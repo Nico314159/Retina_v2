@@ -25,16 +25,20 @@ new tags.blocks(passable) {
 }
 
 class traverse {
-    function init() {
+    function setup() {
+        $input_pitch = data get entity @s Rot[0];
+        $input_yaw = data get entity @s Rot[1];
+        math.gimbal_to_vec();
+
         $delta_x = 1000000;
         $delta_y = 1000000;
         $delta_z = 1000000;
-        $delta_x /= $motion_limit_x;
-        $delta_y /= $motion_limit_y;
-        $delta_z /= $motion_limit_z;
-        if ($motion_limit_x == 0) $delta_x = 2147483647;
-        if ($motion_limit_y == 0) $delta_y = 2147483647;
-        if ($motion_limit_z == 0) $delta_z = 2147483647;
+        $delta_x /= $output_vec3.x;
+        $delta_y /= $output_vec3.y;
+        $delta_z /= $output_vec3.z;
+        if ($output_vec3.x == 0) $delta_x = 2147483647;
+        if ($output_vec3.y == 0) $delta_y = 2147483647;
+        if ($output_vec3.z == 0) $delta_z = 2147483647;
 
         $motion_x = $x;
         $motion_y = $y;
@@ -58,20 +62,11 @@ class traverse {
         $distance_x /= 1000;
         $distance_y /= 1000;
         $distance_z /= 1000;
-        if ($motion_limit_x = 0) $distance_x = 2147483647;
-        if ($motion_limit_y = 0) $distance_y = 2147483647;
-        if ($motion_limit_z = 0) $distance_z = 2147483647;
-
-        traverse.main();
+        traverse.loop();
     }
-    function main() {
-        // Cancel axis if motion has exceeded native value
-        if ($motion_x > $motion_limit_x) $distance_x = 2147483647;
-        if ($motion_y > $motion_limit_y) $distance_y = 2147483647;
-        if ($motion_z > $motion_limit_z) $distance_z = 2147483647;
-
+    function loop() {
         // Stop if motion ceases
-        if ($distance_x = 2147483647 && $distance_y = 2147483647 && $distance_z = 2147483647) $motion_end = 1;
+        if ($distance_x = 2147483647 && $distance_y = 2147483647 && $distance_z = 2147483647) $motion_end = true;
         
         // Find nearest axis
         $shortest_distance = $distance_x;
@@ -88,8 +83,8 @@ class traverse {
             case 2: traverse.z();
         }
         
-        // Repeat step if check failed
-        if ($motion_end = 0) traverse.main();
+        if ($motion_end = 0) traverse.loop();
+        if ($motion_end) particle minecraft:flame ~ ~ ~;
     }
     function x() {
         $distance_x += $delta_x;
@@ -129,7 +124,7 @@ class check {
         if (!$collision_boolean && $fluid) $motion_fluid_boolean = true;
         if (!$collision_boolean && $fire) $motion_fire_boolean = true;
         if ($collision_boolean) check.collision.main();
-        if (!$collision_boolean) traverse.main();
+        if (!$collision_boolean) traverse.loop();
     }
     class block {
         function main() {
