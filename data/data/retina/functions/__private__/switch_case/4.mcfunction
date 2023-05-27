@@ -1,1 +1,0 @@
-function retina:traverse/z
