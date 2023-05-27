@@ -1,0 +1,60 @@
+class math {
+    function sine() {
+        // Bhaskara approximation
+        $output = $input;
+        $output -= 1800;
+        $output %= 1800;
+        $output -= 900;
+
+        $output *= $output;
+        $trig_0 = $output;
+        $trig_0 += 3240000;
+        $trig_0 /= 1000;
+        $output *= -4;
+        $output += 3240000;
+        $output /= $trig_0;
+
+        $trig_0 = $input;
+        $trig_0 %= 3600;
+        if ($trig_0 >= 1800) $output *= -1;
+    }
+    function cosine() {
+        // Bhaskara approximation
+        $output = $input;
+        $output -= 900;
+        $output %= 1800;
+        $output -= 900;
+
+        $output *= $output;
+        $trig_0 = $output;
+        $trig_0 += 3240000;
+        $trig_0 /= 1000;
+        $output *= -4;
+        $output += 3240000;
+        $output /= $trig_0;
+
+        $trig_0 = $input;
+        $trig_0 += 900;
+        $trig_0 %= 3600;
+        if ($trig_0 >= 1800) $output *= -1;
+    }
+    function gimbal_to_vec() {
+        $input = $input_yaw;
+        math.sine();
+        $output_vec3.x = $output;
+        $output_vec3.x *= -1;
+        math.cosine();
+        $output_vec3.z = $output;
+
+        $input = $input_pitch;
+        math.cosine();
+        $output_vec_horizontal = $output;
+        $output_vec3.x *= $output;
+        $output_vec3.z *= $output;
+        $output_vec3.x /= 1000;
+        $output_vec3.z /= 1000;
+        math.sine();
+        $output_vec3.y = $output;
+        $output_vec3.y *= -1;
+    }
+}

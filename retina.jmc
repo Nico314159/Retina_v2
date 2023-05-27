@@ -1,0 +1,170 @@
+import "math";
+
+new tags.blocks(fire) {
+    "values": ["minecraft:fire", "minecraft:soul_fire"]
+}
+new tags.blocks(fluid) {
+    "values": ["minecraft:water", "minecraft:lava"]
+}
+new tags.blocks(passable) {
+    "values": [
+        "#minecraft:replaceable_plants",    
+		"#minecraft:small_flowers",
+		"#minecraft:tall_flowers",
+		"#minecraft:crops",
+		"minecraft:grass",
+		"minecraft:fern",
+		"minecraft:dead_bush",
+		"minecraft:warped_roots",
+		"minecraft:crimson_roots",
+		"minecraft:small_dripleaf",
+		"minecraft:sugar_cane",
+		"minecraft:tall_seagrass",
+		"minecraft:cobweb"
+	]
+}
+
+class traverse {
+    function init() {
+        $delta_x = 1000000;
+        $delta_y = 1000000;
+        $delta_z = 1000000;
+        $delta_x /= $motion_limit_x;
+        $delta_y /= $motion_limit_y;
+        $delta_z /= $motion_limit_z;
+        if ($motion_limit_x == 0) $delta_x = 2147483647;
+        if ($motion_limit_y == 0) $delta_y = 2147483647;
+        if ($motion_limit_z == 0) $delta_z = 2147483647;
+
+        $motion_x = $x;
+        $motion_y = $y;
+        $motion_z = $z;
+        $motion_x %= 1000;
+        $motion_y %= 1000;
+        $motion_z %= 1000;
+        if ($sign_x == 1) $motion_x *= -1;
+        if ($sign_y == 1) $motion_y *= -1;
+        if ($sign_z == 1) $motion_z *= -1;
+        if ($sign_x == 1) $motion_x += 1000;
+        if ($sign_y == 1) $motion_y += 1000;
+        if ($sign_z == 1) $motion_z += 1000;
+
+        $distance_x = $delta_x;
+        $distance_y = $delta_y;
+        $distance_z = $delta_z;
+        $distance_x *= $motion_x;
+        $distance_y *= $motion_y;
+        $distance_z *= $motion_z;
+        $distance_x /= 1000;
+        $distance_y /= 1000;
+        $distance_z /= 1000;
+        if ($motion_limit_x = 0) $distance_x = 2147483647;
+        if ($motion_limit_y = 0) $distance_y = 2147483647;
+        if ($motion_limit_z = 0) $distance_z = 2147483647;
+
+        traverse.main();
+    }
+    function main() {
+        // Cancel axis if motion has exceeded native value
+        if ($motion_x > $motion_limit_x) $distance_x = 2147483647;
+        if ($motion_y > $motion_limit_y) $distance_y = 2147483647;
+        if ($motion_z > $motion_limit_z) $distance_z = 2147483647;
+
+        // Stop if motion ceases
+        if ($distance_x = 2147483647 && $distance_y = 2147483647 && $distance_z = 2147483647) $motion_end = 1;
+        
+        // Find nearest axis
+        $shortest_distance = $distance_x;
+        $shortest_distance < $distance_y;
+        $shortest_distance < $distance_z;
+        if ($shortest_distance = $distance_z) $nearest_axis = 2;
+        if ($shortest_distance = $distance_y) $nearest_axis = 1;
+        if ($shortest_distance = $distance_x) $nearest_axis = 0;
+        
+        // Process data based on nearest axis
+        switch ($nearest_axis) {
+            case 0: traverse.x();
+            case 1: traverse.y();
+            case 2: traverse.z();
+        }
+        
+        // Repeat step if check failed
+        if ($motion_end = 0) traverse.main();
+    }
+    function x() {
+        $distance_x += $delta_x;
+        if ($motion_end = 0) {
+            $motion_x += 1000;
+            execute if score $sign_x __variable__ matches -1 positioned ~-1 ~0 ~0 run check.main();
+            if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
+        }
+    }
+    function y() {
+        $distance_y += $delta_y;
+        if ($motion_end = 0) {
+            $motion_y += 1000;
+            execute if score $sign_y __variable__ matches -1 positioned ~0 ~-1 ~0 run check.main();
+            if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
+        }
+    }
+    function z() {
+        $distance_z += $delta_z;
+        if ($motion_end = 0) {
+            $motion_z += 1000;
+            execute if score $sign_z __variable__ matches -1 positioned ~0 ~0 ~-1 run check.main();
+            if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
+        }
+    }
+}
+
+class check {
+    function main() {
+        $collision = false;
+        $fluid = false;
+        $fire = false;
+
+        check.block.main();
+
+        // Adjust motion if inside block
+        if (!$collision_boolean && $fluid) $motion_fluid_boolean = true;
+        if (!$collision_boolean && $fire) $motion_fire_boolean = true;
+        if ($collision_boolean) check.collision.main();
+        if (!$collision_boolean) traverse.main();
+    }
+    class block {
+        function main() {
+            $boolean = false;
+            if ($boolean <= 0 && !block ~ ~ ~ #retina:passable) $boolean = true;
+            if (block ~ ~ ~ #retina:fluid) $fluid = true;
+            if (block ~ ~ ~ #retina:fire) $fire = true;
+            if ($boolean) $collision_boolean = true;
+        }
+    }
+    class collision {
+        function main() {
+            switch ($nearest_axis) {
+                case 0: check.collision.x();
+                case 1: check.collision.y();
+                case 2: check.collision.z();
+            }
+        }
+        function x() {
+            $collision_x = 1; // Set collision axis
+            $motion_x -= 1001; // Kick back values
+            $distance_x = 2147483647; // Cap distance to prevent motion along that axis.
+            if ($motion_halt_boolean) $motion_end = true; // Halt
+        }
+        function y() {
+            $collision_y = 1; // Set collision axis
+            $motion_y -= 1001; // Kick back values
+            $distance_y = 2147483647; // Cap distance to prevent motion along that axis.
+            if ($motion_halt_boolean) $motion_end = true; // Halt
+        }
+        function z() {
+            $collision_z = 1; // Set collision axis
+            $motion_z -= 1001; // Kick back values
+            $distance_z = 2147483647; // Cap distance to prevent motion along that axis.
+            if ($motion_halt_boolean) $motion_end = true; // Halt
+        }
+    }
+}
