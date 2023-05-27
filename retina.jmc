@@ -40,28 +40,9 @@ class traverse {
         if ($output_vec3.y == 0) $delta_y = 2147483647;
         if ($output_vec3.z == 0) $delta_z = 2147483647;
 
-        $motion_x = $x;
-        $motion_y = $y;
-        $motion_z = $z;
-        $motion_x %= 1000;
-        $motion_y %= 1000;
-        $motion_z %= 1000;
-        if ($sign_x == 1) $motion_x *= -1;
-        if ($sign_y == 1) $motion_y *= -1;
-        if ($sign_z == 1) $motion_z *= -1;
-        if ($sign_x == 1) $motion_x += 1000;
-        if ($sign_y == 1) $motion_y += 1000;
-        if ($sign_z == 1) $motion_z += 1000;
-
         $distance_x = $delta_x;
         $distance_y = $delta_y;
         $distance_z = $delta_z;
-        $distance_x *= $motion_x;
-        $distance_y *= $motion_y;
-        $distance_z *= $motion_z;
-        $distance_x /= 1000;
-        $distance_y /= 1000;
-        $distance_z /= 1000;
         traverse.loop();
     }
     function loop() {
@@ -115,8 +96,8 @@ class traverse {
 class check {
     function main() {
         $collision = false;
-        $fluid = false;
-        $fire = false;
+        $is_fluid = false;
+        $is_fire = false;
 
         check.block.main();
 
@@ -130,8 +111,8 @@ class check {
         function main() {
             $boolean = false;
             if ($boolean <= 0 && !block ~ ~ ~ #retina:passable) $boolean = true;
-            if (block ~ ~ ~ #retina:fluid) $fluid = true;
-            if (block ~ ~ ~ #retina:fire) $fire = true;
+            if (block ~ ~ ~ #retina:fluid) $is_fluid = true;
+            if (block ~ ~ ~ #retina:fire) $is_fire = true;
             if ($boolean) $collision_boolean = true;
         }
     }
@@ -147,19 +128,19 @@ class check {
             $collision_x = 1; // Set collision axis
             $motion_x -= 1001; // Kick back values
             $distance_x = 2147483647; // Cap distance to prevent motion along that axis.
-            if ($motion_halt_boolean) $motion_end = true; // Halt
+            $motion_end = true; // Halt
         }
         function y() {
             $collision_y = 1; // Set collision axis
             $motion_y -= 1001; // Kick back values
             $distance_y = 2147483647; // Cap distance to prevent motion along that axis.
-            if ($motion_halt_boolean) $motion_end = true; // Halt
+            $motion_end = true; // Halt
         }
         function z() {
             $collision_z = 1; // Set collision axis
             $motion_z -= 1001; // Kick back values
             $distance_z = 2147483647; // Cap distance to prevent motion along that axis.
-            if ($motion_halt_boolean) $motion_end = true; // Halt
+            $motion_end = true; // Halt
         }
     }
 }
