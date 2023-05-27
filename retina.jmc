@@ -26,8 +26,8 @@ new tags.blocks(passable) {
 
 class traverse {
     function setup() {
-        $input_pitch = data get entity @s Rot[0];
-        $input_yaw = data get entity @s Rot[1];
+        $input_pitch = data get entity @s Rotation[1] 10;
+        $input_yaw = data get entity @s Rotation[0] 10;
         math.gimbal_to_vec();
 
         $delta_x = 1000000;

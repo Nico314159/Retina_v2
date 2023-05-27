@@ -1,5 +1,5 @@
-execute store result score $input_pitch __variable__ run data get entity @s Rot[0]
-execute store result score $input_yaw __variable__ run data get entity @s Rot[1]
+execute store result score $input_pitch __variable__ run data get entity @s Rotation[1] 10
+execute store result score $input_yaw __variable__ run data get entity @s Rotation[0] 10
 function retina:math/gimbal_to_vec
 scoreboard players set $delta_x __variable__ 1000000
 scoreboard players set $delta_y __variable__ 1000000
