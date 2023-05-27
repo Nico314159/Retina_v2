@@ -90,7 +90,7 @@ class traverse {
         $distance_x += $delta_x;
         if ($motion_end = 0) {
             $motion_x += 1000;
-            execute if score $sign_x __variable__ matches -1 positioned ~-1 ~0 ~0 run check.main();
+            if ($sign_x = -1) execute  positioned ~-1 ~0 ~0 run check.main();
             if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
         }
     }
@@ -98,7 +98,7 @@ class traverse {
         $distance_y += $delta_y;
         if ($motion_end = 0) {
             $motion_y += 1000;
-            execute if score $sign_y __variable__ matches -1 positioned ~0 ~-1 ~0 run check.main();
+            if ($sign_y = -1) execute positioned ~0 ~-1 ~0 run check.main();
             if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
         }
     }
@@ -106,7 +106,7 @@ class traverse {
         $distance_z += $delta_z;
         if ($motion_end = 0) {
             $motion_z += 1000;
-            execute if score $sign_z __variable__ matches -1 positioned ~0 ~0 ~-1 run check.main();
+            if ($sign_z = -1) execute positioned ~0 ~0 ~-1 run check.main();
             if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
         }
     }
