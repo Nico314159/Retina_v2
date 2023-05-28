@@ -14,6 +14,8 @@ new tags.blocks(passable) {
 	]
 }
 
+summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
+
 class traverse {
     function setup() {
 
@@ -23,10 +25,11 @@ class traverse {
         math.gimbal_to_vec();
         Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.x>, &<$output_vec3.y>, &<$output_vec3.z>]");
 
-        $x = data get entity @s Pos[0];
-        $y = data get entity @s Pos[1];
-        $z = data get entity @s Pos[2];
-        Text.tellraw(@a, "Origin: &<yellow>[&<$x>, &<$y>, &<$z>]");
+        execute anchored eyes run tp @e[type=marker,tag=retina.height,limit=1] ~ ~ ~;
+        $x = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1000;
+        $y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1000;
+        $z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
+        tp @e[type=marker,tag=retina.height,limit=1] 0 0 0;
 
         Hardcode.repeatList(
             "comp",
@@ -38,11 +41,22 @@ class traverse {
                 $delta_comp /= $output_vec3.comp;
                 $delta_comp /= $sign_comp;
 
+                $distance_comp = $sign_comp;
+                $distance_comp *= -1;
+                $distance_comp *= $comp;
+                $distance_comp %= 1000;
+                $distance_comp *= $delta_comp;
+                $distance_comp /= 1000;
+
                 if ($output_vec3.comp == 0) $delta_comp = 2147483647;
-                $distance_comp = $delta_comp;
+                if ($output_vec3.comp == 0) $distance_comp = 2147483647;
+
+                $visual_comp = $comp;
+                $visual_comp /= 1000;
             },
             ["x", "y", "z"]
         );
+        Text.tellraw(@a, "Origin: &<yellow>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
 
         $step = 0;
         $end = 0;
@@ -68,7 +82,7 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
         $distance_x += $delta_x;
         if ($end = 0) {
-            $x += $sign_x;
+            $visual_x += $sign_x;
             if ($sign_x = -1) execute positioned ~-1 ~0 ~0 run check.main();
             if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
         }
@@ -78,7 +92,7 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
         $distance_y += $delta_y;
         if ($end = 0) {
-            $y += $sign_y;
+            $visual_y += $sign_y;
             if ($sign_y = -1) execute positioned ~0 ~-1 ~0 run check.main();
             if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
         }
@@ -88,7 +102,7 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
         $distance_z += $delta_z;
         if ($end = 0) {
-            $z += $sign_z;
+            $visual_z += $sign_z;
             if ($sign_z = -1) execute positioned ~0 ~0 ~-1 run check.main();
             if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
         }
@@ -104,18 +118,18 @@ class check {
         if ($end) check.collision.main();
         
         if ($step >= 300) $end = 1;
-        if ($step >= 300) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$x>, &<$y>, &<$z>]");
+        if ($step >= 300) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
         if ($end == 0) traverse.loop();
     }
     class block {
         function main() {
             if (!block ~ ~ ~ #retina:passable) $end = true;
             if ($end) {
-                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
+                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
                 if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
             }
             if (!$end) {
-                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
+                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
             }
         }
     }
