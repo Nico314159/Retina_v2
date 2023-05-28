@@ -79,7 +79,7 @@ class traverse {
         }
         
         if ($motion_end = 0) traverse.loop();
-        if ($motion_end) particle minecraft:flame ~ ~ ~;
+        //if ($motion_end) particle minecraft:flame ~ ~ ~;
     }
     function x() {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
@@ -144,6 +144,7 @@ class check {
     }
     class collision {
         function main() {
+            particle minecraft:flame ~ ~ ~;
             switch ($nearest_axis) {
                 case 0: check.collision.x();
                 case 1: check.collision.y();

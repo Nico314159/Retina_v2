@@ -7,4 +7,3 @@ execute if score $shortest_distance __variable__ = $distance_y __variable__ run 
 execute if score $shortest_distance __variable__ = $distance_x __variable__ run scoreboard players set $nearest_axis __variable__ 0
 function retina:__private__/switch_case/0
 execute if score $motion_end __variable__ matches 0 run function retina:traverse/loop
-execute if score $motion_end __variable__ matches 1.. run particle minecraft:flame ~ ~ ~
