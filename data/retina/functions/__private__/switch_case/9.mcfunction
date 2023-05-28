@@ -1,1 +1,0 @@
-tellraw @a ["",{"text":"Block hit direction: ","bold":true,"color":"white"},{"text":"Z","bold":true,"color":"dark_purple"}]

@@ -8,22 +8,9 @@ new tags.blocks(fluid) {
 }
 new tags.blocks(passable) {
     "values": [
-        "#minecraft:replaceable_plants",    
-		"#minecraft:small_flowers",
-		"#minecraft:tall_flowers",
-		"#minecraft:crops",
         "minecraft:air",
         "minecraft:cave_air",
-        "minecraft:void_air",
-		"minecraft:grass",
-		"minecraft:fern",
-		"minecraft:dead_bush",
-		"minecraft:warped_roots",
-		"minecraft:crimson_roots",
-		"minecraft:small_dripleaf",
-		"minecraft:sugar_cane",
-		"minecraft:tall_seagrass",
-		"minecraft:cobweb"
+        "minecraft:void_air"
 	]
 }
 
@@ -71,11 +58,9 @@ class traverse {
         if ($shortest_distance = $distance_x) $nearest_axis = 0;
         
         // Process data based on nearest axis
-        switch ($nearest_axis) {
-            case 0: if ($step < 300) traverse.x();
-            case 1: if ($step < 300) traverse.y();
-            case 2: if ($step < 300) traverse.z();
-        }
+        if ($nearest_axis = 0 && $step < 300) traverse.x();
+        if ($nearest_axis = 1 && $step < 300) traverse.y();
+        if ($nearest_axis = 2 && $step < 300) traverse.z();
 
     }
     function x() {
@@ -114,8 +99,6 @@ class check {
     function main() {
         $step++;
         $collision = false;
-        $is_fluid = false;
-        $is_fire = false;
 
         check.block.main();
         if ($collision) check.collision.main();
@@ -125,8 +108,6 @@ class check {
     class block {
         function main() {
             if (!block ~ ~ ~ #retina:passable) $collision = true;
-            if (block ~ ~ ~ #retina:fluid) $is_fluid = true;
-            if (block ~ ~ ~ #retina:fire) $is_fire = true;
             if ($collision) {
                 Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
                 if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
@@ -138,11 +119,9 @@ class check {
     }
     class collision {
         function main() {
-            switch ($nearest_axis) {
-                case 0: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>X");
-                case 1: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Y");
-                case 2: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Z");
-            }
+            if ($nearest_axis = 0) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>X");
+            if ($nearest_axis = 1) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Y");
+            if ($nearest_axis = 2) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Z");
         }
     }
 }

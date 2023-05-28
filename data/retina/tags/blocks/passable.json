@@ -1,20 +1,7 @@
 {
     "values": [
-        "#minecraft:replaceable_plants",
-        "#minecraft:small_flowers",
-        "#minecraft:tall_flowers",
-        "#minecraft:crops",
         "minecraft:air",
         "minecraft:cave_air",
-        "minecraft:void_air",
-        "minecraft:grass",
-        "minecraft:fern",
-        "minecraft:dead_bush",
-        "minecraft:warped_roots",
-        "minecraft:crimson_roots",
-        "minecraft:small_dripleaf",
-        "minecraft:sugar_cane",
-        "minecraft:tall_seagrass",
-        "minecraft:cobweb"
+        "minecraft:void_air"
     ]
 }

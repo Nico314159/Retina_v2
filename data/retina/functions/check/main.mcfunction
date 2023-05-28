@@ -1,7 +1,5 @@
 scoreboard players add $step __variable__ 1
 scoreboard players set $collision __variable__ 0
-scoreboard players set $is_fluid __variable__ 0
-scoreboard players set $is_fire __variable__ 0
 function retina:check/block/main
 execute if score $collision __variable__ matches 1.. run function retina:check/collision/main
 execute if score $step __variable__ matches ..299 if score $collision __variable__ matches 0 run function retina:traverse/loop
