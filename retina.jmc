@@ -26,7 +26,6 @@ new tags.blocks(passable) {
 
 class traverse {
     function setup() {
-        
 
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
@@ -39,20 +38,24 @@ class traverse {
         $z = data get entity @s Pos[2];
         Text.tellraw(@a, "Origin: &<yellow>[&<$x>, &<$y>, &<$z>]");
 
-        $delta_x = 1000000;
-        $delta_y = 1000000;
-        $delta_z = 1000000;
-        $delta_x /= $output_vec3.x;
-        $delta_y /= $output_vec3.y;
-        $delta_z /= $output_vec3.z;
-        if ($output_vec3.x == 0) $delta_x = 2147483647;
-        if ($output_vec3.y == 0) $delta_y = 2147483647;
-        if ($output_vec3.z == 0) $delta_z = 2147483647;
+        Hardcode.repeatList(
+            "comp",
+            () => {
+                if ($output_vec3.comp < 0) $sign_comp = -1;
+                if ($output_vec3.comp >= 0) $sign_comp = 1;
+
+                $delta_comp = 1000000;
+                $delta_comp /= $output_vec3.comp;
+                $delta_comp /= $sign_comp;
+
+                if ($output_vec3.comp == 0) $delta_comp = 2147483647;
+                $distance_comp = $delta_comp;
+            },
+            ["x", "y", "z"]
+        );
         Text.tellraw(@a, "Distances to each block: &<green>[&<$delta_x>, &<$delta_y>, &<$delta_z>]");
 
-        $distance_x = $delta_x;
-        $distance_y = $delta_y;
-        $distance_z = $delta_z;
+        $motion_end = false;
         traverse.loop();
     }
     function loop() {
@@ -83,7 +86,7 @@ class traverse {
         if ($motion_end = 0) {
             $motion_x += 1000;
             $x += $sign_x;
-            if ($sign_x = -1) execute  positioned ~-1 ~0 ~0 run check.main();
+            if ($sign_x = -1) execute positioned ~-1 ~0 ~0 run check.main();
             if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
         }
     }
