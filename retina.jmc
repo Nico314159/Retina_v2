@@ -45,10 +45,10 @@ class traverse {
         );
 
         $step = 0;
+        $end = 0;
         traverse.loop();
     }
     function loop() {
-        
         // Find nearest axis
         $shortest_distance = $distance_x;
         $shortest_distance < $distance_y;
@@ -58,9 +58,9 @@ class traverse {
         if ($shortest_distance = $distance_x) $nearest_axis = 0;
         
         // Process data based on nearest axis
-        if ($nearest_axis = 0 && $step < 300) traverse.x();
-        if ($nearest_axis = 1 && $step < 300) traverse.y();
-        if ($nearest_axis = 2 && $step < 300) traverse.z();
+        if ($nearest_axis = 0 && $step < 300 && $end = 0) traverse.x();
+        if ($nearest_axis = 1 && $step < 300 && $end = 0) traverse.y();
+        if ($nearest_axis = 2 && $step < 300 && $end = 0) traverse.z();
 
     }
     function x() {
@@ -98,21 +98,23 @@ class traverse {
 class check {
     function main() {
         $step++;
-        $collision = false;
+        $end = false;
 
         check.block.main();
-        if ($collision) check.collision.main();
-        if ($step < 300 && $collision == 0) traverse.loop();
+        if ($end) check.collision.main();
+        
+        if ($step >= 300) $end = 1;
         if ($step >= 300) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$x>, &<$y>, &<$z>]");
+        if ($end == 0) traverse.loop();
     }
     class block {
         function main() {
-            if (!block ~ ~ ~ #retina:passable) $collision = true;
-            if ($collision) {
+            if (!block ~ ~ ~ #retina:passable) $end = true;
+            if ($end) {
                 Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
                 if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
             }
-            if (!$collision) {
+            if (!$end) {
                 Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
             }
         }

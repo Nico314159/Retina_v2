@@ -29,4 +29,5 @@ scoreboard players operation $delta_z __variable__ /= $sign_z __variable__
 execute if score $output_vec3.z __variable__ matches 0 run scoreboard players set $delta_z __variable__ 2147483647
 scoreboard players operation $distance_z __variable__ = $delta_z __variable__
 scoreboard players set $step __variable__ 0
+scoreboard players set $end __variable__ 0
 function retina:traverse/loop
