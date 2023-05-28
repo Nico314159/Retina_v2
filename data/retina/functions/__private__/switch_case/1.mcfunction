@@ -1,1 +1,1 @@
-function retina:traverse/x
+execute if score $step __variable__ matches ..299 run function retina:traverse/x

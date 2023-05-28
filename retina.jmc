@@ -13,6 +13,8 @@ new tags.blocks(passable) {
 		"#minecraft:tall_flowers",
 		"#minecraft:crops",
         "minecraft:air",
+        "minecraft:cave_air",
+        "minecraft:void_air",
 		"minecraft:grass",
 		"minecraft:fern",
 		"minecraft:dead_bush",
@@ -56,12 +58,9 @@ class traverse {
         );
 
         $step = 0;
-        $motion_end = false;
         traverse.loop();
     }
     function loop() {
-        // Stop if motion ceases
-        if ($distance_x = 2147483647 && $distance_y = 2147483647 && $distance_z = 2147483647) $motion_end = true;
         
         // Find nearest axis
         $shortest_distance = $distance_x;
@@ -73,11 +72,11 @@ class traverse {
         
         // Process data based on nearest axis
         switch ($nearest_axis) {
-            case 0: traverse.x();
-            case 1: traverse.y();
-            case 2: traverse.z();
+            case 0: if ($step < 300) traverse.x();
+            case 1: if ($step < 300) traverse.y();
+            case 2: if ($step < 300) traverse.z();
         }
-        
+
     }
     function x() {
         Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
@@ -119,52 +118,31 @@ class check {
         $is_fire = false;
 
         check.block.main();
-
-        // Adjust motion if inside block
-        if (!$collision && $fluid) $motion_fluid_boolean = true;
-        if (!$collision && $fire) $motion_fire_boolean = true;
         if ($collision) check.collision.main();
-        if (!$collision && $step < 300) traverse.loop();
+        if ($step < 300 && $collision == 0) traverse.loop();
         if ($step >= 300) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$x>, &<$y>, &<$z>]");
     }
     class block {
         function main() {
-            $boolean = false;
-            if ($boolean <= 0 && !block ~ ~ ~ #retina:passable) $boolean = true;
+            if (!block ~ ~ ~ #retina:passable) $collision = true;
             if (block ~ ~ ~ #retina:fluid) $is_fluid = true;
             if (block ~ ~ ~ #retina:fire) $is_fire = true;
-            if ($boolean) {
+            if ($collision) {
                 Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
                 if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
             }
-            if (!$boolean) {
+            if (!$collision) {
                 Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
             }
-            $collision = $boolean;
         }
     }
     class collision {
         function main() {
             switch ($nearest_axis) {
-                case 0: check.collision.x();
-                case 1: check.collision.y();
-                case 2: check.collision.z();
+                case 0: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>X");
+                case 1: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Y");
+                case 2: Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Z");
             }
-        }
-        function x() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>X");
-            $distance_x -= 1001; // Kick back values
-            $motion_end = true; // Halt
-        }
-        function y() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Y");
-            $distance_y -= 1001; // Kick back values
-            $motion_end = true; // Halt
-        }
-        function z() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Z");
-            $distance_z -= 1001; // Kick back values
-            $motion_end = true; // Halt
         }
     }
 }

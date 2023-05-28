@@ -1,4 +1,3 @@
-execute if score $distance_x __variable__ matches 2147483647 if score $distance_y __variable__ matches 2147483647 if score $distance_z __variable__ matches 2147483647 run scoreboard players set $motion_end __variable__ 1
 scoreboard players operation $shortest_distance __variable__ = $distance_x __variable__
 scoreboard players operation $shortest_distance __variable__ < $distance_y __variable__
 scoreboard players operation $shortest_distance __variable__ < $distance_z __variable__

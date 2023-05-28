@@ -1,1 +1,1 @@
-function retina:check/collision/x
+tellraw @a ["",{"text":"Block hit direction: ","bold":true,"color":"white"},{"text":"X","bold":true,"color":"dark_purple"}]
