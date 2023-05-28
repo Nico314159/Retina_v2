@@ -240,12 +240,12 @@ class traverse {
         math.gimbal_to_vec();
         Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.x>, &<$output_vec3.y>, &<$output_vec3.z>]");
 
-        //execute anchored eyes run tp @e[type=marker,tag=retina.height,limit=1] ~ ~ ~;
-        $x = data get entity @s Pos[0] 1000;
-        $y = data get entity @s Pos[1] 1000;
-        $y += 1620;
-        $z = data get entity @s Pos[2] 1000;
-        //tp @e[type=marker,tag=retina.height,limit=1] 0 0 0;
+        execute anchored eyes run summon minecraft:marker ^ ^ ^ {Tags:["retina.height"]};
+        $x = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1000;
+        $y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1000;
+        //$y += 1620;
+        $z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
+        kill @e[type=marker,tag=retina.height,limit=1];
 
         Hardcode.repeatList(
             "comp",
@@ -276,7 +276,7 @@ class traverse {
 
         $step = 0;
         $end = 0;
-        traverse.loop();
+        execute positioned ~ ~1.62 ~ run traverse.loop();
     }
     function loop() {
         // Find nearest axis
