@@ -12,6 +12,7 @@ new tags.blocks(passable) {
 		"#minecraft:small_flowers",
 		"#minecraft:tall_flowers",
 		"#minecraft:crops",
+        "minecraft:air",
 		"minecraft:grass",
 		"minecraft:fern",
 		"minecraft:dead_bush",
@@ -121,10 +122,10 @@ class check {
         check.block.main();
 
         // Adjust motion if inside block
-        if (!$collision_boolean && $fluid) $motion_fluid_boolean = true;
-        if (!$collision_boolean && $fire) $motion_fire_boolean = true;
-        if ($collision_boolean) check.collision.main();
-        if (!$collision_boolean) traverse.loop();
+        if (!$collision && $fluid) $motion_fluid_boolean = true;
+        if (!$collision && $fire) $motion_fire_boolean = true;
+        if ($collision) check.collision.main();
+        if (!$collision) traverse.loop();
     }
     class block {
         function main() {
@@ -138,7 +139,7 @@ class check {
             if (!$boolean) {
                 Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
             }
-            $collision_boolean = $boolean;
+            $collision = $boolean;
         }
     }
     class collision {
@@ -150,19 +151,19 @@ class check {
             }
         }
         function x() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: X&<bold, light_purple>");
+            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, light_purple>X");
             $collision_x = true; // Set collision axis
             $distance_x -= 1001; // Kick back values
             $motion_end = true; // Halt
         }
         function y() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: Y&<bold, light_purple>");
+            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, light_purple>Y");
             $collision_y = true; // Set collision axis
             $distance_y -= 1001; // Kick back values
             $motion_end = true; // Halt
         }
         function z() {
-            Text.tellraw(@a, "&<bold, white>Block hit direction: Z&<bold, light_purple>");
+            Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, light_purple>Z");
             $collision_z = true; // Set collision axis
             $distance_z -= 1001; // Kick back values
             $motion_end = true; // Halt
