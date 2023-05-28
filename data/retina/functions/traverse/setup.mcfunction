@@ -28,7 +28,6 @@ scoreboard players operation $delta_z __variable__ /= $output_vec3.z __variable_
 scoreboard players operation $delta_z __variable__ /= $sign_z __variable__
 execute if score $output_vec3.z __variable__ matches 0 run scoreboard players set $delta_z __variable__ 2147483647
 scoreboard players operation $distance_z __variable__ = $delta_z __variable__
-tellraw @a ["",{"text":"Distances to each block: "},{"text":"[","color":"green"},{"score":{"name":"$delta_x","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$delta_y","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$delta_z","objective":"__variable__"},"color":"green"},{"text":"]","color":"green"}]
 scoreboard players set $step __variable__ 0
 scoreboard players set $motion_end __variable__ 0
 function retina:traverse/loop

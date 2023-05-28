@@ -54,7 +54,6 @@ class traverse {
             },
             ["x", "y", "z"]
         );
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$delta_x>, &<$delta_y>, &<$delta_z>]");
 
         $step = 0;
         $motion_end = false;
@@ -79,33 +78,32 @@ class traverse {
             case 2: traverse.z();
         }
         
-        if ($motion_end = 0 && $step < 300) traverse.loop();
     }
     function x() {
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
         $distance_x += $delta_x;
         if ($motion_end = 0) {
-            $motion_x += 1000;
             $x += $sign_x;
             if ($sign_x = -1) execute positioned ~-1 ~0 ~0 run check.main();
             if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
         }
     }
     function y() {
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
         $distance_y += $delta_y;
         if ($motion_end = 0) {
-            $motion_y += 1000;
             $y += $sign_y;
             if ($sign_y = -1) execute positioned ~0 ~-1 ~0 run check.main();
             if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
         }
     }
     function z() {
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
         $distance_z += $delta_z;
         if ($motion_end = 0) {
-            $motion_z += 1000;
             $z += $sign_z;
             if ($sign_z = -1) execute positioned ~0 ~0 ~-1 run check.main();
             if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
@@ -137,7 +135,7 @@ class check {
             if (block ~ ~ ~ #retina:fire) $is_fire = true;
             if ($boolean) {
                 Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
-                setblock ~ ~ ~ gold_block;
+                if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
             }
             if (!$boolean) {
                 Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
@@ -147,7 +145,6 @@ class check {
     }
     class collision {
         function main() {
-            particle minecraft:flame ~ ~ ~;
             switch ($nearest_axis) {
                 case 0: check.collision.x();
                 case 1: check.collision.y();
