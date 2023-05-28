@@ -26,9 +26,18 @@ new tags.blocks(passable) {
 
 class traverse {
     function setup() {
+        
+
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
+        Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
         math.gimbal_to_vec();
+        Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.x>, &<$output_vec3.y>, &<$output_vec3.z>]");
+
+        $x = data get entity @s Pos[0];
+        $y = data get entity @s Pos[1];
+        $z = data get entity @s Pos[2];
+        Text.tellraw(@a, "Origin: &<yellow>[&<$x>, &<$y>, &<$z>]");
 
         $delta_x = 1000000;
         $delta_y = 1000000;
@@ -39,6 +48,7 @@ class traverse {
         if ($output_vec3.x == 0) $delta_x = 2147483647;
         if ($output_vec3.y == 0) $delta_y = 2147483647;
         if ($output_vec3.z == 0) $delta_z = 2147483647;
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$delta_x>, &<$delta_y>, &<$delta_z>]");
 
         $distance_x = $delta_x;
         $distance_y = $delta_y;
@@ -68,25 +78,31 @@ class traverse {
         if ($motion_end) particle minecraft:flame ~ ~ ~;
     }
     function x() {
+        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
         $distance_x += $delta_x;
         if ($motion_end = 0) {
             $motion_x += 1000;
+            $x += $sign_x;
             if ($sign_x = -1) execute  positioned ~-1 ~0 ~0 run check.main();
             if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
         }
     }
     function y() {
+        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
         $distance_y += $delta_y;
         if ($motion_end = 0) {
             $motion_y += 1000;
+            $y += $sign_y;
             if ($sign_y = -1) execute positioned ~0 ~-1 ~0 run check.main();
             if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
         }
     }
     function z() {
+        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
         $distance_z += $delta_z;
         if ($motion_end = 0) {
             $motion_z += 1000;
+            $z += $sign_z;
             if ($sign_z = -1) execute positioned ~0 ~0 ~-1 run check.main();
             if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
         }
@@ -113,7 +129,13 @@ class check {
             if ($boolean <= 0 && !block ~ ~ ~ #retina:passable) $boolean = true;
             if (block ~ ~ ~ #retina:fluid) $is_fluid = true;
             if (block ~ ~ ~ #retina:fire) $is_fire = true;
-            if ($boolean) $collision_boolean = true;
+            if ($boolean) {
+                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
+            }
+            if (!$boolean) {
+                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
+            }
+            $collision_boolean = $boolean;
         }
     }
     class collision {
@@ -125,21 +147,21 @@ class check {
             }
         }
         function x() {
-            $collision_x = 1; // Set collision axis
-            $motion_x -= 1001; // Kick back values
-            $distance_x = 2147483647; // Cap distance to prevent motion along that axis.
+            Text.tellraw(@a, "&<bold, white>Block hit direction: X&<bold, light_purple>");
+            $collision_x = true; // Set collision axis
+            $distance_x -= 1001; // Kick back values
             $motion_end = true; // Halt
         }
         function y() {
-            $collision_y = 1; // Set collision axis
-            $motion_y -= 1001; // Kick back values
-            $distance_y = 2147483647; // Cap distance to prevent motion along that axis.
+            Text.tellraw(@a, "&<bold, white>Block hit direction: Y&<bold, light_purple>");
+            $collision_y = true; // Set collision axis
+            $distance_y -= 1001; // Kick back values
             $motion_end = true; // Halt
         }
         function z() {
-            $collision_z = 1; // Set collision axis
-            $motion_z -= 1001; // Kick back values
-            $distance_z = 2147483647; // Cap distance to prevent motion along that axis.
+            Text.tellraw(@a, "&<bold, white>Block hit direction: Z&<bold, light_purple>");
+            $collision_z = true; // Set collision axis
+            $distance_z -= 1001; // Kick back values
             $motion_end = true; // Halt
         }
     }
