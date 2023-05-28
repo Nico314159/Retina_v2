@@ -1,0 +1,1 @@
+scoreboard players set $end __variable__ 1
