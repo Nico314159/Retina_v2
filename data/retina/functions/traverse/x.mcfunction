@@ -1,4 +1,4 @@
 tellraw @a ["",{"text":"Distances to each block: "},{"text":"[","color":"green"},{"score":{"name":"$distance_x","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_y","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_z","objective":"__variable__"},"color":"green"},{"text":"]","color":"green"}]
 tellraw @a ["",{"text":"Closest direction: ","bold":false,"color":"white"},{"text":"X","bold":true,"color":"aqua"}]
 scoreboard players operation $distance_x __variable__ += $delta_x __variable__
-execute if score $motion_end __variable__ matches 0 run function retina:__private__/if_else/0
+execute if score $end __variable__ matches 0 run function retina:__private__/if_else/0
