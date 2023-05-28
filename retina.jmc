@@ -137,6 +137,7 @@ class check {
             if (block ~ ~ ~ #retina:fire) $is_fire = true;
             if ($boolean) {
                 Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
+                setblock ~ ~ ~ gold_block;
             }
             if (!$boolean) {
                 Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$x>, &<$y>, &<$z>]");
