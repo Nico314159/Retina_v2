@@ -1,11 +1,11 @@
 execute store result score $int_X __variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1
 scoreboard players operation $test_X __variable__ = $int_X __variable__
 scoreboard players operation $test_X __variable__ /= $overflow_risk __variable__
-execute unless score $test_X __variable__ matches 0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast X coordinate of ","color":"red"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":")","color":"red"}]
+execute unless score $test_X __variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast X coordinate of ","color":"red"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute store result score $int_Z __variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1
 scoreboard players operation $test_Z __variable__ = $int_Z __variable__
 scoreboard players operation $test_Z __variable__ /= $overflow_risk __variable__
-execute unless score $test_Z __variable__ matches 0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":")","color":"red"}]
+execute unless score $test_Z __variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute store result score $input_pitch __variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw __variable__ run data get entity @s Rotation[0] 10
 tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white"},{"score":{"name":"$input_pitch","objective":"__variable__"},"color":"red"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white"},{"score":{"name":"$input_yaw","objective":"__variable__"},"color":"red"}]
@@ -75,6 +75,6 @@ scoreboard players set $step __variable__ 0
 scoreboard players set $end __variable__ 0
 execute store result score $offset_Y __variable__ run data get entity @s Pos[1] -1000
 scoreboard players operation $offset_Y __variable__ += $Y __variable__
-execute if score $offset_Y __variable__ matches 1620 positioned ~ ~1.62 ~ run function retina:traverse/loop
-execute if score $offset_Y __variable__ matches 1270 positioned ~ ~1.27 ~ run function retina:traverse/loop
-execute if score $offset_Y __variable__ matches 400 positioned ~ ~0.4 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 1619..1621 positioned ~ ~1.62 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 1269..1271 positioned ~ ~1.27 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 399..401 positioned ~ ~0.4 ~ run function retina:traverse/loop
