@@ -1,3 +1,5 @@
-scoreboard players operation $visual_z __variable__ += $sign_z __variable__
-execute if score $sign_z __variable__ matches -1 positioned ~0 ~0 ~-1 run function retina:check/main
-execute if score $sign_z __variable__ matches 1 positioned ~0 ~0 ~1 run function retina:check/main
+scoreboard players operation $distance __variable__ = $x0 __variable__
+scoreboard players operation $distance __variable__ -= $frac_X __variable__
+scoreboard players operation $distance __variable__ *= 1000 __int__
+scoreboard players operation $distance __variable__ /= $delta_X __variable__
+execute if score $distance __variable__ < $min_distance_to_surface __variable__ run function retina:__private__/if_else/1

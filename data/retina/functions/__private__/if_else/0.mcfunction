@@ -1,3 +1,2 @@
-scoreboard players operation $visual_x __variable__ += $sign_x __variable__
-execute if score $sign_x __variable__ matches -1 positioned ~-1 ~0 ~0 run function retina:check/main
-execute if score $sign_x __variable__ matches 1 positioned ~1 ~0 ~0 run function retina:check/main
+tellraw @a ["",{"text":"Block has been hit! Coordinates: ","bold":true,"underlined":true,"color":"gray"},{"text":"[","color":"blue"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Y","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"blue"},{"text":"]","color":"blue"}]
+execute if score $debug_gold __variable__ matches 1 run setblock ~ ~ ~ gold_block

@@ -1,4 +1,41 @@
-tellraw @a ["",{"text":"Distances to each block: "},{"text":"[","color":"green"},{"score":{"name":"$distance_x","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_y","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_z","objective":"__variable__"},"color":"green"},{"text":"]","color":"green"}]
+tellraw @a ["",{"text":"Distances to each block: "},{"text":"[","color":"green"},{"score":{"name":"$distance_X","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_Y","objective":"__variable__"},"color":"green"},{"text":", ","color":"green"},{"score":{"name":"$distance_Z","objective":"__variable__"},"color":"green"},{"text":"]","color":"green"}]
 tellraw @a ["",{"text":"Closest direction: ","bold":false,"color":"white"},{"text":"Y","bold":true,"color":"aqua"}]
-scoreboard players operation $distance_y __variable__ += $delta_y __variable__
-execute if score $end __variable__ matches 0 run function retina:__private__/if_else/1
+scoreboard players operation $distance_Y __variable__ += $delta_Y __variable__
+scoreboard players operation $DX __variable__ = $shortest_distance __variable__
+scoreboard players operation $DX __variable__ < $delta_Y __variable__
+scoreboard players operation $DX __variable__ *= $sign_Y __variable__
+scoreboard players operation $DX __variable__ *= $sign_X __variable__
+scoreboard players operation $DX __variable__ *= $delta_Y __variable__
+scoreboard players operation $DX __variable__ /= $delta_X __variable__
+scoreboard players operation $X __variable__ += $DX __variable__
+scoreboard players operation $int_X __variable__ = $X __variable__
+scoreboard players operation $int_X __variable__ /= 1000 __int__
+scoreboard players operation $frac_X __variable__ = $int_X __variable__
+scoreboard players operation $frac_X __variable__ *= -1000 __int__
+scoreboard players operation $frac_X __variable__ += $X __variable__
+scoreboard players operation $DY __variable__ = $shortest_distance __variable__
+scoreboard players operation $DY __variable__ < $delta_Y __variable__
+scoreboard players operation $DY __variable__ *= $sign_Y __variable__
+scoreboard players operation $DY __variable__ *= $sign_Y __variable__
+scoreboard players operation $DY __variable__ *= $delta_Y __variable__
+scoreboard players operation $DY __variable__ /= $delta_Y __variable__
+scoreboard players operation $Y __variable__ += $DY __variable__
+scoreboard players operation $int_Y __variable__ = $Y __variable__
+scoreboard players operation $int_Y __variable__ /= 1000 __int__
+scoreboard players operation $frac_Y __variable__ = $int_Y __variable__
+scoreboard players operation $frac_Y __variable__ *= -1000 __int__
+scoreboard players operation $frac_Y __variable__ += $Y __variable__
+scoreboard players operation $DZ __variable__ = $shortest_distance __variable__
+scoreboard players operation $DZ __variable__ < $delta_Y __variable__
+scoreboard players operation $DZ __variable__ *= $sign_Y __variable__
+scoreboard players operation $DZ __variable__ *= $sign_Z __variable__
+scoreboard players operation $DZ __variable__ *= $delta_Y __variable__
+scoreboard players operation $DZ __variable__ /= $delta_Z __variable__
+scoreboard players operation $Z __variable__ += $DZ __variable__
+scoreboard players operation $int_Z __variable__ = $Z __variable__
+scoreboard players operation $int_Z __variable__ /= 1000 __int__
+scoreboard players operation $frac_Z __variable__ = $int_Z __variable__
+scoreboard players operation $frac_Z __variable__ *= -1000 __int__
+scoreboard players operation $frac_Z __variable__ += $Z __variable__
+execute if score $sign_Y __variable__ matches -1 positioned ~0 ~-1 ~0 run function retina:check/main
+execute if score $sign_Y __variable__ matches 1 positioned ~0 ~1 ~0 run function retina:check/main

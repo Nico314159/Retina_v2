@@ -230,141 +230,227 @@ new tags.blocks(wall_torch) {
 }
 
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
+$overflow_risk = 2147483647;
+$overflow_risk /= SCALE;
+$max_depth = 300;
 
 class traverse {
     function setup() {
-
+        // guard condition
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $int_[i] = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1;
+                $test_[i] = $int_[i];
+                $test_[i] /= $overflow_risk;
+                if ($test_[i] != 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
+                //if ($test_[i] != 0) return 0;
+            },
+            ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
+        );
+        
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
         Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
-        math.gimbal_to_vec();
-        Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.x>, &<$output_vec3.y>, &<$output_vec3.z>]");
+        Math.gimbal_to_vec();
+        Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
 
         execute anchored eyes run summon minecraft:marker ^ ^ ^ {Tags:["retina.height"]};
-        $x = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1000;
-        $y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1000;
-        //$y += 1620;
-        $z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
+        $X = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1000;
+        $Y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1000;
+        //$Y += 1620;
+        $Z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
         kill @e[type=marker,tag=retina.height,limit=1];
 
         Hardcode.repeatList(
-            "comp",
+            "[i]",
             () => {
-                if ($output_vec3.comp < 0) $sign_comp = -1;
-                if ($output_vec3.comp >= 0) $sign_comp = 1;
+                if ($output_vec3.[i] < 0) $sign_[i] = -1;
+                if ($output_vec3.[i] >= 0) $sign_[i] = 1;
 
-                $delta_comp = 1000000;
-                $delta_comp /= $output_vec3.comp;
-                $delta_comp /= $sign_comp;
+                $delta_[i] = 1000000;
+                $delta_[i] /= $output_vec3.[i];
+                $delta_[i] /= $sign_[i];
 
-                $distance_comp = $comp;
-                $distance_comp *= $sign_comp;
-                $distance_comp *= -1;
-                $distance_comp %= 1000;
-                $distance_comp *= $delta_comp;
-                $distance_comp /= 1000;
+                $distance_[i] = $[i];
+                $distance_[i] *= $sign_[i];
+                $distance_[i] *= -1;
+                $distance_[i] %= 1000;
+                $distance_[i] *= $delta_[i];
+                $distance_[i] /= 1000;
 
-                if ($output_vec3.comp == 0) $delta_comp = 2147483647;
-                if ($output_vec3.comp == 0) $distance_comp = 2147483647;
+                if ($output_vec3.[i] == 0) $delta_[i] = 2147483647;
+                if ($output_vec3.[i] == 0) $distance_[i] = 2147483647;
 
-                $visual_comp = $comp;
-                $visual_comp /= 1000;
+                $int_[i] = $[i];
+                $int_[i] /= 1000;
+                $frac_[i] = $int_[i];
+                $frac_[i] *= -1000;
+                $frac_[i] += $[i];
             },
-            ["x", "y", "z"]
+            ["X", "Y", "Z"]
         );
-        Text.tellraw(@a, "Origin: &<yellow>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
+        Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
 
         $step = 0;
         $end = 0;
-        execute positioned ~ ~1.62 ~ run traverse.loop();
+        $offset_Y = data get entity @s Pos[1] -1000; 
+        $offset_Y += $Y;
+        if ($offset_Y == 1620) execute positioned ~ ~1.62 ~ run traverse.loop();
+        if ($offset_Y == 1270) execute positioned ~ ~1.27 ~ run traverse.loop();
+        if ($offset_Y == 400) execute positioned ~ ~0.4 ~ run traverse.loop();
     }
     function loop() {
         // Find nearest axis
-        $shortest_distance = $distance_x;
-        $shortest_distance < $distance_y;
-        $shortest_distance < $distance_z;
-        if ($shortest_distance = $distance_z) $nearest_axis = 2;
-        if ($shortest_distance = $distance_y) $nearest_axis = 1;
-        if ($shortest_distance = $distance_x) $nearest_axis = 0;
+        $shortest_distance = $distance_X;
+        $shortest_distance < $distance_Y;
+        $shortest_distance < $distance_Z;
+        if ($shortest_distance = $distance_Z) $nearest_axis = 2;
+        if ($shortest_distance = $distance_Y) $nearest_axis = 1;
+        if ($shortest_distance = $distance_X) $nearest_axis = 0;
         
         // Process data based on nearest axis
-        if ($nearest_axis = 0 && $step < 300 && $end = 0) traverse.x();
-        if ($nearest_axis = 1 && $step < 300 && $end = 0) traverse.y();
-        if ($nearest_axis = 2 && $step < 300 && $end = 0) traverse.z();
-
+        if ($nearest_axis = 0 && $step < $max_depth && $end = 0) traverse.x();
+        if ($nearest_axis = 1 && $step < $max_depth && $end = 0) traverse.y();
+        if ($nearest_axis = 2 && $step < $max_depth && $end = 0) traverse.z();
     }
     function x() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
-        $distance_x += $delta_x;
-        if ($end = 0) {
-            $visual_x += $sign_x;
-            if ($sign_x = -1) execute positioned ~-1 ~0 ~0 run check.main();
-            if ($sign_x = 1) execute positioned ~1 ~0 ~0 run check.main();
-        }
+        $distance_X += $delta_X;
+
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $D[i] = $shortest_distance;
+                $D[i] < $delta_X;
+                $D[i] *= $sign_X;
+                $D[i] *= $sign_[i];
+                $D[i] *= $delta_X;
+                $D[i] /= $delta_[i];
+                $[i] += $D[i];
+
+                $int_[i] = $[i];
+                $int_[i] /= 1000;
+                $frac_[i] = $int_[i];
+                $frac_[i] *= -1000;
+                $frac_[i] += $[i];
+            },
+            ["X", "Y", "Z"]
+        );
+
+        if ($sign_X = -1) execute positioned ~-1 ~0 ~0 run check.main();
+        if ($sign_X = 1) execute positioned ~1 ~0 ~0 run check.main();
     }
     function y() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
-        $distance_y += $delta_y;
-        if ($end = 0) {
-            $visual_y += $sign_y;
-            if ($sign_y = -1) execute positioned ~0 ~-1 ~0 run check.main();
-            if ($sign_y = 1) execute positioned ~0 ~1 ~0 run check.main();
-        }
+        $distance_Y += $delta_Y;
+
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $D[i] = $shortest_distance;
+                $D[i] < $delta_Y;
+                $D[i] *= $sign_Y;
+                $D[i] *= $sign_[i];
+                $D[i] *= $delta_Y;
+                $D[i] /= $delta_[i];
+                $[i] += $D[i];
+
+                $int_[i] = $[i];
+                $int_[i] /= 1000;
+                $frac_[i] = $int_[i];
+                $frac_[i] *= -1000;
+                $frac_[i] += $[i];
+            },
+            ["X", "Y", "Z"]
+        );
+
+        if ($sign_Y = -1) execute positioned ~0 ~-1 ~0 run check.main();
+        if ($sign_Y = 1) execute positioned ~0 ~1 ~0 run check.main();
+
     }
     function z() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_x>, &<$distance_y>, &<$distance_z>]");
+        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
-        $distance_z += $delta_z;
-        if ($end = 0) {
-            $visual_z += $sign_z;
-            if ($sign_z = -1) execute positioned ~0 ~0 ~-1 run check.main();
-            if ($sign_z = 1) execute positioned ~0 ~0 ~1 run check.main();
-        }
+        $distance_Z += $delta_Z;
+        
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $D[i] = $shortest_distance;
+                $D[i] < $delta_Z;
+                $D[i] *= $sign_Z;
+                $D[i] *= $sign_[i];
+                $D[i] *= $delta_Z;
+                $D[i] /= $delta_[i];
+                $[i] += $D[i];
+
+                $int_[i] = $[i];
+                $int_[i] /= 1000;
+                $frac_[i] = $int_[i];
+                $frac_[i] *= -1000;
+                $frac_[i] += $[i];
+            },
+            ["X", "Y", "Z"]
+        );
+
+        if ($sign_Z = -1) execute positioned ~0 ~0 ~-1 run check.main();
+        if ($sign_Z = 1) execute positioned ~0 ~0 ~1 run check.main();
     }
-}
+}   
+
 
 class check {
     function main() {
-        $step++;
+        $step ++;
         $end = false;
 
         check.block.main();
         if ($end) check.debug();
         
-        if ($step >= 300) $end = 1;
-        if ($step >= 300) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
+        if ($step >= $max_depth) $end = true;
+        if ($step >= $max_depth) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
         if ($end == 0) traverse.loop();
     }
     class block {
         function main() {
-            if (!block ~ ~ ~ #retina:airs) check.block.get_hitbox();
+            if (!block ~ ~ ~ #retina:airs) check.block.found();
             if ($end) {
-                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
+                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
                 if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
             }
             if (!$end) {
-                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$visual_x>, &<$visual_y>, &<$visual_z>]");
+                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
             }
         }
+        function found() {
+            data remove storage retina:data Surfaces;
+            check.block.get_hitbox();
+            // See if the ray hits any surface
+            if (data storage retina:data Surfaces) find_closest_surface.main(); 
+            if ($end) $block_distance = $shortest_distance;
+        }
         function get_hitbox() {
-            $block_found = false;
+            $shape_found = false;
             Hardcode.repeatList(
                 "[shape]",
                 () => {
                     $block.[shape] = false;
-                    if (!$block_found) $block.[shape] ?= execute if block ~ ~ ~ #retina:[shape];
-                    $block_found = $block.[shape];
+                    if (!$shape_found) $block.[shape] ?= execute if block ~ ~ ~ #retina:[shape];
+                    $shape_found = $block.[shape];
                     if ($block.[shape]) hitbox.[shape]();
                 },
-                ["anvil"]
+                ["slab", "stair"]
+                // ["anvil", "attached_stem", "bed", "beetroot", "brewing_stand", "button", 
+                // "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
+                // "door", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
+                // "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", 
+                // "sapling", "slab", "stair", "standing_sign_or_banner", "sugar_cane_like",
+                // "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
-            if (block ~ ~ ~ minecraft:honey_block && $honey_exception) {
-                $block_found = true;
-                hitbox.chest();
-            }
-            if (!$block_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
+            if (!$shape_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
     }
     function debug() {
@@ -374,10 +460,477 @@ class check {
     }
 }
 
+class find_closest_surface {
+    function main() {
+        // @within check.block.found()
+
+        $min_distance_to_surface = 1733; // why this number exactly???
+
+        if ($nearest_axis = 0 && $sign_X = 1) find_closest_surface.west();
+        if ($nearest_axis = 0 && $sign_X = -1) find_closest_surface.east();
+        if ($nearest_axis = 1 && $sign_Y = 1) find_closest_surface.bottom();
+        if ($nearest_axis = 1 && $sign_Y = -1) find_closest_surface.top();
+        if ($nearest_axis = 2 && $sign_Z = 1) find_closest_surface.north();
+        if ($nearest_axis = 2 && $sign_Z = -1) find_closest_surface.south();
+    }
+    function west() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.West;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[1] and List[4] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $y1 = data get storage retina:data List[-1][4];
+            $z1 = data get storage retina:data List[-1][5];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_X = $x0 && $frac_Y >= $y0 && $frac_Y <= $y1 && $frac_Z >= $z0 && $frac_Z <= $z1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_X < $x0) {
+                $distance = $x0;
+                $distance -= $frac_X;
+                $distance *= 1000;
+                $distance /= $delta_X;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    $X_intersection = $x0; // Get x position of the intersection
+
+                    // Get y position of the intersection
+                    $Y_intersection = $distance;
+                    $Y_intersection *= $delta_Y;
+                    $Y_intersection /= 1000; 
+                    $Y_intersection += $frac_Y; 
+
+                    // Get z position of the intersection
+                    $Z_intersection = $distance;
+                    $Z_intersection *= $delta_Z;
+                    $Z_intersection /= 1000;
+                    $Z_intersection += $frac_Z;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($Y_intersection >= $y0 && $Y_intersection <= $y1 && $Z_intersection >= $z0 && $Z_intersection <= $z1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+    function east() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.East;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[0] and List[3] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $y1 = data get storage retina:data List[-1][4];
+            $z1 = data get storage retina:data List[-1][5];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_X = $x0 && $frac_Y >= $y0 && $frac_Y <= $y1 && $frac_Z >= $z0 && $frac_Z <= $z1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_X > $x0) {
+                $distance = $x0;
+                $distance -= $frac_X;
+                $distance *= 1000;
+                $distance /= $delta_X;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    $X_intersection = $x0; // Get x position of the intersection
+
+                    // Get y position of the intersection
+                    $Y_intersection = $distance;
+                    $Y_intersection *= $delta_Y;
+                    $Y_intersection /= 1000;
+                    $Y_intersection += $frac_Y;
+
+                    // Get z position of the intersection
+                    $Z_intersection = $distance;
+                    $Z_intersection *= $delta_Z;
+                    $Z_intersection /= 1000;
+                    $Z_intersection += $frac_Z;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($Y_intersection >= $y0 && $Y_intersection <= $y1 && $Z_intersection >= $z0 && $Z_intersection <= $z1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+    function bottom() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.Bottom;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[1] and List[4] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $x1 = data get storage retina:data List[-1][3];
+            $z1 = data get storage retina:data List[-1][5];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_Y = $y0 && $frac_X >= $x0 && $frac_X <= $x1 && $frac_Z >= $z0 && $frac_Z <= $z1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_Y < $y0) {
+                $distance = $y0;
+                $distance -= $frac_Y;
+                $distance *= 1000;
+                $distance /= $delta_Y;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    // Get x position of the intersection
+                    $X_intersection = $distance;
+                    $X_intersection *= $dx;
+                    $X_intersection /= 1000;
+                    $X_intersection += $frac_X;
+
+                    // Get y position of the intersection (useful for retina:find_closest_surface/ray_intersects_with_surface)
+                    $Y_intersection = $y0;
+
+                    // Get z position of the intersection
+                    $Z_intersection = $distance;
+                    $Z_intersection *= $dz;
+                    $Z_intersection /= 1000;
+                    $Z_intersection += $frac_Z;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($X_intersection >= $x0 && $X_intersection <= $x1 && $Z_intersection >= $z0 && $Z_intersection <= $z1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+    function top() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.Top;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[1] and List[4] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $x1 = data get storage retina:data List[-1][3];
+            $z1 = data get storage retina:data List[-1][5];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_Y = $y0 && $frac_X >= $x0 && $frac_X <= $x1 && $frac_Z >= $z0 && $frac_Z <= $z1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_Y > $y0) {
+                $distance = $y0;
+                $distance -= $frac_Y;
+                $distance *= 1000;
+                $distance /= $delta_Y;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    // Get x position of the intersection
+                    $X_intersection = $distance;
+                    $X_intersection *= $dx;
+                    $X_intersection /= 1000;
+                    $X_intersection += $frac_X;
+
+                    // Get y position of the intersection (useful for retina:find_closest_surface/ray_intersects_with_surface)
+                    $Y_intersection = $y0;
+
+                    // Get z position of the intersection
+                    $Z_intersection = $distance;
+                    $Z_intersection *= $dz;
+                    $Z_intersection /= 1000;
+                    $Z_intersection += $frac_Z;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($X_intersection >= $x0 && $X_intersection <= $x1 && $Z_intersection >= $z0 && $Z_intersection <= $z1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+    function north() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.North;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[2] and List[5] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $x1 = data get storage retina:data List[-1][3];
+            $y1 = data get storage retina:data List[-1][4];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_Z = $z0 && $frac_X >= $x0 && $frac_X <= $x1 && $frac_Y >= $y0 && $frac_Y <= $y1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_Z < $z0) {
+                $distance = $z0;
+                $distance -= $frac_Z;
+                $distance *= 1000;
+                $distance /= $delta_Z;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    // Get x position of the intersection
+                    $X_intersection = $distance;
+                    $X_intersection *= $dx;
+                    $X_intersection /= 1000;
+                    $X_intersection += $frac_X;
+
+                    // Get y position of the intersection
+                    $Y_intersection = $distance;
+                    $Y_intersection *= $dy;
+                    $Y_intersection /= 1000;
+                    $Y_intersection += $frac_Y;
+
+                    // Get z position of the intersection
+                    $Z_intersection = $z0;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($X_intersection >= $x0 && $X_intersection <= $x1 && $Y_intersection >= $y0 && $Y_intersection <= $y1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+    function south() {
+        // @within find_closest_surface.main()
+
+        data modify storage retina:data List set from storage retina:data Surfaces.South;
+        $surfaces = data get storage retina:data List;
+        $cuboid_id = $surfaces;
+        $cuboid_id --;
+        while ($surfaces >= 1) {
+            // Store all coordinates to scores (List[2] and List[5] should have the same values)
+            $x0 = data get storage retina:data List[-1][0];
+            $y0 = data get storage retina:data List[-1][1];
+            $z0 = data get storage retina:data List[-1][2];
+            $x1 = data get storage retina:data List[-1][3];
+            $y1 = data get storage retina:data List[-1][4];
+
+            // If the current position is already in the plane of the surface, check if it is in the surface
+            if ($frac_Z = $z0 && $frac_X >= $x0 && $frac_X <= $x1 && $frac_Y >= $y0 && $frac_Y <= $y1) find_closest_surface.ray_already_in_surface();
+
+            // If the current position is before the plane, check if it hits the surface and get the position of that intersection
+            if ($frac_Z > $z0) {
+                $distance = $z0;
+                $distance -= $frac_Z;
+                $distance *= 1000;
+                $distance /= $delta_Z;
+
+                // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
+                if ($distance < $min_distance_to_surface) {
+                    // Get x position of the intersection
+                    $X_intersection = $distance;
+                    $X_intersection *= $dx;
+                    $X_intersection /= 1000;
+                    $X_intersection += $frac_X;
+
+                    // Get y position of the intersection
+                    $Y_intersection = $distance;
+                    $Y_intersection *= $dy;
+                    $Y_intersection /= 1000;
+                    $Y_intersection += $frac_Y;
+
+                    // Get z position of the intersection
+                    $Z_intersection = $z0;
+
+                    // If the ray hits the surface, return this as the minimum distance and the contact surface
+                    if ($X_intersection >= $x0 && $X_intersection <= $x1 && $Y_intersection >= $y0 && $Y_intersection <= $y1) find_closest_surface.ray_intersects_with_surface();
+                }
+            }
+
+            // Loop this function
+            data remove storage retina:data List[-1];
+            $surfaces --;
+            $cuboid_id --;
+        }
+    }
+
+    function ray_already_in_surface() {
+        // Name is self-explanatory.
+
+        // @within retina:find_closest_surface/bottom/loop
+        // @within retina:find_closest_surface/east/loop
+        // @within retina:find_closest_surface/north/loop
+        // @within retina:find_closest_surface/south/loop
+        // @within retina:find_closest_surface/top/loop
+        // @within retina:find_closest_surface/west/loop
+
+        $end = true;
+        $closest_cuboid_id = $cuboid_id;
+        $min_distance_to_surface = 0;
+        data modify storage retina:data ContactSurface set from storage retina:data List[-1];
+    }
+    function ray_intersects_with_surface() {
+        // Establishes the current surface as the first the ray will hit.
+        // This function only runs if the ray is closer to this surface than it is to any other surface analysed so far, but there is no guarantee that this is the surface the ray will eventually hit first.
+        
+        // @within find_closest_surface.bottom()
+        // @within find_closest_surface.east()
+        // @within find_closest_surface.north()
+        // @within find_closest_surface.south()
+        // @within find_closest_surface.top.find_intersection()
+        // @within find_closest_surface.west()
+
+        $end = true;
+        $closest_cuboid_id = $cuboid_id;
+        $min_distance_to_surface = $distance;
+
+        data modify storage retina:data ContactSurface set from storage retina:data List[-1];
+    }
+}
+
 class hitbox {
     function anvil() {}
+    function attached_stem() {}
+    function bed() {}
+    function beetroot() {}
+    function brewing_stand() {}
+    function button() {}
+    function cactus_shaped() {}
+    function campfire() {}
+    function carpet() {}
+    function cauldron() {}
+    function chain() {}
     function chest() {}
+    function composter() {}
+    function conduit() {}
     function cubic() {
-        $end = true;
+        data modify storage retina:data Surfaces.Top set value [[    0,       1000000, 0,       1000000, 1000000, 1000000 ]];
+        data modify storage retina:data Surfaces.Bottom set value [[ 0,       0,       0,       1000000, 0,       1000000 ]];
+        data modify storage retina:data Surfaces.West set value [[   0,       0,       0,       0,       1000000, 1000000 ]];
+        data modify storage retina:data Surfaces.East set value [[   1000000, 0,       0,       1000000, 1000000, 1000000 ]];
+        data modify storage retina:data Surfaces.North set value [[  0,       0,       0,       1000000, 1000000, 0       ]];
+        data modify storage retina:data Surfaces.South set value [[  0,       0,       1000000, 1000000, 1000000, 1000000 ]];
     }
+    function door() {}
+    function farmland_shaped() {}
+    function fence_gate() {}
+    function fence() {}
+    function grass_shaped() {}
+    function ladder() {}
+    function lantern() {}
+    function mushroom_shaped() {}
+    function pane_shaped() {}
+    function pressure_plate() {}
+    function rail() {}
+    function sapling() {}
+    function slab() {
+        if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:slabs[type=double]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000]], West: [[0, 0, 0, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 1000000, 1000000]]}
+    }
+    function stair() {
+        // half=bottom, shape=straight
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 500000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 500000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 500000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 1000000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 1000000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 1000000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 500000, 1000000, 1000000, 500000]]}
+
+        // half=top, shape=straight
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 0, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 500000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 500000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 500000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 500000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 500000, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 500000, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 500000, 1000000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 1000000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 1000000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 500000, 1000000, 500000, 500000]]}
+
+        // half=bottom, shape=inner_left
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 1000000], [0, 1000000, 0, 500000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 0, 1000000, 1000000, 0], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000], [0, 500000, 500000, 500000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 500000, 1000000, 1000000], [500000, 1000000, 500000, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 500000, 500000, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 1000000], [500000, 500000, 500000, 500000, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 500000, 1000000, 0], [500000, 500000, 500000, 1000000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 500000, 1000000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 1000000, 1000000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 1000000, 1000000, 500000], [500000, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 500000, 500000, 1000000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 1000000, 1000000, 500000], [0, 1000000, 500000, 500000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 1000000, 500000, 500000], [0, 500000, 500000, 500000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 500000], [0, 500000, 500000, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000], [500000, 500000, 500000, 500000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 1000000, 1000000, 0], [0, 500000, 500000, 500000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 500000, 1000000, 1000000, 500000], [0, 500000, 1000000, 500000, 1000000, 1000000]]}
+
+        // half=top, shape=inner_left
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 0, 1000000, 0, 1000000], [0, 0, 0, 500000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000], [0, 0, 0, 0, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 0, 1000000, 500000, 0], [0, 0, 0, 500000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000], [0, 0, 500000, 500000, 500000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 500000, 500000, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 500000, 0, 1000000], [500000, 0, 500000, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 500000, 500000, 0], [500000, 0, 500000, 1000000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 500000, 500000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 500000, 1000000, 0, 1000000], [500000, 0, 0, 1000000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 500000, 0, 500000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 500000, 1000000, 500000, 500000], [500000, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 1000000, 500000, 1000000], [500000, 0, 500000, 1000000, 500000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 1000000, 500000, 500000], [0, 500000, 500000, 500000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 1000000, 0, 500000], [0, 0, 500000, 500000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 500000], [0, 0, 500000, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000], [500000, 0, 500000, 500000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 1000000, 500000, 0], [0, 0, 500000, 500000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 500000, 1000000, 500000, 500000], [0, 0, 1000000, 500000, 500000, 1000000]]}
+
+        // half=bottom, shape=inner_right
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 1000000, 1000000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 1000000, 1000000, 500000], [500000, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 500000, 500000, 1000000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 1000000, 1000000, 500000], [0, 1000000, 500000, 500000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 1000000, 500000, 500000], [0, 500000, 500000, 500000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 500000], [0, 500000, 500000, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000], [500000, 500000, 500000, 500000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 1000000, 1000000, 0], [0, 500000, 500000, 500000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 500000, 1000000, 1000000, 500000], [0, 500000, 1000000, 500000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 1000000, 1000000, 1000000], [0, 1000000, 0, 500000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 1000000, 1000000, 500000], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 500000, 500000, 500000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 1000000], [0, 1000000, 0, 500000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 0, 1000000, 1000000, 0], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000], [0, 500000, 500000, 500000, 1000000, 500000]]}
+
+        // half=top, shape=inner_right
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 500000, 1000000, 500000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 500000, 1000000, 0, 1000000], [500000, 0, 0, 1000000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 500000, 0, 500000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 500000, 1000000, 500000, 500000], [500000, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 1000000, 500000, 1000000], [500000, 0, 500000, 1000000, 500000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 1000000, 500000, 500000], [0, 500000, 500000, 500000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 1000000, 0, 500000], [0, 0, 500000, 500000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 500000], [0, 0, 500000, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000], [500000, 0, 500000, 500000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 1000000, 500000, 0], [0, 0, 500000, 500000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 500000, 1000000, 500000, 500000], [0, 0, 1000000, 500000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 500000, 500000, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 500000, 0, 1000000], [500000, 0, 500000, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 500000, 500000, 0], [500000, 0, 500000, 1000000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 500000, 500000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 1000000, 500000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 0, 1000000, 0, 1000000], [0, 0, 0, 500000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 1000000], [0, 0, 0, 0, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 0, 1000000, 500000, 0], [0, 0, 0, 500000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000], [0, 0, 500000, 500000, 500000, 500000]]}
+
+        // half=bottom, shape=outer_left
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 500000, 1000000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 500000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 500000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 500000, 500000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 500000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 500000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 500000, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 500000, 500000, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 500000, 1000000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 500000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 500000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 500000, 500000, 1000000, 500000]]}
+
+        // half=top, shape=outer_left
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 0, 1000000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 500000, 1000000, 500000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 500000, 500000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 500000, 500000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 500000, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 500000, 500000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 500000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 500000, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 500000, 1000000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 500000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 500000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 500000, 500000, 500000, 500000]]}
+
+        // half=bottom, shape=outer_right
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 500000, 1000000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 500000, 500000, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 500000, 1000000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 500000, 1000000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 1000000, 1000000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 0, 500000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 0, 500000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 0, 0, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 0, 500000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 500000, 500000, 1000000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 1000000, 500000, 500000, 1000000, 1000000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [0, 500000, 500000, 500000, 500000, 1000000]], West: [[0, 0, 0, 0, 500000, 1000000], [0, 500000, 500000, 0, 1000000, 1000000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [500000, 500000, 500000, 500000, 1000000, 1000000]], North: [[0, 0, 0, 1000000, 500000, 0], [0, 500000, 500000, 500000, 1000000, 500000]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [0, 500000, 1000000, 500000, 1000000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 1000000, 0, 1000000, 1000000, 500000]], Bottom: [[0, 0, 0, 1000000, 0, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], West: [[0, 0, 0, 0, 500000, 1000000], [500000, 500000, 0, 500000, 1000000, 500000]], East: [[1000000, 0, 0, 1000000, 500000, 1000000], [1000000, 500000, 0, 1000000, 1000000, 500000]], North: [[0, 0, 0, 1000000, 500000, 0], [500000, 500000, 0, 1000000, 1000000, 0]], South: [[0, 0, 1000000, 1000000, 500000, 1000000], [500000, 500000, 500000, 1000000, 1000000, 500000]]}
+
+        // half=top, shape=outer_right
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 500000, 1000000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 500000, 1000000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 500000, 1000000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 500000, 1000000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 1000000, 1000000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 0, 500000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 0, 500000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 0, 0, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 0, 500000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 500000, 500000, 500000, 500000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [0, 500000, 500000, 500000, 500000, 1000000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [0, 0, 500000, 500000, 0, 1000000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [0, 0, 500000, 0, 500000, 1000000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [500000, 0, 500000, 500000, 500000, 1000000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [0, 0, 500000, 500000, 500000, 500000]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [0, 0, 1000000, 500000, 500000, 1000000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000000, 0, 1000000, 1000000, 1000000], [500000, 500000, 0, 1000000, 500000, 500000]], Bottom: [[0, 500000, 0, 1000000, 500000, 1000000], [500000, 0, 0, 1000000, 0, 500000]], West: [[0, 500000, 0, 0, 1000000, 1000000], [500000, 0, 0, 500000, 500000, 500000]], East: [[1000000, 500000, 0, 1000000, 1000000, 1000000], [1000000, 0, 0, 1000000, 500000, 500000]], North: [[0, 500000, 0, 1000000, 1000000, 0], [500000, 0, 0, 1000000, 500000, 0]], South: [[0, 500000, 1000000, 1000000, 1000000, 1000000], [500000, 0, 500000, 1000000, 500000, 500000]]}
+
+    }
+    function standing_sign_or_banner() {}
+    function sugar_cane_like() {}
+    function trapdoor() {}
+    function vertical_torch() {}
+    function wall_sign() {}
+    function wall_torch() {}
+    function wall() {}
 }

@@ -1,4 +1,4 @@
-class math {
+class Math {
     function sine() {
         // Bhaskara approximation
         $output = $input;
@@ -40,21 +40,21 @@ class math {
     }
     function gimbal_to_vec() {
         $input = $input_yaw;
-        math.sine();
-        $output_vec3.x = $output;
-        $output_vec3.x *= -1;
-        math.cosine();
-        $output_vec3.z = $output;
+        Math.sine();
+        $output_vec3.X = $output;
+        $output_vec3.X *= -1;
+        Math.cosine();
+        $output_vec3.Z = $output;
 
         $input = $input_pitch;
-        math.cosine();
+        Math.cosine();
         $output_vec_horizontal = $output;
-        $output_vec3.x *= $output;
-        $output_vec3.z *= $output;
-        $output_vec3.x /= 1000;
-        $output_vec3.z /= 1000;
-        math.sine();
-        $output_vec3.y = $output;
-        $output_vec3.y *= -1;
+        $output_vec3.X *= $output;
+        $output_vec3.Z *= $output;
+        $output_vec3.X /= 1000;
+        $output_vec3.Z /= 1000;
+        Math.sine();
+        $output_vec3.Y = $output;
+        $output_vec3.Y *= -1;
     }
 }

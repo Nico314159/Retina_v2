@@ -1,2 +1,10 @@
-tellraw @a ["",{"text":"Block has been hit! Coordinates: ","bold":true,"underlined":true,"color":"gray"},{"text":"[","color":"blue"},{"score":{"name":"$visual_x","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$visual_y","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$visual_z","objective":"__variable__"},"color":"blue"},{"text":"]","color":"blue"}]
-execute if score $debug_gold __variable__ matches 1 run setblock ~ ~ ~ gold_block
+scoreboard players operation $X_intersection __variable__ = $x0 __variable__
+scoreboard players operation $Y_intersection __variable__ = $distance __variable__
+scoreboard players operation $Y_intersection __variable__ *= $delta_Y __variable__
+scoreboard players operation $Y_intersection __variable__ /= 1000 __int__
+scoreboard players operation $Y_intersection __variable__ += $frac_Y __variable__
+scoreboard players operation $Z_intersection __variable__ = $distance __variable__
+scoreboard players operation $Z_intersection __variable__ *= $delta_Z __variable__
+scoreboard players operation $Z_intersection __variable__ /= 1000 __int__
+scoreboard players operation $Z_intersection __variable__ += $frac_Z __variable__
+execute if score $Y_intersection __variable__ >= $y0 __variable__ if score $Y_intersection __variable__ <= $y1 __variable__ if score $Z_intersection __variable__ >= $z0 __variable__ if score $Z_intersection __variable__ <= $z1 __variable__ run function retina:find_closest_surface/ray_intersects_with_surface
