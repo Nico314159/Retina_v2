@@ -331,9 +331,8 @@ class traverse {
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
-                $frac_[i] = $int_[i];
-                $frac_[i] *= -1000;
-                $frac_[i] += $[i];
+                $frac_[i] = $[i];
+                $frac_[i] %= 1000;
             },
             ["X", "Y", "Z"]
         );
@@ -357,9 +356,8 @@ class traverse {
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
-                $frac_[i] = $int_[i];
-                $frac_[i] *= -1000;
-                $frac_[i] += $[i];
+                $frac_[i] = $[i];
+                $frac_[i] %= 1000;
             },
             ["X", "Y", "Z"]
         );
@@ -383,9 +381,8 @@ class traverse {
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
-                $frac_[i] = $int_[i];
-                $frac_[i] *= -1000;
-                $frac_[i] += $[i];
+                $frac_[i] = $[i];
+                $frac_[i] %= 1000;
             },
             ["X", "Y", "Z"]
         );
