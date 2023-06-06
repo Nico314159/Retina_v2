@@ -460,7 +460,7 @@ class find_closest_surface {
         $min_distance_to_surface = 1733; // sqrt(3)
         Hardcode.repeatLists(
             ["[direction]", "[axis]", "[sign]"],
-            () => {if (!$sign_[axis] = [sign]) find_closest_surface.[direction]();},
+            () => {if (!$sign_[axis] = [sign] && $end == 0) find_closest_surface.[direction]();},
             [
                 ["east", "west", "top", "bottom", "south", "north"],
                 ["X", "X", "Y", "Y", "Z", "Z"],
