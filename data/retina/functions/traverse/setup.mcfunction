@@ -32,9 +32,8 @@ execute if score $output_vec3.X __variable__ matches 0 run scoreboard players se
 execute if score $output_vec3.X __variable__ matches 0 run scoreboard players set $distance_X __variable__ 2147483647
 scoreboard players operation $int_X __variable__ = $X __variable__
 scoreboard players operation $int_X __variable__ /= 1000 __int__
-scoreboard players operation $frac_X __variable__ = $int_X __variable__
-scoreboard players operation $frac_X __variable__ *= -1000 __int__
-scoreboard players operation $frac_X __variable__ += $X __variable__
+scoreboard players operation $frac_X __variable__ = $X __variable__
+scoreboard players operation $frac_X __variable__ %= 1000 __int__
 scoreboard players operation $origin_Y __variable__ = $Y __variable__
 execute if score $output_vec3.Y __variable__ matches ..-1 run scoreboard players set $sign_Y __variable__ -1
 execute if score $output_vec3.Y __variable__ matches 0.. run scoreboard players set $sign_Y __variable__ 1
@@ -51,9 +50,8 @@ execute if score $output_vec3.Y __variable__ matches 0 run scoreboard players se
 execute if score $output_vec3.Y __variable__ matches 0 run scoreboard players set $distance_Y __variable__ 2147483647
 scoreboard players operation $int_Y __variable__ = $Y __variable__
 scoreboard players operation $int_Y __variable__ /= 1000 __int__
-scoreboard players operation $frac_Y __variable__ = $int_Y __variable__
-scoreboard players operation $frac_Y __variable__ *= -1000 __int__
-scoreboard players operation $frac_Y __variable__ += $Y __variable__
+scoreboard players operation $frac_Y __variable__ = $Y __variable__
+scoreboard players operation $frac_Y __variable__ %= 1000 __int__
 scoreboard players operation $origin_Z __variable__ = $Z __variable__
 execute if score $output_vec3.Z __variable__ matches ..-1 run scoreboard players set $sign_Z __variable__ -1
 execute if score $output_vec3.Z __variable__ matches 0.. run scoreboard players set $sign_Z __variable__ 1
@@ -70,9 +68,8 @@ execute if score $output_vec3.Z __variable__ matches 0 run scoreboard players se
 execute if score $output_vec3.Z __variable__ matches 0 run scoreboard players set $distance_Z __variable__ 2147483647
 scoreboard players operation $int_Z __variable__ = $Z __variable__
 scoreboard players operation $int_Z __variable__ /= 1000 __int__
-scoreboard players operation $frac_Z __variable__ = $int_Z __variable__
-scoreboard players operation $frac_Z __variable__ *= -1000 __int__
-scoreboard players operation $frac_Z __variable__ += $Z __variable__
+scoreboard players operation $frac_Z __variable__ = $Z __variable__
+scoreboard players operation $frac_Z __variable__ %= 1000 __int__
 tellraw @a ["",{"text":"Origin: "},{"text":"[","color":"yellow"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Y","objective":"__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"yellow"},{"text":"]","color":"yellow"}]
 scoreboard players set $step __variable__ 0
 scoreboard players set $end __variable__ 0
