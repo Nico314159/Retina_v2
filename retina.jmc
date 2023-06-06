@@ -234,6 +234,7 @@ $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 $max_depth = 300;
 
+
 class traverse {
     function setup() {
         // guard condition
@@ -261,10 +262,11 @@ class traverse {
         //$Y += 1620;
         $Z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
         kill @e[type=marker,tag=retina.height,limit=1];
-
         Hardcode.repeatList(
             "[i]",
             () => {
+                $origin_[i] = $[i];
+
                 if ($output_vec3.[i] < 0) $sign_[i] = -1;
                 if ($output_vec3.[i] >= 0) $sign_[i] = 1;
 
@@ -319,20 +321,12 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
         $distance_X += $delta_X;
 
-        $DX = $X;
-        $DX %= 1000;
-        $DX *= -1;
-        if ($sign_X == 1) $DX += 1000;
-        if ($sign_X == -1 && $DX = 0) $DX = -1000;
         Hardcode.repeatList(
             "[i]",
             () => {
-                $D[i] = $DX;
-                $D[i] *= $delta_X;
-                $D[i] *= $sign_X;
-                $D[i] /= $delta_[i];
-                $D[i] /= $sign_[i];
-                $[i] += $D[i];
+                $[i] = $output_vec3.[i];
+                $[i] *= $shortest_distance;
+                $[i] += $origin_[i];
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
@@ -342,6 +336,7 @@ class traverse {
             },
             ["X", "Y", "Z"]
         );
+        $distance_X += $delta_X;
 
         if ($sign_X = -1) execute positioned ~-1 ~0 ~0 run check.main();
         if ($sign_X = 1) execute positioned ~1 ~0 ~0 run check.main();
@@ -351,20 +346,12 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
         $distance_Y += $delta_Y;
 
-        $DY = $Y;
-        $DY %= 1000;
-        $DY *= -1;
-        if ($sign_Y == 1) $DY += 1000;
-        if ($sign_Y == -1 && $DY = 0) $DY = -1000;
         Hardcode.repeatList(
             "[i]",
             () => {
-                $D[i] = $DY;
-                $D[i] *= $delta_Y;
-                $D[i] *= $sign_Y;
-                $D[i] /= $delta_[i];
-                $D[i] /= $sign_[i];
-                $[i] += $D[i];
+                $[i] = $output_vec3.[i];
+                $[i] *= $shortest_distance;
+                $[i] += $origin_[i];
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
@@ -384,20 +371,12 @@ class traverse {
         Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
         $distance_Z += $delta_Z;
         
-        $DZ = $Z;
-        $DZ %= 1000;
-        $DZ *= -1;
-        if ($sign_Z == 1) $DZ += 1000;
-        if ($sign_Z == -1 && $DZ = 0) $DZ = -1000;
         Hardcode.repeatList(
             "[i]",
             () => {
-                $D[i] = $DZ;
-                $D[i] *= $delta_Z;
-                $D[i] *= $sign_Z;
-                $D[i] /= $delta_[i];
-                $D[i] /= $sign_[i];
-                $[i] += $D[i];
+                $[i] = $output_vec3.[i];
+                $[i] *= $shortest_distance;
+                $[i] += $origin_[i];
 
                 $int_[i] = $[i];
                 $int_[i] /= 1000;
@@ -424,7 +403,7 @@ class check {
         
         if ($step >= $max_depth) $end = true;
         if ($step >= $max_depth) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-        if ($end == 0) traverse.loop();
+        if ($end = 0) traverse.loop();
     }
     class block {
         function main() {
@@ -438,7 +417,9 @@ class check {
             }
         }
         function found() {
+            // clear residual data from `Surfaces`
             data remove storage retina:data Surfaces;
+            data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
             check.block.get_hitbox();
             // See if the ray hits any surface
             if (data storage retina:data Surfaces) find_closest_surface.main(); 
@@ -451,7 +432,7 @@ class check {
                 () => {
                     $block.[shape] = false;
                     if (!$shape_found) $block.[shape] ?= execute if block ~ ~ ~ #retina:[shape];
-                    $shape_found = $block.[shape];
+                    $shape_found += $block.[shape];
                     if ($block.[shape]) hitbox.[shape]();
                 },
                 ["slab", "stair"]
@@ -476,14 +457,16 @@ class find_closest_surface {
     function main() {
         // @within check.block.found()
 
-        $min_distance_to_surface = 1733; // why this number exactly???
-
-        if ($nearest_axis = 0 && $sign_X = 1) find_closest_surface.west();
-        if ($nearest_axis = 0 && $sign_X = -1) find_closest_surface.east();
-        if ($nearest_axis = 1 && $sign_Y = 1) find_closest_surface.bottom();
-        if ($nearest_axis = 1 && $sign_Y = -1) find_closest_surface.top();
-        if ($nearest_axis = 2 && $sign_Z = 1) find_closest_surface.north();
-        if ($nearest_axis = 2 && $sign_Z = -1) find_closest_surface.south();
+        $min_distance_to_surface = 1733; // sqrt(3)
+        Hardcode.repeatLists(
+            ["[direction]", "[axis]", "[sign]"],
+            () => {if (!$sign_[axis] = [sign]) find_closest_surface.[direction]();},
+            [
+                ["east", "west", "top", "bottom", "south", "north"],
+                ["X", "X", "Y", "Y", "Z", "Z"],
+                ["1", "-1", "1", "-1", "1", "-1"]
+            ]
+        );
     }
     function west() {
         // @within find_closest_surface.main()
