@@ -326,6 +326,7 @@ class traverse {
             () => {
                 $[i] = $output_vec3.[i];
                 $[i] *= $shortest_distance;
+                $[i] /= 1000;
                 $[i] += $origin_[i];
 
                 $int_[i] = $[i];
@@ -351,6 +352,7 @@ class traverse {
             () => {
                 $[i] = $output_vec3.[i];
                 $[i] *= $shortest_distance;
+                $[i] /= 1000;
                 $[i] += $origin_[i];
 
                 $int_[i] = $[i];
@@ -376,6 +378,7 @@ class traverse {
             () => {
                 $[i] = $output_vec3.[i];
                 $[i] *= $shortest_distance;
+                $[i] /= 1000;
                 $[i] += $origin_[i];
 
                 $int_[i] = $[i];
