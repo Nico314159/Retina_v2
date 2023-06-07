@@ -7,4 +7,4 @@ scoreboard players set -4 __int__ -4
 scoreboard players set -1 __int__ -1
 scoreboard players set $overflow_risk __variable__ 2147483647
 scoreboard players operation $overflow_risk __variable__ /= 1000 __int__
-scoreboard players set $max_depth __variable__ 300
+execute unless score $max_depth __variable__ = $max_depth __variable__ run scoreboard players set $max_depth __variable__ 300
