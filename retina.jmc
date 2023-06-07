@@ -245,7 +245,7 @@ class traverse {
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
                 if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
-                //if (!$test_[i] matches -1..0) return 0;
+                if (!$test_[i] matches -1..0) return 0;
             },
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
