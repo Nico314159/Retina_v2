@@ -467,7 +467,7 @@ class check {
 class find_closest_surface {
     function main() {
         // @within check.block.found()
-
+        
         $min_distance_to_surface = 1733; // sqrt(3)
         Hardcode.repeatLists(
             ["[direction]", "[axis]", "[sign]"],
@@ -502,6 +502,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_X = $x0 && $relative_Y >= $y0 && $relative_Y <= $y1 && $relative_Z >= $z0 && $relative_Z <= $z1) find_closest_surface.ray_already_in_surface();
@@ -512,6 +513,7 @@ class find_closest_surface {
                 $distance -= $relative_X;
                 $distance *= 1000;
                 $distance /= $delta_X;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -549,6 +551,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_X = $x0 && $relative_Y >= $y0 && $relative_Y <= $y1 && $relative_Z >= $z0 && $relative_Z <= $z1) find_closest_surface.ray_already_in_surface();
@@ -559,6 +562,7 @@ class find_closest_surface {
                 $distance -= $relative_X;
                 $distance *= 1000;
                 $distance /= $delta_X;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -596,6 +600,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_Y = $y0 && $relative_X >= $x0 && $relative_X <= $x1 && $relative_Z >= $z0 && $relative_Z <= $z1) find_closest_surface.ray_already_in_surface();
@@ -606,6 +611,7 @@ class find_closest_surface {
                 $distance -= $relative_Y;
                 $distance *= 1000;
                 $distance /= $delta_Y;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -644,6 +650,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_Y = $y0 && $relative_X >= $x0 && $relative_X <= $x1 && $relative_Z >= $z0 && $relative_Z <= $z1) find_closest_surface.ray_already_in_surface();
@@ -654,6 +661,7 @@ class find_closest_surface {
                 $distance -= $relative_Y;
                 $distance *= 1000;
                 $distance /= $delta_Y;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -692,6 +700,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_Z = $z0 && $relative_X >= $x0 && $relative_X <= $x1 && $relative_Y >= $y0 && $relative_Y <= $y1) find_closest_surface.ray_already_in_surface();
@@ -702,6 +711,7 @@ class find_closest_surface {
                 $distance -= $relative_Z;
                 $distance *= 1000;
                 $distance /= $delta_Z;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -740,6 +750,7 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
+            Text.tellraw(@a, "&<italic>Relative X: &<!italic,light_purple,$relative_X>, &<white>x0: &<light_purple,$x0>");
 
             // If the current position is already in the plane of the surface, check if it is in the surface
             if ($relative_Z = $z0 && $relative_X >= $x0 && $relative_X <= $x1 && $relative_Y >= $y0 && $relative_Y <= $y1) find_closest_surface.ray_already_in_surface();
@@ -750,6 +761,7 @@ class find_closest_surface {
                 $distance -= $relative_Z;
                 $distance *= 1000;
                 $distance /= $delta_Z;
+                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
 
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
