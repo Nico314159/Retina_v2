@@ -500,9 +500,9 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
 
-            if ($output.vec3_X != 0) {
+            if ($output_vec3.X != 0) {
                 $distance = $X0;
-                $distance /= $output.vec3_X;
+                $distance /= $output_vec3.X;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
@@ -511,12 +511,12 @@ class find_closest_surface {
                 
                     // Get y position of the intersection
                     $Y_intersection = $distance;
-                    $Y_intersection *= $output.vec3_Y;
+                    $Y_intersection *= $output_vec3.Y;
                     $Y_intersection /= 1000;
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
-                    $Z_intersection *= $output.vec3_Z;
+                    $Z_intersection *= $output_vec3.Z;
                     $Z_intersection /= 1000;
                 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
@@ -540,9 +540,9 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
             
-            if ($output.vec3_X != 0) {
+            if ($output_vec3.X != 0) {
                 $distance = $X0;
-                $distance /= $output.vec3_X;
+                $distance /= $output_vec3.X;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
@@ -551,12 +551,12 @@ class find_closest_surface {
                 
                     // Get y position of the intersection
                     $Y_intersection = $distance;
-                    $Y_intersection *= $output.vec3_Y;
+                    $Y_intersection *= $output_vec3.Y;
                     $Y_intersection /= 1000;
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
-                    $Z_intersection *= $output.vec3_Z;
+                    $Z_intersection *= $output_vec3.Z;
                     $Z_intersection /= 1000;
                 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
@@ -580,23 +580,23 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
-            if ($output.vec3_Y != 0) {
+            if ($output_vec3.Y != 0) {
                 $distance = $Y0;
-                $distance /= $output.vec3_Y;
+                $distance /= $output_vec3.Y;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
-                    $X_intersection *= $output.vec3_X;
+                    $X_intersection *= $output_vec3.X;
                     $X_intersection /= 1000;
                      
                     $Y_intersection = $Y0; // Get y position of the intersection
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
-                    $Z_intersection *= $output.vec3_Z;
+                    $Z_intersection *= $output_vec3.Z;
                     $Z_intersection /= 1000;
                              
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
@@ -620,23 +620,23 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
-            if ($output.vec3_Y != 0) {
+            if ($output_vec3.Y != 0) {
                 $distance = $Y0;
-                $distance /= $output.vec3_Y;
+                $distance /= $output_vec3.Y;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
-                    $X_intersection *= $output.vec3_X;
+                    $X_intersection *= $output_vec3.X;
                     $X_intersection /= 1000;
                      
                     $Y_intersection = $Y0; // Get y position of the intersection
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
-                    $Z_intersection *= $output.vec3_Z;
+                    $Z_intersection *= $output_vec3.Z;
                     $Z_intersection /= 1000;         
                 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
@@ -660,21 +660,21 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($output.vec3_Z != 0) {
+            if ($output_vec3.Z != 0) {
                 $distance = $Z0;
-                $distance /= $output.vec3_Z;
+                $distance /= $output_vec3.Z;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
-                    $X_intersection *= $output.vec3_X;
+                    $X_intersection *= $output_vec3.X;
                     $X_intersection /= 1000;
                      
                     // Get y position of the intersection
                     $Y_intersection = $distance;
-                    $Y_intersection *= $output.vec3_Y;
+                    $Y_intersection *= $output_vec3.Y;
                     $Y_intersection /= 1000;
                     
                     $Z_intersection = $Z0; // Get z position of the intersection
@@ -700,21 +700,21 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($output.vec3_Z != 0) {
+            if ($output_vec3.Z != 0) {
                 $distance = $Z0;
-                $distance /= $output.vec3_Z;
+                $distance /= $output_vec3.Z;
                 Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
-                    $X_intersection *= $output.vec3_X;
+                    $X_intersection *= $output_vec3.X;
                     $X_intersection /= 1000;
                      
                     // Get y position of the intersection
                     $Y_intersection = $distance;
-                    $Y_intersection *= $output.vec3_Y;
+                    $Y_intersection *= $output_vec3.Y;
                     $Y_intersection /= 1000;
                     
                     $Z_intersection = $Z0; // Get z position of the intersection

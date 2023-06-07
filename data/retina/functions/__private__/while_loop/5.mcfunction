@@ -1,5 +1,5 @@
 function retina:find_closest_surface/store_coords
-execute unless score $output.vec3_Z __variable__ matches 0 run function retina:__private__/if_else/12
+execute unless score $output_vec3.Z __variable__ matches 0 run function retina:__private__/if_else/12
 data remove storage retina:data List[-1]
 scoreboard players remove $surfaces __variable__ 1
 scoreboard players remove $cuboid_id __variable__ 1
