@@ -17,6 +17,8 @@ execute store result score $Y __variable__ run data get entity @e[type=marker,ta
 execute store result score $Z __variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000
 kill @e[type=marker,tag=retina.height,limit=1]
 scoreboard players operation $origin_X __variable__ = $X __variable__
+scoreboard players operation $frac_origin_X __variable__ = $X __variable__
+scoreboard players operation $frac_origin_X __variable__ %= 1000 __int__
 execute if score $output_vec3.X __variable__ matches ..-1 run scoreboard players set $sign_X __variable__ -1
 execute if score $output_vec3.X __variable__ matches 0.. run scoreboard players set $sign_X __variable__ 1
 scoreboard players set $delta_X __variable__ 1000000
@@ -35,6 +37,8 @@ scoreboard players operation $int_X __variable__ /= 1000 __int__
 scoreboard players operation $frac_X __variable__ = $X __variable__
 scoreboard players operation $frac_X __variable__ %= 1000 __int__
 scoreboard players operation $origin_Y __variable__ = $Y __variable__
+scoreboard players operation $frac_origin_Y __variable__ = $Y __variable__
+scoreboard players operation $frac_origin_Y __variable__ %= 1000 __int__
 execute if score $output_vec3.Y __variable__ matches ..-1 run scoreboard players set $sign_Y __variable__ -1
 execute if score $output_vec3.Y __variable__ matches 0.. run scoreboard players set $sign_Y __variable__ 1
 scoreboard players set $delta_Y __variable__ 1000000
@@ -53,6 +57,8 @@ scoreboard players operation $int_Y __variable__ /= 1000 __int__
 scoreboard players operation $frac_Y __variable__ = $Y __variable__
 scoreboard players operation $frac_Y __variable__ %= 1000 __int__
 scoreboard players operation $origin_Z __variable__ = $Z __variable__
+scoreboard players operation $frac_origin_Z __variable__ = $Z __variable__
+scoreboard players operation $frac_origin_Z __variable__ %= 1000 __int__
 execute if score $output_vec3.Z __variable__ matches ..-1 run scoreboard players set $sign_Z __variable__ -1
 execute if score $output_vec3.Z __variable__ matches 0.. run scoreboard players set $sign_Z __variable__ 1
 scoreboard players set $delta_Z __variable__ 1000000
