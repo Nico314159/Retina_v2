@@ -1,3 +1,0 @@
-execute if score $nearest_axis __variable__ matches 0 run tellraw @a ["",{"text":"Block hit direction: ","bold":true,"color":"white"},{"text":"X","bold":true,"color":"dark_purple"}]
-execute if score $nearest_axis __variable__ matches 1 run tellraw @a ["",{"text":"Block hit direction: ","bold":true,"color":"white"},{"text":"Y","bold":true,"color":"dark_purple"}]
-execute if score $nearest_axis __variable__ matches 2 run tellraw @a ["",{"text":"Block hit direction: ","bold":true,"color":"white"},{"text":"Z","bold":true,"color":"dark_purple"}]

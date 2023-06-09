@@ -1,2 +1,2 @@
-#define SCALE 1000
+#define SCALE 1024
 #command return

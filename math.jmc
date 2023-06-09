@@ -9,7 +9,7 @@ class Math {
         $output *= $output;
         $trig_0 = $output;
         $trig_0 += 3240000;
-        $trig_0 /= 1000;
+        $trig_0 /= 1024;
         $output *= -4;
         $output += 3240000;
         $output /= $trig_0;
@@ -28,7 +28,7 @@ class Math {
         $output *= $output;
         $trig_0 = $output;
         $trig_0 += 3240000;
-        $trig_0 /= 1000;
+        $trig_0 /= 1024;
         $output *= -4;
         $output += 3240000;
         $output /= $trig_0;
@@ -51,8 +51,8 @@ class Math {
         $output_vec_horizontal = $output;
         $output_vec3.X *= $output;
         $output_vec3.Z *= $output;
-        $output_vec3.X /= 1000;
-        $output_vec3.Z /= 1000;
+        $output_vec3.X /= 1024;
+        $output_vec3.Z /= 1024;
         Math.sine();
         $output_vec3.Y = $output;
         $output_vec3.Y *= -1;

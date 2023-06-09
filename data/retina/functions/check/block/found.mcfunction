@@ -1,4 +1,3 @@
-tellraw @a ["",{"text":"Function `retina:check/block/found` called at coordinates: ","color":"white"},{"text":"[","color":"blue"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Y","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"blue"},{"text":"]","color":"blue"}]
 data remove storage retina:data Surfaces
 data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]}
 function retina:check/block/get_hitbox

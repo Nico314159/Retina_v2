@@ -1,5 +1,6 @@
 function retina:find_closest_surface/store_coords
-execute unless score $output_vec3.X __variable__ matches 0 run function retina:__private__/if_else/2
+execute if score $debug_messages __variable__ matches 1.. run tellraw @a ["",{"text":"[WEST] ","italic":true,"bold":true},{"text":"Relative X: ","bold":false},{"italic":false,"color":"light_purple","score":{"name":"$relative_X","objective":"__variable__"}},{"text":", ","italic":false,"color":"light_purple"},{"text":"X0: ","color":"white"},{"color":"light_purple","score":{"name":"$X0","objective":"__variable__"}}]
+execute if score $relative_X __variable__ <= $X0 __variable__ run function retina:__private__/if_else/2
 data remove storage retina:data List[-1]
 scoreboard players remove $surfaces __variable__ 1
 scoreboard players remove $cuboid_id __variable__ 1

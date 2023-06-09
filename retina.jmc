@@ -232,8 +232,7 @@ new tags.blocks(wall_torch) {
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
 $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
-$max_depth ??= 300;
-
+$max_depth ??= 150;
 
 class traverse {
     function setup() {
@@ -252,57 +251,57 @@ class traverse {
         
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
-        Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
+        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
         Math.gimbal_to_vec();
-        Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
+        if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
 
         execute anchored eyes run summon minecraft:marker ^ ^ ^ {Tags:["retina.height"]};
-        $X = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1000;
-        $Y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1000;
+        $X = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1024;
+        $Y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 1024;
         //$Y += 1620;
-        $Z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1000;
+        $Z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 1024;
         kill @e[type=marker,tag=retina.height,limit=1];
         Hardcode.repeatList(
             "[i]",
             () => {
                 $origin_[i] = $[i];
                 $frac_origin_[i] = $[i];
-                $frac_origin_[i] %= 1000;
+                $frac_origin_[i] %= 1024;
                 $step_[i] = 0;
 
                 if ($output_vec3.[i] < 0) $sign_[i] = -1;
                 if ($output_vec3.[i] >= 0) $sign_[i] = 1;
 
-                $delta_[i] = 1000000;
+                $delta_[i] = 1048576;
                 $delta_[i] /= $output_vec3.[i];
                 $delta_[i] /= $sign_[i];
 
                 $distance_[i] = $[i];
                 $distance_[i] *= $sign_[i];
                 $distance_[i] *= -1;
-                $distance_[i] %= 1000;
+                $distance_[i] %= 1024;
                 $distance_[i] *= $delta_[i];
-                $distance_[i] /= 1000;
+                $distance_[i] /= 1024;
 
                 if ($output_vec3.[i] == 0) $delta_[i] = 2147483647;
                 if ($output_vec3.[i] == 0) $distance_[i] = 2147483647;
 
                 $int_[i] = $[i];
-                $int_[i] /= 1000;
+                $int_[i] /= 1024;
                 $frac_[i] = $[i];
-                $frac_[i] %= 1000;
+                $frac_[i] %= 1024;
             },
             ["X", "Y", "Z"]
         );
-        Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+        if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
 
         $step = 0;
         $end = 0;
-        $offset_Y = data get entity @s Pos[1] -1000; 
+        $offset_Y = data get entity @s Pos[1] -1024; 
         $offset_Y += $Y;
-        if ($offset_Y matches 1619..1621) execute positioned ~ ~1.62 ~ run traverse.loop();
-        if ($offset_Y matches 1269..1271) execute positioned ~ ~1.27 ~ run traverse.loop();
-        if ($offset_Y matches 399..401) execute positioned ~ ~0.4 ~ run traverse.loop();
+        if ($offset_Y = 1658) execute positioned ~ ~1.62 ~ run traverse.loop();
+        if ($offset_Y = 1300) execute positioned ~ ~1.27 ~ run traverse.loop();
+        if ($offset_Y = 409) execute positioned ~ ~0.4 ~ run traverse.loop();
     }
     function loop() {
         // Find nearest axis
@@ -319,8 +318,8 @@ class traverse {
         if ($nearest_axis = 2 && $step < $max_depth && $end = 0) traverse.z();
     }
     function x() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
+        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
         $distance_X += $delta_X;
         $step_X += $sign_X;
         $int_X += $sign_X;
@@ -330,12 +329,12 @@ class traverse {
             () => {
                 $relative_[i] = $output_vec3.[i];
                 $relative_[i] *= $shortest_distance;
-                $relative_[i] /= 1000;
+                $relative_[i] /= 1024;
                 $[i] = $relative_[i];
                 $[i] += $origin_[i];
 
                 $frac_[i] = $[i];
-                $frac_[i] %= 1000;
+                $frac_[i] %= 1024;
             },
             ["X", "Y", "Z"]
         );
@@ -344,8 +343,8 @@ class traverse {
         if ($sign_X = 1) execute positioned ~1 ~0 ~0 run check.main();
     }
     function y() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
+        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
         $distance_Y += $delta_Y;
         $step_Y += $sign_Y;
         $int_Y += $sign_Y;
@@ -355,12 +354,12 @@ class traverse {
             () => {
                 $relative_[i] = $output_vec3.[i];
                 $relative_[i] *= $shortest_distance;
-                $relative_[i] /= 1000;
+                $relative_[i] /= 1024;
                 $[i] = $relative_[i];
                 $[i] += $origin_[i];
 
                 $frac_[i] = $[i];
-                $frac_[i] %= 1000;
+                $frac_[i] %= 1024;
             },
             ["X", "Y", "Z"]
         );
@@ -370,8 +369,8 @@ class traverse {
 
     }
     function z() {
-        Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
+        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
         $distance_Z += $delta_Z;
         $step_Z += $sign_Z;
         $int_Z += $sign_Z;
@@ -381,12 +380,12 @@ class traverse {
             () => {
                 $relative_[i] = $output_vec3.[i];
                 $relative_[i] *= $shortest_distance;
-                $relative_[i] /= 1000;
+                $relative_[i] /= 1024;
                 $[i] = $relative_[i];
                 $[i] += $origin_[i];
 
                 $frac_[i] = $[i];
-                $frac_[i] %= 1000;
+                $frac_[i] %= 1024;
             },
             ["X", "Y", "Z"]
         );
@@ -403,26 +402,24 @@ class check {
         $end = false;
 
         check.block.main();
-        if ($end) check.debug();
         
         if ($step >= $max_depth) $end = true;
-        if ($step >= $max_depth) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+        if ($step >= $max_depth && $debug_messages) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
         if ($end = 0) traverse.loop();
     }
     class block {
         function main() {
             if (!block ~ ~ ~ #retina:airs) check.block.found();
             if ($end) {
-                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-                if ($debug_gold = 1) setblock ~ ~ ~ gold_block;
+                if ($debug_messages) Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+                if ($debug_gold) setblock ~ ~ ~ gold_block;
             }
             if (!$end) {
-                Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+                if ($debug_messages) Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
             }
         }
         function found() {
             // clear residual data from `Surfaces`
-            Text.tellraw(@a, "&<white>Function `retina:check/block/found` called at coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
             data remove storage retina:data Surfaces;
             data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
             check.block.get_hitbox();
@@ -451,11 +448,6 @@ class check {
             if (!$shape_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
     }
-    function debug() {
-        if ($nearest_axis = 0) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>X");
-        if ($nearest_axis = 1) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Y");
-        if ($nearest_axis = 2) Text.tellraw(@a, "&<bold, white>Block hit direction: &<bold, dark_purple>Z");
-    }
 }
 
 class find_closest_surface {
@@ -465,7 +457,7 @@ class find_closest_surface {
         $min_distance_to_surface = 1733; // sqrt(3)
         Hardcode.repeatLists(
             ["[direction]", "[axis]", "[sign]"],
-            () => {if (!$sign_[axis] = [sign] && $end == 0) find_closest_surface.[direction]();},
+            () => {if (!$sign_[axis] = [sign] && $end = 0) find_closest_surface.[direction]();},
             [
                 ["east", "west", "top", "bottom", "south", "north"],
                 ["X", "X", "Y", "Y", "Z", "Z"],
@@ -478,8 +470,8 @@ class find_closest_surface {
             ["[axis]", "[num]", "$index"],
             () => {
                 $[axis][num] = data get storage retina:data List[-1][$index];
-                $k = 1000;
-                $k *= $steps_[axis];
+                $k = 1024;
+                $k *= $step_[axis];
                 $k -= $frac_origin_[axis];
                 $[axis][num] += $k;
             },
@@ -500,10 +492,12 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
 
-            if ($output_vec3.X != 0) {
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<!bold>Relative X: &<!italic,light_purple,$relative_X>, &<white>X0: &<light_purple,$X0>");
+            if ($relative_X <= $X0) {
+                if ($output_vec3.X == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -512,15 +506,16 @@ class find_closest_surface {
                     // Get y position of the intersection
                     $Y_intersection = $distance;
                     $Y_intersection *= $output_vec3.Y;
-                    $Y_intersection /= 1000;
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
                     $Z_intersection *= $output_vec3.Z;
-                    $Z_intersection /= 1000;
                 
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<!bold>Y-Int: &<!italic,light_purple,$Y_intersection>, &<italic,white>Y0: &<!italic,light_purple,$Y0>, &<italic,white>Y1: &<!italic,light_purple,$Y1>");
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<!bold>Z-Int: &<!italic,light_purple,$Z_intersection>, &<italic,white>Z0: &<!italic,light_purple,$Z0>, &<italic,white>Z1: &<!italic,light_purple,$Z1>"); 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
+                    if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "West";
                 }
             }
 
@@ -540,10 +535,12 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
             
-            if ($output_vec3.X != 0) {
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<!bold>Relative X: &<!italic,light_purple,$relative_X>, &<white>X0: &<light_purple,$X0>");
+            if ($relative_X <= $X0) {
+                if ($output_vec3.X == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
@@ -552,15 +549,16 @@ class find_closest_surface {
                     // Get y position of the intersection
                     $Y_intersection = $distance;
                     $Y_intersection *= $output_vec3.Y;
-                    $Y_intersection /= 1000;
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
                     $Z_intersection *= $output_vec3.Z;
-                    $Z_intersection /= 1000;
                 
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<!bold>Y-Int: &<!italic,light_purple,$Y_intersection>, &<italic,white>Y0: &<!italic,light_purple,$Y0>, &<italic,white>Y1: &<!italic,light_purple,$Y1>");
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<!bold>Z-Int: &<!italic,light_purple,$Z_intersection>, &<italic,white>Z0: &<!italic,light_purple,$Z0>, &<italic,white>Z1: &<!italic,light_purple,$Z1>"); 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
+                    if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "East";
                 }
             }
 
@@ -580,27 +578,26 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
-            if ($output_vec3.Y != 0) {
+            if ($relative_Y >= $Y0) {
+                if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
                     $X_intersection *= $output_vec3.X;
-                    $X_intersection /= 1000;
                      
                     $Y_intersection = $Y0; // Get y position of the intersection
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
                     $Z_intersection *= $output_vec3.Z;
-                    $Z_intersection /= 1000;
                              
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
+                    if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "Bottom";
                 }
             }
 
@@ -619,29 +616,29 @@ class find_closest_surface {
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
-            
-            if ($output_vec3.Y != 0) {
+
+            if ($relative_Y >= $Y0) {
+                if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
                     $X_intersection *= $output_vec3.X;
-                    $X_intersection /= 1000;
                      
                     $Y_intersection = $Y0; // Get y position of the intersection
                 
                     // Get z position of the intersection
                     $Z_intersection = $distance;
-                    $Z_intersection *= $output_vec3.Z;
-                    $Z_intersection /= 1000;         
+                    $Z_intersection *= $output_vec3.Z;      
                 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
+                    if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "Top";
                 }
+
             }
 
             // Loop this function
@@ -660,27 +657,30 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($output_vec3.Z != 0) {
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<!bold>Relative Z: &<!italic,light_purple,$relative_Z>, &<white>Z0: &<light_purple,$Z0>");
+            if ($relative_Z <= $Z0) {
+                if ($output_vec3.Z == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
                     $X_intersection *= $output_vec3.X;
-                    $X_intersection /= 1000;
                      
                     // Get y position of the intersection
                     $Y_intersection = $distance;
                     $Y_intersection *= $output_vec3.Y;
-                    $Y_intersection /= 1000;
                     
                     $Z_intersection = $Z0; // Get z position of the intersection
                 
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<!bold>X-Int: &<!italic,light_purple,$X_intersection>, &<italic,white>X0: &<!italic,light_purple,$X0>, &<italic,white>X1: &<!italic,light_purple,$X1>");
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<!bold>Y-Int: &<!italic,light_purple,$Y_intersection>, &<italic,white>Y0: &<!italic,light_purple,$Y0>, &<italic,white>Y1: &<!italic,light_purple,$Y1>"); 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) find_closest_surface.ray_intersects_with_surface();
+                    if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) data modify storage retina:output HitFace set value "North";
                 }
             }
 
@@ -700,27 +700,30 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($output_vec3.Z != 0) {
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<!bold>Relative Z: &<!italic,light_purple,$relative_Z>, &<white>Z0: &<light_purple,$Z0>");
+            if ($relative_Z >= $Z0) {
+                if ($output_vec3.Z == 0) return 0; // The if block is actually its own function, so this give control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
-                Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if ($distance < $min_distance_to_surface) {
                     // Get x position of the intersection
                     $X_intersection = $distance;
                     $X_intersection *= $output_vec3.X;
-                    $X_intersection /= 1000;
                      
                     // Get y position of the intersection
                     $Y_intersection = $distance;
                     $Y_intersection *= $output_vec3.Y;
-                    $Y_intersection /= 1000;
                     
                     $Z_intersection = $Z0; // Get z position of the intersection
                 
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<!bold>X-Int: &<!italic,light_purple,$X_intersection>, &<italic,white>X0: &<!italic,light_purple,$X0>, &<italic,white>X1: &<!italic,light_purple,$X1>");
+                    if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<!bold>Y-Int: &<!italic,light_purple,$Y_intersection>, &<italic,white>Y0: &<!italic,light_purple,$Y0>, &<italic,white>Y1: &<!italic,light_purple,$Y1>"); 
                     // If the ray hits the surface, return this as the minimum distance and the contact surface
                     if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) find_closest_surface.ray_intersects_with_surface();
+                    if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) data modify storage retina:output HitFace set value "South";
                 }
             }
 
@@ -766,12 +769,12 @@ class hitbox {
     function composter() {}
     function conduit() {}
     function cubic() {
-        data modify storage retina:data Surfaces.Top set value [[    0,       1000, 0,       1000, 1000, 1000 ]];
-        data modify storage retina:data Surfaces.Bottom set value [[ 0,       0,       0,       1000, 0,       1000 ]];
-        data modify storage retina:data Surfaces.West set value [[   0,       0,       0,       0,       1000, 1000 ]];
-        data modify storage retina:data Surfaces.East set value [[   1000, 0,       0,       1000, 1000, 1000 ]];
-        data modify storage retina:data Surfaces.North set value [[  0,       0,       0,       1000, 1000, 0       ]];
-        data modify storage retina:data Surfaces.South set value [[  0,       0,       1000, 1000, 1000, 1000 ]];
+        data modify storage retina:data Surfaces.Top set value [[    0,       1024, 0,       1024, 1024, 1024 ]];
+        data modify storage retina:data Surfaces.Bottom set value [[ 0,       0,       0,       1024, 0,       1024 ]];
+        data modify storage retina:data Surfaces.West set value [[   0,       0,       0,       0,       1024, 1024 ]];
+        data modify storage retina:data Surfaces.East set value [[   1024, 0,       0,       1024, 1024, 1024 ]];
+        data modify storage retina:data Surfaces.North set value [[  0,       0,       0,       1024, 1024, 0       ]];
+        data modify storage retina:data Surfaces.South set value [[  0,       0,       1024, 1024, 1024, 1024 ]];
     }
     function door() {}
     function farmland_shaped() {}
@@ -786,70 +789,70 @@ class hitbox {
     function rail() {}
     function sapling() {}
     function slab() {
-        if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 500,  0, 1000, 500,  1000]], Bottom: [[0, 0, 0, 1000, 0, 1000]], West: [[0, 0, 0, 0, 500, 1000]], East: [[1000, 0, 0, 1000, 500, 1000]], North: [[0, 0, 0, 1000, 500, 0]], South: [[0, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value    {Top: [[0, 1000, 0, 1000, 1000, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000]], West: [[0, 500, 0, 0, 1000, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000]], North: [[0, 500, 0, 1000, 1000, 0]], South: [[0, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:slabs[type=double]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000]], West: [[0, 0, 0, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 1000, 1000]]}
+        if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 512,  0, 1024, 512,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value    {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024]], West: [[0, 512, 0, 0, 1024, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024]], North: [[0, 512, 0, 1024, 1024, 0]], South: [[0, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:slabs[type=double]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
     }
     function stair() {
         // half=bottom, shape=straight
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 0, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 0, 1000, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 0, 500, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 500, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 500, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 0, 500, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 500, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 1000, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 1000, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 1000, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 1000, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 500, 1000, 1000, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 0, 1024, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 0, 512, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 512, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 512, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 0, 512, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 512, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 1024, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 1024, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 1024, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 1024, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 512, 1024, 1024, 512]]}
 
         // half=top, shape=straight
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 0, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 0, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 0, 500, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 500, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 500, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 0, 500, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 500, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 500, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 500, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 500, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 500, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 500, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 500, 1000, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 1000, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 1000, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 500, 1000, 500, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 0, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 0, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 0, 512, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 512, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 512, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 0, 512, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 512, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 512, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 512, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 512, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 512, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 512, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 512, 1024, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=straight]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 1024, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 1024, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 512, 1024, 512, 512]]}
 
         // half=bottom, shape=inner_left
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 0, 1000, 1000, 1000], [0, 1000, 0, 500, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 0, 1000, 500, 1000], [0, 500, 0, 500, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 0, 500, 1000, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 1000], [500, 500, 0, 500, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 0, 1000, 1000, 0], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 1000, 1000, 1000, 1000], [0, 500, 500, 500, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 500, 1000, 1000], [500, 1000, 500, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 500, 500, 1000], [500, 500, 500, 1000, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 1000], [500, 500, 500, 500, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 0, 500, 1000, 1000], [1000, 500, 500, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 500, 1000, 0], [500, 500, 500, 1000, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 500, 1000, 1000], [500, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 1000, 1000, 1000], [500, 1000, 0, 1000, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 1000, 500, 1000], [500, 500, 0, 1000, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000], [500, 500, 0, 500, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000], [1000, 500, 0, 1000, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 1000, 1000, 500], [500, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 1000, 1000, 1000], [500, 500, 500, 1000, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 1000, 1000, 500], [0, 1000, 500, 500, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 1000, 500, 500], [0, 500, 500, 500, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 500], [0, 500, 500, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 500], [500, 500, 500, 500, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 1000, 1000, 0], [0, 500, 500, 500, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 500, 1000, 1000, 500], [0, 500, 1000, 500, 1000, 1000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 0, 1024, 1024, 1024], [0, 1024, 0, 512, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 0, 1024, 512, 1024], [0, 512, 0, 512, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 0, 512, 1024, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 1024], [512, 512, 0, 512, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 0, 1024, 1024, 0], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 1024, 1024, 1024, 1024], [0, 512, 512, 512, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 512, 1024, 1024], [512, 1024, 512, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 512, 512, 1024], [512, 512, 512, 1024, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 1024], [512, 512, 512, 512, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 0, 512, 1024, 1024], [1024, 512, 512, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 512, 1024, 0], [512, 512, 512, 1024, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 512, 1024, 1024], [512, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 1024, 1024, 1024], [512, 1024, 0, 1024, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 1024, 512, 1024], [512, 512, 0, 1024, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024], [512, 512, 0, 512, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024], [1024, 512, 0, 1024, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 1024, 1024, 512], [512, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 1024, 1024, 1024], [512, 512, 512, 1024, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 1024, 1024, 512], [0, 1024, 512, 512, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 1024, 512, 512], [0, 512, 512, 512, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 512], [0, 512, 512, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 512], [512, 512, 512, 512, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 1024, 1024, 0], [0, 512, 512, 512, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 512, 1024, 1024, 512], [0, 512, 1024, 512, 1024, 1024]]}
 
         // half=top, shape=inner_left
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 0, 1000, 500, 1000], [0, 500, 0, 500, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 0, 1000, 0, 1000], [0, 0, 0, 500, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 0, 500, 500, 1000], [0, 0, 0, 0, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 1000], [500, 0, 0, 500, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 0, 1000, 500, 0], [0, 0, 0, 500, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 1000, 1000, 500, 1000], [0, 0, 500, 500, 500, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 500, 500, 1000], [500, 500, 500, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 500, 0, 1000], [500, 0, 500, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 1000], [500, 0, 500, 500, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 0, 500, 500, 1000], [1000, 0, 500, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 500, 500, 0], [500, 0, 500, 1000, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 500, 500, 1000], [500, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 500, 1000, 500, 1000], [500, 500, 0, 1000, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 500, 1000, 0, 1000], [500, 0, 0, 1000, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 500, 0, 500, 1000], [500, 0, 0, 500, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 500, 1000, 500, 1000], [1000, 0, 0, 1000, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 500, 1000, 500, 500], [500, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 1000, 500, 1000], [500, 0, 500, 1000, 500, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 1000, 500, 500], [0, 500, 500, 500, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 1000, 0, 500], [0, 0, 500, 500, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 500], [0, 0, 500, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 500], [500, 0, 500, 500, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 1000, 500, 0], [0, 0, 500, 500, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 500, 1000, 500, 500], [0, 0, 1000, 500, 500, 1000]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 0, 1024, 512, 1024], [0, 512, 0, 512, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 0, 1024, 0, 1024], [0, 0, 0, 512, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 0, 512, 512, 1024], [0, 0, 0, 0, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 1024], [512, 0, 0, 512, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 0, 1024, 512, 0], [0, 0, 0, 512, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 1024, 1024, 512, 1024], [0, 0, 512, 512, 512, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 512, 512, 1024], [512, 512, 512, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 512, 0, 1024], [512, 0, 512, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 1024], [512, 0, 512, 512, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 0, 512, 512, 1024], [1024, 0, 512, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 512, 512, 0], [512, 0, 512, 1024, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 512, 512, 1024], [512, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 512, 1024, 512, 1024], [512, 512, 0, 1024, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 512, 1024, 0, 1024], [512, 0, 0, 1024, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 512, 0, 512, 1024], [512, 0, 0, 512, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 512, 1024, 512, 1024], [1024, 0, 0, 1024, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 512, 1024, 512, 512], [512, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 1024, 512, 1024], [512, 0, 512, 1024, 512, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 1024, 512, 512], [0, 512, 512, 512, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 1024, 0, 512], [0, 0, 512, 512, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 512], [0, 0, 512, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 512], [512, 0, 512, 512, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 1024, 512, 0], [0, 0, 512, 512, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 512, 1024, 512, 512], [0, 0, 1024, 512, 512, 1024]]}
 
         // half=bottom, shape=inner_right
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 1000, 1000, 1000], [500, 1000, 0, 1000, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 1000, 500, 1000], [500, 500, 0, 1000, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000], [500, 500, 0, 500, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000], [1000, 500, 0, 1000, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 1000, 1000, 500], [500, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 1000, 1000, 1000], [500, 500, 500, 1000, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 1000, 1000, 500], [0, 1000, 500, 500, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 1000, 500, 500], [0, 500, 500, 500, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 500], [0, 500, 500, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 500], [500, 500, 500, 500, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 1000, 1000, 0], [0, 500, 500, 500, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 500, 1000, 1000, 500], [0, 500, 1000, 500, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 1000, 1000, 1000], [0, 1000, 0, 500, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 1000, 500, 1000], [0, 500, 0, 500, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000], [500, 500, 0, 500, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 1000, 1000, 500], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 1000, 1000, 1000], [0, 500, 500, 500, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 0, 1000, 1000, 1000], [0, 1000, 0, 500, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 0, 1000, 500, 1000], [0, 500, 0, 500, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 0, 500, 1000, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 1000], [500, 500, 0, 500, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 0, 1000, 1000, 0], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 1000, 1000, 1000, 1000], [0, 500, 500, 500, 1000, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 1024, 1024, 1024], [512, 1024, 0, 1024, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 1024, 512, 1024], [512, 512, 0, 1024, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024], [512, 512, 0, 512, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024], [1024, 512, 0, 1024, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 1024, 1024, 512], [512, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 1024, 1024, 1024], [512, 512, 512, 1024, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 1024, 1024, 512], [0, 1024, 512, 512, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 1024, 512, 512], [0, 512, 512, 512, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 512], [0, 512, 512, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 512], [512, 512, 512, 512, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 1024, 1024, 0], [0, 512, 512, 512, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 512, 1024, 1024, 512], [0, 512, 1024, 512, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 1024, 1024, 1024], [0, 1024, 0, 512, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 1024, 512, 1024], [0, 512, 0, 512, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024], [512, 512, 0, 512, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 1024, 1024, 512], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 1024, 1024, 1024], [0, 512, 512, 512, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 0, 1024, 1024, 1024], [0, 1024, 0, 512, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 0, 1024, 512, 1024], [0, 512, 0, 512, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 0, 512, 1024, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 1024], [512, 512, 0, 512, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 0, 1024, 1024, 0], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 1024, 1024, 1024, 1024], [0, 512, 512, 512, 1024, 512]]}
 
         // half=top, shape=inner_right
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 500, 1000, 500, 1000], [500, 500, 0, 1000, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 500, 1000, 0, 1000], [500, 0, 0, 1000, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 500, 0, 500, 1000], [500, 0, 0, 500, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 500, 1000, 500, 1000], [1000, 0, 0, 1000, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 500, 1000, 500, 500], [500, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 1000, 500, 1000], [500, 0, 500, 1000, 500, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 1000, 500, 500], [0, 500, 500, 500, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 1000, 0, 500], [0, 0, 500, 500, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 500], [0, 0, 500, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 500], [500, 0, 500, 500, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 1000, 500, 0], [0, 0, 500, 500, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 500, 1000, 500, 500], [0, 0, 1000, 500, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 500, 500, 1000], [500, 500, 500, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 500, 0, 1000], [500, 0, 500, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 1000], [500, 0, 500, 500, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 0, 500, 500, 1000], [1000, 0, 500, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 500, 500, 0], [500, 0, 500, 1000, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 500, 500, 1000], [500, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 0, 1000, 500, 1000], [0, 500, 0, 500, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 0, 1000, 0, 1000], [0, 0, 0, 500, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 0, 500, 500, 1000], [0, 0, 0, 0, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 1000], [500, 0, 0, 500, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 0, 1000, 500, 0], [0, 0, 0, 500, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 1000, 1000, 500, 1000], [0, 0, 500, 500, 500, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 512, 1024, 512, 1024], [512, 512, 0, 1024, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 512, 1024, 0, 1024], [512, 0, 0, 1024, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 512, 0, 512, 1024], [512, 0, 0, 512, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 512, 1024, 512, 1024], [1024, 0, 0, 1024, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 512, 1024, 512, 512], [512, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 1024, 512, 1024], [512, 0, 512, 1024, 512, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 1024, 512, 512], [0, 512, 512, 512, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 1024, 0, 512], [0, 0, 512, 512, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 512], [0, 0, 512, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 512], [512, 0, 512, 512, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 1024, 512, 0], [0, 0, 512, 512, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 512, 1024, 512, 512], [0, 0, 1024, 512, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 512, 512, 1024], [512, 512, 512, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 512, 0, 1024], [512, 0, 512, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 1024], [512, 0, 512, 512, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 0, 512, 512, 1024], [1024, 0, 512, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 512, 512, 0], [512, 0, 512, 1024, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 512, 512, 1024], [512, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=inner_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 0, 1024, 512, 1024], [0, 512, 0, 512, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 0, 1024, 0, 1024], [0, 0, 0, 512, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 0, 512, 512, 1024], [0, 0, 0, 0, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 1024], [512, 0, 0, 512, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 0, 1024, 512, 0], [0, 0, 0, 512, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 1024, 1024, 512, 1024], [0, 0, 512, 512, 512, 512]]}
 
         // half=bottom, shape=outer_left
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 0, 1000, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 0, 1000, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 0, 500, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 500, 1000, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 500, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 500, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 500, 500, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 500, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 500, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 500, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 500, 1000, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 500, 500, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 500, 1000, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 500, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 500, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 0, 500, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 500, 500, 1000, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 0, 1024, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 0, 1024, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 0, 512, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 512, 1024, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 512, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 512, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 512, 512, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 512, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 512, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 512, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 512, 1024, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 512, 512, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 512, 1024, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 512, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 512, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 0, 512, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 512, 512, 1024, 512]]}
 
         // half=top, shape=outer_left
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 0, 1000, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 0, 1000, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 0, 500, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 500, 1000, 500, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 500, 500, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 500, 500, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 500, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 500, 500, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 500, 500, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 500, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 500, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 500, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 500, 500, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 500, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 500, 1000, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 500, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 500, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 0, 500, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 500, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 500, 500, 500, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 0, 1024, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 0, 1024, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 0, 512, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 512, 1024, 512, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 512, 512, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 512, 512, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 512, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 512, 512, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 512, 512, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 512, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 512, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 512, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 512, 512, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 512, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 512, 1024, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_left]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 512, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 512, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 0, 512, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 512, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 512, 512, 512, 512]]}
 
         // half=bottom, shape=outer_right
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 500, 1000, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 500, 1000, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 500, 500, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 500, 1000, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 500, 1000, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 1000, 1000, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 0, 500, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 0, 500, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 0, 0, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 0, 500, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 0, 500, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 500, 500, 1000, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [0, 1000, 500, 500, 1000, 1000]], Bottom: [[0, 0, 0, 1000, 0, 1000], [0, 500, 500, 500, 500, 1000]], West: [[0, 0, 0, 0, 500, 1000], [0, 500, 500, 0, 1000, 1000]], East: [[1000, 0, 0, 1000, 500, 1000], [500, 500, 500, 500, 1000, 1000]], North: [[0, 0, 0, 1000, 500, 0], [0, 500, 500, 500, 1000, 500]], South: [[0, 0, 1000, 1000, 500, 1000], [0, 500, 1000, 500, 1000, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 500, 0, 1000, 500, 1000], [500, 1000, 0, 1000, 1000, 500]], Bottom: [[0, 0, 0, 1000, 0, 1000], [500, 500, 0, 1000, 500, 500]], West: [[0, 0, 0, 0, 500, 1000], [500, 500, 0, 500, 1000, 500]], East: [[1000, 0, 0, 1000, 500, 1000], [1000, 500, 0, 1000, 1000, 500]], North: [[0, 0, 0, 1000, 500, 0], [500, 500, 0, 1000, 1000, 0]], South: [[0, 0, 1000, 1000, 500, 1000], [500, 500, 500, 1000, 1000, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 512, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 512, 1024, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 512, 512, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 512, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 512, 1024, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 0, 512, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 0, 512, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 0, 0, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 0, 512, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 0, 512, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 512, 512, 1024, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [0, 1024, 512, 512, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024], [0, 512, 512, 512, 512, 1024]], West: [[0, 0, 0, 0, 512, 1024], [0, 512, 512, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 512, 1024], [512, 512, 512, 512, 1024, 1024]], North: [[0, 0, 0, 1024, 512, 0], [0, 512, 512, 512, 1024, 512]], South: [[0, 0, 1024, 1024, 512, 1024], [0, 512, 1024, 512, 1024, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=bottom, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024], [512, 1024, 0, 1024, 1024, 512]], Bottom: [[0, 0, 0, 1024, 0, 1024], [512, 512, 0, 1024, 512, 512]], West: [[0, 0, 0, 0, 512, 1024], [512, 512, 0, 512, 1024, 512]], East: [[1024, 0, 0, 1024, 512, 1024], [1024, 512, 0, 1024, 1024, 512]], North: [[0, 0, 0, 1024, 512, 0], [512, 512, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 512, 1024], [512, 512, 512, 1024, 1024, 512]]}
 
         // half=top, shape=outer_right
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 500, 1000, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 500, 1000, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 500, 500, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 500, 1000, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 500, 1000, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 1000, 1000, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 0, 500, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 0, 500, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 0, 0, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 0, 500, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 0, 500, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 500, 500, 500, 500]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [0, 500, 500, 500, 500, 1000]], Bottom: [[0, 500, 0, 1000, 500, 1000], [0, 0, 500, 500, 0, 1000]], West: [[0, 500, 0, 0, 1000, 1000], [0, 0, 500, 0, 500, 1000]], East: [[1000, 500, 0, 1000, 1000, 1000], [500, 0, 500, 500, 500, 1000]], North: [[0, 500, 0, 1000, 1000, 0], [0, 0, 500, 500, 500, 500]], South: [[0, 500, 1000, 1000, 1000, 1000], [0, 0, 1000, 500, 500, 1000]]}
-        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1000, 0, 1000, 1000, 1000], [500, 500, 0, 1000, 500, 500]], Bottom: [[0, 500, 0, 1000, 500, 1000], [500, 0, 0, 1000, 0, 500]], West: [[0, 500, 0, 0, 1000, 1000], [500, 0, 0, 500, 500, 500]], East: [[1000, 500, 0, 1000, 1000, 1000], [1000, 0, 0, 1000, 500, 500]], North: [[0, 500, 0, 1000, 1000, 0], [500, 0, 0, 1000, 500, 0]], South: [[0, 500, 1000, 1000, 1000, 1000], [500, 0, 500, 1000, 500, 500]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=east, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 512, 1024, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 512, 1024, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 512, 512, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 512, 1024, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 512, 1024, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=west, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 0, 512, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 0, 512, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 0, 0, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 0, 512, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 0, 512, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 512, 512, 512, 512]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=south, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [0, 512, 512, 512, 512, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024], [0, 0, 512, 512, 0, 1024]], West: [[0, 512, 0, 0, 1024, 1024], [0, 0, 512, 0, 512, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024], [512, 0, 512, 512, 512, 1024]], North: [[0, 512, 0, 1024, 1024, 0], [0, 0, 512, 512, 512, 512]], South: [[0, 512, 1024, 1024, 1024, 1024], [0, 0, 1024, 512, 512, 1024]]}
+        if (block ~ ~ ~ #minecraft:stairs[half=top, facing=north, shape=outer_right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024], [512, 512, 0, 1024, 512, 512]], Bottom: [[0, 512, 0, 1024, 512, 1024], [512, 0, 0, 1024, 0, 512]], West: [[0, 512, 0, 0, 1024, 1024], [512, 0, 0, 512, 512, 512]], East: [[1024, 512, 0, 1024, 1024, 1024], [1024, 0, 0, 1024, 512, 512]], North: [[0, 512, 0, 1024, 1024, 0], [512, 0, 0, 1024, 512, 0]], South: [[0, 512, 1024, 1024, 1024, 1024], [512, 0, 512, 1024, 512, 512]]}
 
     }
     function standing_sign_or_banner() {}
