@@ -1,2 +1,3 @@
 execute if score $debug_messages __variable__ matches 1.. run tellraw @a ["",{"text":"Block has been hit! Coordinates: ","bold":true,"underlined":true,"color":"gray"},{"text":"[","color":"blue"},{"score":{"name":"$int_X","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Y","objective":"__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Z","objective":"__variable__"},"color":"blue"},{"text":"]","color":"blue"}]
 execute if score $debug_gold __variable__ matches 1.. run setblock ~ ~ ~ gold_block
+particle minecraft:end_rod ~ ~ ~ 0 0 0 0 1 force @a
