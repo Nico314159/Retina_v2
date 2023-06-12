@@ -11,10 +11,10 @@ scoreboard players set $block.bed __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.bed __variable__ if block ~ ~ ~ #retina:bed
 scoreboard players operation $shape_found __variable__ += $block.bed __variable__
 execute if score $block.bed __variable__ matches 1.. run function retina:hitbox/bed
-scoreboard players set $block.beetroot __variable__ 0
-execute unless score $shape_found __variable__ matches 1.. store success score $block.beetroot __variable__ if block ~ ~ ~ #retina:beetroot
-scoreboard players operation $shape_found __variable__ += $block.beetroot __variable__
-execute if score $block.beetroot __variable__ matches 1.. run function retina:hitbox/beetroot
+scoreboard players set $block.beetroot_shaped __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.beetroot_shaped __variable__ if block ~ ~ ~ #retina:beetroot_shaped
+scoreboard players operation $shape_found __variable__ += $block.beetroot_shaped __variable__
+execute if score $block.beetroot_shaped __variable__ matches 1.. run function retina:hitbox/beetroot_shaped
 scoreboard players set $block.brewing_stand __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.brewing_stand __variable__ if block ~ ~ ~ #retina:brewing_stand
 scoreboard players operation $shape_found __variable__ += $block.brewing_stand __variable__
