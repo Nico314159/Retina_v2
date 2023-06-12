@@ -1,11 +1,14 @@
 import "math";
 
+// also includes blocks w/ randomized hitboxes
 new tags.blocks(airs) {
     "values": [
         "minecraft:air",
         "minecraft:cave_air",
-        "minecraft:void_air"
-	]
+        "minecraft:void_air",
+        "#minecraft:small_flowers",
+        "minecraft:mangrove_propagule",
+	] 
 }
 
 new tags.blocks(anvil) {
@@ -169,8 +172,17 @@ new tags.blocks(rail) {
 		"minecraft:powered_rail"
 	]
 }
+// exclude mangrove & azalea
 new tags.blocks(sapling) {
-    "values": ["#minecraft:saplings"]
+    "values": [
+        "minecraft:oak_sapling",
+        "minecraft:spruce_sapling",
+        "minecraft:birch_sapling",
+        "minecraft:jungle_sapling",
+        "minecraft:acacia_sapling",
+        "minecraft:dark_oak_sapling",
+        "minecraft:cherry_sapling"
+    ]
 }
 new tags.blocks(slab) {
     "values": ["#minecraft:slabs"]
