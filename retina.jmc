@@ -192,6 +192,9 @@ new tags.blocks(sapling) {
 new tags.blocks(slab) {
     "values": ["#minecraft:slabs"]
 }
+new tags.blocks(snow) {
+    "values": ["minecraft:snow"]
+}
 new tags.blocks(sugar_cane_like) {
 	"values": [
 		"minecraft:sugar_cane",
@@ -459,7 +462,7 @@ class check {
                 "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
                 "door", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
                 "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", 
-                "sapling", "slab", "stair", "standing_sign_or_banner", "sugar_cane_like",
+                "sapling", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
                 "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
             if (!$shape_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
@@ -1018,6 +1021,16 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 512,  0, 1024, 512,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024]], West: [[0, 512, 0, 0, 1024, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024]], North: [[0, 512, 0, 1024, 1024, 0]], South: [[0, 512, 1024, 1024, 1024, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=double]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
+    }
+    function snow() {
+        if (block ~ ~ ~ #retina:snow[layers=1]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=2]) data modify storage retina:data Surfaces set value {Top: [[0, 256, 0, 1024, 256, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 256, 1024]], East: [[1024, 0, 0, 1024, 256, 1024]], North: [[0, 0, 0, 1024, 256, 0]], South: [[0, 0, 1024, 1024, 256, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=3]) data modify storage retina:data Surfaces set value {Top: [[0, 384, 0, 1024, 384, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 384, 1024]], East: [[1024, 0, 0, 1024, 384, 1024]], North: [[0, 0, 0, 1024, 384, 0]], South: [[0, 0, 1024, 1024, 384, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=4]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=5]) data modify storage retina:data Surfaces set value {Top: [[0, 640, 0, 1024, 640, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 640, 1024]], East: [[1024, 0, 0, 1024, 640, 1024]], North: [[0, 0, 0, 1024, 640, 0]], South: [[0, 0, 1024, 1024, 640, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=6]) data modify storage retina:data Surfaces set value {Top: [[0, 768, 0, 1024, 768, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 768, 1024]], East: [[1024, 0, 0, 1024, 768, 1024]], North: [[0, 0, 0, 1024, 768, 0]], South: [[0, 0, 1024, 1024, 768, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=7]) data modify storage retina:data Surfaces set value {Top: [[0, 896, 0, 1024, 896, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 896, 1024]], East: [[1024, 0, 0, 1024, 896, 1024]], North: [[0, 0, 0, 1024, 896, 0]], South: [[0, 0, 1024, 1024, 896, 1024]]}
+        if (block ~ ~ ~ #retina:snow[layers=8]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
     }
     function stair() {
         // half=bottom, shape=straight
