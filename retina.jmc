@@ -911,7 +911,7 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:doors[facing=south, open=true, hinge=right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 192, 1024, 1024]], Bottom: [[0, 0, 0, 192, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[192, 0, 0, 192, 1024, 1024]], North: [[0, 0, 0, 192, 1024, 0]], South: [[0, 0, 1024, 192, 1024, 1024]]}
     }
     function end_portal_frame() {
-        if (block ~ ~ ~ minecraft:end_portal_frame) data modify storage retina:data Surfaces set value {Top: [[0, 832, 0, 1024, 832, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 832, 1024]], East: [[1024, 0, 0, 1024, 832, 1024]], North: [[0, 0, 0, 1024, 832, 0]], South: [[0, 0, 1024, 1024, 832, 1024]]}
+        data modify storage retina:data Surfaces set value {Top: [[0, 832, 0, 1024, 832, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 832, 1024]], East: [[1024, 0, 0, 1024, 832, 1024]], North: [[0, 0, 0, 1024, 832, 0]], South: [[0, 0, 1024, 1024, 832, 1024]]};
     }
     function farmland_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[0, 960, 0, 1024, 960, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 960, 1024]], East: [[1024, 0, 0, 1024, 960, 1024]], North: [[0, 0, 0, 1024, 960, 0]], South: [[0, 0, 1024, 1024, 960, 1024]]};
@@ -972,6 +972,9 @@ class hitbox {
     function lantern() {
         if (block ~ ~ ~ #retina:lantern[hanging=false]) data modify storage retina:data Surfaces set value {Top: [[320, 448, 320, 704, 448, 704], [384, 576, 384, 640, 576, 640]], Bottom: [[320, 0, 320, 704, 0, 704], [384, 448, 384, 640, 448, 640]], West: [[320, 0, 320, 320, 448, 704], [384, 448, 384, 384, 576, 640]], East: [[704, 0, 320, 704, 448, 704], [640, 448, 384, 640, 576, 640]], North: [[320, 0, 320, 704, 448, 320], [384, 448, 384, 640, 576, 384]], South: [[320, 0, 704, 704, 448, 704], [384, 448, 640, 640, 576, 640]]}
         if (block ~ ~ ~ #retina:lantern[hanging=true]) data modify storage retina:data Surfaces set value {Top: [[320, 512, 320, 704, 512, 704], [384, 640, 384, 640, 640, 640]], Bottom: [[320, 64, 320, 704, 64, 704], [384, 512, 384, 640, 512, 640]], West: [[320, 64, 320, 320, 512, 704], [384, 512, 384, 384, 640, 640]], East: [[704, 64, 320, 704, 512, 704], [640, 512, 384, 640, 640, 640]], North: [[320, 64, 320, 704, 512, 320], [384, 512, 384, 640, 640, 384]], South: [[320, 64, 704, 704, 512, 704], [384, 512, 640, 640, 640, 640]]}
+    }
+    function lily_pad() {
+        data modify storage retina:data Surfaces set value {Top: [[64, 64, 64, 960, 64, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 64, 960]], East: [[960, 0, 64, 960, 64, 960]], North: [[64, 0, 64, 960, 64, 64]], South: [[64, 0, 960, 960, 64, 960]]};
     }
     function mushroom_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[320, 384, 320, 704, 384, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[320, 0, 320, 320, 384, 704]], East: [[704, 0, 320, 704, 384, 704]], North: [[320, 0, 320, 704, 384, 320]], South: [[320, 0, 704, 704, 384, 704]]};
