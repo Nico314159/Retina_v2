@@ -23,14 +23,6 @@ new tags.blocks(attached_stem) {
 new tags.blocks(bed) {
 	"values": ["#minecraft:beds"]
 }
-new tags.blocks(beetroot_shaped) {
-	"values": [
-        "minecraft:beetroots",
-        "minecraft:wheat",
-        "minecraft:carrots",
-        "minecraft:potatoes"
-    ]
-}
 new tags.blocks(brewing_stand) {
 	"values": ["minecraft:brewing_stand"]
 }
@@ -189,6 +181,12 @@ new tags.blocks(sapling) {
         "minecraft:cherry_sapling"
     ]
 }
+new tags.blocks(short_crop) {
+    "values": [
+        "minecraft:carrots",
+        "minecraft:potatoes"
+    ]
+}
 new tags.blocks(slab) {
     "values": ["#minecraft:slabs"]
 }
@@ -225,6 +223,12 @@ new tags.blocks(standing_sign_or_banner) {
 		"minecraft:black_banner",
 		"minecraft:twisting_vines_plant"
 	]
+}
+new tags.blocks(tall_crop) {
+	"values": [
+        "minecraft:beetroots",
+        "minecraft:wheat"
+    ]
 }
 new tags.blocks(trapdoor) {
     "values": ["#minecraft:trapdoors"]
@@ -458,12 +462,12 @@ class check {
                     $shape_found += $block.[shape];
                     if ($block.[shape]) hitbox.[shape]();
                 },
-                ["anvil", "attached_stem", "bed", "beetroot_shaped", "brewing_stand", "button", 
+                ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
                 "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
                 "door", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
                 "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", 
-                "sapling", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
-                "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
+                "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
+                "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
             if (!$shape_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
@@ -817,16 +821,7 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:beds[part=head, facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024], [0, 192, 0, 192, 192, 192], [0, 192, 832, 192, 192, 1024]], Bottom: [[0, 192, 0, 1024, 192, 1024], [0, 0, 0, 192, 0, 192], [0, 0, 832, 192, 0, 1024]], West: [[0, 192, 0, 0, 576, 1024], [0, 0, 0, 0, 192, 192], [0, 0, 832, 0, 192, 1024]], East: [[1024, 192, 0, 1024, 576, 1024], [192, 0, 0, 192, 192, 192], [192, 0, 832, 192, 192, 1024]], North: [[0, 192, 0, 1024, 576, 0], [0, 0, 0, 192, 192, 0], [0, 0, 832, 192, 192, 832]], South: [[0, 192, 1024, 1024, 576, 1024], [0, 0, 192, 192, 192, 192], [0, 0, 1024, 192, 192, 1024]]}
         if (block ~ ~ ~ #minecraft:beds[part=head, facing=north]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024], [832, 192, 0, 1024, 192, 192], [0, 192, 0, 192, 192, 192]], Bottom: [[0, 192, 0, 1024, 192, 1024], [832, 0, 0, 1024, 0, 192], [0, 0, 0, 192, 0, 192]], West: [[0, 192, 0, 0, 576, 1024], [832, 0, 0, 832, 192, 192], [0, 0, 0, 0, 192, 192]], East: [[1024, 192, 0, 1024, 576, 1024], [1024, 0, 0, 1024, 192, 192], [192, 0, 0, 192, 192, 192]], North: [[0, 192, 0, 1024, 576, 0], [832, 0, 0, 1024, 192, 0], [0, 0, 0, 192, 192, 0]], South: [[0, 192, 1024, 1024, 576, 1024], [832, 0, 192, 1024, 192, 192], [0, 0, 192, 192, 192, 192]]}
     }
-    function beetroot_shaped() {
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=0]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=1]) data modify storage retina:data Surfaces set value {Top: [[0, 256, 0, 1024, 256, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 256, 1024]], East: [[1024, 0, 0, 1024, 256, 1024]], North: [[0, 0, 0, 1024, 256, 0]], South: [[0, 0, 1024, 1024, 256, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=2]) data modify storage retina:data Surfaces set value {Top: [[0, 384, 0, 1024, 384, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 384, 1024]], East: [[1024, 0, 0, 1024, 384, 1024]], North: [[0, 0, 0, 1024, 384, 0]], South: [[0, 0, 1024, 1024, 384, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=3]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=4]) data modify storage retina:data Surfaces set value {Top: [[0, 640, 0, 1024, 640, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 640, 1024]], East: [[1024, 0, 0, 1024, 640, 1024]], North: [[0, 0, 0, 1024, 640, 0]], South: [[0, 0, 1024, 1024, 640, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=5]) data modify storage retina:data Surfaces set value {Top: [[0, 768, 0, 1024, 768, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 768, 1024]], East: [[1024, 0, 0, 1024, 768, 1024]], North: [[0, 0, 0, 1024, 768, 0]], South: [[0, 0, 1024, 1024, 768, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=6]) data modify storage retina:data Surfaces set value {Top: [[0, 896, 0, 1024, 896, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 896, 1024]], East: [[1024, 0, 0, 1024, 896, 1024]], North: [[0, 0, 0, 1024, 896, 0]], South: [[0, 0, 1024, 1024, 896, 1024]]}
-        if (block ~ ~ ~ #retina:beetroot_shaped[age=7]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
-    }
+
     function brewing_stand() {
         data modify storage retina:data Surfaces set value {Top: [[64, 128, 64, 960, 128, 960], [448, 896, 448, 576, 896, 576]], Bottom: [[64, 0, 64, 960, 0, 960], [448, 128, 448, 576, 128, 576]], West: [[64, 0, 64, 64, 128, 960], [448, 128, 448, 448, 896, 576]], East: [[960, 0, 64, 960, 128, 960], [576, 128, 448, 576, 896, 576]], North: [[64, 0, 64, 960, 128, 64], [448, 128, 448, 576, 896, 448]], South: [[64, 0, 960, 960, 128, 960], [448, 128, 576, 576, 896, 576]]};
     }
@@ -1017,6 +1012,16 @@ class hitbox {
     function sapling() {
         data modify storage retina:data Surfaces set value {Top: [[128, 768, 128, 896, 768, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 768, 896]], East: [[896, 0, 128, 896, 768, 896]], North: [[128, 0, 128, 896, 768, 128]], South: [[128, 0, 896, 896, 768, 896]]};
     }
+    function short_crop() {
+        if (block ~ ~ ~ #retina:short_crop[age=0]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=1]) data modify storage retina:data Surfaces set value {Top: [[0, 192, 0, 1024, 192, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 192, 1024]], East: [[1024, 0, 0, 1024, 192, 1024]], North: [[0, 0, 0, 1024, 192, 0]], South: [[0, 0, 1024, 1024, 192, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=2]) data modify storage retina:data Surfaces set value {Top: [[0, 256, 0, 1024, 256, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 256, 1024]], East: [[1024, 0, 0, 1024, 256, 1024]], North: [[0, 0, 0, 1024, 256, 0]], South: [[0, 0, 1024, 1024, 256, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=3]) data modify storage retina:data Surfaces set value {Top: [[0, 320, 0, 1024, 320, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 320, 1024]], East: [[1024, 0, 0, 1024, 320, 1024]], North: [[0, 0, 0, 1024, 320, 0]], South: [[0, 0, 1024, 1024, 320, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=4]) data modify storage retina:data Surfaces set value {Top: [[0, 384, 0, 1024, 384, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 384, 1024]], East: [[1024, 0, 0, 1024, 384, 1024]], North: [[0, 0, 0, 1024, 384, 0]], South: [[0, 0, 1024, 1024, 384, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=5]) data modify storage retina:data Surfaces set value {Top: [[0, 448, 0, 1024, 448, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 448, 1024]], East: [[1024, 0, 0, 1024, 448, 1024]], North: [[0, 0, 0, 1024, 448, 0]], South: [[0, 0, 1024, 1024, 448, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=6]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #retina:short_crop[age=7]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 576, 1024]], East: [[1024, 0, 0, 1024, 576, 1024]], North: [[0, 0, 0, 1024, 576, 0]], South: [[0, 0, 1024, 1024, 576, 1024]]}
+    }
     function slab() {
         if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 512,  0, 1024, 512,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024]], West: [[0, 512, 0, 0, 1024, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024]], North: [[0, 512, 0, 1024, 1024, 0]], South: [[0, 512, 1024, 1024, 1024, 1024]]}
@@ -1098,6 +1103,16 @@ class hitbox {
     }
     function sugar_cane_like() {
         data modify storage retina:data Surfaces set value {Top: [[128, 1024, 128, 896, 1024, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 1024, 896]], East: [[896, 0, 128, 896, 1024, 896]], North: [[128, 0, 128, 896, 1024, 128]], South: [[128, 0, 896, 896, 1024, 896]]};
+    }
+    function tall_crop() {
+        if (block ~ ~ ~ #retina:tall_crop[age=0]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=1]) data modify storage retina:data Surfaces set value {Top: [[0, 256, 0, 1024, 256, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 256, 1024]], East: [[1024, 0, 0, 1024, 256, 1024]], North: [[0, 0, 0, 1024, 256, 0]], South: [[0, 0, 1024, 1024, 256, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=2]) data modify storage retina:data Surfaces set value {Top: [[0, 384, 0, 1024, 384, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 384, 1024]], East: [[1024, 0, 0, 1024, 384, 1024]], North: [[0, 0, 0, 1024, 384, 0]], South: [[0, 0, 1024, 1024, 384, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=3]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=4]) data modify storage retina:data Surfaces set value {Top: [[0, 640, 0, 1024, 640, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 640, 1024]], East: [[1024, 0, 0, 1024, 640, 1024]], North: [[0, 0, 0, 1024, 640, 0]], South: [[0, 0, 1024, 1024, 640, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=5]) data modify storage retina:data Surfaces set value {Top: [[0, 768, 0, 1024, 768, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 768, 1024]], East: [[1024, 0, 0, 1024, 768, 1024]], North: [[0, 0, 0, 1024, 768, 0]], South: [[0, 0, 1024, 1024, 768, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=6]) data modify storage retina:data Surfaces set value {Top: [[0, 896, 0, 1024, 896, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 896, 1024]], East: [[1024, 0, 0, 1024, 896, 1024]], North: [[0, 0, 0, 1024, 896, 0]], South: [[0, 0, 1024, 1024, 896, 1024]]}
+        if (block ~ ~ ~ #retina:tall_crop[age=7]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
     }
     function trapdoor() {
         // open=false

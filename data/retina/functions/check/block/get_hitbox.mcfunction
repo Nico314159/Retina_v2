@@ -11,10 +11,6 @@ scoreboard players set $block.bed __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.bed __variable__ if block ~ ~ ~ #retina:bed
 scoreboard players operation $shape_found __variable__ += $block.bed __variable__
 execute if score $block.bed __variable__ matches 1.. run function retina:hitbox/bed
-scoreboard players set $block.beetroot_shaped __variable__ 0
-execute unless score $shape_found __variable__ matches 1.. store success score $block.beetroot_shaped __variable__ if block ~ ~ ~ #retina:beetroot_shaped
-scoreboard players operation $shape_found __variable__ += $block.beetroot_shaped __variable__
-execute if score $block.beetroot_shaped __variable__ matches 1.. run function retina:hitbox/beetroot_shaped
 scoreboard players set $block.brewing_stand __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.brewing_stand __variable__ if block ~ ~ ~ #retina:brewing_stand
 scoreboard players operation $shape_found __variable__ += $block.brewing_stand __variable__
@@ -103,6 +99,10 @@ scoreboard players set $block.sapling __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.sapling __variable__ if block ~ ~ ~ #retina:sapling
 scoreboard players operation $shape_found __variable__ += $block.sapling __variable__
 execute if score $block.sapling __variable__ matches 1.. run function retina:hitbox/sapling
+scoreboard players set $block.short_crop __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.short_crop __variable__ if block ~ ~ ~ #retina:short_crop
+scoreboard players operation $shape_found __variable__ += $block.short_crop __variable__
+execute if score $block.short_crop __variable__ matches 1.. run function retina:hitbox/short_crop
 scoreboard players set $block.slab __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.slab __variable__ if block ~ ~ ~ #retina:slab
 scoreboard players operation $shape_found __variable__ += $block.slab __variable__
@@ -123,6 +123,10 @@ scoreboard players set $block.sugar_cane_like __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.sugar_cane_like __variable__ if block ~ ~ ~ #retina:sugar_cane_like
 scoreboard players operation $shape_found __variable__ += $block.sugar_cane_like __variable__
 execute if score $block.sugar_cane_like __variable__ matches 1.. run function retina:hitbox/sugar_cane_like
+scoreboard players set $block.tall_crop __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.tall_crop __variable__ if block ~ ~ ~ #retina:tall_crop
+scoreboard players operation $shape_found __variable__ += $block.tall_crop __variable__
+execute if score $block.tall_crop __variable__ matches 1.. run function retina:hitbox/tall_crop
 scoreboard players set $block.trapdoor __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.trapdoor __variable__ if block ~ ~ ~ #retina:trapdoor
 scoreboard players operation $shape_found __variable__ += $block.trapdoor __variable__
