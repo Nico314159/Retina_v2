@@ -67,6 +67,9 @@ new tags.blocks(conduit) {
 new tags.blocks(door) {
     "values": ["#minecraft:doors"]
 }
+new tags.blocks(end_portal_frame) {
+    "values": ["minecraft:end_portal_frame"]
+}
 new tags.blocks(farmland_shaped) {
     "values": [
         "minecraft:farmland",
@@ -464,7 +467,7 @@ class check {
                 },
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
                 "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
-                "door", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
+                "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
                 "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", 
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
@@ -906,6 +909,9 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:doors[facing=west, open=true, hinge=right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 192]], Bottom: [[0, 0, 0, 1024, 0, 192]], West: [[0, 0, 0, 0, 1024, 192]], East: [[1024, 0, 0, 1024, 1024, 192]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 192, 1024, 1024, 192]]}
         if (block ~ ~ ~ #minecraft:doors[facing=north, open=true, hinge=right]) data modify storage retina:data Surfaces set value {Top: [[832, 1024, 0, 1024, 1024, 1024]], Bottom: [[832, 0, 0, 1024, 0, 1024]], West: [[832, 0, 0, 832, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[832, 0, 0, 1024, 1024, 0]], South: [[832, 0, 1024, 1024, 1024, 1024]]}
         if (block ~ ~ ~ #minecraft:doors[facing=south, open=true, hinge=right]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 192, 1024, 1024]], Bottom: [[0, 0, 0, 192, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[192, 0, 0, 192, 1024, 1024]], North: [[0, 0, 0, 192, 1024, 0]], South: [[0, 0, 1024, 192, 1024, 1024]]}
+    }
+    function end_portal_frame() {
+        if (block ~ ~ ~ minecraft:end_portal_frame) data modify storage retina:data Surfaces set value {Top: [[0, 832, 0, 1024, 832, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 832, 1024]], East: [[1024, 0, 0, 1024, 832, 1024]], North: [[0, 0, 0, 1024, 832, 0]], South: [[0, 0, 1024, 1024, 832, 1024]]}
     }
     function farmland_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[0, 960, 0, 1024, 960, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 960, 1024]], East: [[1024, 0, 0, 1024, 960, 1024]], North: [[0, 0, 0, 1024, 960, 0]], South: [[0, 0, 1024, 1024, 960, 1024]]};

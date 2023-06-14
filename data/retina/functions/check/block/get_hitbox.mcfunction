@@ -55,6 +55,10 @@ scoreboard players set $block.door __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.door __variable__ if block ~ ~ ~ #retina:door
 scoreboard players operation $shape_found __variable__ += $block.door __variable__
 execute if score $block.door __variable__ matches 1.. run function retina:hitbox/door
+scoreboard players set $block.end_portal_frame __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.end_portal_frame __variable__ if block ~ ~ ~ #retina:end_portal_frame
+scoreboard players operation $shape_found __variable__ += $block.end_portal_frame __variable__
+execute if score $block.end_portal_frame __variable__ matches 1.. run function retina:hitbox/end_portal_frame
 scoreboard players set $block.farmland_shaped __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.farmland_shaped __variable__ if block ~ ~ ~ #retina:farmland_shaped
 scoreboard players operation $shape_found __variable__ += $block.farmland_shaped __variable__
