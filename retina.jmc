@@ -469,14 +469,11 @@ class check {
             if ($end) $block_distance = $shortest_distance;
         }
         function get_hitbox() {
-            $shape_found = false;
             Hardcode.repeatList(
                 "[shape]",
-                () => {
-                    $block.[shape] = false;
-                    if (!$shape_found) $block.[shape] ?= execute if block ~ ~ ~ #retina:[shape];
-                    $shape_found += $block.[shape];
-                    if ($block.[shape]) hitbox.[shape]();
+                () => { 
+                    if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
+                    if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
                 "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
@@ -485,7 +482,7 @@ class check {
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
-            if (!$shape_found) hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
+            hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
     }
 }
