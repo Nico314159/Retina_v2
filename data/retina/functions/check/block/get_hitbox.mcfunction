@@ -99,6 +99,10 @@ scoreboard players set $block.rail __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.rail __variable__ if block ~ ~ ~ #retina:rail
 scoreboard players operation $shape_found __variable__ += $block.rail __variable__
 execute if score $block.rail __variable__ matches 1.. run function retina:hitbox/rail
+scoreboard players set $block.repeater_shaped __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.repeater_shaped __variable__ if block ~ ~ ~ #retina:repeater_shaped
+scoreboard players operation $shape_found __variable__ += $block.repeater_shaped __variable__
+execute if score $block.repeater_shaped __variable__ matches 1.. run function retina:hitbox/repeater_shaped
 scoreboard players set $block.sapling __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.sapling __variable__ if block ~ ~ ~ #retina:sapling
 scoreboard players operation $shape_found __variable__ += $block.sapling __variable__

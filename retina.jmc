@@ -172,6 +172,12 @@ new tags.blocks(rail) {
 		"minecraft:powered_rail"
 	]
 }
+new tags.blocks(repeater_shaped) {
+    "values": [
+        "minecraft:repeater",
+		"minecraft:comparator"
+	]
+}
 // exclude mangrove & azalea
 new tags.blocks(sapling) {
     "values": [
@@ -472,7 +478,7 @@ class check {
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
                 "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
                 "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped",
-                "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", 
+                "ladder", "lantern", "mushroom_shaped", "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
@@ -828,7 +834,6 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:beds[part=head, facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024], [0, 192, 0, 192, 192, 192], [0, 192, 832, 192, 192, 1024]], Bottom: [[0, 192, 0, 1024, 192, 1024], [0, 0, 0, 192, 0, 192], [0, 0, 832, 192, 0, 1024]], West: [[0, 192, 0, 0, 576, 1024], [0, 0, 0, 0, 192, 192], [0, 0, 832, 0, 192, 1024]], East: [[1024, 192, 0, 1024, 576, 1024], [192, 0, 0, 192, 192, 192], [192, 0, 832, 192, 192, 1024]], North: [[0, 192, 0, 1024, 576, 0], [0, 0, 0, 192, 192, 0], [0, 0, 832, 192, 192, 832]], South: [[0, 192, 1024, 1024, 576, 1024], [0, 0, 192, 192, 192, 192], [0, 0, 1024, 192, 192, 1024]]}
         if (block ~ ~ ~ #minecraft:beds[part=head, facing=north]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024], [832, 192, 0, 1024, 192, 192], [0, 192, 0, 192, 192, 192]], Bottom: [[0, 192, 0, 1024, 192, 1024], [832, 0, 0, 1024, 0, 192], [0, 0, 0, 192, 0, 192]], West: [[0, 192, 0, 0, 576, 1024], [832, 0, 0, 832, 192, 192], [0, 0, 0, 0, 192, 192]], East: [[1024, 192, 0, 1024, 576, 1024], [1024, 0, 0, 1024, 192, 192], [192, 0, 0, 192, 192, 192]], North: [[0, 192, 0, 1024, 576, 0], [832, 0, 0, 1024, 192, 0], [0, 0, 0, 192, 192, 0]], South: [[0, 192, 1024, 1024, 576, 1024], [832, 0, 192, 1024, 192, 192], [0, 0, 192, 192, 192, 192]]}
     }
-
     function brewing_stand() {
         data modify storage retina:data Surfaces set value {Top: [[64, 128, 64, 960, 128, 960], [448, 896, 448, 576, 896, 576]], Bottom: [[64, 0, 64, 960, 0, 960], [448, 128, 448, 576, 128, 576]], West: [[64, 0, 64, 64, 128, 960], [448, 128, 448, 448, 896, 576]], East: [[960, 0, 64, 960, 128, 960], [576, 128, 448, 576, 896, 576]], North: [[64, 0, 64, 960, 128, 64], [448, 128, 448, 576, 896, 448]], South: [[64, 0, 960, 960, 128, 960], [448, 128, 576, 576, 896, 576]]};
     }
@@ -1021,6 +1026,9 @@ class hitbox {
     function rail() {
         if (!block ~ ~ ~ #retina:rail[shape=ascending_east] && !block ~ ~ ~ #retina:rail[shape=ascending_west] && !block ~ ~ ~ #retina:rail[shape=ascending_north] && !block ~ ~ ~ #retina:rail[shape=ascending_south]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}
         if (!block ~ ~ ~ #retina:rail[shape=east_west] && !block ~ ~ ~ #retina:rail[shape=north_south]) data modify storage retina:data Surfaces set value {Top: [[0, 512, 0, 1024, 512, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
+    }
+    function repeater_shaped() {
+        data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]};
     }
     function sapling() {
         data modify storage retina:data Surfaces set value {Top: [[128, 768, 128, 896, 768, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 768, 896]], East: [[896, 0, 128, 896, 768, 896]], North: [[128, 0, 128, 896, 768, 128]], South: [[128, 0, 896, 896, 768, 896]]};
