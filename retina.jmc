@@ -191,7 +191,11 @@ new tags.blocks(short_crop) {
     ]
 }
 new tags.blocks(slab) {
-    "values": ["#minecraft:slabs"]
+    "values": [
+        "#minecraft:slabs",
+        "minecraft:sculk_sensor",
+        "minecraft:calibrated_sculk_sensor"
+    ]
 }
 new tags.blocks(snow) {
     "values": ["minecraft:snow"]
