@@ -87,6 +87,10 @@ scoreboard players set $block.mushroom_shaped __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.mushroom_shaped __variable__ if block ~ ~ ~ #retina:mushroom_shaped
 scoreboard players operation $shape_found __variable__ += $block.mushroom_shaped __variable__
 execute if score $block.mushroom_shaped __variable__ matches 1.. run function retina:hitbox/mushroom_shaped
+scoreboard players set $block.nether_sprouts __variable__ 0
+execute unless score $shape_found __variable__ matches 1.. store success score $block.nether_sprouts __variable__ if block ~ ~ ~ #retina:nether_sprouts
+scoreboard players operation $shape_found __variable__ += $block.nether_sprouts __variable__
+execute if score $block.nether_sprouts __variable__ matches 1.. run function retina:hitbox/nether_sprouts
 scoreboard players set $block.pane_shaped __variable__ 0
 execute unless score $shape_found __variable__ matches 1.. store success score $block.pane_shaped __variable__ if block ~ ~ ~ #retina:pane_shaped
 scoreboard players operation $shape_found __variable__ += $block.pane_shaped __variable__
