@@ -246,6 +246,12 @@ new tags.blocks(standing_sign_or_banner) {
 		"minecraft:twisting_vines_plant"
 	]
 }
+new tags.blocks(stem) {
+    "values": [
+        "minecraft:melon_stem",
+        "minecraft:pumpkin_stem"
+    ]
+}
 new tags.blocks(tall_crop) {
 	"values": [
         "minecraft:beetroots",
@@ -485,7 +491,7 @@ class check {
                 "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "door",
                 "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", "ladder", "lantern", "lever",  
                 "mushroom_shaped", "nether_sprouts", "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
-                "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
+                "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "stem", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
@@ -1152,6 +1158,16 @@ class hitbox {
     }
     function standing_sign_or_banner() {
         data modify storage retina:data Surfaces set value {Top: [[256, 1024, 256, 768, 1024, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[256, 0, 256, 256, 1024, 768]], East: [[768, 0, 256, 768, 1024, 768]], North: [[256, 0, 256, 768, 1024, 256]], South: [[256, 0, 768, 768, 1024, 768]]};
+    }
+    function stem() {
+        if (block ~ ~ ~ #retina:stem[age=0]) data modify storage retina:data Surfaces set value {Top: [[448, 128, 448, 576, 128, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 128, 576]], East: [[576, 0, 448, 576, 128, 576]], North: [[448, 0, 448, 576, 128, 448]], South: [[448, 0, 576, 576, 128, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=1]) data modify storage retina:data Surfaces set value {Top: [[448, 256, 448, 576, 256, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 256, 576]], East: [[576, 0, 448, 576, 256, 576]], North: [[448, 0, 448, 576, 256, 448]], South: [[448, 0, 576, 576, 256, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=2]) data modify storage retina:data Surfaces set value {Top: [[448, 384, 448, 576, 384, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 384, 576]], East: [[576, 0, 448, 576, 384, 576]], North: [[448, 0, 448, 576, 384, 448]], South: [[448, 0, 576, 576, 384, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=3]) data modify storage retina:data Surfaces set value {Top: [[448, 512, 448, 576, 512, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 512, 576]], East: [[576, 0, 448, 576, 512, 576]], North: [[448, 0, 448, 576, 512, 448]], South: [[448, 0, 576, 576, 512, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=4]) data modify storage retina:data Surfaces set value {Top: [[448, 640, 448, 576, 640, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 640, 576]], East: [[576, 0, 448, 576, 640, 576]], North: [[448, 0, 448, 576, 640, 448]], South: [[448, 0, 576, 576, 640, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=5]) data modify storage retina:data Surfaces set value {Top: [[448, 768, 448, 576, 768, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 768, 576]], East: [[576, 0, 448, 576, 768, 576]], North: [[448, 0, 448, 576, 768, 448]], South: [[448, 0, 576, 576, 768, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=6]) data modify storage retina:data Surfaces set value {Top: [[448, 896, 448, 576, 896, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 896, 576]], East: [[576, 0, 448, 576, 896, 576]], North: [[448, 0, 448, 576, 896, 448]], South: [[448, 0, 576, 576, 896, 576]]}
+        if (block ~ ~ ~ #retina:stem[age=7]) data modify storage retina:data Surfaces set value {Top: [[448, 1024, 448, 576, 1024, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 1024, 576]], East: [[576, 0, 448, 576, 1024, 576]], North: [[448, 0, 448, 576, 1024, 448]], South: [[448, 0, 576, 576, 1024, 576]]}
     }
     function sugar_cane_like() {
         data modify storage retina:data Surfaces set value {Top: [[128, 1024, 128, 896, 1024, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 1024, 896]], East: [[896, 0, 128, 896, 1024, 896]], North: [[128, 0, 128, 896, 1024, 128]], South: [[128, 0, 896, 896, 1024, 896]]};

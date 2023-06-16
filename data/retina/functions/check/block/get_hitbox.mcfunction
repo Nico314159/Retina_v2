@@ -68,6 +68,8 @@ execute if block ~ ~ ~ #retina:stair run function retina:hitbox/stair
 execute if block ~ ~ ~ #retina:stair run return 1
 execute if block ~ ~ ~ #retina:standing_sign_or_banner run function retina:hitbox/standing_sign_or_banner
 execute if block ~ ~ ~ #retina:standing_sign_or_banner run return 1
+execute if block ~ ~ ~ #retina:stem run function retina:hitbox/stem
+execute if block ~ ~ ~ #retina:stem run return 1
 execute if block ~ ~ ~ #retina:sugar_cane_like run function retina:hitbox/sugar_cane_like
 execute if block ~ ~ ~ #retina:sugar_cane_like run return 1
 execute if block ~ ~ ~ #retina:tall_crop run function retina:hitbox/tall_crop
