@@ -36,6 +36,9 @@ new tags.blocks(cactus_shaped) {
 		"minecraft:dragon_egg"
 	]
 }
+new tags.blocks(cake) {
+    "values": ["minecraft:cake"]
+}
 new tags.blocks(campfire) {
     "values": ["#minecraft:campfires"]
 }
@@ -479,7 +482,7 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
-                "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "door",
+                "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "door",
                 "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", "ladder", "lantern", "lever",  
                 "mushroom_shaped", "nether_sprouts", "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
@@ -879,6 +882,15 @@ class hitbox {
     }
     function cactus_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[64, 1024, 64, 960, 1024, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 1024, 960]], East: [[960, 0, 64, 960, 1024, 960]], North: [[64, 0, 64, 960, 1024, 64]], South: [[64, 0, 960, 960, 1024, 960]]};
+    }
+    function cake() {
+        if (block ~ ~ ~ minecraft:cake[bites=0]) data modify storage retina:data Surfaces set value {Top: [[64, 512, 64, 960, 512, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[64, 0, 64, 960, 512, 64]], South: [[64, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=1]) data modify storage retina:data Surfaces set value {Top: [[192, 512, 64, 960, 512, 960]], Bottom: [[192, 0, 64, 960, 0, 960]], West: [[192, 0, 64, 192, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[192, 0, 64, 960, 512, 64]], South: [[192, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=2]) data modify storage retina:data Surfaces set value {Top: [[320, 512, 64, 960, 512, 960]], Bottom: [[320, 0, 64, 960, 0, 960]], West: [[320, 0, 64, 320, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[320, 0, 64, 960, 512, 64]], South: [[320, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=3]) data modify storage retina:data Surfaces set value {Top: [[448, 512, 64, 960, 512, 960]], Bottom: [[448, 0, 64, 960, 0, 960]], West: [[448, 0, 64, 448, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[448, 0, 64, 960, 512, 64]], South: [[448, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=4]) data modify storage retina:data Surfaces set value {Top: [[576, 512, 64, 960, 512, 960]], Bottom: [[576, 0, 64, 960, 0, 960]], West: [[576, 0, 64, 576, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[576, 0, 64, 960, 512, 64]], South: [[576, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=5]) data modify storage retina:data Surfaces set value {Top: [[704, 512, 64, 960, 512, 960]], Bottom: [[704, 0, 64, 960, 0, 960]], West: [[704, 0, 64, 704, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[704, 0, 64, 960, 512, 64]], South: [[704, 0, 960, 960, 512, 960]]}
+        if (block ~ ~ ~ minecraft:cake[bites=6]) data modify storage retina:data Surfaces set value {Top: [[832, 512, 64, 960, 512, 960]], Bottom: [[832, 0, 64, 960, 0, 960]], West: [[832, 0, 64, 832, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[832, 0, 64, 960, 512, 64]], South: [[832, 0, 960, 960, 512, 960]]}
     }
     function campfire() {
         data modify storage retina:data Surfaces set value {Top: [[0, 448, 0, 1024, 448, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 448, 1024]], East: [[1024, 0, 0, 1024, 448, 1024]], North: [[0, 0, 0, 1024, 448, 0]], South: [[0, 0, 1024, 1024, 448, 1024]]};
