@@ -4,6 +4,8 @@
         "minecraft:cave_air",
         "minecraft:void_air",
         "#minecraft:small_flowers",
-        "minecraft:mangrove_propagule"
+        "minecraft:mangrove_propagule",
+        "minecraft:bamboo_sapling",
+        "minecraft:bamboo"
     ]
 }
