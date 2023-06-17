@@ -209,6 +209,12 @@ new tags.blocks(sapling) {
         "minecraft:cherry_sapling"
     ]
 }
+new tags.blocks(sculk_sensor) {
+    "values": [
+        "minecraft:sculk_sensor",
+        "minecraft:calibrated_sculk_sensor"
+    ]
+}
 new tags.blocks(short_crop) {
     "values": [
         "minecraft:carrots",
@@ -1097,6 +1103,7 @@ class hitbox {
         if (block ~ ~ ~ #retina:short_crop[age=7]) data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 576, 1024]], East: [[1024, 0, 0, 1024, 576, 1024]], North: [[0, 0, 0, 1024, 576, 0]], South: [[0, 0, 1024, 1024, 576, 1024]]}
     }
     function slab() {
+        if (block ~ ~ ~ #retina:sculk_sensor) data modify storage retina:data Surfaces set value {Top: [[0, 512,  0, 1024, 512,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=bottom]) data modify storage retina:data Surfaces set value {Top: [[0, 512,  0, 1024, 512,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 512, 1024]], East: [[1024, 0, 0, 1024, 512, 1024]], North: [[0, 0, 0, 1024, 512, 0]], South: [[0, 0, 1024, 1024, 512, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=top]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 512, 0, 1024, 512, 1024]], West: [[0, 512, 0, 0, 1024, 1024]], East: [[1024, 512, 0, 1024, 1024, 1024]], North: [[0, 512, 0, 1024, 1024, 0]], South: [[0, 512, 1024, 1024, 1024, 1024]]}
         if (block ~ ~ ~ #minecraft:slabs[type=double]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
