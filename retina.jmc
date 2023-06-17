@@ -186,6 +186,9 @@ new tags.blocks(pane_shaped) {
 		"minecraft:black_stained_glass_pane"
 	]
 }
+new tags.blocks(piglin_head) {
+    "values": "minecraft:piglin_head"
+}
 new tags.blocks(pressure_plate) {
     "values": ["#minecraft:pressure_plates"]
 }
@@ -522,7 +525,7 @@ class check {
                 "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
                 "grass_shaped", "head", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
-                "pane_shaped", "pressure_plate", "rail", "repeater_shaped", "rod",
+                "pane_shaped", "piglin_head", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "stem", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "vine", "wall_sign", "wall_torch", "wall"]
             );
@@ -1099,6 +1102,9 @@ class hitbox {
         if (block ~ ~ ~ #retina:pane_shaped[north=true]) data modify storage retina:data Surfaces.East append value [576, 0, 0, 576, 1024, 448];
         if (block ~ ~ ~ #retina:pane_shaped[north=true]) data modify storage retina:data Surfaces.North append value [448, 0, 0, 576, 1024, 0];
         if (block ~ ~ ~ #retina:pane_shaped[north=true]) data modify storage retina:data Surfaces.South append value [448, 0, 448, 576, 1024, 448];
+    }
+    function piglin_head() {
+        data modify storage retina:data Surfaces set value {Top: [[192, 512, 192, 832, 512, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 512, 832]], East: [[832, 0, 192, 832, 512, 832]], North: [[192, 0, 192, 832, 512, 192]], South: [[192, 0, 832, 832, 512, 832]]};
     }
     function pressure_plate() {
         if (block ~ ~ ~ #minecraft:pressure_plates[powered=false]) data modify storage retina:data Surfaces set value {Top: [[64, 64, 64, 960, 64, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 64, 960]], East: [[960, 0, 64, 960, 64, 960]], North: [[64, 0, 64, 960, 64, 64]], South: [[64, 0, 960, 960, 64, 960]]}

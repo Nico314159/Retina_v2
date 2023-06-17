@@ -56,6 +56,8 @@ execute if block ~ ~ ~ #retina:nether_sprouts run function retina:hitbox/nether_
 execute if block ~ ~ ~ #retina:nether_sprouts run return 1
 execute if block ~ ~ ~ #retina:pane_shaped run function retina:hitbox/pane_shaped
 execute if block ~ ~ ~ #retina:pane_shaped run return 1
+execute if block ~ ~ ~ #retina:piglin_head run function retina:hitbox/piglin_head
+execute if block ~ ~ ~ #retina:piglin_head run return 1
 execute if block ~ ~ ~ #retina:pressure_plate run function retina:hitbox/pressure_plate
 execute if block ~ ~ ~ #retina:pressure_plate run return 1
 execute if block ~ ~ ~ #retina:rail run function retina:hitbox/rail
