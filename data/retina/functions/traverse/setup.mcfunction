@@ -86,6 +86,6 @@ scoreboard players set $step __variable__ 0
 scoreboard players set $end __variable__ 0
 execute store result score $offset_Y __variable__ run data get entity @s Pos[1] -1024
 scoreboard players operation $offset_Y __variable__ += $Y __variable__
-execute if score $offset_Y __variable__ matches 1658 positioned ~ ~1.62 ~ run function retina:traverse/loop
-execute if score $offset_Y __variable__ matches 1300 positioned ~ ~1.27 ~ run function retina:traverse/loop
-execute if score $offset_Y __variable__ matches 409 positioned ~ ~0.4 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 1657..1659 positioned ~ ~1.62 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 1299..1301 positioned ~ ~1.27 ~ run function retina:traverse/loop
+execute if score $offset_Y __variable__ matches 408..410 positioned ~ ~0.4 ~ run function retina:traverse/loop
