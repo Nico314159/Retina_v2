@@ -62,6 +62,8 @@ execute if block ~ ~ ~ #retina:rail run function retina:hitbox/rail
 execute if block ~ ~ ~ #retina:rail run return 1
 execute if block ~ ~ ~ #retina:repeater_shaped run function retina:hitbox/repeater_shaped
 execute if block ~ ~ ~ #retina:repeater_shaped run return 1
+execute if block ~ ~ ~ #retina:rod run function retina:hitbox/rod
+execute if block ~ ~ ~ #retina:rod run return 1
 execute if block ~ ~ ~ #retina:sapling run function retina:hitbox/sapling
 execute if block ~ ~ ~ #retina:sapling run return 1
 execute if block ~ ~ ~ #retina:short_crop run function retina:hitbox/short_crop
