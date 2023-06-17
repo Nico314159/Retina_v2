@@ -302,7 +302,10 @@ new tags.blocks(vertical_torch) {
 	]
 }
 new tags.blocks(vine) {
-    "values": ["minecraft:vine"]
+    "values": [
+        "minecraft:vine",
+        "minecraft:sculk_vein"
+    ]
 }
 new tags.blocks(wall) {
     "values": ["#minecraft:walls"]
@@ -1255,7 +1258,7 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[384, 768, 384, 768, 768, 768]], Bottom: [[384, 0, 384, 768, 0, 768]], West: [[384, 0, 384, 384, 768, 768]], East: [[768, 0, 384, 768, 768, 768]], North: [[384, 0, 384, 768, 768, 384]], South: [[384, 0, 768, 768, 768, 768]]};
     }
     function vine() {
-        if (block ~ ~ ~ minecraft:vines[up=true]) {
+        if (block ~ ~ ~ #retina:vine[up=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 1024, 0, 1024, 1024, 1024]; 
             data modify storage retina:data Surfaces.Bottom append value [0, 960, 0, 1024, 960, 1024]; 
             data modify storage retina:data Surfaces.West append value [0, 960, 0, 0, 1024, 1024]; 
@@ -1263,7 +1266,15 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 960, 0, 1024, 1024, 0];
             data modify storage retina:data Surfaces.South append value [0, 960, 1024, 1024, 1024, 1024];
         }
-        if (block ~ ~ ~ minecraft:vines[north=true]) {
+        if (block ~ ~ ~ #retina:vine[down=true]) {
+            data modify storage retina:data Surfaces.Top append value [0, 64, 0, 1024, 64, 1024]; 
+            data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 1024, 0, 1024]; 
+            data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 64, 1024]; 
+            data modify storage retina:data Surfaces.East append value [1024, 0, 0, 1024, 64, 1024]; 
+            data modify storage retina:data Surfaces.North append value [0, 0, 0, 1024, 64, 0];
+            data modify storage retina:data Surfaces.South append value [0, 0, 1024, 1024, 64, 1024];
+        }
+        if (block ~ ~ ~ #retina:vine[north=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 1024, 0, 1024, 1024, 64];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 1024, 0, 64];
             data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 1024, 64];
@@ -1271,7 +1282,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 0, 1024, 1024, 0];
             data modify storage retina:data Surfaces.South append value [0, 0, 64, 1024, 1024, 64];
         }
-        if (block ~ ~ ~ minecraft:vines[south=true]) {
+        if (block ~ ~ ~ #retina:vine[south=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 1024, 960, 1024, 1024, 1024];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 960, 1024, 0, 1024];
             data modify storage retina:data Surfaces.West append value [0, 0, 960, 0, 1024, 1024];
@@ -1279,7 +1290,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 960, 1024, 1024, 960];
             data modify storage retina:data Surfaces.South append value [0, 0, 1024, 1024, 1024, 1024];
         }
-        if (block ~ ~ ~ minecraft:vines[west=true]) {
+        if (block ~ ~ ~ #retina:vine[west=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 1024, 0, 64, 1024, 1024];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 64, 0, 1024];
             data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 1024, 1024];
@@ -1287,7 +1298,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 0, 64, 1024, 0];
             data modify storage retina:data Surfaces.South append value [0, 0, 1024, 64, 1024, 1024];
         }
-        if (block ~ ~ ~ minecraft:vines[east=true]) {
+        if (block ~ ~ ~ #retina:vine[east=true]) {
             data modify storage retina:data Surfaces.Top append value [960, 1024, 0, 1024, 1024, 1024];
             data modify storage retina:data Surfaces.Bottom append value [960, 0, 0, 1024, 0, 1024];
             data modify storage retina:data Surfaces.West append value [960, 0, 0, 960, 1024, 1024];
