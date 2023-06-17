@@ -101,6 +101,9 @@ new tags.blocks(lantern) {
         "minecraft:soul_lantern"
     ]
 }
+new tags.blocks(lever) {
+    "values": ["minecraft:lever"]
+}
 new tags.blocks(mushroom_shaped) {
 	"values": [
 		"minecraft:brown_mushroom",
@@ -476,8 +479,8 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
-                "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
-                "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", "ladder", "lantern", 
+                "cactus_shaped", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "door",
+                "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", "ladder", "lantern", "lever",  
                 "mushroom_shaped", "nether_sprouts", "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "wall_sign", "wall_torch", "wall"]
@@ -981,6 +984,19 @@ class hitbox {
     function lantern() {
         if (block ~ ~ ~ #retina:lantern[hanging=false]) data modify storage retina:data Surfaces set value {Top: [[320, 448, 320, 704, 448, 704], [384, 576, 384, 640, 576, 640]], Bottom: [[320, 0, 320, 704, 0, 704], [384, 448, 384, 640, 448, 640]], West: [[320, 0, 320, 320, 448, 704], [384, 448, 384, 384, 576, 640]], East: [[704, 0, 320, 704, 448, 704], [640, 448, 384, 640, 576, 640]], North: [[320, 0, 320, 704, 448, 320], [384, 448, 384, 640, 576, 384]], South: [[320, 0, 704, 704, 448, 704], [384, 448, 640, 640, 576, 640]]}
         if (block ~ ~ ~ #retina:lantern[hanging=true]) data modify storage retina:data Surfaces set value {Top: [[320, 512, 320, 704, 512, 704], [384, 640, 384, 640, 640, 640]], Bottom: [[320, 64, 320, 704, 64, 704], [384, 512, 384, 640, 512, 640]], West: [[320, 64, 320, 320, 512, 704], [384, 512, 384, 384, 640, 640]], East: [[704, 64, 320, 704, 512, 704], [640, 512, 384, 640, 640, 640]], North: [[320, 64, 320, 704, 512, 320], [384, 512, 384, 640, 640, 384]], South: [[320, 64, 704, 704, 512, 704], [384, 512, 640, 640, 640, 640]]}
+    }
+    function lever() {
+        if (block ~ ~ ~ minecraft:lever[face=floor] && !block ~ ~ ~ minecraft:lever[facing=north] && !block ~ ~ ~ minecraft:lever[facing=south]) data modify storage retina:data Surfaces set value {Top: [[256, 384, 320, 768, 384, 704]], Bottom: [[256, 0, 320, 768, 0, 704]], West: [[256, 0, 320, 256, 384, 704]], East: [[768, 0, 320, 768, 384, 704]], North: [[256, 0, 320, 768, 384, 320]], South: [[256, 0, 704, 768, 384, 704]]}
+        if (block ~ ~ ~ minecraft:lever[face=floor] && !block ~ ~ ~ minecraft:lever[facing=east] && !block ~ ~ ~ minecraft:lever[facing=west]) data modify storage retina:data Surfaces set value {Top: [[320, 384, 256, 704, 384, 768]], Bottom: [[320, 0, 256, 704, 0, 768]], West: [[320, 0, 256, 320, 384, 768]], East: [[704, 0, 256, 704, 384, 768]], North: [[320, 0, 256, 704, 384, 256]], South: [[320, 0, 768, 704, 384, 768]]}
+
+        if (block ~ ~ ~ minecraft:lever[face=wall,facing=north]) data modify storage retina:data Surfaces set value {Top: [[704, 768, 768, 320, 768, 1024]], Bottom: [[704, 256, 768, 320, 256, 1024]], West: [[320, 256, 768, 320, 768, 1024]], East: [[704, 256, 768, 704, 768, 1024]], North: [[320, 256, 768, 704, 768, 768]], South: [[320, 256, 1024, 704, 768, 1024]]}
+        if (block ~ ~ ~ minecraft:lever[face=wall,facing=south]) data modify storage retina:data Surfaces set value {Top: [[704, 768, 0, 320, 768, 384]], Bottom: [[704, 256, 0, 320, 256, 384]], West: [[320, 256, 0, 320, 768, 384]], East: [[704, 256, 0, 704, 768, 384]], North: [[320, 256, 0, 704, 768, 0]], South: [[320, 256, 384, 704, 768, 384]]}
+
+        if (block ~ ~ ~ minecraft:lever[face=wall,facing=west]) data modify storage retina:data Surfaces set value {Top: [[768, 768, 320, 1024, 768, 704]], Bottom: [[768, 256, 320, 1024, 256, 704]], West: [[768, 256, 320, 768, 768, 704]], East: [[1024, 256, 320, 1024, 768, 704]], North: [[768, 256, 320, 1024, 768, 320]], South: [[768, 256, 704, 1024, 768, 704]]}
+        if (block ~ ~ ~ minecraft:lever[face=wall,facing=east]) data modify storage retina:data Surfaces set value {Top: [[0, 768, 320, 384, 768, 704]], Bottom: [[0, 256, 320, 384, 256, 704]], West: [[0, 256, 320, 0, 768, 704]], East: [[384, 256, 320, 384, 768, 704]], North: [[0, 256, 320, 384, 768, 320]], South: [[0, 256, 704, 384, 768, 704]]}
+    
+        if (block ~ ~ ~ minecraft:lever[face=ceiling] && !block ~ ~ ~ minecraft:lever[facing=north] && !block ~ ~ ~ minecraft:lever[facing=south]) data modify storage retina:data Surfaces set value {Top: [[256, 1024, 320, 768, 1024, 704]], Bottom: [[256, 640, 320, 768, 640, 704]], West: [[256, 640, 320, 256, 1024, 704]], East: [[768, 640, 320, 768, 1024, 704]], North: [[256, 640, 320, 768, 1024, 320]], South: [[256, 640, 704, 768, 1024, 704]]}
+        if (block ~ ~ ~ minecraft:lever[face=ceiling] && !block ~ ~ ~ minecraft:lever[facing=east] && !block ~ ~ ~ minecraft:lever[facing=west]) data modify storage retina:data Surfaces set value {Top: [[320, 1024, 256, 704, 1024, 768]], Bottom: [[320, 640, 256, 704, 640, 768]], West: [[320, 640, 256, 320, 1024, 768]], East: [[704, 640, 256, 704, 1024, 768]], North: [[320, 640, 256, 704, 1024, 256]], South: [[320, 640, 768, 704, 1024, 768]]}
     }
     function lily_pad() {
         data modify storage retina:data Surfaces set value {Top: [[64, 64, 64, 960, 64, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 64, 960]], East: [[960, 0, 64, 960, 64, 960]], North: [[64, 0, 64, 960, 64, 64]], South: [[64, 0, 960, 960, 64, 960]]};

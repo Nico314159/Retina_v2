@@ -40,6 +40,8 @@ execute if block ~ ~ ~ #retina:ladder run function retina:hitbox/ladder
 execute if block ~ ~ ~ #retina:ladder run return 1
 execute if block ~ ~ ~ #retina:lantern run function retina:hitbox/lantern
 execute if block ~ ~ ~ #retina:lantern run return 1
+execute if block ~ ~ ~ #retina:lever run function retina:hitbox/lever
+execute if block ~ ~ ~ #retina:lever run return 1
 execute if block ~ ~ ~ #retina:mushroom_shaped run function retina:hitbox/mushroom_shaped
 execute if block ~ ~ ~ #retina:mushroom_shaped run return 1
 execute if block ~ ~ ~ #retina:nether_sprouts run function retina:hitbox/nether_sprouts
