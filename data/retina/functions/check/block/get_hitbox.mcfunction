@@ -26,6 +26,8 @@ execute if block ~ ~ ~ #retina:composter run function retina:hitbox/composter
 execute if block ~ ~ ~ #retina:composter run return 1
 execute if block ~ ~ ~ #retina:conduit run function retina:hitbox/conduit
 execute if block ~ ~ ~ #retina:conduit run return 1
+execute if block ~ ~ ~ #retina:daylight_detector run function retina:hitbox/daylight_detector
+execute if block ~ ~ ~ #retina:daylight_detector run return 1
 execute if block ~ ~ ~ #retina:door run function retina:hitbox/door
 execute if block ~ ~ ~ #retina:door run return 1
 execute if block ~ ~ ~ #retina:end_portal_frame run function retina:hitbox/end_portal_frame

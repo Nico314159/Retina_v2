@@ -67,6 +67,9 @@ new tags.blocks(composter) {
 new tags.blocks(conduit) {
     "values": ["minecraft:conduit"]
 }
+new tags.blocks(daylight_detector) {
+    "values": ["minecraft:daylight_detector"]
+}
 new tags.blocks(door) {
     "values": ["#minecraft:doors"]
 }
@@ -507,9 +510,10 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
                 ["anvil", "attached_stem", "bed", "brewing_stand", "button", 
-                "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "door",
-                "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", "head", "ladder", "lantern", "lever",  
-                "mushroom_shaped", "nether_sprouts", "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
+                "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
+                "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
+                "grass_shaped", "head", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
+                "pane_shaped", "pressure_plate", "rail", "repeater_shaped",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "stem", "sugar_cane_like",
                 "tall_crop", "trapdoor", "vertical_torch", "vine", "wall_sign", "wall_torch", "wall"]
             );
@@ -939,6 +943,9 @@ class hitbox {
     }
     function conduit() {
         data modify storage retina:data Surfaces set value {Top: [[320, 704, 320, 704, 704, 704]], Bottom: [[320, 320, 320, 704, 320, 704]], West: [[320, 320, 320, 320, 704, 704]], East: [[704, 320, 320, 704, 704, 704]], North: [[320, 320, 320, 704, 704, 320]], South: [[320, 320, 704, 704, 704, 704]]};
+    }
+    function daylight_detector() {
+        data modify storage retina:data Surfaces set value {Top: [[0, 384, 0, 1024, 384,  1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 384, 1024]], East: [[1024, 0, 0, 1024, 384, 1024]], North: [[0, 0, 0, 1024, 384, 0]], South: [[0, 0, 1024, 1024, 384, 1024]]};
     }
     function door() {
         // open=false
