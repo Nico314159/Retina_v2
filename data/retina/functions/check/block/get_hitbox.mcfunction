@@ -58,6 +58,8 @@ execute if block ~ ~ ~ #retina:pane_shaped run function retina:hitbox/pane_shape
 execute if block ~ ~ ~ #retina:pane_shaped run return 1
 execute if block ~ ~ ~ #retina:piglin_head run function retina:hitbox/piglin_head
 execute if block ~ ~ ~ #retina:piglin_head run return 1
+execute if block ~ ~ ~ #retina:pitcher_crop run function retina:hitbox/pitcher_crop
+execute if block ~ ~ ~ #retina:pitcher_crop run return 1
 execute if block ~ ~ ~ #retina:pressure_plate run function retina:hitbox/pressure_plate
 execute if block ~ ~ ~ #retina:pressure_plate run return 1
 execute if block ~ ~ ~ #retina:rail run function retina:hitbox/rail
@@ -84,6 +86,8 @@ execute if block ~ ~ ~ #retina:sugar_cane_like run function retina:hitbox/sugar_
 execute if block ~ ~ ~ #retina:sugar_cane_like run return 1
 execute if block ~ ~ ~ #retina:tall_crop run function retina:hitbox/tall_crop
 execute if block ~ ~ ~ #retina:tall_crop run return 1
+execute if block ~ ~ ~ #retina:torchflower_crop run function retina:hitbox/torchflower_crop
+execute if block ~ ~ ~ #retina:torchflower_crop run return 1
 execute if block ~ ~ ~ #retina:trapdoor run function retina:hitbox/trapdoor
 execute if block ~ ~ ~ #retina:trapdoor run return 1
 execute if block ~ ~ ~ #retina:vertical_torch run function retina:hitbox/vertical_torch

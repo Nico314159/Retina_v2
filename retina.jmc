@@ -189,7 +189,10 @@ new tags.blocks(pane_shaped) {
 	]
 }
 new tags.blocks(piglin_head) {
-    "values": "minecraft:piglin_head"
+    "values": ["minecraft:piglin_head"]
+}
+new tags.blocks(pitcher_crop) {
+    "values": ["minecraft:pitcher_crop"]
 }
 new tags.blocks(pressure_plate) {
     "values": ["#minecraft:pressure_plates"]
@@ -290,6 +293,9 @@ new tags.blocks(tall_crop) {
         "minecraft:beetroots",
         "minecraft:wheat"
     ]
+}
+new tags.blocks(torchflower_crop) {
+    "values": ["minecraft:torchflower_crop"]
 }
 new tags.blocks(trapdoor) {
     "values": ["#minecraft:trapdoors"]
@@ -530,9 +536,9 @@ class check {
                 "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
                 "grass_shaped", "head", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
-                "pane_shaped", "piglin_head", "pressure_plate", "rail", "repeater_shaped", "rod",
+                "pane_shaped", "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "short_crop", "slab", "snow", "stair", "standing_sign_or_banner", "stem", "sugar_cane_like",
-                "tall_crop", "trapdoor", "vertical_torch", "vine", "wall_sign", "wall_torch", "wall"]
+                "tall_crop", "torchflower_crop", "trapdoor", "vertical_torch", "vine", "wall_sign", "wall_torch", "wall"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
@@ -1111,6 +1117,14 @@ class hitbox {
     function piglin_head() {
         data modify storage retina:data Surfaces set value {Top: [[192, 512, 192, 832, 512, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 512, 832]], East: [[832, 0, 192, 832, 512, 832]], North: [[192, 0, 192, 832, 512, 192]], South: [[192, 0, 832, 832, 512, 832]]};
     }
+    function pitcher_crop() {
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=0]) data modify storage retina:data Surfaces set value {Top: [[320, 192, 320, 704, 192, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[12, 0, 64, 64, 192, 704]], East: [[704, 0, 320, 704, 192, 704]], North: [[320, 0, 320, 704, 192, 320]], South: [[320, 0, 704, 704, 192, 704]]}
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=1]) data modify storage retina:data Surfaces set value {Top: [[192, 896, 192, 832, 896, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 896, 832]], East: [[832, 0, 192, 832, 896, 832]], North: [[192, 0, 192, 832, 896, 192]], South: [[192, 0, 832, 832, 896, 832]]}
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=2]) data modify storage retina:data Surfaces set value {Top: [[192, 1024, 192, 832, 1024, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 1024, 832]], East: [[832, 0, 192, 832, 1024, 832]], North: [[192, 0, 192, 832, 1024, 192]], South: [[192, 0, 832, 832, 1024, 832]]}
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=3,half=lower]) data modify storage retina:data Surfaces set value {Top: [[192, 1024, 192, 832, 1024, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 1024, 832]], East: [[832, 0, 192, 832, 1024, 832]], North: [[192, 0, 192, 832, 1024, 192]], South: [[192, 0, 832, 832, 1024, 832]]}
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=3,half=upper]) data modify storage retina:data Surfaces set value {Top: [[192, 704, 192, 832, 704, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 704, 832]], East: [[832, 0, 192, 832, 704, 832]], North: [[192, 0, 192, 832, 704, 192]], South: [[192, 0, 832, 832, 704, 832]]}
+        if (block ~ ~ ~ minecraft:pitcher_crop[age=4]) data modify storage retina:data Surfaces set value {Top: [[192, 1024, 192, 832, 1024, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 1024, 832]], East: [[832, 0, 192, 832, 1024, 832]], North: [[192, 0, 192, 832, 1024, 192]], South: [[192, 0, 832, 832, 1024, 832]]}
+    }
     function pressure_plate() {
         if (block ~ ~ ~ #minecraft:pressure_plates[powered=false]) data modify storage retina:data Surfaces set value {Top: [[64, 64, 64, 960, 64, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 64, 960]], East: [[960, 0, 64, 960, 64, 960]], North: [[64, 0, 64, 960, 64, 64]], South: [[64, 0, 960, 960, 64, 960]]}
         if (block ~ ~ ~ #minecraft:pressure_plates[powered=true]) data modify storage retina:data Surfaces set value {Top: [[64, 32, 64, 960, 32, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 32, 960]], East: [[960, 0, 64, 960, 32, 960]], North: [[64, 0, 64, 960, 32, 64]], South: [[64, 0, 960, 960, 32, 960]]}
@@ -1242,6 +1256,10 @@ class hitbox {
         if (block ~ ~ ~ #retina:tall_crop[age=5]) data modify storage retina:data Surfaces set value {Top: [[0, 768, 0, 1024, 768, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 768, 1024]], East: [[1024, 0, 0, 1024, 768, 1024]], North: [[0, 0, 0, 1024, 768, 0]], South: [[0, 0, 1024, 1024, 768, 1024]]}
         if (block ~ ~ ~ #retina:tall_crop[age=6]) data modify storage retina:data Surfaces set value {Top: [[0, 896, 0, 1024, 896, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 896, 1024]], East: [[1024, 0, 0, 1024, 896, 1024]], North: [[0, 0, 0, 1024, 896, 0]], South: [[0, 0, 1024, 1024, 896, 1024]]}
         if (block ~ ~ ~ #retina:tall_crop[age=7]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[1024, 0, 0, 1024, 1024, 1024]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
+    }
+    function torchflower_crop() {
+        if (block ~ ~ ~ minecraft:torchflower_crop[age=0]) data modify storage retina:data Surfaces set value {Top: [[320, 384, 320, 704, 384, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[12, 0, 64, 64, 384, 704]], East: [[704, 0, 320, 704, 384, 704]], North: [[320, 0, 320, 704, 384, 320]], South: [[320, 0, 704, 704, 384, 704]]}
+        if (block ~ ~ ~ minecraft:torchflower_crop[age=1]) data modify storage retina:data Surfaces set value {Top: [[320, 640, 320, 704, 640, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[12, 0, 64, 64, 640, 704]], East: [[704, 0, 320, 704, 640, 704]], North: [[320, 0, 320, 704, 640, 320]], South: [[320, 0, 704, 704, 640, 704]]}
     }
     function trapdoor() {
         // open=false
