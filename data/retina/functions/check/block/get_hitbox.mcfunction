@@ -94,8 +94,8 @@ execute if block ~ ~ ~ #retina:trapdoor run function retina:hitbox/trapdoor
 execute if block ~ ~ ~ #retina:trapdoor run return 1
 execute if block ~ ~ ~ #retina:vertical_torch run function retina:hitbox/vertical_torch
 execute if block ~ ~ ~ #retina:vertical_torch run return 1
-execute if block ~ ~ ~ #retina:vine run function retina:hitbox/vine
-execute if block ~ ~ ~ #retina:vine run return 1
+execute if block ~ ~ ~ #retina:vine_like run function retina:hitbox/vine_like
+execute if block ~ ~ ~ #retina:vine_like run return 1
 execute if block ~ ~ ~ #retina:wall_sign run function retina:hitbox/wall_sign
 execute if block ~ ~ ~ #retina:wall_sign run return 1
 execute if block ~ ~ ~ #retina:wall_torch run function retina:hitbox/wall_torch

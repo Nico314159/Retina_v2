@@ -313,10 +313,11 @@ new tags.blocks(vertical_torch) {
 		"minecraft:soul_torch"
 	]
 }
-new tags.blocks(vine) {
+new tags.blocks(vine_like) {
     "values": [
         "minecraft:vine",
-        "minecraft:sculk_vein"
+        "minecraft:sculk_vein",
+        "minecraft:glow_lichen"
     ]
 }
 new tags.blocks(wall) {
@@ -544,7 +545,7 @@ class check {
                 "grass_shaped", "head", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
                 "pane_shaped", "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem",
-                "tall_crop", "torchflower_crop", "trapdoor", "vertical_torch", "vine", "wall_sign", "wall_torch", "wall"]
+                "tall_crop", "torchflower_crop", "trapdoor", "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
@@ -1284,7 +1285,7 @@ class hitbox {
     function vertical_torch() {
         data modify storage retina:data Surfaces set value {Top: [[384, 768, 384, 768, 768, 768]], Bottom: [[384, 0, 384, 768, 0, 768]], West: [[384, 0, 384, 384, 768, 768]], East: [[768, 0, 384, 768, 768, 768]], North: [[384, 0, 384, 768, 768, 384]], South: [[384, 0, 768, 768, 768, 768]]};
     }
-    function vine() {
+    function vine_like() {
         if (block ~ ~ ~ #retina:vine[up=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 1024, 0, 1024, 1024, 1024]; 
             data modify storage retina:data Surfaces.Bottom append value [0, 960, 0, 1024, 960, 1024]; 
