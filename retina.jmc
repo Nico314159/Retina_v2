@@ -297,6 +297,9 @@ new tags.blocks(stem) {
         "minecraft:pumpkin_stem"
     ]
 }
+new tags.blocks(stonecutter) {
+    "values": ["minecraft:stonecutter"]
+}
 new tags.blocks(tall_crop) {
 	"values": [
         "minecraft:beetroots",
@@ -547,7 +550,7 @@ class check {
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
                 "grass_shaped", "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
                 "pane_shaped", "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem",
+                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem", "stonecutter",
                 "tall_crop", "torchflower_crop", "trapdoor", "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
@@ -1249,6 +1252,9 @@ class hitbox {
     }
     function standing_sign_or_banner() {
         data modify storage retina:data Surfaces set value {Top: [[256, 1024, 256, 768, 1024, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[256, 0, 256, 256, 1024, 768]], East: [[768, 0, 256, 768, 1024, 768]], North: [[256, 0, 256, 768, 1024, 256]], South: [[256, 0, 768, 768, 1024, 768]]};
+    }
+    function stonecutter() {
+        data modify storage retina:data Surfaces set value {Top: [[0, 576, 0, 1024, 576, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 576, 1024]], East: [[1024, 0, 0, 1024, 576, 1024]], North: [[0, 0, 0, 1024, 576, 0]], South: [[0, 0, 1024, 1024, 576, 1024]]};
     }
     function stem() {
         if (block ~ ~ ~ #retina:stem[age=0]) data modify storage retina:data Surfaces set value {Top: [[448, 128, 448, 576, 128, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 128, 576]], East: [[576, 0, 448, 576, 128, 576]], North: [[448, 0, 448, 576, 128, 448]], South: [[448, 0, 576, 576, 128, 576]]}

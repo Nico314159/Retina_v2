@@ -88,6 +88,8 @@ execute if block ~ ~ ~ #retina:standing_sign_or_banner run function retina:hitbo
 execute if block ~ ~ ~ #retina:standing_sign_or_banner run return 1
 execute if block ~ ~ ~ #retina:stem run function retina:hitbox/stem
 execute if block ~ ~ ~ #retina:stem run return 1
+execute if block ~ ~ ~ #retina:stonecutter run function retina:hitbox/stonecutter
+execute if block ~ ~ ~ #retina:stonecutter run return 1
 execute if block ~ ~ ~ #retina:tall_crop run function retina:hitbox/tall_crop
 execute if block ~ ~ ~ #retina:tall_crop run return 1
 execute if block ~ ~ ~ #retina:torchflower_crop run function retina:hitbox/torchflower_crop
