@@ -54,6 +54,8 @@ execute if block ~ ~ ~ #retina:lever run function retina:hitbox/lever
 execute if block ~ ~ ~ #retina:lever run return 1
 execute if block ~ ~ ~ #retina:mushroom_shaped run function retina:hitbox/mushroom_shaped
 execute if block ~ ~ ~ #retina:mushroom_shaped run return 1
+execute if block ~ ~ ~ #retina:nether_fungus run function retina:hitbox/nether_fungus
+execute if block ~ ~ ~ #retina:nether_fungus run return 1
 execute if block ~ ~ ~ #retina:nether_sprouts run function retina:hitbox/nether_sprouts
 execute if block ~ ~ ~ #retina:nether_sprouts run return 1
 execute if block ~ ~ ~ #retina:pane_shaped run function retina:hitbox/pane_shaped

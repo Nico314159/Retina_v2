@@ -172,6 +172,12 @@ new tags.blocks(mushroom_shaped) {
         "minecraft:potted_torchflower"
 	]
 }
+new tags.blocks(nether_fungus) {
+    "values": [
+        "minecraft:crimson_fungus",
+        "minecraft:warped_fungus"
+    ]
+}
 new tags.blocks(nether_sprouts) {
     "values": ["minecraft:nether_sprouts"]
 }
@@ -557,10 +563,10 @@ class check {
                 },
                 ["anvil", "attached_stem", "bed", "berries", "brewing_stand", "button", 
                 "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", 
-                "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
-                "grass_shaped", "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
+                "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", 
+                "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair",  "standing_sign_or_banner",
+                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner",
                 "stem", "stonecutter", "tall_crop", "torchflower_crop", "trapdoor", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
@@ -1107,6 +1113,9 @@ class hitbox {
     function mushroom_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[320, 384, 320, 704, 384, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[320, 0, 320, 320, 384, 704]], East: [[704, 0, 320, 704, 384, 704]], North: [[320, 0, 320, 704, 384, 320]], South: [[320, 0, 704, 704, 384, 704]]};
     }
+    function nether_fungus() {
+        data modify storage retina:data Surfaces set value {Top: [[256, 576, 256, 768, 576, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[256, 0, 256, 256, 576, 768]], East: [[768, 0, 256, 768, 576, 768]], North: [[256, 0, 256, 768, 576, 256]], South: [[256, 0, 768, 768, 576, 768]]};
+    }
     function nether_sprouts() {
         data modify storage retina:data Surfaces set value {Top: [[128, 192, 128, 896, 192, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 192, 896]], East: [[896, 0, 128, 896, 192, 896]], North: [[128, 0, 128, 896, 192, 128]], South: [[128, 0, 896, 896, 192, 896]]};
     }
@@ -1276,6 +1285,9 @@ class hitbox {
         if (block ~ ~ ~ #retina:stem[age=5]) data modify storage retina:data Surfaces set value {Top: [[448, 768, 448, 576, 768, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 768, 576]], East: [[576, 0, 448, 576, 768, 576]], North: [[448, 0, 448, 576, 768, 448]], South: [[448, 0, 576, 576, 768, 576]]}
         if (block ~ ~ ~ #retina:stem[age=6]) data modify storage retina:data Surfaces set value {Top: [[448, 896, 448, 576, 896, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 896, 576]], East: [[576, 0, 448, 576, 896, 576]], North: [[448, 0, 448, 576, 896, 448]], South: [[448, 0, 576, 576, 896, 576]]}
         if (block ~ ~ ~ #retina:stem[age=7]) data modify storage retina:data Surfaces set value {Top: [[448, 1024, 448, 576, 1024, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 1024, 576]], East: [[576, 0, 448, 576, 1024, 576]], North: [[448, 0, 448, 576, 1024, 448]], South: [[448, 0, 576, 576, 1024, 576]]}
+    }
+    function structure_void() {
+    
     }
     function sugar_cane_like() {
         data modify storage retina:data Surfaces set value {Top: [[128, 1024, 128, 896, 1024, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 1024, 896]], East: [[896, 0, 128, 896, 1024, 896]], North: [[128, 0, 128, 896, 1024, 128]], South: [[128, 0, 896, 896, 1024, 896]]};
