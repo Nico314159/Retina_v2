@@ -92,6 +92,8 @@ execute if block ~ ~ ~ #retina:stem run function retina:hitbox/stem
 execute if block ~ ~ ~ #retina:stem run return 1
 execute if block ~ ~ ~ #retina:stonecutter run function retina:hitbox/stonecutter
 execute if block ~ ~ ~ #retina:stonecutter run return 1
+execute if block ~ ~ ~ #retina:structure_void run function retina:hitbox/structure_void
+execute if block ~ ~ ~ #retina:structure_void run return 1
 execute if block ~ ~ ~ #retina:tall_crop run function retina:hitbox/tall_crop
 execute if block ~ ~ ~ #retina:tall_crop run return 1
 execute if block ~ ~ ~ #retina:torchflower_crop run function retina:hitbox/torchflower_crop
