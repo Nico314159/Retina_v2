@@ -96,6 +96,8 @@ execute if block ~ ~ ~ #retina:torchflower_crop run function retina:hitbox/torch
 execute if block ~ ~ ~ #retina:torchflower_crop run return 1
 execute if block ~ ~ ~ #retina:trapdoor run function retina:hitbox/trapdoor
 execute if block ~ ~ ~ #retina:trapdoor run return 1
+execute if block ~ ~ ~ #retina:twisting_vines run function retina:hitbox/twisting_vines
+execute if block ~ ~ ~ #retina:twisting_vines run return 1
 execute if block ~ ~ ~ #retina:vertical_torch run function retina:hitbox/vertical_torch
 execute if block ~ ~ ~ #retina:vertical_torch run return 1
 execute if block ~ ~ ~ #retina:vine_like run function retina:hitbox/vine_like
@@ -106,4 +108,6 @@ execute if block ~ ~ ~ #retina:wall_torch run function retina:hitbox/wall_torch
 execute if block ~ ~ ~ #retina:wall_torch run return 1
 execute if block ~ ~ ~ #retina:wall run function retina:hitbox/wall
 execute if block ~ ~ ~ #retina:wall run return 1
+execute if block ~ ~ ~ #retina:weeping_vines run function retina:hitbox/weeping_vines
+execute if block ~ ~ ~ #retina:weeping_vines run return 1
 function retina:hitbox/cubic

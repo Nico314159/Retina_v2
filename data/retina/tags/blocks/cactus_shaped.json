@@ -2,6 +2,9 @@
     "values": [
         "minecraft:cactus",
         "minecraft:decorated_pot",
-        "minecraft:dragon_egg"
+        "minecraft:dragon_egg",
+        "minecraft:weeping_vines_plant",
+        "minecraft:cave_vines_plant",
+        "minecraft:cave_vines"
     ]
 }

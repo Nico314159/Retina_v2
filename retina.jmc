@@ -38,7 +38,10 @@ new tags.blocks(cactus_shaped) {
     "values": [
 		"minecraft:cactus",
         "minecraft:decorated_pot",
-		"minecraft:dragon_egg"
+		"minecraft:dragon_egg",
+        "minecraft:weeping_vines_plant",
+        "minecraft:cave_vines_plant",
+        "minecraft:cave_vines"
 	]
 }
 new tags.blocks(cake) {
@@ -288,6 +291,7 @@ new tags.blocks(standing_sign_or_banner) {
 		"minecraft:green_banner",
 		"minecraft:red_banner",
 		"minecraft:black_banner",
+        "minecraft:twisting_vines",
 		"minecraft:twisting_vines_plant"
 	]
 }
@@ -311,6 +315,9 @@ new tags.blocks(torchflower_crop) {
 }
 new tags.blocks(trapdoor) {
     "values": ["#minecraft:trapdoors"]
+}
+new tags.blocks(twisting_vines) {
+    "values": ["minecraft:twisting_vines"]
 }
 new tags.blocks(vertical_torch) {
 	"values": [
@@ -338,6 +345,9 @@ new tags.blocks(wall_torch) {
 		"minecraft:redstone_wall_torch",
 		"minecraft:soul_wall_torch"
 	]
+}
+new tags.blocks(weeping_vines) {
+    "values": ["minecraft:weeping_vines"]
 }
 
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
@@ -550,8 +560,9 @@ class check {
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", 
                 "grass_shaped", "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_sprouts",
                 "pane_shaped", "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem", "stonecutter",
-                "tall_crop", "torchflower_crop", "trapdoor", "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall"]
+                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair",  "standing_sign_or_banner",
+                "stem", "stonecutter", "tall_crop", "torchflower_crop", "trapdoor", "twisting_vines", 
+                "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
@@ -1294,6 +1305,9 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:trapdoors[facing=south, open=true]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 192]], Bottom: [[0, 0, 0, 1024, 0, 192]], West: [[0, 0, 0, 0, 1024, 192]], East: [[1024, 0, 0, 1024, 1024, 192]], North: [[0, 0, 0, 1024, 1024, 0]], South: [[0, 0, 192, 1024, 1024, 192]]}
         if (block ~ ~ ~ #minecraft:trapdoors[facing=north, open=true]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 832, 1024, 1024, 1024]], Bottom: [[0, 0, 832, 1024, 0, 1024]], West: [[0, 0, 832, 0, 1024, 1024]], East: [[1024, 0, 832, 1024, 1024, 1024]], North: [[0, 0, 832, 1024, 1024, 832]], South: [[0, 0, 1024, 1024, 1024, 1024]]}
     }
+    function twisting_vines() {
+        data modify storage retina:data Surfaces set value {Top: [[256, 960, 256, 768, 960, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[256, 0, 256, 256, 960, 768]], East: [[768, 0, 256, 768, 960, 768]], North: [[256, 0, 256, 768, 960, 256]], South: [[256, 0, 768, 768, 960, 768]]};
+    }
     function vertical_torch() {
         data modify storage retina:data Surfaces set value {Top: [[384, 768, 384, 768, 768, 768]], Bottom: [[384, 0, 384, 768, 0, 768]], West: [[384, 0, 384, 384, 768, 768]], East: [[768, 0, 384, 768, 768, 768]], North: [[384, 0, 384, 768, 768, 384]], South: [[384, 0, 768, 768, 768, 768]]};
     }
@@ -1420,6 +1434,9 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:walls[south=tall]) data modify storage retina:data Surfaces.East append value [704, 0, 768, 704, 1024, 1024];
         if (block ~ ~ ~ #minecraft:walls[south=tall]) data modify storage retina:data Surfaces.North append value [320, 0, 768, 704, 1024, 768];
         if (block ~ ~ ~ #minecraft:walls[south=tall]) data modify storage retina:data Surfaces.South append value [320, 0, 1024, 704, 1024, 1024];
+    }
+    function weeping_vines() {
+        data modify storage retina:data Surfaces set value {Top: [[256, 1024, 256, 768, 1024, 768]], Bottom: [[256, 640, 256, 768, 640, 768]], West: [[256, 640, 256, 256, 1024, 768]], East: [[768, 640, 256, 768, 1024, 768]], North: [[256, 640, 256, 768, 1024, 256]], South: [[256, 640, 768, 768, 1024, 768]]};
     }
     function cubic() {
         // Runs for 1x1x1 cubic blocks and for any other block that isn't supported by retina
