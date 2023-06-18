@@ -44,6 +44,8 @@ execute if block ~ ~ ~ #retina:grass_shaped run function retina:hitbox/grass_sha
 execute if block ~ ~ ~ #retina:grass_shaped run return 1
 execute if block ~ ~ ~ #retina:head run function retina:hitbox/head
 execute if block ~ ~ ~ #retina:head run return 1
+execute if block ~ ~ ~ #retina:hanging_roots run function retina:hitbox/hanging_roots
+execute if block ~ ~ ~ #retina:hanging_roots run return 1
 execute if block ~ ~ ~ #retina:ladder run function retina:hitbox/ladder
 execute if block ~ ~ ~ #retina:ladder run return 1
 execute if block ~ ~ ~ #retina:lantern run function retina:hitbox/lantern
