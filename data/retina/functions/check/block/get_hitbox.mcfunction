@@ -4,6 +4,8 @@ execute if block ~ ~ ~ #retina:attached_stem run function retina:hitbox/attached
 execute if block ~ ~ ~ #retina:attached_stem run return 1
 execute if block ~ ~ ~ #retina:bed run function retina:hitbox/bed
 execute if block ~ ~ ~ #retina:bed run return 1
+execute if block ~ ~ ~ #retina:bell run function retina:hitbox/bell
+execute if block ~ ~ ~ #retina:bell run return 1
 execute if block ~ ~ ~ #retina:berries run function retina:hitbox/berries
 execute if block ~ ~ ~ #retina:berries run return 1
 execute if block ~ ~ ~ #retina:brewing_stand run function retina:hitbox/brewing_stand
