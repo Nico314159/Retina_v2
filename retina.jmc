@@ -247,6 +247,9 @@ new tags.blocks(pickle) {
 new tags.blocks(piglin_head) {
     "values": ["minecraft:piglin_head"]
 }
+new tags.blocks(pink_petals) {
+    "values": ["minecraft:pink_petals"]
+}
 new tags.blocks(pitcher_crop) {
     "values": ["minecraft:pitcher_crop"]
 }
@@ -621,7 +624,7 @@ class check {
                 "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
-                "pane_shaped", "pickle",  "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
+                "pane_shaped", "pickle", "piglin_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "seagrass", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
@@ -1273,6 +1276,9 @@ class hitbox {
         if (block ~ ~ ~ minecraft:sea_pickle[pickles=2]) data modify storage retina:data Surfaces set value {Top: [[192, 384, 192, 832, 384, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[192, 0, 192, 192, 384, 832]], East: [[832, 0, 192, 832, 384, 832]], North: [[192, 0, 192, 832, 384, 192]], South: [[192, 0, 832, 832, 384, 832]]}
         if (block ~ ~ ~ minecraft:sea_pickle[pickles=3]) data modify storage retina:data Surfaces set value {Top: [[128, 384, 128, 896, 384, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 384, 896]], East: [[896, 0, 128, 896, 384, 896]], North: [[128, 0, 128, 896, 384, 128]], South: [[128, 0, 896, 896, 384, 896]]}
         if (block ~ ~ ~ minecraft:sea_pickle[pickles=4]) data modify storage retina:data Surfaces set value {Top: [[128, 448, 128, 896, 448, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 448, 896]], East: [[896, 0, 128, 896, 448, 896]], North: [[128, 0, 128, 896, 448, 128]], South: [[128, 0, 896, 896, 448, 896]]}
+    }
+    function pink_petals() {
+        data modify storage retina:data Surfaces set value {Top: [[0, 192, 0, 1024, 192, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 192, 1024]], East: [[1024, 0, 0, 1024, 192, 1024]], North: [[0, 0, 0, 1024, 192, 0]], South: [[0, 0, 1024, 1024, 192, 1024]]};
     }
     function piglin_head() {
         data modify storage retina:data Surfaces set value {Top: [[192, 512, 192, 832, 512, 832]], Bottom: [[192, 0, 192, 832, 0, 832]], West: [[12, 0, 64, 64, 512, 832]], East: [[832, 0, 192, 832, 512, 832]], North: [[192, 0, 192, 832, 512, 192]], South: [[192, 0, 832, 832, 512, 832]]};
