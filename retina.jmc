@@ -284,6 +284,9 @@ new tags.blocks(sculk_sensor) {
         "minecraft:calibrated_sculk_sensor"
     ]
 }
+new tags.blocks(seagrass) {
+    "values": ["minecraft:seagrass"]
+}
 new tags.blocks(short_crop) {
     "values": [
         "minecraft:carrots",
@@ -612,7 +615,7 @@ class check {
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", 
                 "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "pickle",  "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
+                "sapling", "seagrass", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
@@ -1283,6 +1286,9 @@ class hitbox {
         if (!block ~ ~ ~ #retina:rod[facing=east] && !block ~ ~ ~ #retina:rod[facing=west] && !block ~ ~ ~ #retina:rod[facing=up] && !block ~ ~ ~ #retina:rod[facing=down]) data modify storage retina:data Surfaces set value {Top: [[384, 640, 0, 640, 640, 1024]], Bottom: [[384, 384, 0, 640, 384, 1024]], West: [[384, 384, 0, 384, 640, 1024]], East: [[640, 384, 0, 640, 640, 1024]], North: [[384, 384, 0, 640, 640, 0]], South: [[384, 384, 1024, 640, 640, 1024]]}
     }
     function sapling() {
+        data modify storage retina:data Surfaces set value {Top: [[128, 768, 128, 896, 768, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 768, 896]], East: [[896, 0, 128, 896, 768, 896]], North: [[128, 0, 128, 896, 768, 128]], South: [[128, 0, 896, 896, 768, 896]]};
+    }
+    function seagrass() {
         data modify storage retina:data Surfaces set value {Top: [[128, 768, 128, 896, 768, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 768, 896]], East: [[896, 0, 128, 896, 768, 896]], North: [[128, 0, 128, 896, 768, 128]], South: [[128, 0, 896, 896, 768, 896]]};
     }
     function short_crop() {

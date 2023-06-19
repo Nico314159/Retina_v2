@@ -80,6 +80,8 @@ execute if block ~ ~ ~ #retina:rod run function retina:hitbox/rod
 execute if block ~ ~ ~ #retina:rod run return 1
 execute if block ~ ~ ~ #retina:sapling run function retina:hitbox/sapling
 execute if block ~ ~ ~ #retina:sapling run return 1
+execute if block ~ ~ ~ #retina:seagrass run function retina:hitbox/seagrass
+execute if block ~ ~ ~ #retina:seagrass run return 1
 execute if block ~ ~ ~ #retina:short_crop run function retina:hitbox/short_crop
 execute if block ~ ~ ~ #retina:short_crop run return 1
 execute if block ~ ~ ~ #retina:slab run function retina:hitbox/slab
