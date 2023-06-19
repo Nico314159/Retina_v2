@@ -365,6 +365,9 @@ new tags.blocks(tripwire) {
 new tags.blocks(tripwire_hook) {
     "values": ["minecraft:tripwire_hook"]
 }
+new tags.blocks(turtle_egg) {
+    "values": ["minecraft:turtle_egg"]
+}
 new tags.blocks(twisting_vines) {
     "values": ["minecraft:twisting_vines"]
 }
@@ -609,8 +612,8 @@ class check {
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "grass_shaped", 
                 "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "pickle",  "piglin_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner",
-                "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "twisting_vines", 
+                "sapling", "short_crop", "slab", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
+                "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
@@ -1429,6 +1432,10 @@ class hitbox {
 
         if (block ~ ~ ~ minecraft:tripwire_hook[facing=south]) data modify storage retina:data Surfaces set value {Top: [[320, 640, 0, 704, 640, 448]], Bottom: [[320, 0, 0, 704, 0, 448]], West: [[320, 0, 0, 320, 640, 448]], East: [[704, 0, 0, 704, 640, 448]], North: [[320, 0, 0, 704, 640, 0]], South: [[320, 0, 448, 704, 640, 448]]}
         if (block ~ ~ ~ minecraft:tripwire_hook[facing=north]) data modify storage retina:data Surfaces set value {Top: [[320, 640, 576, 704, 640, 1024]], Bottom: [[320, 0, 576, 704, 0, 1024]], West: [[320, 0, 576, 320, 640, 1024]], East: [[704, 0, 576, 704, 640, 1024]], North: [[320, 0, 576, 704, 640, 576]], South: [[320, 0, 1024, 704, 640, 1024]]}
+    }
+    function turtle_egg() {
+        if (block ~ ~ ~ minecraft:turtle_egg[eggs=1]) data modify storage retina:data Surfaces set value {Top: [[192, 448, 192, 768, 448, 768]], Bottom: [[192, 0, 192, 768, 0, 768]], West: [[192, 0, 192, 192, 448, 768]], East: [[768, 0, 192, 768, 448, 768]], North: [[192, 0, 192, 768, 448, 192]], South: [[192, 0, 768, 768, 448, 768]]}
+        if (!block ~ ~ ~ minecraft:turtle_egg[eggs=1]) data modify storage retina:data Surfaces set value {Top: [[64, 448, 64, 960, 448, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 448, 960]], East: [[960, 0, 64, 960, 448, 960]], North: [[64, 0, 64, 960, 448, 64]], South: [[64, 0, 960, 960, 448, 960]]}
     }
     function twisting_vines() {
         data modify storage retina:data Surfaces set value {Top: [[256, 960, 256, 768, 960, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[256, 0, 256, 256, 960, 768]], East: [[768, 0, 256, 768, 960, 768]], North: [[256, 0, 256, 768, 960, 256]], South: [[256, 0, 768, 768, 960, 768]]};

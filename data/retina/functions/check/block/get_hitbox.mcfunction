@@ -110,6 +110,8 @@ execute if block ~ ~ ~ #retina:tripwire run function retina:hitbox/tripwire
 execute if block ~ ~ ~ #retina:tripwire run return 1
 execute if block ~ ~ ~ #retina:tripwire_hook run function retina:hitbox/tripwire_hook
 execute if block ~ ~ ~ #retina:tripwire_hook run return 1
+execute if block ~ ~ ~ #retina:turtle_egg run function retina:hitbox/turtle_egg
+execute if block ~ ~ ~ #retina:turtle_egg run return 1
 execute if block ~ ~ ~ #retina:twisting_vines run function retina:hitbox/twisting_vines
 execute if block ~ ~ ~ #retina:twisting_vines run return 1
 execute if block ~ ~ ~ #retina:vertical_torch run function retina:hitbox/vertical_torch
