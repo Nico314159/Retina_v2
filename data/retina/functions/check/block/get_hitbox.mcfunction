@@ -44,6 +44,8 @@ execute if block ~ ~ ~ #retina:fence_gate run function retina:hitbox/fence_gate
 execute if block ~ ~ ~ #retina:fence_gate run return 1
 execute if block ~ ~ ~ #retina:fence run function retina:hitbox/fence
 execute if block ~ ~ ~ #retina:fence run return 1
+execute if block ~ ~ ~ #retina:fire run function retina:hitbox/fire
+execute if block ~ ~ ~ #retina:fire run return 1
 execute if block ~ ~ ~ #retina:grass_shaped run function retina:hitbox/grass_shaped
 execute if block ~ ~ ~ #retina:grass_shaped run return 1
 execute if block ~ ~ ~ #retina:head run function retina:hitbox/head
