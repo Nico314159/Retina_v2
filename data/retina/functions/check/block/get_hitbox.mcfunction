@@ -28,6 +28,10 @@ execute if block ~ ~ ~ #retina:composter run function retina:hitbox/composter
 execute if block ~ ~ ~ #retina:composter run return 1
 execute if block ~ ~ ~ #retina:conduit run function retina:hitbox/conduit
 execute if block ~ ~ ~ #retina:conduit run return 1
+execute if block ~ ~ ~ #retina:coral_fan run function retina:hitbox/coral_fan
+execute if block ~ ~ ~ #retina:coral_fan run return 1
+execute if block ~ ~ ~ #retina:coral_plant run function retina:hitbox/coral_plant
+execute if block ~ ~ ~ #retina:coral_plant run return 1
 execute if block ~ ~ ~ #retina:daylight_detector run function retina:hitbox/daylight_detector
 execute if block ~ ~ ~ #retina:daylight_detector run return 1
 execute if block ~ ~ ~ #retina:door run function retina:hitbox/door
