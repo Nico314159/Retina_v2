@@ -119,6 +119,9 @@ new tags.blocks(head) {
         "minecraft:dragon_head"
     ]
 }
+new tags.blocks(hopper) {
+    "values": ["minecraft:hopper"]
+}
 new tags.blocks(ladder) {
     "values": ["minecraft:ladder"]
 }
@@ -1092,6 +1095,50 @@ class hitbox {
     }
     function head() {
         data modify storage retina:data Surfaces set value {Top: [[256, 512, 256, 768, 512, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[12, 0, 64, 64, 512, 768]], East: [[768, 0, 256, 768, 512, 768]], North: [[256, 0, 256, 768, 512, 256]], South: [[256, 0, 768, 768, 512, 768]]};
+    }
+    function hopper() {
+        data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 1024, 1024, 1024]], Bottom: [[0, 640, 0, 1024, 640, 1024], [256, 256, 256, 768, 256, 768]], West: [[0, 640, 0, 0, 1024, 1024], [256, 256, 256, 256, 640, 768]], East: [[1024, 640, 0, 1024, 1024, 1024], [768, 256, 256, 768, 640, 768]], North: [[0, 640, 0, 1024, 1024, 0], [256, 256, 256, 768, 640, 256]], South: [[0, 640, 1024, 1024, 1024, 1024], [256, 256, 768, 768, 640, 768]]};
+
+        if (block ~ ~ ~ minecraft:hopper[facing=east]) {
+            data modify storage retina:data Surfaces.Top append value [768, 640, 384, 1024, 640, 640]; 
+            data modify storage retina:data Surfaces.Bottom append value [768, 256, 384, 1024, 256, 640];
+            data modify storage retina:data Surfaces.West append value [768, 256, 384, 768, 640, 640];
+            data modify storage retina:data Surfaces.East append value [1024, 256, 384, 1024, 640, 640];
+            data modify storage retina:data Surfaces.North append value [768, 256, 384, 1024, 640, 384];
+            data modify storage retina:data Surfaces.South append value [768, 256, 640, 1024, 640, 640];
+        }
+        if (block ~ ~ ~ minecraft:hopper[facing=west]) {
+            data modify storage retina:data Surfaces.Top append value [0, 640, 384, 256, 640, 640]; 
+            data modify storage retina:data Surfaces.Bottom append value [0, 256, 384, 256, 256, 640];
+            data modify storage retina:data Surfaces.West append value [0, 256, 384, 0, 640, 640];
+            data modify storage retina:data Surfaces.East append value [256, 256, 384, 256, 640, 640];
+            data modify storage retina:data Surfaces.North append value [0, 256, 384, 256, 640, 384];
+            data modify storage retina:data Surfaces.South append value [0, 256, 640, 256, 640, 640];
+        }
+        if (block ~ ~ ~ minecraft:hopper[facing=south]) {
+            data modify storage retina:data Surfaces.Top append value [384, 640, 768, 640, 640, 1024]; 
+            data modify storage retina:data Surfaces.Bottom append value [384, 256, 768, 640, 256, 1024];
+            data modify storage retina:data Surfaces.West append value [384, 256, 768, 384, 640, 1024];
+            data modify storage retina:data Surfaces.East append value [640. 256, 768, 640, 640, 1024];
+            data modify storage retina:data Surfaces.North append value [384, 256, 768, 640, 640, 768];
+            data modify storage retina:data Surfaces.South append value [384, 256, 1024, 640, 640, 1024];
+        }
+        if (block ~ ~ ~ minecraft:hopper[facing=north]) {
+            data modify storage retina:data Surfaces.Top append value [384, 640, 0, 640, 640, 256]; 
+            data modify storage retina:data Surfaces.Bottom append value [384, 256, 0, 640, 256, 256];
+            data modify storage retina:data Surfaces.West append value [384, 256, 0, 384, 640, 256];
+            data modify storage retina:data Surfaces.East append value [640. 256, 0, 640, 640, 256];
+            data modify storage retina:data Surfaces.North append value [384, 256, 0, 640, 640, 0];
+            data modify storage retina:data Surfaces.South append value [384, 256, 256, 640, 640, 256];
+        }
+        if (block ~ ~ ~ minecraft:hopper[facing=down]) {
+            data modify storage retina:data Surfaces.Top append value [384, 256, 384, 640, 256, 640]; 
+            data modify storage retina:data Surfaces.Bottom append value [384, 0, 384, 640, 0, 640];
+            data modify storage retina:data Surfaces.West append value [384, 0, 384, 384, 256, 640];
+            data modify storage retina:data Surfaces.East append value [640, 0, 384, 640, 256, 640];
+            data modify storage retina:data Surfaces.North append value [384, 0, 384, 640, 256, 384];
+            data modify storage retina:data Surfaces.South append value [384, 0, 640, 640, 256, 640];
+        }
     }
     function ladder() {
         if (block ~ ~ ~ minecraft:ladder[facing=east]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 0, 128, 1024, 1024]], Bottom: [[0, 0, 0, 128, 0, 1024]], West: [[0, 0, 0, 0, 1024, 1024]], East: [[128, 0, 0, 128, 1024, 1024]], North: [[0, 0, 0, 128, 1024, 0]], South: [[0, 0, 1024, 128, 1024, 1024]]}
