@@ -9,7 +9,8 @@ new tags.blocks(airs) {
         "#minecraft:small_flowers",
         "minecraft:mangrove_propagule",
         "minecraft:bamboo_sapling",
-        "minecraft:bamboo"
+        "minecraft:bamboo",
+        "minecraft:pointed_dripstone"
 	]
 }
 
