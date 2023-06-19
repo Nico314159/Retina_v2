@@ -92,6 +92,8 @@ execute if block ~ ~ ~ #retina:short_crop run function retina:hitbox/short_crop
 execute if block ~ ~ ~ #retina:short_crop run return 1
 execute if block ~ ~ ~ #retina:slab run function retina:hitbox/slab
 execute if block ~ ~ ~ #retina:slab run return 1
+execute if block ~ ~ ~ #retina:small_dripleaf run function retina:hitbox/small_dripleaf
+execute if block ~ ~ ~ #retina:small_dripleaf run return 1
 execute if block ~ ~ ~ #retina:snow run function retina:hitbox/snow
 execute if block ~ ~ ~ #retina:snow run return 1
 execute if block ~ ~ ~ #retina:spore_blossom run function retina:hitbox/spore_blossom
