@@ -14,6 +14,8 @@ execute if block ~ ~ ~ #retina:button run function retina:hitbox/button
 execute if block ~ ~ ~ #retina:button run return 1
 execute if block ~ ~ ~ #retina:cactus_shaped run function retina:hitbox/cactus_shaped
 execute if block ~ ~ ~ #retina:cactus_shaped run return 1
+execute if block ~ ~ ~ #retina:candle run function retina:hitbox/candle
+execute if block ~ ~ ~ #retina:candle run return 1
 execute if block ~ ~ ~ #retina:cake run function retina:hitbox/cake
 execute if block ~ ~ ~ #retina:cake run return 1
 execute if block ~ ~ ~ #retina:campfire run function retina:hitbox/campfire

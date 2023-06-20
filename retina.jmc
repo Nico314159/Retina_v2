@@ -54,6 +54,9 @@ new tags.blocks(cake) {
 new tags.blocks(campfire) {
     "values": ["#minecraft:campfires"]
 }
+new tags.blocks(candle) {
+    "values": ["#retina:candles"]
+}
 new tags.blocks(carpet) {
     "values": [
         "#minecraft:wool_carpets",
@@ -624,7 +627,7 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
                 ["anvil", "attached_stem", "bed", "bell", "berries", "brewing_stand", "button", 
-                "cactus_shaped", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
+                "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "pickle", "piglin_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
@@ -1053,6 +1056,12 @@ class hitbox {
     }
     function campfire() {
         data modify storage retina:data Surfaces set value {Top: [[0, 448, 0, 1024, 448, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 448, 1024]], East: [[1024, 0, 0, 1024, 448, 1024]], North: [[0, 0, 0, 1024, 448, 0]], South: [[0, 0, 1024, 1024, 448, 1024]]};
+    }
+    function candle() {
+        if (block ~ ~ ~ #retina:candle[candles=1]) data modify storage retina:data Surfaces set value {Top: [[448, 384, 448, 576, 384, 576]], Bottom: [[448, 0, 448, 576, 0, 576]], West: [[448, 0, 448, 448, 384, 576]], East: [[576, 0, 448, 576, 384, 576]], North: [[448, 0, 448, 576, 384, 448]], South: [[448, 0, 576, 576, 384, 576]]}
+        if (block ~ ~ ~ #retina:candle[candles=2]) data modify storage retina:data Surfaces set value {Top: [[320, 384, 384, 704, 384, 576]], Bottom: [[320, 0, 384, 704, 0, 576]], West: [[320, 0, 384, 320, 384, 576]], East: [[704, 0, 384, 704, 384, 576]], North: [[320, 0, 384, 704, 384, 384]], South: [[320, 0, 576, 704, 384, 576]]}
+        if (block ~ ~ ~ #retina:candle[candles=3]) data modify storage retina:data Surfaces set value  {Top: [[320, 384, 384, 640, 384, 704]], Bottom: [[320, 0, 384, 640, 0, 704]], West: [[320, 0, 384, 320, 384, 704]], East: [[640, 0, 384, 640, 384, 704]], North: [[320, 0, 384, 640, 384, 384]], South: [[320, 0, 704, 640, 384, 704]]}
+        if (block ~ ~ ~ #retina:candle[candles=4]) data modify storage retina:data Surfaces set value {Top: [[320, 384, 320, 704, 384, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[320, 0, 320, 320, 384, 704]], East: [[704, 0, 320, 704, 384, 704]], North: [[320, 0, 320, 704, 384, 320]], South: [[320, 0, 704, 704, 384, 704]]}
     }
     function carpet() {
         data modify storage retina:data Surfaces set value {Top: [[0, 64, 0, 1024, 64, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 64, 1024]], East: [[1024, 0, 0, 1024, 64, 1024]], North: [[0, 0, 0, 1024, 64, 0]], South: [[0, 0, 1024, 1024, 64, 1024]]};
