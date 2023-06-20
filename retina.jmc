@@ -49,7 +49,10 @@ new tags.blocks(cactus_shaped) {
 	]
 }
 new tags.blocks(cake) {
-    "values": ["minecraft:cake"]
+    "values": [
+        "minecraft:cake",
+        "#minecraft:candle_cakes"
+    ]
 }
 new tags.blocks(campfire) {
     "values": ["#minecraft:campfires"]
@@ -1046,6 +1049,8 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[64, 1024, 64, 960, 1024, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 1024, 960]], East: [[960, 0, 64, 960, 1024, 960]], North: [[64, 0, 64, 960, 1024, 64]], South: [[64, 0, 960, 960, 1024, 960]]};
     }
     function cake() {
+        if (block ~ ~ ~ #minecraft:candle_cakes) data modify storage retina:data Surfaces set value {Top: [[64, 512, 64, 960, 512, 960], [448, 896, 448, 576, 896, 576]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 512, 960], [448, 512, 448, 448, 896, 576]], East: [[960, 0, 64, 960, 512, 960], [576, 512, 448, 576, 896, 576]], North: [[64, 0, 64, 960, 512, 64], [448, 512, 448, 576, 896, 448]], South: [[64, 0, 960, 960, 512, 960], [448, 512, 576, 576, 896, 576]]}
+
         if (block ~ ~ ~ minecraft:cake[bites=0]) data modify storage retina:data Surfaces set value {Top: [[64, 512, 64, 960, 512, 960]], Bottom: [[64, 0, 64, 960, 0, 960]], West: [[64, 0, 64, 64, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[64, 0, 64, 960, 512, 64]], South: [[64, 0, 960, 960, 512, 960]]}
         if (block ~ ~ ~ minecraft:cake[bites=1]) data modify storage retina:data Surfaces set value {Top: [[192, 512, 64, 960, 512, 960]], Bottom: [[192, 0, 64, 960, 0, 960]], West: [[192, 0, 64, 192, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[192, 0, 64, 960, 512, 64]], South: [[192, 0, 960, 960, 512, 960]]}
         if (block ~ ~ ~ minecraft:cake[bites=2]) data modify storage retina:data Surfaces set value {Top: [[320, 512, 64, 960, 512, 960]], Bottom: [[320, 0, 64, 960, 0, 960]], West: [[320, 0, 64, 320, 512, 960]], East: [[960, 0, 64, 960, 512, 960]], North: [[320, 0, 64, 960, 512, 64]], South: [[320, 0, 960, 960, 512, 960]]}
