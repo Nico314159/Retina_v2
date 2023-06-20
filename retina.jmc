@@ -319,6 +319,9 @@ new tags.blocks(slab) {
 new tags.blocks(small_dripleaf) {
     "values": ["minecraft:small_dripleaf"]
 }
+new tags.blocks(sniffer_egg) {
+    "values": ["minecraft:sniffer_egg"]
+}
 new tags.blocks(snow) {
     "values": ["minecraft:snow"]
 }
@@ -634,7 +637,7 @@ class check {
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "pickle", "piglin_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
+                "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
@@ -1351,6 +1354,9 @@ class hitbox {
     }
     function small_dripleaf() {
         data modify storage retina:data Surfaces set value {Top: [[128, 832, 128, 896, 832, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 832, 896]], East: [[896, 0, 128, 896, 832, 896]], North: [[128, 0, 128, 896, 832, 128]], South: [[128, 0, 896, 896, 832, 896]]};
+    }
+    function sniffer_egg() {
+        data modify storage retina:data Surfaces set value {Top:[[64, 1024, 128, 960, 1024, 896]], Bottom:[[64, 0, 128, 960, 0, 896]], West:[[64, 1024, 128, 64, 1024, 896]], East:[[960, 1024, 128, 960, 1024, 896]], North:[[64, 0, 128, 960, 1024, 128]], South:[[64, 0, 896, 960, 1024, 896]]};
     }
     function snow() {
         if (block ~ ~ ~ #retina:snow[layers=1]) data modify storage retina:data Surfaces set value {Top: [[0, 128, 0, 1024, 128, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 128, 1024]], East: [[1024, 0, 0, 1024, 128, 1024]], North: [[0, 0, 0, 1024, 128, 0]], South: [[0, 0, 1024, 1024, 128, 1024]]}

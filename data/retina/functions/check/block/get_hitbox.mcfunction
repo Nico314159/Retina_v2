@@ -96,6 +96,8 @@ execute if block ~ ~ ~ #retina:slab run function retina:hitbox/slab
 execute if block ~ ~ ~ #retina:slab run return 1
 execute if block ~ ~ ~ #retina:small_dripleaf run function retina:hitbox/small_dripleaf
 execute if block ~ ~ ~ #retina:small_dripleaf run return 1
+execute if block ~ ~ ~ #retina:sniffer_egg run function retina:hitbox/sniffer_egg
+execute if block ~ ~ ~ #retina:sniffer_egg run return 1
 execute if block ~ ~ ~ #retina:snow run function retina:hitbox/snow
 execute if block ~ ~ ~ #retina:snow run return 1
 execute if block ~ ~ ~ #retina:spore_blossom run function retina:hitbox/spore_blossom
