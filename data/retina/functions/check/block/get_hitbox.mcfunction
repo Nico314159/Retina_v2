@@ -136,6 +136,8 @@ execute if block ~ ~ ~ #retina:vertical_torch run function retina:hitbox/vertica
 execute if block ~ ~ ~ #retina:vertical_torch run return 1
 execute if block ~ ~ ~ #retina:vine_like run function retina:hitbox/vine_like
 execute if block ~ ~ ~ #retina:vine_like run return 1
+execute if block ~ ~ ~ #retina:wall_banner run function retina:hitbox/wall_banner
+execute if block ~ ~ ~ #retina:wall_banner run return 1
 execute if block ~ ~ ~ #retina:wall_hanging_sign run function retina:hitbox/wall_hanging_sign
 execute if block ~ ~ ~ #retina:wall_hanging_sign run return 1
 execute if block ~ ~ ~ #retina:wall_sign run function retina:hitbox/wall_sign
