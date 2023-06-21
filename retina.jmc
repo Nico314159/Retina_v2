@@ -422,6 +422,9 @@ new tags.blocks(vine_like) {
 new tags.blocks(wall) {
     "values": ["#minecraft:walls"]
 }
+new tags.blocks(wall_hanging_sign) {
+    "values": ["#minecraft:wall_hanging_signs"]
+}
 new tags.blocks(wall_sign) {
     "values": ["#minecraft:wall_signs"]
 }
@@ -648,7 +651,7 @@ class check {
                 "pane_shaped", "pickle", "piglin_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
-                "vertical_torch", "vine_like", "wall_sign", "wall_torch", "wall", "weeping_vines"]
+                "vertical_torch", "vine_like", "wall_hanging_sign", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
         }
@@ -1573,6 +1576,11 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [960, 0, 0, 1024, 1024, 0];
             data modify storage retina:data Surfaces.South append value [960, 0, 1024, 1024, 1024, 1024];
         }
+    }
+    function wall_hanging_sign() {
+        if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=east] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 384, 1024, 1024, 640], [64, 640, 448, 960, 640, 576]], Bottom:[[0, 896, 384, 1024, 896, 640], [64, 0, 448, 960, 0, 576]], West:[[0, 1024, 384, 0, 1024, 640], [64, 640, 448, 64, 640, 576]], East:[[1024, 1024, 384, 1024, 1024, 640], [960, 640, 448, 960, 640, 576]], North:[[0, 896, 384, 1024, 1024, 384], [64, 0, 448, 960, 640, 448]], South:[[0, 896, 640, 1024, 1024, 640], [64, 0, 576, 960, 640, 576]]}
+
+        if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=north] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=south]) data modify storage retina:data Surfaces set value {Top:[[384, 1024, 0, 640, 1024, 1024], [448, 640, 64, 576, 640, 960]], Bottom:[[384, 896, 0, 640, 896, 1024], [448, 0, 64, 576, 0, 960]], West:[[384, 1024, 0, 384, 1024, 1024], [448, 640, 64, 448, 640, 960]], East:[[640, 1024, 0, 640, 1024, 1024], [576, 640, 64, 576, 640, 960]], North:[[384, 896, 0, 640, 1024, 0], [448, 0, 64, 576, 640, 64]], South:[[384, 896, 1024, 640, 1024, 1024], [448, 0, 960, 576, 640, 960]]}
     }
     function wall_sign() {
         if (block ~ ~ ~ #minecraft:wall_signs[facing=east]) data modify storage retina:data Surfaces set value {Top: [[0, 800, 0, 128, 800, 1024]], Bottom: [[0, 224, 0, 128, 224, 1024]], West: [[0, 224, 0, 0, 800, 1024]], East: [[128, 224, 0, 128, 800, 1024]], North: [[0, 224, 0, 128, 800, 0]], South: [[0, 224, 1024, 128, 800, 1024]]}
