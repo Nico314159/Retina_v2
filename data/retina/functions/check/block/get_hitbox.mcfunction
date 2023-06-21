@@ -2,6 +2,8 @@ execute if block ~ ~ ~ #retina:anvil run function retina:hitbox/anvil
 execute if block ~ ~ ~ #retina:anvil run return 1
 execute if block ~ ~ ~ #retina:attached_stem run function retina:hitbox/attached_stem
 execute if block ~ ~ ~ #retina:attached_stem run return 1
+execute if block ~ ~ ~ #retina:azalea run function retina:hitbox/azalea
+execute if block ~ ~ ~ #retina:azalea run return 1
 execute if block ~ ~ ~ #retina:bed run function retina:hitbox/bed
 execute if block ~ ~ ~ #retina:bed run return 1
 execute if block ~ ~ ~ #retina:bell run function retina:hitbox/bell
