@@ -156,6 +156,9 @@ new tags.blocks(grass_shaped) {
 new tags.blocks(hanging_roots) {
     "values": ["minecraft:hanging_roots"]
 }
+new tags.blocks(hanging_sign) {
+    "values": ["#minecraft:ceiling_hanging_signs"]
+}
 new tags.blocks(head) {
     "values": [
         "minecraft:player_head",
@@ -641,7 +644,7 @@ class check {
                 ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
-                "head", "hanging_roots", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
+                "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pane_shaped", "pickle", "piglin_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
@@ -1186,6 +1189,18 @@ class hitbox {
     }
     function hanging_roots() {
         data modify storage retina:data Surfaces set value {Top: [[128, 1024, 128, 896, 1024, 896]], Bottom: [[128, 640, 128, 896, 640, 896]], West: [[128, 640, 128, 128, 1024, 896]], East: [[896, 640, 128, 896, 1024, 896]], North: [[128, 640, 128, 896, 1024, 128]], South: [[128, 640, 896, 896, 1024, 896]]};
+    }
+    function hanging_sign() {
+        // usual facing
+        if (!block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=0] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=4] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=8] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=12]) data modify storage retina:data Surfaces set value {Top:[[192, 1024, 192, 832, 1024, 832]], Bottom:[[192, 0, 192, 832, 0, 832]], West:[[192, 1024, 192, 192, 1024, 832]], East:[[832, 1024, 192, 832, 1024, 832]], North:[[192, 0, 192, 832, 1024, 192]], South:[[192, 0, 832, 832, 1024, 832]]}
+        if (!block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=0] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=4] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=8] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=12]) return 1;
+
+        // facing X axis (east-west)
+        if (!block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=4] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=12]) data modify storage retina:data Surfaces set value {Top:[[64, 640, 448, 960, 640, 576]], Bottom:[[64, 0, 448, 960, 0, 576]], West:[[64, 640, 448, 64, 640, 576]], East:[[960, 640, 448, 960, 640, 576]], North:[[64, 0, 448, 960, 640, 448]], South:[[64, 0, 576, 960, 640, 576]]}
+        if (!block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=4] && !block ~ ~ ~ #minecraft:ceiling_hanging_signs[rotation=12]) return 2;
+
+        // facing Z axis (north-south)
+        data modify storage retina:data Surfaces set value {Top:[[448, 640, 64, 576, 640, 960]], Bottom:[[448, 0, 64, 576, 0, 960]], West:[[448, 640, 64, 448, 640, 960]], East:[[576, 640, 64, 576, 640, 960]], North:[[448, 0, 64, 576, 640, 64]], South:[[448, 0, 960, 576, 640, 960]]};
     }
     function head() {
         data modify storage retina:data Surfaces set value {Top: [[256, 512, 256, 768, 512, 768]], Bottom: [[256, 0, 256, 768, 0, 768]], West: [[12, 0, 64, 64, 512, 768]], East: [[768, 0, 256, 768, 512, 768]], North: [[256, 0, 256, 768, 512, 256]], South: [[256, 0, 768, 768, 512, 768]]};
