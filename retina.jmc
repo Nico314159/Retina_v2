@@ -276,6 +276,15 @@ new tags.blocks(piglin_wall_head) {
 new tags.blocks(pink_petals) {
     "values": ["minecraft:pink_petals"]
 }
+new tags.blocks(piston) {
+    "values": [
+        "minecraft:piston",
+        "minecraft:sticky_piston"
+    ]
+}
+new tags.blocks(piston_head) {
+    "values": ["minecraft:piston_head"]
+}
 new tags.blocks(pitcher_crop) {
     "values": ["minecraft:pitcher_crop"]
 }
@@ -687,9 +696,9 @@ class check {
                 },
                 ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
-                "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
+                "daylight_detector", "door", "end_portal_frame", "extended_piston", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
-                "pane_shaped", "pickle", "piglin_head", "piglin_wall_head", "pink_petals", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
+                "pane_shaped", "pickle", "piglin_head", "piglin_wall_head", "pink_petals", "piston_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
                 "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
                 "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_banner", "wall_hanging_sign", "wall_head", "wall_sign", "wall_torch", "wall", "weeping_vines"]
@@ -1208,6 +1217,17 @@ class hitbox {
     function end_portal_frame() {
         data modify storage retina:data Surfaces set value {Top: [[0, 832, 0, 1024, 832, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 832, 1024]], East: [[1024, 0, 0, 1024, 832, 1024]], North: [[0, 0, 0, 1024, 832, 0]], South: [[0, 0, 1024, 1024, 832, 1024]]};
     }
+    function extended_piston() {
+        unless (block ~ ~ ~ #retina:piston[extended=true]) hitbox.cubic();
+        unless (block ~ ~ ~ #retina:piston[extended=true]) return 1;
+
+        if (block ~ ~ ~ #retina:piston[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 768, 1024, 1024]], Bottom:[[0, 0, 0, 768, 0, 1024]], West:[[0, 1024, 0, 0, 1024, 1024]], East:[[768, 1024, 0, 768, 1024, 1024]], North:[[0, 0, 0, 768, 1024, 0]], South:[[0, 0, 1024, 768, 1024, 1024]]}
+        if (block ~ ~ ~ #retina:piston[facing=west]) data modify storage retina:data Surfaces set value {Top:[[256, 1024, 0, 1024, 1024, 1024]], Bottom:[[256, 0, 0, 1024, 0, 1024]], West:[[256, 1024, 0, 256, 1024, 1024]], East:[[1024, 1024, 0, 1024, 1024, 1024]], North:[[256, 0, 0, 1024, 1024, 0]], South:[[256, 0, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #retina:piston[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 1024, 1024, 768]], Bottom:[[0, 0, 0, 1024, 0, 768]], West:[[0, 1024, 0, 0, 1024, 768]], East:[[1024, 1024, 0, 1024, 1024, 768]], North:[[0, 0, 0, 1024, 1024, 0]], South:[[0, 0, 768, 1024, 1024, 768]]}
+        if (block ~ ~ ~ #retina:piston[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 256, 1024, 1024, 1024]], Bottom:[[0, 0, 256, 1024, 0, 1024]], West:[[0, 1024, 256, 0, 1024, 1024]], East:[[1024, 1024, 256, 1024, 1024, 1024]], North:[[0, 0, 256, 1024, 1024, 256]], South:[[0, 0, 1024, 1024, 1024, 1024]]}
+        if (block ~ ~ ~ #retina:piston[facing=up]) data modify storage retina:data Surfaces set value {Top:[[0, 768, 0, 1024, 768, 1024]], Bottom:[[0, 0, 0, 1024, 0, 1024]], West:[[0, 768, 0, 0, 768, 1024]], East:[[1024, 768, 0, 1024, 768, 1024]], North:[[0, 0, 0, 1024, 768, 0]], South:[[0, 0, 1024, 1024, 768, 1024]]}
+        if (block ~ ~ ~ #retina:piston[facing=down]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 1024, 1024, 1024]], Bottom:[[0, 256, 0, 1024, 256, 1024]], West:[[0, 1024, 0, 0, 1024, 1024]], East:[[1024, 1024, 0, 1024, 1024, 1024]], North:[[0, 256, 0, 1024, 1024, 0]], South:[[0, 256, 1024, 1024, 1024, 1024]]}
+    }
     function farmland_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[0, 960, 0, 1024, 960, 1024]], Bottom: [[0, 0, 0, 1024, 0, 1024]], West: [[0, 0, 0, 0, 960, 1024]], East: [[1024, 0, 0, 1024, 960, 1024]], North: [[0, 0, 0, 1024, 960, 0]], South: [[0, 0, 1024, 1024, 960, 1024]]};
     }
@@ -1406,6 +1426,14 @@ class hitbox {
         if (block ~ ~ ~ minecraft:wall_piglin_head[facing=south]) data modify storage retina:data Surfaces set value {Top:[[192, 768, 0, 832, 768, 512]], Bottom:[[192, 256, 0, 832, 256, 512]], West:[[192, 768, 0, 192, 768, 512]], East:[[832, 768, 0, 832, 768, 512]], North:[[192, 256, 0, 832, 768, 0]], South:[[192, 256, 512, 832, 768, 512]]}
         if (block ~ ~ ~ minecraft:wall_piglin_head[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 768, 192, 512, 768, 832]], Bottom:[[0, 256, 192, 512, 256, 832]], West:[[0, 768, 192, 0, 768, 832]], East:[[512, 768, 192, 512, 768, 832]], North:[[0, 256, 192, 512, 768, 192]], South:[[0, 256, 832, 512, 768, 832]]}
         if (block ~ ~ ~ minecraft:wall_piglin_head[facing=west]) data modify storage retina:data Surfaces set value {Top:[[512, 768, 192, 1024, 768, 832]], Bottom:[[512, 256, 192, 1024, 256, 832]], West:[[512, 768, 192, 512, 768, 832]], East:[[1024, 768, 192, 1024, 768, 832]], North:[[512, 256, 192, 1024, 768, 192]], South:[[512, 256, 832, 1024, 768, 832]]}
+    }
+    function piston_head() {
+        if (block ~ ~ ~ minecraft:piston_head[facing=down]) data modify storage retina:data Surfaces set value {Top:[[0, 256, 0, 1024, 256, 1024], [384, 1024, 384, 640, 1024, 640]], Bottom:[[0, 0, 0, 1024, 0, 1024], [384, 256, 384, 640, 256, 640]], West:[[0, 256, 0, 0, 256, 1024], [384, 1024, 384, 384, 1024, 640]], East:[[1024, 256, 0, 1024, 256, 1024], [640, 1024, 384, 640, 1024, 640]], North:[[0, 0, 0, 1024, 256, 0], [384, 256, 384, 640, 1024, 384]], South:[[0, 0, 1024, 1024, 256, 1024], [384, 256, 640, 640, 1024, 640]]}
+        if (block ~ ~ ~ minecraft:piston_head[facing=up]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 1024, 1024, 1024], [384, 768, 384, 640, 768, 640]], Bottom:[[0, 768, 0, 1024, 768, 1024], [384, 0, 384, 640, 0, 640]], West:[[0, 1024, 0, 0, 1024, 1024], [384, 768, 384, 384, 768, 640]], East:[[1024, 1024, 0, 1024, 1024, 1024], [640, 768, 384, 640, 768, 640]], North:[[0, 768, 0, 1024, 1024, 0], [384, 0, 384, 640, 768, 384]], South:[[0, 768, 1024, 1024, 1024, 1024], [384, 0, 640, 640, 768, 640]]}
+        if (block ~ ~ ~ minecraft:piston_head[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 1024, 1024, 256], [384, 640, 256, 640, 640, 1024]], Bottom:[[0, 0, 0, 1024, 0, 256], [384, 384, 256, 640, 384, 1024]], West:[[0, 1024, 0, 0, 1024, 256], [384, 640, 256, 384, 640, 1024]], East:[[1024, 1024, 0, 1024, 1024, 256], [640, 640, 256, 640, 640, 1024]], North:[[0, 0, 0, 1024, 1024, 0], [384, 384, 256, 640, 640, 256]], South:[[0, 0, 256, 1024, 1024, 256], [384, 384, 1024, 640, 640, 1024]]}
+        if (block ~ ~ ~ minecraft:piston_head[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 768, 1024, 1024, 1024], [384, 640, 0, 640, 640, 768]], Bottom:[[0, 0, 768, 1024, 0, 1024], [384, 384, 0, 640, 384, 768]], West:[[0, 1024, 768, 0, 1024, 1024], [384, 640, 0, 384, 640, 768]], East:[[1024, 1024, 768, 1024, 1024, 1024], [640, 640, 0, 640, 640, 768]], North:[[0, 0, 768, 1024, 1024, 768], [384, 384, 0, 640, 640, 0]], South:[[0, 0, 1024, 1024, 1024, 1024], [384, 384, 768, 640, 640, 768]]}
+        if (block ~ ~ ~ minecraft:piston_head[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 1024, 0, 256, 1024, 1024], [256, 640, 384, 1024, 640, 640]], Bottom:[[0, 0, 0, 256, 0, 1024], [256, 384, 384, 1024, 384, 640]], West:[[0, 1024, 0, 0, 1024, 1024], [256, 640, 384, 256, 640, 640]], East:[[256, 1024, 0, 256, 1024, 1024], [1024, 640, 384, 1024, 640, 640]], North:[[0, 0, 0, 256, 1024, 0], [256, 384, 384, 1024, 640, 384]], South:[[0, 0, 1024, 256, 1024, 1024], [256, 384, 640, 1024, 640, 640]]}
+        if (block ~ ~ ~ minecraft:piston_head[facing=east]) data modify storage retina:data Surfaces set value {Top:[[768, 1024, 0, 1024, 1024, 1024], [0, 640, 384, 768, 640, 640]], Bottom:[[768, 0, 0, 1024, 0, 1024], [0, 384, 384, 768, 384, 640]], West:[[768, 1024, 0, 768, 1024, 1024], [0, 640, 384, 0, 640, 640]], East:[[1024, 1024, 0, 1024, 1024, 1024], [768, 640, 384, 768, 640, 640]], North:[[768, 0, 0, 1024, 1024, 0], [0, 384, 384, 768, 640, 384]], South:[[768, 0, 1024, 1024, 1024, 1024], [0, 384, 640, 768, 640, 640]]}
     }
     function pitcher_crop() {
         if (block ~ ~ ~ minecraft:pitcher_crop[age=0]) data modify storage retina:data Surfaces set value {Top: [[320, 192, 320, 704, 192, 704]], Bottom: [[320, 0, 320, 704, 0, 704]], West: [[12, 0, 64, 64, 192, 704]], East: [[704, 0, 320, 704, 192, 704]], North: [[320, 0, 320, 704, 192, 320]], South: [[320, 0, 704, 704, 192, 704]]}
@@ -1659,7 +1687,6 @@ class hitbox {
         if (block ~ ~ ~ minecraft:wall_banner[facing=south]) data modify storage retina:data Surfaces set value {Top: [[0, 800, 0, 1024, 800, 128]], Bottom: [[0, 0, 0, 1024, 0, 128]], West: [[0, 800, 0, 0, 800, 128]], East: [[1024, 800, 0, 1024, 800, 128]], North: [[0, 0, 0, 1024, 800, 0]], South: [[0, 0, 128, 1024, 800, 128]]}
         if (block ~ ~ ~ minecraft:wall_banner[facing=east]) data modify storage retina:data Surfaces set value {Top: [[896, 800, 0, 1024, 800, 1024]], Bottom: [[896, 0, 0, 1024, 0, 1024]], West: [[896, 800, 0, 896, 800, 1024]], East: [[1024, 800, 0, 1024, 800, 1024]], North: [[896, 0, 0, 1024, 800, 0]], South: [[896, 0, 1024, 1024, 800, 1024]]}
         if (block ~ ~ ~ minecraft:wall_banner[facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 800, 0, 128, 800, 1024]], Bottom: [[0, 0, 0, 128, 0, 1024]], West: [[0, 800, 0, 0, 800, 1024]], East: [[128, 800, 0, 128, 800, 1024]], North: [[0, 0, 0, 128, 800, 0]], South: [[0, 0, 1024, 128, 800, 1024]]}
-
     }
     function wall_hanging_sign() {
         if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=east] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 1024, 384, 1024, 1024, 640], [64, 640, 448, 960, 640, 576]], Bottom: [[0, 896, 384, 1024, 896, 640], [64, 0, 448, 960, 0, 576]], West: [[0, 1024, 384, 0, 1024, 640], [64, 640, 448, 64, 640, 576]], East: [[1024, 1024, 384, 1024, 1024, 640], [960, 640, 448, 960, 640, 576]], North: [[0, 896, 384, 1024, 1024, 384], [64, 0, 448, 960, 640, 448]], South: [[0, 896, 640, 1024, 1024, 640], [64, 0, 576, 960, 640, 576]]}

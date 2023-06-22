@@ -48,6 +48,8 @@ execute if block ~ ~ ~ #retina:door run function retina:hitbox/door
 execute if block ~ ~ ~ #retina:door run return 1
 execute if block ~ ~ ~ #retina:end_portal_frame run function retina:hitbox/end_portal_frame
 execute if block ~ ~ ~ #retina:end_portal_frame run return 1
+execute if block ~ ~ ~ #retina:extended_piston run function retina:hitbox/extended_piston
+execute if block ~ ~ ~ #retina:extended_piston run return 1
 execute if block ~ ~ ~ #retina:farmland_shaped run function retina:hitbox/farmland_shaped
 execute if block ~ ~ ~ #retina:farmland_shaped run return 1
 execute if block ~ ~ ~ #retina:fence_gate run function retina:hitbox/fence_gate
@@ -86,6 +88,8 @@ execute if block ~ ~ ~ #retina:piglin_wall_head run function retina:hitbox/pigli
 execute if block ~ ~ ~ #retina:piglin_wall_head run return 1
 execute if block ~ ~ ~ #retina:pink_petals run function retina:hitbox/pink_petals
 execute if block ~ ~ ~ #retina:pink_petals run return 1
+execute if block ~ ~ ~ #retina:piston_head run function retina:hitbox/piston_head
+execute if block ~ ~ ~ #retina:piston_head run return 1
 execute if block ~ ~ ~ #retina:pitcher_crop run function retina:hitbox/pitcher_crop
 execute if block ~ ~ ~ #retina:pitcher_crop run return 1
 execute if block ~ ~ ~ #retina:pressure_plate run function retina:hitbox/pressure_plate
