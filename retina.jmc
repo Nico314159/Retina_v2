@@ -38,6 +38,9 @@ new tags.blocks(bell) {
 new tags.blocks(berries) {
     "values": ["minecraft:sweet_berry_bush"]
 }
+new tags.blocks(big_dripleaf) {
+	"values": ["minecraft:big_dripleaf"]
+}
 new tags.blocks(big_dripleaf_stem) {
 	"values": ["minecraft:big_dripleaf_stem"]
 }
@@ -682,7 +685,7 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
-                ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf_stem", "brewing_stand", "button", 
+                ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
@@ -1060,6 +1063,30 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:sweet_berries[age=1]) hitbox.cactus_shaped();
         if (block ~ ~ ~ #minecraft:sweet_berries[age=2]) hitbox.cactus_shaped();
         if (block ~ ~ ~ #minecraft:sweet_berries[age=3]) hitbox.cubic();
+    }
+    function big_dripleaf() {
+        if (block ~ ~ ~ minecraft:big_dripleaf[facing=north]) data modify storage retina:data Surfaces set value {Top:[[320, 832, 576, 704, 832, 960]], Bottom:[[320, 0, 576, 704, 0, 960]], West:[[320, 832, 576, 320, 832, 960]], East:[[704, 832, 576, 704, 832, 960]], North:[[320, 0, 576, 704, 832, 576]], South:[[320, 0, 960, 704, 832, 960]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf[facing=south]) data modify storage retina:data Surfaces set value {Top:[[320, 832, 64, 704, 832, 448]], Bottom:[[320, 0, 64, 704, 0, 448]], West:[[320, 832, 64, 320, 832, 448]], East:[[704, 832, 64, 704, 832, 448]], North:[[320, 0, 64, 704, 832, 64]], South:[[320, 0, 448, 704, 832, 448]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf[facing=east]) data modify storage retina:data Surfaces set value {Top:[[64, 832, 320, 448, 832, 704]], Bottom:[[64, 0, 320, 448, 0, 704]], West:[[64, 832, 320, 64, 832, 704]], East:[[448, 832, 320, 448, 832, 704]], North:[[64, 0, 320, 448, 832, 320]], South:[[64, 0, 704, 448, 832, 704]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf[facing=west]) data modify storage retina:data Surfaces set value {Top:[[576, 832, 320, 960, 832, 704]], Bottom:[[576, 0, 320, 960, 0, 704]], West:[[576, 832, 320, 576, 832, 704]], East:[[960, 832, 320, 960, 832, 704]], North:[[576, 0, 320, 960, 832, 320]], South:[[576, 0, 704, 960, 832, 704]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf[tilt=full]) return 1;
+        
+        if (block ~ ~ ~ minecraft:big_dripleaf[tilt=partial]) {
+            data modify storage retina:data Surfaces.Top append value [[0, 832, 0, 1024, 832, 1024]];
+            data modify storage retina:data Surfaces.Bottom append value [[0, 704, 0, 1024, 704, 1024]];
+            data modify storage retina:data Surfaces.West append value [[0, 832, 0, 0, 832, 1024]];
+            data modify storage retina:data Surfaces.East append value [[1024, 832, 0, 1024, 832, 1024]];
+            data modify storage retina:data Surfaces.North append value [[0, 704, 0, 1024, 832, 0]];
+            data modify storage retina:data Surfaces.South append value [[0, 704, 1024, 1024, 832, 1024]];
+        }
+        if (block ~ ~ ~ minecraft:big_dripleaf[tilt=partial]) return 2;
+
+        data modify storage retina:data Surfaces.Top append value [[0, 960, 0, 1024, 960, 1024]];
+        data modify storage retina:data Surfaces.Bottom append value [[0, 704, 0, 1024, 704, 1024]]; 
+        data modify storage retina:data Surfaces.West append value [[0, 960, 0, 0, 960, 1024]];
+        data modify storage retina:data Surfaces.East append value [[1024, 960, 0, 1024, 960, 1024]];
+        data modify storage retina:data Surfaces.North append value [[0, 704, 0, 1024, 960, 0]];
+        data modify storage retina:data Surfaces.South append value [[0, 704, 1024, 1024, 960, 1024]];
     }
     function big_dripleaf_stem() {
         if (block ~ ~ ~ minecraft:big_dripleaf_stem[facing=north]) data modify storage retina:data Surfaces set value {Top:[[320, 1024, 576, 704, 1024, 960]], Bottom:[[320, 0, 576, 704, 0, 960]], West:[[320, 1024, 576, 320, 1024, 960]], East:[[704, 1024, 576, 704, 1024, 960]], North:[[320, 0, 576, 704, 1024, 576]], South:[[320, 0, 960, 704, 1024, 960]]}

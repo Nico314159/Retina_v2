@@ -10,6 +10,8 @@ execute if block ~ ~ ~ #retina:bell run function retina:hitbox/bell
 execute if block ~ ~ ~ #retina:bell run return 1
 execute if block ~ ~ ~ #retina:berries run function retina:hitbox/berries
 execute if block ~ ~ ~ #retina:berries run return 1
+execute if block ~ ~ ~ #retina:big_dripleaf run function retina:hitbox/big_dripleaf
+execute if block ~ ~ ~ #retina:big_dripleaf run return 1
 execute if block ~ ~ ~ #retina:big_dripleaf_stem run function retina:hitbox/big_dripleaf_stem
 execute if block ~ ~ ~ #retina:big_dripleaf_stem run return 1
 execute if block ~ ~ ~ #retina:brewing_stand run function retina:hitbox/brewing_stand
