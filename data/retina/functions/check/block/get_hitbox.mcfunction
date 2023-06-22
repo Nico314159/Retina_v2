@@ -78,6 +78,8 @@ execute if block ~ ~ ~ #retina:pickle run function retina:hitbox/pickle
 execute if block ~ ~ ~ #retina:pickle run return 1
 execute if block ~ ~ ~ #retina:piglin_head run function retina:hitbox/piglin_head
 execute if block ~ ~ ~ #retina:piglin_head run return 1
+execute if block ~ ~ ~ #retina:piglin_wall_head run function retina:hitbox/piglin_wall_head
+execute if block ~ ~ ~ #retina:piglin_wall_head run return 1
 execute if block ~ ~ ~ #retina:pink_petals run function retina:hitbox/pink_petals
 execute if block ~ ~ ~ #retina:pink_petals run return 1
 execute if block ~ ~ ~ #retina:pitcher_crop run function retina:hitbox/pitcher_crop
