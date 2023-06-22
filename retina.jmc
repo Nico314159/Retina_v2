@@ -38,6 +38,9 @@ new tags.blocks(bell) {
 new tags.blocks(berries) {
     "values": ["minecraft:sweet_berry_bush"]
 }
+new tags.blocks(big_dripleaf_stem) {
+	"values": ["minecraft:big_dripleaf_stem"]
+}
 new tags.blocks(brewing_stand) {
 	"values": ["minecraft:brewing_stand"]
 }
@@ -679,7 +682,7 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
-                ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "brewing_stand", "button", 
+                ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
@@ -1057,6 +1060,12 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:sweet_berries[age=1]) hitbox.cactus_shaped();
         if (block ~ ~ ~ #minecraft:sweet_berries[age=2]) hitbox.cactus_shaped();
         if (block ~ ~ ~ #minecraft:sweet_berries[age=3]) hitbox.cubic();
+    }
+    function big_dripleaf_stem() {
+        if (block ~ ~ ~ minecraft:big_dripleaf_stem[facing=north]) data modify storage retina:data Surfaces set value {Top:[[320, 1024, 576, 704, 1024, 960]], Bottom:[[320, 0, 576, 704, 0, 960]], West:[[320, 1024, 576, 320, 1024, 960]], East:[[704, 1024, 576, 704, 1024, 960]], North:[[320, 0, 576, 704, 1024, 576]], South:[[320, 0, 960, 704, 1024, 960]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf_stem[facing=south]) data modify storage retina:data Surfaces set value {Top:[[320, 1024, 64, 704, 1024, 448]], Bottom:[[320, 0, 64, 704, 0, 448]], West:[[320, 1024, 64, 320, 1024, 448]], East:[[704, 1024, 64, 704, 1024, 448]], North:[[320, 0, 64, 704, 1024, 64]], South:[[320, 0, 448, 704, 1024, 448]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf_stem[facing=east]) data modify storage retina:data Surfaces set value {Top:[[64, 1024, 320, 448, 1024, 704]], Bottom:[[64, 0, 320, 448, 0, 704]], West:[[64, 1024, 320, 64, 1024, 704]], East:[[448, 1024, 320, 448, 1024, 704]], North:[[64, 0, 320, 448, 1024, 320]], South:[[64, 0, 704, 448, 1024, 704]]}
+        if (block ~ ~ ~ minecraft:big_dripleaf_stem[facing=west]) data modify storage retina:data Surfaces set value {Top:[[576, 1024, 320, 960, 1024, 704]], Bottom:[[576, 0, 320, 960, 0, 704]], West:[[576, 1024, 320, 576, 1024, 704]], East:[[960, 1024, 320, 960, 1024, 704]], North:[[576, 0, 320, 960, 1024, 320]], South:[[576, 0, 704, 960, 1024, 704]]}
     }
     function brewing_stand() {
         data modify storage retina:data Surfaces set value {Top: [[64, 128, 64, 960, 128, 960], [448, 896, 448, 576, 896, 576]], Bottom: [[64, 0, 64, 960, 0, 960], [448, 128, 448, 576, 128, 576]], West: [[64, 0, 64, 64, 128, 960], [448, 128, 448, 448, 896, 576]], East: [[960, 0, 64, 960, 128, 960], [576, 128, 448, 576, 896, 576]], North: [[64, 0, 64, 960, 128, 64], [448, 128, 448, 576, 896, 448]], South: [[64, 0, 960, 960, 128, 960], [448, 128, 576, 576, 896, 576]]};
