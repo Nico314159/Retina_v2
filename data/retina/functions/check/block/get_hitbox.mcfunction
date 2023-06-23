@@ -1,3 +1,5 @@
+execute if block ~ ~ ~ #retina:amethyst run function retina:hitbox/amethyst
+execute if block ~ ~ ~ #retina:amethyst run return 1
 execute if block ~ ~ ~ #retina:anvil run function retina:hitbox/anvil
 execute if block ~ ~ ~ #retina:anvil run return 1
 execute if block ~ ~ ~ #retina:attached_stem run function retina:hitbox/attached_stem

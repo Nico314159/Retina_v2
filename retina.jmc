@@ -14,6 +14,14 @@ new tags.blocks(airs) {
 	]
 }
 
+new tags.blocks(amethyst) {
+    "values": [
+        "minecraft:small_amethyst_bud",
+        "minecraft:medium_amethyst_bud",
+        "minecraft:large_amethyst_bud",
+        "minecraft:amethyst_cluster"
+    ]
+}
 new tags.blocks(anvil) {
     "values": ["#minecraft:anvil"]
 }
@@ -694,7 +702,7 @@ class check {
                     if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
                     if (block ~ ~ ~ #retina:[shape]) return 1;
                 },
-                ["anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
+                ["amethyst", "anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "extended_piston", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", 
                 "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
@@ -1011,6 +1019,38 @@ class find_closest_surface {
 }
 
 class hitbox {  
+    function amethyst() {
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=up]) data modify storage retina:data Surfaces set value {Top:[[256, 192, 256, 768, 192, 768]], Bottom:[[256, 0, 256, 768, 0, 768]], West:[[256, 192, 256, 256, 192, 768]], East:[[768, 192, 256, 768, 192, 768]], North:[[256, 0, 256, 768, 192, 256]], South:[[256, 0, 768, 768, 192, 768]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=down]) data modify storage retina:data Surfaces set value {Top:[[256, 1024, 256, 768, 1024, 768]], Bottom:[[256, 832, 256, 768, 832, 768]], West:[[256, 1024, 256, 256, 1024, 768]], East:[[768, 1024, 256, 768, 1024, 768]], North:[[256, 832, 256, 768, 1024, 256]], South:[[256, 832, 768, 768, 1024, 768]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=north]) data modify storage retina:data Surfaces set value {Top:[[256, 768, 832, 768, 768, 1024]], Bottom:[[256, 256, 832, 768, 256, 1024]], West:[[256, 768, 832, 256, 768, 1024]], East:[[768, 768, 832, 768, 768, 1024]], North:[[256, 256, 832, 768, 768, 832]], South:[[256, 256, 1024, 768, 768, 1024]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=south]) data modify storage retina:data Surfaces set value {Top:[[256, 768, 0, 768, 768, 192]], Bottom:[[256, 256, 0, 768, 256, 192]], West:[[256, 768, 0, 256, 768, 192]], East:[[768, 768, 0, 768, 768, 192]], North:[[256, 256, 0, 768, 768, 0]], South:[[256, 256, 192, 768, 768, 192]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 768, 256, 192, 768, 768]], Bottom:[[0, 256, 256, 192, 256, 768]], West:[[0, 768, 256, 0, 768, 768]], East:[[192, 768, 256, 192, 768, 768]], North:[[0, 256, 256, 192, 768, 256]], South:[[0, 256, 768, 192, 768, 768]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud[facing=west]) data modify storage retina:data Surfaces set value {Top:[[832, 768, 256, 1024, 768, 768]], Bottom:[[832, 256, 256, 1024, 256, 768]], West:[[832, 768, 256, 832, 768, 768]], East:[[1024, 768, 256, 1024, 768, 768]], North:[[832, 256, 256, 1024, 768, 256]], South:[[832, 256, 768, 1024, 768, 768]]}
+        if (block ~ ~ ~ minecraft:small_amethyst_bud) return 1;
+    
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=up]) data modify storage retina:data Surfaces set value {Top:[[192, 256, 192, 832, 256, 832]], Bottom:[[192, 0, 192, 832, 0, 832]], West:[[192, 256, 192, 192, 256, 832]], East:[[832, 256, 192, 832, 256, 832]], North:[[192, 0, 192, 832, 256, 192]], South:[[192, 0, 832, 832, 256, 832]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=down]) data modify storage retina:data Surfaces set value {Top:[[192, 1024, 192, 832, 1024, 832]], Bottom:[[192, 768, 192, 832, 768, 832]], West:[[192, 1024, 192, 192, 1024, 832]], East:[[832, 1024, 192, 832, 1024, 832]], North:[[192, 768, 192, 832, 1024, 192]], South:[[192, 768, 832, 832, 1024, 832]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=north]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 768, 832, 832, 1024]], Bottom:[[192, 192, 768, 832, 192, 1024]], West:[[192, 832, 768, 192, 832, 1024]], East:[[832, 832, 768, 832, 832, 1024]], North:[[192, 192, 768, 832, 832, 768]], South:[[192, 192, 1024, 832, 832, 1024]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=south]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 0, 832, 832, 256]], Bottom:[[192, 192, 0, 832, 192, 256]], West:[[192, 832, 0, 192, 832, 256]], East:[[832, 832, 0, 832, 832, 256]], North:[[192, 192, 0, 832, 832, 0]], South:[[192, 192, 256, 832, 832, 256]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 832, 192, 256, 832, 832]], Bottom:[[0, 192, 192, 256, 192, 832]], West:[[0, 832, 192, 0, 832, 832]], East:[[256, 832, 192, 256, 832, 832]], North:[[0, 192, 192, 256, 832, 192]], South:[[0, 192, 832, 256, 832, 832]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud[facing=west]) data modify storage retina:data Surfaces set value {Top:[[768, 832, 192, 1024, 832, 832]], Bottom:[[768, 192, 192, 1024, 192, 832]], West:[[768, 832, 192, 768, 832, 832]], East:[[1024, 832, 192, 1024, 832, 832]], North:[[768, 192, 192, 1024, 832, 192]], South:[[768, 192, 832, 1024, 832, 832]]}
+        if (block ~ ~ ~ minecraft:medium_amethyst_bud) return 1;
+    
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=up]) data modify storage retina:data Surfaces set value {Top:[[192, 320, 192, 832, 320, 832]], Bottom:[[192, 0, 192, 832, 0, 832]], West:[[192, 320, 192, 192, 320, 832]], East:[[832, 320, 192, 832, 320, 832]], North:[[192, 0, 192, 832, 320, 192]], South:[[192, 0, 832, 832, 320, 832]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=down]) data modify storage retina:data Surfaces set value {Top:[[192, 1024, 192, 832, 1024, 832]], Bottom:[[192, 704, 192, 832, 704, 832]], West:[[192, 1024, 192, 192, 1024, 832]], East:[[832, 1024, 192, 832, 1024, 832]], North:[[192, 704, 192, 832, 1024, 192]], South:[[192, 704, 832, 832, 1024, 832]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=north]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 704, 832, 832, 1024]], Bottom:[[192, 192, 704, 832, 192, 1024]], West:[[192, 832, 704, 192, 832, 1024]], East:[[832, 832, 704, 832, 832, 1024]], North:[[192, 192, 704, 832, 832, 704]], South:[[192, 192, 1024, 832, 832, 1024]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=south]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 0, 832, 832, 320]], Bottom:[[192, 192, 0, 832, 192, 320]], West:[[192, 832, 0, 192, 832, 320]], East:[[832, 832, 0, 832, 832, 320]], North:[[192, 192, 0, 832, 832, 0]], South:[[192, 192, 320, 832, 832, 320]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 832, 192, 320, 832, 832]], Bottom:[[0, 192, 192, 320, 192, 832]], West:[[0, 832, 192, 0, 832, 832]], East:[[320, 832, 192, 320, 832, 832]], North:[[0, 192, 192, 320, 832, 192]], South:[[0, 192, 832, 320, 832, 832]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud[facing=west]) data modify storage retina:data Surfaces set value {Top:[[704, 832, 192, 1024, 832, 832]], Bottom:[[704, 192, 192, 1024, 192, 832]], West:[[704, 832, 192, 704, 832, 832]], East:[[1024, 832, 192, 1024, 832, 832]], North:[[704, 192, 192, 1024, 832, 192]], South:[[704, 192, 832, 1024, 832, 832]]}
+        if (block ~ ~ ~ minecraft:large_amethyst_bud) return 1;
+
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=up]) data modify storage retina:data Surfaces set value {Top:[[192, 448, 192, 832, 448, 832]], Bottom:[[192, 0, 192, 832, 0, 832]], West:[[192, 448, 192, 192, 448, 832]], East:[[832, 448, 192, 832, 448, 832]], North:[[192, 0, 192, 832, 448, 192]], South:[[192, 0, 832, 832, 448, 832]]}
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=down]) data modify storage retina:data Surfaces set value {Top:[[192, 1024, 192, 832, 1024, 832]], Bottom:[[192, 576, 192, 832, 576, 832]], West:[[192, 1024, 192, 192, 1024, 832]], East:[[832, 1024, 192, 832, 1024, 832]], North:[[192, 576, 192, 832, 1024, 192]], South:[[192, 576, 832, 832, 1024, 832]]}
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=north]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 576, 832, 832, 1024]], Bottom:[[192, 192, 576, 832, 192, 1024]], West:[[192, 832, 576, 192, 832, 1024]], East:[[832, 832, 576, 832, 832, 1024]], North:[[192, 192, 576, 832, 832, 576]], South:[[192, 192, 1024, 832, 832, 1024]]}
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=south]) data modify storage retina:data Surfaces set value {Top:[[192, 832, 0, 832, 832, 448]], Bottom:[[192, 192, 0, 832, 192, 448]], West:[[192, 832, 0, 192, 832, 448]], East:[[832, 832, 0, 832, 832, 448]], North:[[192, 192, 0, 832, 832, 0]], South:[[192, 192, 448, 832, 832, 448]]}
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 832, 192, 448, 832, 832]], Bottom:[[0, 192, 192, 448, 192, 832]], West:[[0, 832, 192, 0, 832, 832]], East:[[448, 832, 192, 448, 832, 832]], North:[[0, 192, 192, 448, 832, 192]], South:[[0, 192, 832, 448, 832, 832]]}
+        if (block ~ ~ ~ minecraft:amethyst_cluster[facing=west]) data modify storage retina:data Surfaces set value {Top:[[576, 832, 192, 1024, 832, 832]], Bottom:[[576, 192, 192, 1024, 192, 832]], West:[[576, 832, 192, 576, 832, 832]], East:[[1024, 832, 192, 1024, 832, 832]], North:[[576, 192, 192, 1024, 832, 192]], South:[[576, 192, 832, 1024, 832, 832]]}
+    }
     function anvil() {
         data modify storage retina:data Surfaces set value {Top: [[128, 256, 128, 896, 256, 896]], Bottom: [[128, 0, 128, 896, 0, 896]], West: [[128, 0, 128, 128, 256, 896]], East: [[896, 0, 128, 896, 256, 896]], North: [[128, 0, 128, 896, 256, 128]], South: [[128, 0, 896, 896, 256, 896]]};
 
