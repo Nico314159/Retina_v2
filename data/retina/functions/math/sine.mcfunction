@@ -5,7 +5,7 @@ scoreboard players remove $output __variable__ 900
 scoreboard players operation $output __variable__ *= $output __variable__
 scoreboard players operation $trig_0 __variable__ = $output __variable__
 scoreboard players add $trig_0 __variable__ 3240000
-scoreboard players operation $trig_0 __variable__ /= 1024 __int__
+scoreboard players operation $trig_0 __variable__ /= 192 __int__
 scoreboard players operation $output __variable__ *= -4 __int__
 scoreboard players add $output __variable__ 3240000
 scoreboard players operation $output __variable__ /= $trig_0 __variable__
