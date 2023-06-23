@@ -78,7 +78,7 @@ new tags.blocks(campfire) {
     "values": ["#minecraft:campfires"]
 }
 new tags.blocks(candle) {
-    "values": ["#retina:candles"]
+    "values": ["#minecraft:candles"]
 }
 new tags.blocks(carpet) {
     "values": [

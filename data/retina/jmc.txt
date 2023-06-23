@@ -1,6 +1,6 @@
 LOAD=__load__
 TICK=__tick__
 PRIVATE=__private__
-VAR=__variable__
-INT=__int__
-STORAGE=__storage__
+VAR=retina.__variable__
+INT=retina.__int__
+STORAGE=retina.__storage__
