@@ -62,6 +62,8 @@ execute if block ~ ~ ~ #retina:fire run function retina:hitbox/fire
 execute if block ~ ~ ~ #retina:fire run return 1
 execute if block ~ ~ ~ #retina:grass_shaped run function retina:hitbox/grass_shaped
 execute if block ~ ~ ~ #retina:grass_shaped run return 1
+execute if block ~ ~ ~ #retina:grindstone run function retina:hitbox/grindstone
+execute if block ~ ~ ~ #retina:grindstone run return 1
 execute if block ~ ~ ~ #retina:head run function retina:hitbox/head
 execute if block ~ ~ ~ #retina:head run return 1
 execute if block ~ ~ ~ #retina:hanging_roots run function retina:hitbox/hanging_roots
