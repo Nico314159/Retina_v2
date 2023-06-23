@@ -1,6 +1,6 @@
 data modify storage retina:data Surfaces.Top append value [384,640,768,640,640,1024]
 data modify storage retina:data Surfaces.Bottom append value [384,256,768,640,256,1024]
 data modify storage retina:data Surfaces.West append value [384,256,768,384,640,1024]
-data modify storage retina:data Surfaces.East append value [640.256,768,640,640,1024]
+data modify storage retina:data Surfaces.East append value [640,256,768,640,640,1024]
 data modify storage retina:data Surfaces.North append value [384,256,768,640,640,768]
 data modify storage retina:data Surfaces.South append value [384,256,1024,640,640,1024]
