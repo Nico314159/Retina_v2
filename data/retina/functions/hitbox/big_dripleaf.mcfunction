@@ -4,7 +4,7 @@ execute if block ~ ~ ~ minecraft:big_dripleaf[facing=east] run data modify stora
 execute if block ~ ~ ~ minecraft:big_dripleaf[facing=west] run data modify storage retina:data Surfaces set value {Top:[[108,156,60,180,156,132]],Bottom:[[108,0,60,180,0,132]],West:[[108,156,60,108,156,132]],East:[[180,156,60,180,156,132]],North:[[108,0,60,180,156,60]],South:[[108,0,132,180,156,132]]}
 execute if block ~ ~ ~ minecraft:big_dripleaf[tilt=full] run return 1
 execute if block ~ ~ ~ minecraft:big_dripleaf[tilt=partial] run function retina:__private__/if_else/6
-execute if block ~ ~ ~ minecraft:big_dripleaf[tilt=partial] run return 2
+execute if block ~ ~ ~ minecraft:big_dripleaf[tilt=partial] run return 1
 data modify storage retina:data Surfaces.Top append value [[0,180,0,192,180,192]]
 data modify storage retina:data Surfaces.Bottom append value [[0,132,0,192,132,192]]
 data modify storage retina:data Surfaces.West append value [[0,180,0,0,180,192]]
