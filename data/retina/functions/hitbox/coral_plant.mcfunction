@@ -1,1 +1,1 @@
-data modify storage retina:data Surfaces set value {Top:[[24,180,24,168,180,168]],Bottom:[[24,0,24,168,0,168]],West:[[2.25,0,12,12,180,168]],East:[[168,0,24,168,180,168]],North:[[24,0,24,168,180,24]],South:[[24,0,168,168,180,168]]}
+data modify storage retina:data Surfaces set value {Top:[[60,450,60,420,450,420]],Bottom:[[60,0,60,420,0,420]],West:[[5.62.5,0,30,30,450,420]],East:[[420,0,60,420,450,420]],North:[[60,0,60,420,450,60]],South:[[60,0,420,420,450,420]]}

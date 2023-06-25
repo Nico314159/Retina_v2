@@ -1,4 +1,4 @@
-data modify storage retina:data Surfaces set value {Top:[[0,192,0,192,192,192]],Bottom:[[0,120,0,192,120,192],[48,48,48,144,48,144]],West:[[0,120,0,0,192,192],[48,48,48,48,120,144]],East:[[192,120,0,192,192,192],[144,48,48,144,120,144]],North:[[0,120,0,192,192,0],[48,48,48,144,120,48]],South:[[0,120,192,192,192,192],[48,48,144,144,120,144]]}
+data modify storage retina:data Surfaces set value {Top:[[0,480,0,480,480,480]],Bottom:[[0,300,0,480,300,480],[120,120,120,360,120,360]],West:[[0,300,0,0,480,480],[120,120,120,120,300,360]],East:[[480,300,0,480,480,480],[360,120,120,360,300,360]],North:[[0,300,0,480,480,0],[120,120,120,360,300,120]],South:[[0,300,480,480,480,480],[120,120,360,360,300,360]]}
 execute if block ~ ~ ~ minecraft:hopper[facing=east] run function retina:__private__/if_else/9
 execute if block ~ ~ ~ minecraft:hopper[facing=west] run function retina:__private__/if_else/10
 execute if block ~ ~ ~ minecraft:hopper[facing=south] run function retina:__private__/if_else/11

@@ -5,7 +5,7 @@ scoreboard players remove $output retina.__variable__ 900
 scoreboard players operation $output retina.__variable__ *= $output retina.__variable__
 scoreboard players operation $trig_0 retina.__variable__ = $output retina.__variable__
 scoreboard players add $trig_0 retina.__variable__ 3240000
-scoreboard players operation $trig_0 retina.__variable__ /= 192 retina.__int__
+scoreboard players operation $trig_0 retina.__variable__ /= 480 retina.__int__
 scoreboard players operation $output retina.__variable__ *= -4 retina.__int__
 scoreboard players add $output retina.__variable__ 3240000
 scoreboard players operation $output retina.__variable__ /= $trig_0 retina.__variable__
