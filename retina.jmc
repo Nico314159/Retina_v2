@@ -850,6 +850,7 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<!bold>Relative Y: &<!italic,light_purple,$relative_Y>, &<white>Y0: &<light_purple,$Y0>");
             if ($relative_Y >= $Y0) {
                 if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
@@ -867,7 +868,9 @@ class find_closest_surface {
                 // Get z position of the intersection
                 $Z_intersection = $distance;
                 $Z_intersection *= $output_vec3.Z;
-                            
+
+                if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<!bold>X-Int: &<!italic,light_purple,$X_intersection>, &<italic,white>X0: &<!italic,light_purple,$X0>, &<italic,white>X1: &<!italic,light_purple,$X1>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<!bold>Z-Int: &<!italic,light_purple,$Z_intersection>, &<italic,white>Z0: &<!italic,light_purple,$Z0>, &<italic,white>Z1: &<!italic,light_purple,$Z1>");     
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "Bottom";
@@ -889,6 +892,7 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
 
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<!bold>Relative Y: &<!italic,light_purple,$relative_Y>, &<white>Y0: &<light_purple,$Y0>");
             if ($relative_Y >= $Y0) {
                 if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
@@ -907,6 +911,8 @@ class find_closest_surface {
                 $Z_intersection = $distance;
                 $Z_intersection *= $output_vec3.Z;      
             
+                if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<!bold>X-Int: &<!italic,light_purple,$X_intersection>, &<italic,white>X0: &<!italic,light_purple,$X0>, &<italic,white>X1: &<!italic,light_purple,$X1>");
+                if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<!bold>Z-Int: &<!italic,light_purple,$Z_intersection>, &<italic,white>Z0: &<!italic,light_purple,$Z0>, &<italic,white>Z1: &<!italic,light_purple,$Z1>");     
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) find_closest_surface.ray_intersects_with_surface();
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) data modify storage retina:output HitFace set value "Top";
