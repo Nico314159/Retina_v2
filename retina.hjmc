@@ -1,1 +1,2 @@
 #define SCALE 480
+#define no_break $step < $max_depth && $hit_block = 0 && $hit_entity = 0

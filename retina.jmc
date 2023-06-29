@@ -503,10 +503,266 @@ new tags.blocks(weeping_vines) {
     "values": ["minecraft:weeping_vines"]
 }
 
+
+new tags.entity_types(intangible) {
+	"description": "Entities to ignore when looking for targeted entities",
+	"values": [
+		"minecraft:area_effect_cloud",
+		"minecraft:arrow",
+		"minecraft:dragon_fireball",
+		"minecraft:egg",
+		"minecraft:ender_pearl",
+		"minecraft:evoker_fangs",
+		"minecraft:experience_bottle",
+		"minecraft:experience_orb",
+		"minecraft:eye_of_ender",
+		"minecraft:firework_rocket",
+		"minecraft:fishing_bobber",
+		"minecraft:item",
+		"minecraft:leash_knot",
+		"minecraft:llama_spit",
+		"minecraft:marker",
+		"minecraft:minecart",
+		"minecraft:painting",
+		"minecraft:potion",
+		"minecraft:small_fireball",
+		"minecraft:snowball",
+		"minecraft:spectral_arrow",
+		"minecraft:tnt",
+		"minecraft:trident",
+		"minecraft:wither_skull"
+	]
+}
+
+new tags.entity_types(armor_stand) {
+    "values": ["minecraft:armor_stand"]
+}
+new tags.entity_types(axolotl) {
+    "values": ["minecraft:axolotl"]
+}
+new tags.entity_types(bat_like) {
+    "values": [
+		"minecraft:bat",
+		"minecraft:parrot"
+	]
+}
+new tags.entity_types(bee) {
+    "values": ["minecraft:bee"]
+}
+new tags.entity_types(boat) {
+    "values": [
+		"minecraft:boat",
+		"minecraft:chest_boat"
+	]
+}
+new tags.entity_types(cat_like) {
+    "values": [
+		"minecraft:cat",
+		"minecraft:fox",
+		"minecraft:ocelot"
+	]
+}
+new tags.entity_types(cave_spider) {
+    "values": ["minecraft:cave_spider"]
+}
+new tags.entity_types(chicken) {
+    "values": ["minecraft:chicken"]
+}
+new tags.entity_types(cod) {
+    "values": ["minecraft:cod"]
+}
+new tags.entity_types(cow) {
+    "values": [
+		"minecraft:cow",
+		"minecraft:mooshroom"
+	]
+}
+new tags.entity_types(creeper) {
+    "values": ["minecraft:creeper"]
+}
+new tags.entity_types(dolphin) {
+    "values": ["minecraft:dolphin"]
+}
+new tags.entity_types(donkey) {
+    "values": ["minecraft:donkey"]
+}
+new tags.entity_types(elder_guardian) {
+    "values": ["minecraft:elder_guardian"]
+}
+new tags.entity_types(end_crystal) {
+    "values": ["minecraft:end_crystal"]
+}
+new tags.entity_types(enderman) {
+    "values": ["minecraft:enderman"]
+}
+new tags.entity_types(falling_block_like) {
+    "values": [
+		"minecraft:falling_block",
+		"minecraft:tnt"
+	]
+}
+new tags.entity_types(ghast) {
+    "values": ["minecraft:ghast"]
+}
+new tags.entity_types(giant) {
+    "values": ["minecraft:giant"]
+}
+new tags.entity_types(guardian) {
+    "values": ["minecraft:guardian"]
+}
+new tags.entity_types(hoglin) {
+    "values": [
+		"minecraft:hoglin",
+		"minecraft:zoglin"
+	]
+}
+new tags.entity_types(horse_like) {
+    "values": [
+		"minecraft:horse",
+		"minecraft:mule",
+		"minecraft:skeleton_horse",
+		"minecraft:zombie_horse"
+	]
+}
+new tags.entity_types(iron_golem) {
+    "values": ["minecraft:iron_golem"]
+}
+new tags.entity_types(item_frame) {
+    "values": [
+		"minecraft:item_frame",
+		"minecraft:glow_item_frame"
+	]
+}
+new tags.entity_types(leash_knot) {
+    "values": ["minecraft:leash_knot"]
+}
+new tags.entity_types(llama) {
+    "values": [
+		"minecraft:llama",
+		"minecraft:trader_llama"
+	]
+}
+new tags.entity_types(minecart) {
+    "values": [
+		"minecraft:minecart",
+		"minecraft:tnt_minecart",
+		"minecraft:chest_minecart",
+		"minecraft:hopper_minecart",
+		"minecraft:furnace_minecart",
+		"minecraft:spawner_minecart",
+		"minecraft:command_block_minecart"
+	]
+}
+new tags.entity_types(panda) {
+    "values": ["minecraft:panda"]
+}
+new tags.entity_types(phantom) {
+    "values": ["minecraft:phantom"]
+}
+new tags.entity_types(pig) {
+    "values": ["minecraft:pig"]
+}
+new tags.entity_types(player_like) {
+    "values": [
+        "minecraft:player",
+        "minecraft:blaze"
+    ]
+}
+new tags.entity_types(polar_bear) {
+    "values": ["minecraft:polar_bear"]
+}
+new tags.entity_types(pufferfish) {
+    "values": ["minecraft:pufferfish"]
+}
+new tags.entity_types(rabbit) {
+    "values": ["minecraft:rabbit"]
+}
+new tags.entity_types(ravager) {
+    "values": ["minecraft:ravager"]
+}
+new tags.entity_types(salmon) {
+    "values": ["minecraft:salmon"]
+}
+new tags.entity_types(sheep_like) {
+    "values": [
+        "minecraft:sheep",
+        "minecraft:goat"
+    ]
+}
+new tags.entity_types(shulker) {
+    "values": ["minecraft:shulker"]
+}
+new tags.entity_types(skeleton) {
+    "values": ["#minecraft:skeletons"]
+}
+new tags.entity_types(slime_like) {
+    "values": [
+		"minecraft:slime",
+		"minecraft:magma_cube"
+	]
+}
+new tags.entity_types(small_arthropod) {
+    "values": [
+        "minecraft:endermite",
+        "minecraft:silverfish"
+    ]
+}
+new tags.entity_types(snow_golem) {
+    "values": ["minecraft:snow_golem"]
+}
+new tags.entity_types(spider) {
+    "values": ["minecraft:spider"]
+}
+new tags.entity_types(squid) {
+    "values": [
+		"minecraft:squid",
+		"minecraft:glow_squid"
+	]
+}
+new tags.entity_types(strider) {
+    "values": ["minecraft:strider"]
+}
+new tags.entity_types(tropical_fish) {
+    "values": ["minecraft:tropical_fish"]
+}
+new tags.entity_types(turtle) {
+    "values": ["minecraft:turtle"]
+}
+new tags.entity_types(vex) {
+    "values": ["minecraft:vex"]
+}
+new tags.entity_types(wither) {
+    "values": ["minecraft:wither"]
+}
+new tags.entity_types(wither_skeleton) {
+    "values": ["minecraft:wither_skeleton"]
+}
+new tags.entity_types(wolf) {
+    "values": ["minecraft:wolf"]
+}
+new tags.entity_types(zombie_like) {
+    "values": [
+		"minecraft:drowned",
+		"minecraft:evoker",
+		"minecraft:husk",
+		"minecraft:illusioner",
+		"minecraft:piglin",
+		"minecraft:piglin_brute",
+		"minecraft:pillager",
+		"minecraft:villager",
+		"minecraft:vindicator",
+		"minecraft:wandering_trader",
+		"minecraft:witch",
+		"minecraft:zombie",
+		"minecraft:zombie_villager",
+		"minecraft:zombified_piglin"
+	]
+}
+
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
 $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
-$max_depth ??= 150;
+$max_depth ??= 50;
 
 class traverse {
     function setup() {
@@ -523,6 +779,9 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
+        tag @s add retina.executing;
+        $block_distance = execute run $entity_distance = 2147483647;
+		$hit_block = execute run $hit_entity = execute run $contact = false;
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
         if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -576,6 +835,7 @@ class traverse {
         if ($offset_Y matches 776..778) execute positioned ~ ~1.62 ~ run traverse.loop();
         if ($offset_Y matches 608..610) execute positioned ~ ~1.27 ~ run traverse.loop();
         if ($offset_Y = 192) execute positioned ~ ~0.4 ~ run traverse.loop();
+        tag @s remove retina.executing;
     }
     function loop() {
         // Find nearest axis
@@ -587,9 +847,9 @@ class traverse {
         if ($shortest_distance = $distance_X) $nearest_axis = 0;
         
         // Process data based on nearest axis
-        if ($nearest_axis = 0 && $step < $max_depth && $end = 0) traverse.x();
-        if ($nearest_axis = 1 && $step < $max_depth && $end = 0) traverse.y();
-        if ($nearest_axis = 2 && $step < $max_depth && $end = 0) traverse.z();
+        if ($nearest_axis = 0 && no_break) traverse.x();
+        if ($nearest_axis = 1 && no_break) traverse.y();
+        if ($nearest_axis = 2 && no_break) traverse.z();
     }
     function x() {
         if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
@@ -673,33 +933,33 @@ class traverse {
 class check {
     function main() {
         $step ++;
-        $end = false;
 
         check.block.main();
-        
-        if ($step >= $max_depth) $end = true;
+        if (data storage retina:input {TargetEntities: true}) check.entity.main();
+
         if ($step >= $max_depth && $debug_messages) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-        if ($end = 0) traverse.loop();
+        if (no_break) traverse.loop();
     }
     class block {
         function main() {
             if (block ~ ~ ~ #retina:airs) return 0;
             check.block.found();
-            if (!$end && $debug_messages) Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-            if (!$end) return 0;
+            if (!$hit_block && $debug_messages) Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+            if (!$hit_block) return 0;
             
             if ($debug_messages) Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
             if ($debug_gold) setblock ~ ~ ~ gold_block;
-            particle minecraft:end_rod ~ ~ ~ 0 0 0 0 1 force @a;
+            if ($end_particle) particle minecraft:end_rod ~ ~ ~ 0 0 0 0 1 force @a;
         }
         function found() {
-            // clear residual data from `Surfaces`
+            // Clear residual data from `Surfaces`
             data remove storage retina:data Surfaces;
             data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
             check.block.get_hitbox();
             // See if the ray hits any surface
             if (data storage retina:data Surfaces) find_closest_surface.main(); 
-            if ($end) $block_distance = $shortest_distance;
+            if ($contact) $block_distance = $min_distance_to_surface;
+            $hit_block = $contact;
         }
         function get_hitbox() {
             Hardcode.repeatList(
@@ -718,6 +978,237 @@ class check {
                 "vertical_torch", "vine_like", "wall_banner", "wall_hanging_sign", "wall_head", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
+        }
+    }
+    class entity {
+        function main() {
+            // This doesn't need to be its own function, but now I can add debug stuff later	
+            execute align xyz if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=0, dy=0, dz=0] run check.entity.found();
+            if (!$hit_entity && $debug_messages) Text.tellraw(@a, "&<italic, white>No entity... Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+            if (!$hit_entity) return 0;
+            
+            if ($debug_messages) Text.tellraw(@a, "&<bold, underlined, dark_gray>Entity has been hit! Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]. hit_entity = &<$hit_entity>");
+            if ($end_particle) particle minecraft:soul_fire_flame ~ ~ ~ 0 0 0 0 1 force @a;
+        }
+        function found() {
+            // Clear residual data from `Surfaces`
+            data remove storage retina:data Surfaces;
+            data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
+
+            // Identify the entity and get a list of surfaces
+            retina.id:$max = 0;
+            tag @e[type=!#retina:intangible] remove retina.possible_target;
+            execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
+
+            // See if the ray hits any surface
+            $contact = false;
+            if (data storage retina:data Surfaces) find_closest_surface.main();
+            if ($contact) $entity_distance = $min_distance_to_surface;
+            $hit_entity = $contact;
+
+            // If the ray could hit both an entity and a block, remember only the one that comes first
+            if ($hit_block && $hit_entity && $debug_messages) Text.tellraw(@a, "&<gold>Distance comparison: entity_distance = &<$entity_distance>, block_distance = &<$block_distance>");
+            if ($hit_block && $hit_entity && $entity_distance < $block_distance) $hit_block = false;
+            if ($hit_block && $hit_entity && $entity_distance >= $block_distance) $hit_entity = false;
+        }
+        function get_hitbox() {
+            execute run {
+                Hardcode.repeatList( 
+                    "[type]",
+                    () => {
+                        if (entity @s[type=#retina:[type]]) entity_hitbox.[type]();
+                        if (entity @s[type=#retina:[type]]) return 1;
+                    },
+                    ["armor_stand", "axolotl", "bat_like", "bee", "boat", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
+                    "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "ghast", "giant", "guardian",
+                    "hoglin", "horse_like",  "iron_golem", "item_frame", "leash_knot", "llama", "minecart", "panda", "phantom", "pig", "player_like", 
+                    "polar_bear", "pufferfish", "rabbit", "ravager", "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod",
+                    "snow_golem", "spider", "squid", "strider", "tropical_fish", "turtle", "vex", "wither", "wither_skeleton", "wolf", "zombie_like"]
+                );
+            }
+
+            // Get the entity's coordinates
+            execute summon marker run {
+                data modify storage retina:data Pos set from entity @s Pos;
+		        
+                // Get position (fractional coordinates)
+                Hardcode.repeatLists(
+                    ["[axis]", "$index"],
+                    () => { 
+                        $entity_frac_[axis] = data get storage retina:data Pos[$index] SCALE;
+						//$debug_[axis] = $entity_frac_[axis];
+                        $k = SCALE;
+                        $k *= $step_[axis];
+                        $k -= $frac_origin_[axis];
+                        $k += $origin_[axis];
+                        $entity_frac_[axis] -= $k;
+                        Text.tellraw(@a, "&<bold>K = &<$k>, int_[axis] = &<$int_[axis]>");
+                    },
+                    [["X", "Y", "Z"], ["0", "1", "2"]]
+                );
+
+                // Clean up
+                data remove storage retina:data Pos;
+                kill @s;
+            }
+        
+            Hardcode.repeatList(
+                "[i]",
+                () => { 
+                    $entity_[i]0 = $entity_frac_[i];
+                    $entity_[i]0 -= $entity_half_width;
+                    $entity_[i]0 > 0;
+                    $entity_[i]1 = $entity_frac_[i];
+                    $entity_[i]1 += $entity_half_width;
+                    $entity_[i]1 < 480;
+                },
+                ["X", "Z"]
+            );
+            $entity_Y0 = $entity_frac_Y;
+            $entity_Y0 > 0;
+            $entity_Y1 = $entity_frac_Y;
+            $entity_Y1 += $entity_height;
+            $entity_Y1 < 480;
+
+            // Store these coordinates to storage
+            Hardcode.repeatList(
+                "[face]", () => {data modify storage retina:data Surfaces.[face] append value [0, 0, 0, 0, 0, 0];}, 
+                ["Top", "Bottom", "West", "East", "North", "South"]
+            );
+
+            execute store result storage retina:data Surfaces.Top[-1][0] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.Top[-1][1] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.Top[-1][2] int 1 run $entity_Z0.get();
+            execute store result storage retina:data Surfaces.Top[-1][3] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.Top[-1][4] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.Top[-1][5] int 1 run $entity_Z1.get();
+
+            execute store result storage retina:data Surfaces.Bottom[-1][0] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.Bottom[-1][1] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.Bottom[-1][2] int 1 run $entity_Z0.get();
+            execute store result storage retina:data Surfaces.Bottom[-1][3] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.Bottom[-1][4] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.Bottom[-1][5] int 1 run $entity_Z1.get();
+
+            execute store result storage retina:data Surfaces.West[-1][0] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.West[-1][1] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.West[-1][2] int 1 run $entity_Z0.get();
+            execute store result storage retina:data Surfaces.West[-1][3] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.West[-1][4] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.West[-1][5] int 1 run $entity_Z1.get();
+
+            execute store result storage retina:data Surfaces.East[-1][0] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.East[-1][1] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.East[-1][2] int 1 run $entity_Z0.get();
+            execute store result storage retina:data Surfaces.East[-1][3] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.East[-1][4] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.East[-1][5] int 1 run $entity_Z1.get();
+
+            execute store result storage retina:data Surfaces.North[-1][0] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.North[-1][1] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.North[-1][2] int 1 run $entity_Z0.get();
+            execute store result storage retina:data Surfaces.North[-1][3] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.North[-1][4] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.North[-1][5] int 1 run $entity_Z0.get();
+
+            execute store result storage retina:data Surfaces.South[-1][0] int 1 run $entity_X0.get();
+            execute store result storage retina:data Surfaces.South[-1][1] int 1 run $entity_Y0.get();
+            execute store result storage retina:data Surfaces.South[-1][2] int 1 run $entity_Z1.get();
+            execute store result storage retina:data Surfaces.South[-1][3] int 1 run $entity_X1.get();
+            execute store result storage retina:data Surfaces.South[-1][4] int 1 run $entity_Y1.get();
+            execute store result storage retina:data Surfaces.South[-1][5] int 1 run $entity_Z1.get();
+
+            Hardcode.repeatLists(
+                ["[axis]", "[num]"],
+                () => {
+                    $debug_[axis][num] = $entity_[axis][num];
+                    $k = SCALE;
+                    $k *= $step_[axis];
+                    $k -= $frac_origin_[axis];
+                    $k += $origin_[axis];
+                    $debug_[axis][num] += $k;
+                },
+                [
+                    ["X", "Y", "Z", "X", "Y", "Z"],
+                    ["0", "0", "0", "1", "1", "1"]
+                ]
+            );
+        
+			if ($debug_messages) {
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+				execute summon minecraft:marker run {
+					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
+					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
+					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
+					execute at @s run particle minecraft:wax_on ~ ~ ~;
+					kill @s;
+				}
+			}
+
+            // Special case for item frames and paintings which are annoying
+            if (entity @s[type=#retina:item_frame]) Text.tellraw(@a, "check/entity/get_hitbox(): item frame found");
+            if (entity @s[type=#retina:item_frame]) entity_hitbox.item_frame();
+            if (entity @s[type=#retina:item_frame] && data storage retina:data Surfaces) Text.tellraw(@a, "check/entity/get_hitbox(): item frame `Surfaces` collected");
+
+            // Give this entity a tag and an ID
+            tag @s add retina.possible_target;
+            retina.id:@s = retina.id:$max;
+            retina.id:$max++;
         }
     }
 }
@@ -772,7 +1263,7 @@ class find_closest_surface {
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
                 
                 $X_intersection = $X0; // Get x position of the intersection
             
@@ -810,14 +1301,14 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<!bold>Relative X: &<!italic,light_purple,$relative_X>, &<white>X0: &<light_purple,$X0>");
-            if ($relative_X <= $X0) {
+            if ($relative_X >= $X0) {
                 if ($output_vec3.X == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
 
                 $X_intersection = $X0; // Get x position of the intersection
             
@@ -855,13 +1346,13 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<!bold>Relative Y: &<!italic,light_purple,$relative_Y>, &<white>Y0: &<light_purple,$Y0>");
-            if ($relative_Y >= $Y0) {
+            if ($relative_Y <= $Y0) {
                 if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
 
                 // Get x position of the intersection
                 $X_intersection = $Y0;
@@ -905,7 +1396,7 @@ class find_closest_surface {
                 $distance /= $output_vec3.Y;
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
 
                 // Get x position of the intersection
                 $X_intersection = $Y0;
@@ -950,7 +1441,7 @@ class find_closest_surface {
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
 
                 // Get x position of the intersection
                 $X_intersection = $Z0;
@@ -988,14 +1479,14 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<!bold>Relative Z: &<!italic,light_purple,$relative_Z>, &<white>Z0: &<light_purple,$Z0>");
-            if ($relative_Z <= $Z0) {
+            if ($relative_Z >= $Z0) {
                 if ($output_vec3.Z == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
             
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
-                unless ($distance < $min_distance_to_surface) return 0;
+                if (!$distance < $min_distance_to_surface) return 0;
 
                 // Get x position of the intersection
                 $X_intersection = $Z0;
@@ -1034,7 +1525,7 @@ class find_closest_surface {
         // @within find_closest_surface.top()
         // @within find_closest_surface.west()
 
-        $end = true;
+        $contact = true;
         $closest_cuboid_id = $cuboid_id;
         $min_distance_to_surface = $distance;
 
@@ -1282,8 +1773,8 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[0, 390, 0, 480, 390, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 390, 480]], East: [[480, 0, 0, 480, 390, 480]], North: [[0, 0, 0, 480, 390, 0]], South: [[0, 0, 480, 480, 390, 480]]};
     }
     function extended_piston() {
-        unless (block ~ ~ ~ #retina:piston[extended=true]) hitbox.cubic();
-        unless (block ~ ~ ~ #retina:piston[extended=true]) return 1;
+        if (!block ~ ~ ~ #retina:piston[extended=true]) hitbox.cubic();
+        if (!block ~ ~ ~ #retina:piston[extended=true]) return 1;
 
         if (block ~ ~ ~ #retina:piston[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 360, 480, 480]], Bottom:[[0, 0, 0, 360, 0, 480]], West:[[0, 0, 0, 0, 480, 480]], East:[[360, 0, 0, 360, 480, 480]], North:[[0, 0, 0, 360, 480, 0]], South:[[0, 0, 480, 360, 480, 480]]}
         if (block ~ ~ ~ #retina:piston[facing=west]) data modify storage retina:data Surfaces set value {Top:[[120, 480, 0, 480, 480, 480]], Bottom:[[120, 0, 0, 480, 0, 480]], West:[[120, 0, 0, 120, 480, 480]], East:[[480, 0, 0, 480, 480, 480]], North:[[120, 0, 0, 480, 480, 0]], South:[[120, 0, 480, 480, 480, 480]]}
@@ -1875,6 +2366,239 @@ class hitbox {
         data modify storage retina:data Surfaces.East set value [[   480, 0,       0,       480, 480, 480 ]];
         data modify storage retina:data Surfaces.North set value [[  0,       0,       0,       480, 480, 0       ]];
         data modify storage retina:data Surfaces.South set value [[  0,       0,       480, 480, 480, 480 ]];
-        $end = true;
+        $contact = true;
+    }
+}
+
+class entity_hitbox {
+    function armor_stand() {
+        data modify storage retina:data EntityTag set from entity @s;
+        if (data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 60;
+        if (data storage retina:data EntityTag{Small: 1b}) $entity_height = 474;
+        if (!data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 120;
+        if (!data storage retina:data EntityTag{Small: 1b}) $entity_height = 948;
+        if (data storage retina:data EntityTag{Marker: 1b}) $entity_half_width = execute run $entity_height = 0;
+    }
+    function axolotl() {
+        $entity_half_width = 180;
+        $entity_height = 202; // rounded from 201.6;
+    }
+    function bat_like() {
+        $entity_half_width = 216;
+        $entity_height = 672;
+    }
+    function bee() {
+        $entity_half_width = 144;
+        $entity_height = 336;
+    }
+    function boat() {
+        $entity_half_width = 330;
+        $entity_height = 270;
+    }
+    function cat_like() {
+        $entity_half_width = 144;
+        $entity_height = 336;
+    }
+    function cave_spider() {
+        $entity_half_width = 168;
+        $entity_height = 240;
+    }
+    function chicken() {
+        $entity_half_width = 96;
+        $entity_height = 336;
+    }
+    function cod() {
+        $entity_half_width = 120;
+        $entity_height = 144;
+    }
+    function cow() {
+        $entity_half_width = 216;
+        $entity_height = 672;
+    }
+    function creeper() {
+        $entity_half_width = 144;
+        $entity_height = 816;
+    }
+    function dolphin() {
+        $entity_half_width = 216;
+        $entity_height = 288;
+    }
+    function donkey() {
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 720;
+    }
+    function elder_guardian() {
+        $entity_half_width = 479; // rounded from 479.4;
+        $entity_height = 959; // rounded from 958.8;
+    }
+    function end_crystal() {
+        $entity_half_width = 480;
+        $entity_height = 960;
+    }
+    function enderman() {
+        $entity_half_width = 144;
+        $entity_height = 1392;
+    }
+    function falling_block_like() {
+        $entity_half_width = 235; // rounded from 235.2;
+        $entity_height = 470; // rounded from 470.4;
+    }
+    function ghast() {
+        $entity_half_width = 960;
+        $entity_height = 1920;
+    }
+    function giant() {
+        $entity_half_width = 864;
+        $entity_height = 5760;
+    }
+    function guardian() {
+        $entity_half_width = 204;
+        $entity_height = 408;
+    }
+    function hoglin() {
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 672;
+    }
+    function horse_like() {
+        Text.tellraw(@a, "retina:entity_hitboxes/horse_like called!");
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 768;
+    }
+    function iron_golem() {
+        $entity_half_width = 336;
+        $entity_height = 1296;
+    }
+    function item_frame() {
+        $item_frame_facing = data get entity @s Facing;
+        switch ($item_frame_facing) {
+            case 0: data modify storage retina:data Surfaces set value {Top: [[60, 480, 60, 420, 480, 420]], Bottom: [[60, 450, 60, 420, 450, 420]], West: [[60, 450, 60, 60, 480, 420]], East: [[420, 450, 60, 420, 480, 420]], North: [[60, 450, 60, 420, 480, 60]], South: [[60, 450, 420, 420, 480, 420]]};
+            case 1: data modify storage retina:data Surfaces set value {Top: [[60, 30, 60, 420, 30, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[60, 0, 60, 60, 30, 420]], East: [[420, 0, 60, 420, 30, 420]], North: [[60, 0, 60, 420, 30, 60]], South: [[60, 0, 420, 420, 30, 420]]};
+            case 2: data modify storage retina:data Surfaces set value {Top: [[60, 420, 450, 420, 420, 480]], Bottom: [[60, 60, 450, 420, 60, 480]], West: [[60, 60, 450, 60, 420, 480]], East: [[420, 60, 450, 420, 420, 480]], North: [[60, 60, 450, 420, 420, 450]], South: [[60, 60, 480, 420, 420, 480]]};
+            case 3: data modify storage retina:data Surfaces set value {Top: [[60, 420, 0, 420, 420, 30]], Bottom: [[60, 60, 0, 420, 60, 30]], West: [[60, 60, 0, 60, 420, 30]], East: [[420, 60, 0, 420, 420, 30]], North: [[60, 60, 0, 420, 420, 0]], South: [[60, 60, 30, 420, 420, 30]]};
+            case 4: data modify storage retina:data Surfaces set value {Top: [[450, 420, 60, 480, 420, 420]], Bottom: [[450, 60, 60, 480, 60, 420]], West: [[450, 60, 60, 450, 420, 420]], East: [[480, 60, 60, 480, 420, 420]], North: [[450, 60, 60, 480, 420, 60]], South: [[450, 60, 420, 480, 420, 420]]};
+            case 5: data modify storage retina:data Surfaces set value {Top: [[0, 420, 60, 30, 420, 420]], Bottom: [[0, 60, 60, 30, 60, 420]], West: [[0, 60, 60, 0, 420, 420]], East: [[30, 60, 60, 30, 420, 420]], North: [[0, 60, 60, 30, 420, 60]], South: [[0, 60, 420, 30, 420, 420]]};
+        }
+    }
+    function leash_knot() {
+        $entity_half_width = 90;
+        $entity_height = 240;
+    }
+    function llama() {
+        $entity_half_width = 216;
+        $entity_height = 898; // rounded from 897.6;
+    }
+    function minecart() {
+        $entity_half_width = 235; // rounded from 235.2;
+        $entity_height = 336;
+    }
+    function panda() {
+        $entity_half_width = 312;
+        $entity_height = 600;
+    }
+    function phantom() {
+        $entity_half_width = 216;
+        $entity_height = 240;
+    }
+    function pig() {
+        $entity_half_width = 216;
+        $entity_height = 432;
+    }
+    function player_like() {
+        $entity_half_width = 144;
+        $entity_height = 864;
+    }
+    function polar_bear() {
+        $entity_half_width = 336;
+        $entity_height = 672;
+    }
+    function pufferfish() {
+        $pufferfish_puffstate = data get entity @s PuffState;
+        if ($pufferfish_puffstate = 0) $entity_half_width = 84;
+        if ($pufferfish_puffstate = 0) $entity_height = 168;
+        if ($pufferfish_puffstate = 1) $entity_half_width = 120;
+        if ($pufferfish_puffstate = 1) $entity_height = 240;
+        if ($pufferfish_puffstate = 2) $entity_half_width = 168;
+        if ($pufferfish_puffstate = 2) $entity_height = 336;
+    }
+    function rabbit() {
+        $entity_half_width = 96;
+        $entity_height = 240;
+    }
+    function ravager() {
+        $entity_half_width = 468;
+        $entity_height = 960;
+    }
+    function salmon() {
+        $entity_half_width = 168;
+        $entity_height = 192;
+    }
+    function sheep_like() {
+        $entity_half_width = 216;
+        $entity_height = 624;
+    }
+    function shulker() {
+        // TODO: take peek/rotation into account and move this to the end of get_hitbox.entity(), along with item frames and paintings maybe
+        $entity_half_width = 240;
+        $entity_height = 480;
+    }
+    function skeleton() {
+        $entity_half_width = 144;
+        $entity_height = 955; // rounded from 955.2;
+    }
+    function slime_like() {
+        $entity_half_width = 122; // rounded from 122.4;
+        $entity_height = 245; // rounded from 244.8;
+        $slime_size = data get entity @s Size;
+        $slime_size ++;
+        $entity_half_width *= $slime_size;
+        $entity_height *= $slime_size;
+    }
+    function small_arthropod() {
+        $entity_half_width = 96;
+        $entity_height = 144;
+    }
+    function snow_golem() {
+        $entity_half_width = 168;
+        $entity_height = 912;
+    }
+    function spider() {
+        $entity_half_width = 336;
+        $entity_height = 432;
+    }
+    function squid() {
+        $entity_half_width = 192;
+        $entity_height = 384;
+    }
+    function strider() {
+        $entity_half_width = 216;
+        $entity_height = 816;
+    }
+    function tropical_fish() {
+        $entity_half_width = 120;
+        $entity_height = 192;
+    }
+    function turtle() {
+        $entity_half_width = 288;
+        $entity_height = 192;
+    }
+    function vex() {
+        $entity_half_width = 96;
+        $entity_height = 384;
+    }
+    function wither() {
+        $entity_half_width = 216;
+        $entity_height = 1680;
+    }
+    function wither_skeleton() {
+        $entity_half_width = 168;
+        $entity_height = 1152;
+    }
+    function wolf() {
+        $entity_half_width = 144;
+        $entity_height = 408;
+    }
+    function zombie_like() {
+        $entity_half_width = 144;
+        $entity_height = 936;
     }
 }

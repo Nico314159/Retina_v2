@@ -8,6 +8,9 @@ scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__varia
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute unless score $test_Z retina.__variable__ matches -1..0 run return 0
+tag @s add retina.executing
+execute store result score $block_distance retina.__variable__ run scoreboard players set $entity_distance retina.__variable__ 2147483647
+execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
 execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red"}]
@@ -89,3 +92,4 @@ scoreboard players operation $offset_Y retina.__variable__ += $Y retina.__variab
 execute if score $offset_Y retina.__variable__ matches 776..778 positioned ~ ~1.62 ~ run function retina:traverse/loop
 execute if score $offset_Y retina.__variable__ matches 608..610 positioned ~ ~1.27 ~ run function retina:traverse/loop
 execute if score $offset_Y retina.__variable__ matches 192 positioned ~ ~0.4 ~ run function retina:traverse/loop
+tag @s remove retina.executing
