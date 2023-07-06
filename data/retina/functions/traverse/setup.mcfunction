@@ -16,11 +16,7 @@ execute store result score $input_yaw retina.__variable__ run data get entity @s
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red"}]
 function retina:math/gimbal_to_vec
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold"},{"text":"]","color":"gold"}]
-execute anchored eyes run summon minecraft:marker ^ ^ ^ {Tags:["retina.height"]}
-execute store result score $X retina.__variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 480
-execute store result score $Y retina.__variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] 480
-execute store result score $Z retina.__variable__ run data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] 480
-kill @e[type=marker,tag=retina.height,limit=1]
+execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run function retina:__private__/anonymous/0
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ %= 480 retina.__int__

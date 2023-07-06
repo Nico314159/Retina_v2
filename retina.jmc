@@ -804,12 +804,12 @@ class traverse {
         Math.gimbal_to_vec();
         if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
 
-        execute anchored eyes run summon minecraft:marker ^ ^ ^ {Tags:["retina.height"]};
-        $X = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] SCALE;
-        $Y = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[1] SCALE;
-        //$Y += 1620;
-        $Z = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[2] SCALE;
-        kill @e[type=marker,tag=retina.height,limit=1];
+        execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run {
+            $X = data get entity @s Pos[0] SCALE;
+            $Y = data get entity @s Pos[1] SCALE;
+            $Z = data get entity @s Pos[2] SCALE;
+            kill @s;
+        }
         Hardcode.repeatList(
             "[i]",
             () => {
