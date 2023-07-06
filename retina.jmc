@@ -558,6 +558,9 @@ new tags.entity_types(boat) {
 		"minecraft:chest_boat"
 	]
 }
+new tags.entity_types(camel) {
+    "values": ["minecraft:camel"]
+}
 new tags.entity_types(cat_like) {
     "values": [
 		"minecraft:cat",
@@ -712,6 +715,9 @@ new tags.entity_types(small_arthropod) {
         "minecraft:endermite",
         "minecraft:silverfish"
     ]
+}
+new tags.entity_types(sniffer) {
+    "values": ["minecraft:sniffer"]
 }
 new tags.entity_types(snow_golem) {
     "values": ["minecraft:snow_golem"]
@@ -1029,10 +1035,10 @@ class check {
                         if (entity @s[type=#retina:[type]]) entity_hitbox.[type]();
                         if (entity @s[type=#retina:[type]]) return 1;
                     },
-                    ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
+                    ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
                     "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
                     "hoglin", "horse_like",  "iron_golem", "item_frame", "leash_knot", "llama", "minecart", "panda", "phantom", "pig", "player_like", 
-                    "polar_bear", "pufferfish", "rabbit", "ravager", "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod",
+                    "polar_bear", "pufferfish", "rabbit", "ravager", "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod", "sniffer",
                     "snow_golem", "spider", "squid", "strider", "tropical_fish", "turtle", "vex", "warden", "wither", "wither_skeleton", "wolf", "zombie_like"]
                 );
             }
@@ -2321,6 +2327,10 @@ class entity_hitbox {
         $entity_half_width = 330;
         $entity_height = 270;
     }
+    function camel() {
+        $entity_half_width = 408;
+        $entity_height = 1140;
+    }
     function cat_like() {
         $entity_half_width = 144;
         $entity_height = 336;
@@ -2485,6 +2495,10 @@ class entity_hitbox {
     function small_arthropod() {
         $entity_half_width = 96;
         $entity_height = 144;
+    }
+    function sniffer() {
+        $entity_half_width = 456;
+        $entity_height = 840;
     }
     function snow_golem() {
         $entity_half_width = 168;
