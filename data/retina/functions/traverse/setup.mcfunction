@@ -86,7 +86,6 @@ scoreboard players operation $frac_Z retina.__variable__ = $Z retina.__variable_
 scoreboard players operation $frac_Z retina.__variable__ %= 480 retina.__int__
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Origin: "},{"text":"[","color":"yellow"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Y","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"yellow"},{"text":"]","color":"yellow"}]
 scoreboard players set $step retina.__variable__ 0
-scoreboard players set $end retina.__variable__ 0
 execute store result score $offset_Y retina.__variable__ run data get entity @s Pos[1] -480
 scoreboard players operation $offset_Y retina.__variable__ += $Y retina.__variable__
 execute if score $offset_Y retina.__variable__ matches 776..778 positioned ~ ~1.62 ~ run function retina:traverse/loop

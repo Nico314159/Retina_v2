@@ -59,46 +59,7 @@ execute store result storage retina:data Surfaces.South[-1][2] int 1 run scorebo
 execute store result storage retina:data Surfaces.South[-1][3] int 1 run scoreboard players get $entity_X1 retina.__variable__
 execute store result storage retina:data Surfaces.South[-1][4] int 1 run scoreboard players get $entity_Y1 retina.__variable__
 execute store result storage retina:data Surfaces.South[-1][5] int 1 run scoreboard players get $entity_Z1 retina.__variable__
-scoreboard players operation $debug_X0 retina.__variable__ = $entity_X0 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_X retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_X retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_X retina.__variable__
-scoreboard players operation $debug_X0 retina.__variable__ += $k retina.__variable__
-scoreboard players operation $debug_Y0 retina.__variable__ = $entity_Y0 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_Y retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_Y retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_Y retina.__variable__
-scoreboard players operation $debug_Y0 retina.__variable__ += $k retina.__variable__
-scoreboard players operation $debug_Z0 retina.__variable__ = $entity_Z0 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_Z retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_Z retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_Z retina.__variable__
-scoreboard players operation $debug_Z0 retina.__variable__ += $k retina.__variable__
-scoreboard players operation $debug_X1 retina.__variable__ = $entity_X1 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_X retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_X retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_X retina.__variable__
-scoreboard players operation $debug_X1 retina.__variable__ += $k retina.__variable__
-scoreboard players operation $debug_Y1 retina.__variable__ = $entity_Y1 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_Y retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_Y retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_Y retina.__variable__
-scoreboard players operation $debug_Y1 retina.__variable__ += $k retina.__variable__
-scoreboard players operation $debug_Z1 retina.__variable__ = $entity_Z1 retina.__variable__
-scoreboard players set $k retina.__variable__ 480
-scoreboard players operation $k retina.__variable__ *= $step_Z retina.__variable__
-scoreboard players operation $k retina.__variable__ -= $frac_origin_Z retina.__variable__
-scoreboard players operation $k retina.__variable__ += $origin_Z retina.__variable__
-scoreboard players operation $debug_Z1 retina.__variable__ += $k retina.__variable__
-execute if score $debug_messages retina.__variable__ matches 1.. run function retina:__private__/if_else/0
-execute if entity @s[type=#retina:item_frame] run tellraw @a {"text":"check/entity/get_hitbox(): item frame found"}
 execute if entity @s[type=#retina:item_frame] run function retina:entity_hitbox/item_frame
-execute if entity @s[type=#retina:item_frame] if data storage retina:data Surfaces run tellraw @a {"text":"check/entity/get_hitbox(): item frame `Surfaces` collected"}
 tag @s add retina.possible_target
 scoreboard players operation @s retina.id = $max retina.id
 scoreboard players add $max retina.id 1

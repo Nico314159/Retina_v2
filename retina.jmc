@@ -782,6 +782,7 @@ class traverse {
         tag @s add retina.executing;
         $block_distance = execute run $entity_distance = 2147483647;
 		$hit_block = execute run $hit_entity = execute run $contact = false;
+        
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
         if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -829,7 +830,6 @@ class traverse {
         if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
 
         $step = 0;
-        $end = 0;
         $offset_Y = data get entity @s Pos[1] -SCALE;
         $offset_Y += $Y;
         if ($offset_Y matches 776..778) execute positioned ~ ~1.62 ~ run traverse.loop();
@@ -1037,12 +1037,9 @@ class check {
                     () => { 
                         $entity_frac_[axis] = data get storage retina:data Pos[$index] SCALE;
 						//$debug_[axis] = $entity_frac_[axis];
-                        $k = SCALE;
-                        $k *= $step_[axis];
-                        $k -= $frac_origin_[axis];
-                        $k += $origin_[axis];
-                        $entity_frac_[axis] -= $k;
-                        Text.tellraw(@a, "&<bold>K = &<$k>, int_[axis] = &<$int_[axis]>");
+                        $temp = SCALE;
+                        $temp *= $int_[axis];
+                        $entity_frac_[axis] -= $temp;
                     },
                     [["X", "Y", "Z"], ["0", "1", "2"]]
                 );
@@ -1118,92 +1115,7 @@ class check {
             execute store result storage retina:data Surfaces.South[-1][4] int 1 run $entity_Y1.get();
             execute store result storage retina:data Surfaces.South[-1][5] int 1 run $entity_Z1.get();
 
-            Hardcode.repeatLists(
-                ["[axis]", "[num]"],
-                () => {
-                    $debug_[axis][num] = $entity_[axis][num];
-                    $k = SCALE;
-                    $k *= $step_[axis];
-                    $k -= $frac_origin_[axis];
-                    $k += $origin_[axis];
-                    $debug_[axis][num] += $k;
-                },
-                [
-                    ["X", "Y", "Z", "X", "Y", "Z"],
-                    ["0", "0", "0", "1", "1", "1"]
-                ]
-            );
-        
-			if ($debug_messages) {
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z0.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y0.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X0.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-				execute summon minecraft:marker run {
-					execute store result entity @s Pos[0] double 0.002083333 run $debug_X1.get();
-					execute store result entity @s Pos[1] double 0.002083333 run $debug_Y1.get();
-					execute store result entity @s Pos[2] double 0.002083333 run $debug_Z1.get();
-					execute at @s run particle minecraft:wax_on ~ ~ ~;
-					kill @s;
-				}
-			}
-
-            // Special case for item frames and paintings which are annoying
-            if (entity @s[type=#retina:item_frame]) Text.tellraw(@a, "check/entity/get_hitbox(): item frame found");
-            if (entity @s[type=#retina:item_frame]) entity_hitbox.item_frame();
-            if (entity @s[type=#retina:item_frame] && data storage retina:data Surfaces) Text.tellraw(@a, "check/entity/get_hitbox(): item frame `Surfaces` collected");
+            if (entity @s[type=#retina:item_frame]) entity_hitbox.item_frame(); // Special case for item frames and paintings which are annoying
 
             // Give this entity a tag and an ID
             tag @s add retina.possible_target;
@@ -1220,7 +1132,7 @@ class find_closest_surface {
         $min_distance_to_surface = 832; // sqrt(3) * 480
         Hardcode.repeatLists(
             ["[direction]", "[axis]", "[sign]"],
-            () => {if (!$sign_[axis] = [sign] && $end = 0) find_closest_surface.[direction]();},
+            () => {if (!$sign_[axis] = [sign] && no_break) find_closest_surface.[direction]();},
             [
                 ["east", "west", "top", "bottom", "south", "north"],
                 ["X", "X", "Y", "Y", "Z", "Z"],
@@ -2460,7 +2372,6 @@ class entity_hitbox {
         $entity_height = 672;
     }
     function horse_like() {
-        Text.tellraw(@a, "retina:entity_hitboxes/horse_like called!");
         $entity_half_width = 335; // rounded from 335.156256;
         $entity_height = 768;
     }
