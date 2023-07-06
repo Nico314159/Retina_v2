@@ -534,6 +534,9 @@ new tags.entity_types(intangible) {
 	]
 }
 
+new tags.entity_types(allay) {
+    "values": ["minecraft:allay"]
+}
 new tags.entity_types(armor_stand) {
     "values": ["minecraft:armor_stand"]
 }
@@ -600,6 +603,9 @@ new tags.entity_types(falling_block_like) {
 		"minecraft:falling_block",
 		"minecraft:tnt"
 	]
+}
+new tags.entity_types(frog) {
+    "values": ["minecraft:frog"]
 }
 new tags.entity_types(ghast) {
     "values": ["minecraft:ghast"]
@@ -730,6 +736,9 @@ new tags.entity_types(turtle) {
 }
 new tags.entity_types(vex) {
     "values": ["minecraft:vex"]
+}
+new tags.entity_types(warden) {
+    "values": ["minecraft:warden"]
 }
 new tags.entity_types(wither) {
     "values": ["minecraft:wither"]
@@ -956,6 +965,7 @@ class check {
             data remove storage retina:data Surfaces;
             data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
             check.block.get_hitbox();
+
             // See if the ray hits any surface
             if (data storage retina:data Surfaces) find_closest_surface.main(); 
             if ($contact) $block_distance = $min_distance_to_surface;
@@ -1019,11 +1029,11 @@ class check {
                         if (entity @s[type=#retina:[type]]) entity_hitbox.[type]();
                         if (entity @s[type=#retina:[type]]) return 1;
                     },
-                    ["armor_stand", "axolotl", "bat_like", "bee", "boat", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
-                    "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "ghast", "giant", "guardian",
+                    ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
+                    "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
                     "hoglin", "horse_like",  "iron_golem", "item_frame", "leash_knot", "llama", "minecart", "panda", "phantom", "pig", "player_like", 
                     "polar_bear", "pufferfish", "rabbit", "ravager", "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod",
-                    "snow_golem", "spider", "squid", "strider", "tropical_fish", "turtle", "vex", "wither", "wither_skeleton", "wolf", "zombie_like"]
+                    "snow_golem", "spider", "squid", "strider", "tropical_fish", "turtle", "vex", "warden", "wither", "wither_skeleton", "wolf", "zombie_like"]
                 );
             }
 
@@ -2283,6 +2293,10 @@ class hitbox {
 }
 
 class entity_hitbox {
+    function allay() {
+        $entity_half_width = 84;
+        $entity_height = 288;
+    }
     function armor_stand() {
         data modify storage retina:data EntityTag set from entity @s;
         if (data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 60;
@@ -2354,6 +2368,10 @@ class entity_hitbox {
     function falling_block_like() {
         $entity_half_width = 235; // rounded from 235.2;
         $entity_height = 470; // rounded from 470.4;
+    }
+    function frog() {
+        $entity_half_width = 120;
+        $entity_height = 240;
     }
     function ghast() {
         $entity_half_width = 960;
@@ -2495,6 +2513,10 @@ class entity_hitbox {
     function vex() {
         $entity_half_width = 96;
         $entity_height = 384;
+    }
+    function warden() {
+        $entity_half_width = 216;
+        $entity_height = 1392;
     }
     function wither() {
         $entity_half_width = 216;
