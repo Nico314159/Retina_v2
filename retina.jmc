@@ -1670,10 +1670,10 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[150, 330, 150, 330, 330, 330]], Bottom: [[150, 150, 150, 330, 150, 330]], West: [[150, 150, 150, 150, 330, 330]], East: [[330, 150, 150, 330, 330, 330]], North: [[150, 150, 150, 330, 330, 150]], South: [[150, 150, 330, 330, 330, 330]]};
     }
     function coral_fan() {
-        data modify storage retina:data Surfaces set value {Top: [[60, 120, 60, 420, 120, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[5.62.5, 0, 30, 30, 120, 420]], East: [[420, 0, 60, 420, 120, 420]], North: [[60, 0, 60, 420, 120, 60]], South: [[60, 0, 420, 420, 120, 420]]};
+        data modify storage retina:data Surfaces set value {Top: [[60, 120, 60, 420, 120, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[60, 0, 60, 60, 120, 420]], East: [[420, 0, 60, 420, 120, 420]], North: [[60, 0, 60, 420, 120, 60]], South: [[60, 0, 420, 420, 120, 420]]};
     }
     function coral_plant() {
-        data modify storage retina:data Surfaces set value {Top: [[60, 450, 60, 420, 450, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[5.62.5, 0, 30, 30, 450, 420]], East: [[420, 0, 60, 420, 450, 420]], North: [[60, 0, 60, 420, 450, 60]], South: [[60, 0, 420, 420, 450, 420]]};
+        data modify storage retina:data Surfaces set value {Top: [[60, 450, 60, 420, 450, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[60, 0, 60, 60, 450, 420]], East: [[420, 0, 60, 420, 450, 420]], North: [[60, 0, 60, 420, 450, 60]], South: [[60, 0, 420, 420, 450, 420]]};
     }
     function daylight_detector() {
         data modify storage retina:data Surfaces set value {Top: [[0, 180, 0, 480, 180,  480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 180, 480]], East: [[480, 0, 0, 480, 180, 480]], North: [[0, 0, 0, 480, 180, 0]], South: [[0, 0, 480, 480, 180, 480]]};
