@@ -56,7 +56,7 @@ new tags.blocks(brewing_stand) {
 	"values": ["minecraft:brewing_stand"]
 }
 new tags.blocks(button) {
-	"values": ["minecraft:buttons"]
+	"values": ["#minecraft:buttons"]
 }
 new tags.blocks(cactus_shaped) {
     "values": [
@@ -277,7 +277,7 @@ new tags.blocks(pane_shaped) {
 	]
 }
 new tags.blocks(pickle) {
-    "values": "minecraft:sea_pickle"
+    "values": ["minecraft:sea_pickle"]
 }
 new tags.blocks(piglin_head) {
     "values": ["minecraft:piglin_head"]
@@ -2194,20 +2194,20 @@ class hitbox {
         }
     }
     function wall_banner() {
-        if (block ~ ~ ~ minecraft:wall_banner[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 420, 480, 375, 480]], Bottom:[[0, 0, 420, 480, 0, 480]], West:[[0, 0, 420, 0, 375, 480]], East:[[480, 0, 420, 480, 375, 480]], North:[[0, 0, 420, 480, 375, 420]], South:[[0, 0, 480, 480, 375, 480]]}
-        if (block ~ ~ ~ minecraft:wall_banner[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 480, 375, 60]], Bottom:[[0, 0, 0, 480, 0, 60]], West:[[0, 0, 0, 0, 375, 60]], East:[[480, 0, 0, 480, 375, 60]], North:[[0, 0, 0, 480, 375, 0]], South:[[0, 0, 60, 480, 375, 60]]}
-        if (block ~ ~ ~ minecraft:wall_banner[facing=east]) data modify storage retina:data Surfaces set value {Top:[[420, 375, 0, 480, 375, 480]], Bottom:[[420, 0, 0, 480, 0, 480]], West:[[420, 0, 0, 420, 375, 480]], East:[[480, 0, 0, 480, 375, 480]], North:[[420, 0, 0, 480, 375, 0]], South:[[420, 0, 480, 480, 375, 480]]}
-        if (block ~ ~ ~ minecraft:wall_banner[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 60, 375, 480]], Bottom:[[0, 0, 0, 60, 0, 480]], West:[[0, 0, 0, 0, 375, 480]], East:[[60, 0, 0, 60, 375, 480]], North:[[0, 0, 0, 60, 375, 0]], South:[[0, 0, 480, 60, 375, 480]]}
+        if (block ~ ~ ~ #minecraft:wall_banner[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 420, 480, 375, 480]], Bottom:[[0, 0, 420, 480, 0, 480]], West:[[0, 0, 420, 0, 375, 480]], East:[[480, 0, 420, 480, 375, 480]], North:[[0, 0, 420, 480, 375, 420]], South:[[0, 0, 480, 480, 375, 480]]}
+        if (block ~ ~ ~ #minecraft:wall_banner[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 480, 375, 60]], Bottom:[[0, 0, 0, 480, 0, 60]], West:[[0, 0, 0, 0, 375, 60]], East:[[480, 0, 0, 480, 375, 60]], North:[[0, 0, 0, 480, 375, 0]], South:[[0, 0, 60, 480, 375, 60]]}
+        if (block ~ ~ ~ #minecraft:wall_banner[facing=east]) data modify storage retina:data Surfaces set value {Top:[[420, 375, 0, 480, 375, 480]], Bottom:[[420, 0, 0, 480, 0, 480]], West:[[420, 0, 0, 420, 375, 480]], East:[[480, 0, 0, 480, 375, 480]], North:[[420, 0, 0, 480, 375, 0]], South:[[420, 0, 480, 480, 375, 480]]}
+        if (block ~ ~ ~ #minecraft:wall_banner[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 60, 375, 480]], Bottom:[[0, 0, 0, 60, 0, 480]], West:[[0, 0, 0, 0, 375, 480]], East:[[60, 0, 0, 60, 375, 480]], North:[[0, 0, 0, 60, 375, 0]], South:[[0, 0, 480, 60, 375, 480]]}
     }
     function wall_hanging_sign() {
         if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=east] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 180, 480, 480, 300], [30, 300, 210, 450, 300, 270]], Bottom:[[0, 420, 180, 480, 420, 300], [30, 0, 210, 450, 0, 270]], West:[[0, 420, 180, 0, 480, 300], [30, 0, 210, 30, 300, 270]], East:[[480, 420, 180, 480, 480, 300], [450, 0, 210, 450, 300, 270]], North:[[0, 420, 180, 480, 480, 180], [30, 0, 210, 450, 300, 210]], South:[[0, 420, 300, 480, 480, 300], [30, 0, 270, 450, 300, 270]]}
         if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=north] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=south]) data modify storage retina:data Surfaces set value {Top:[[180, 480, 0, 300, 480, 480], [210, 300, 30, 270, 300, 450]], Bottom:[[180, 420, 0, 300, 420, 480], [210, 0, 30, 270, 0, 450]], West:[[180, 420, 0, 180, 480, 480], [210, 0, 30, 210, 300, 450]], East:[[300, 420, 0, 300, 480, 480], [270, 0, 30, 270, 300, 450]], North:[[180, 420, 0, 300, 480, 0], [210, 0, 30, 270, 300, 30]], South:[[180, 420, 480, 300, 480, 480], [210, 0, 450, 270, 300, 450]]}
     }
     function wall_head() {
-        if (block ~ ~ ~ minecraft:wall_head[facing=north]) data modify storage retina:data Surfaces set value {Top:[[120, 360, 240, 360, 360, 480]], Bottom:[[120, 120, 240, 360, 120, 480]], West:[[120, 120, 240, 120, 360, 480]], East:[[360, 120, 240, 360, 360, 480]], North:[[120, 120, 240, 360, 360, 240]], South:[[120, 120, 480, 360, 360, 480]]}
-        if (block ~ ~ ~ minecraft:wall_head[facing=south]) data modify storage retina:data Surfaces set value {Top:[[120, 360, 0, 360, 360, 240]], Bottom:[[120, 120, 0, 360, 120, 240]], West:[[120, 120, 0, 120, 360, 240]], East:[[360, 120, 0, 360, 360, 240]], North:[[120, 120, 0, 360, 360, 0]], South:[[120, 120, 240, 360, 360, 240]]}
-        if (block ~ ~ ~ minecraft:wall_head[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 360, 120, 240, 360, 360]], Bottom:[[0, 120, 120, 240, 120, 360]], West:[[0, 120, 120, 0, 360, 360]], East:[[240, 120, 120, 240, 360, 360]], North:[[0, 120, 120, 240, 360, 120]], South:[[0, 120, 360, 240, 360, 360]]}
-        if (block ~ ~ ~ minecraft:wall_head[facing=west]) data modify storage retina:data Surfaces set value {Top:[[240, 360, 120, 480, 360, 360]], Bottom:[[240, 120, 120, 480, 120, 360]], West:[[240, 120, 120, 240, 360, 360]], East:[[480, 120, 120, 480, 360, 360]], North:[[240, 120, 120, 480, 360, 120]], South:[[240, 120, 360, 480, 360, 360]]}
+        if (block ~ ~ ~ #retina:wall_head[facing=north]) data modify storage retina:data Surfaces set value {Top:[[120, 360, 240, 360, 360, 480]], Bottom:[[120, 120, 240, 360, 120, 480]], West:[[120, 120, 240, 120, 360, 480]], East:[[360, 120, 240, 360, 360, 480]], North:[[120, 120, 240, 360, 360, 240]], South:[[120, 120, 480, 360, 360, 480]]}
+        if (block ~ ~ ~ #retina:wall_head[facing=south]) data modify storage retina:data Surfaces set value {Top:[[120, 360, 0, 360, 360, 240]], Bottom:[[120, 120, 0, 360, 120, 240]], West:[[120, 120, 0, 120, 360, 240]], East:[[360, 120, 0, 360, 360, 240]], North:[[120, 120, 0, 360, 360, 0]], South:[[120, 120, 240, 360, 360, 240]]}
+        if (block ~ ~ ~ #retina:wall_head[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 360, 120, 240, 360, 360]], Bottom:[[0, 120, 120, 240, 120, 360]], West:[[0, 120, 120, 0, 360, 360]], East:[[240, 120, 120, 240, 360, 360]], North:[[0, 120, 120, 240, 360, 120]], South:[[0, 120, 360, 240, 360, 360]]}
+        if (block ~ ~ ~ #retina:wall_head[facing=west]) data modify storage retina:data Surfaces set value {Top:[[240, 360, 120, 480, 360, 360]], Bottom:[[240, 120, 120, 480, 120, 360]], West:[[240, 120, 120, 240, 360, 360]], East:[[480, 120, 120, 480, 360, 360]], North:[[240, 120, 120, 480, 360, 120]], South:[[240, 120, 360, 480, 360, 360]]}
     }
     function wall_sign() {
         if (block ~ ~ ~ #minecraft:wall_signs[facing=east]) data modify storage retina:data Surfaces set value {Top: [[0, 375, 0, 60, 375, 480]], Bottom: [[0, 105, 0, 60, 105, 480]], West: [[0, 105, 0, 0, 375, 480]], East: [[60, 105, 0, 60, 375, 480]], North: [[0, 105, 0, 60, 375, 0]], South: [[0, 105, 480, 60, 375, 480]]}

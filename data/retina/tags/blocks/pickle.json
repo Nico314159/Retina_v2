@@ -1,3 +1,5 @@
 {
-    "values": "minecraft:sea_pickle"
+    "values": [
+        "minecraft:sea_pickle"
+    ]
 }
