@@ -9,3 +9,4 @@ scoreboard players set -1 retina.__int__ -1
 scoreboard players set $overflow_risk retina.__variable__ 2147483647
 scoreboard players operation $overflow_risk retina.__variable__ /= 480 retina.__int__
 execute unless score $max_depth retina.__variable__ = $max_depth retina.__variable__ run scoreboard players set $max_depth retina.__variable__ 50
+data merge storage retina:input {TargetEntities:true}

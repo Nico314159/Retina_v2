@@ -778,6 +778,7 @@ new tags.entity_types(zombie_like) {
 $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 $max_depth ??= 50;
+data merge storage retina:input {TargetEntities: true};
 
 class traverse {
     function setup() {
@@ -794,10 +795,16 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
-        tag @s add retina.executing;
+        data modify storage retina:output Target set value "NONE";
+        data remove storage retina:output Distance;
+        data remove storage retina:output TargetedBlock;
+        data remove storage retina:output TargetedEntity;
+        data remove storage retina:output ContactSurface;
+        data remove storage retina:output HitFace;
         $block_distance = execute run $entity_distance = 2147483647;
 		$hit_block = execute run $hit_entity = execute run $contact = false;
         
+        tag @s add retina.executing;
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
         if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -850,6 +857,9 @@ class traverse {
         if ($offset_Y matches 776..778) execute positioned ~ ~1.62 ~ run traverse.loop();
         if ($offset_Y matches 608..610) execute positioned ~ ~1.27 ~ run traverse.loop();
         if ($offset_Y = 192) execute positioned ~ ~0.4 ~ run traverse.loop();
+
+        if ($hit_block) storage.block();
+        if ($hit_entity) storage.entity();
         tag @s remove retina.executing;
     }
     function loop() {
@@ -861,6 +871,10 @@ class traverse {
         if ($shortest_distance = $distance_Y) $nearest_axis = 1;
         if ($shortest_distance = $distance_X) $nearest_axis = 0;
         
+        $prev_X = $int_X;
+        $prev_Y = $int_Y;
+        $prev_Z = $int_Z;
+
         // Process data based on nearest axis
         if ($nearest_axis = 0 && no_break) traverse.x();
         if ($nearest_axis = 1 && no_break) traverse.y();
@@ -943,7 +957,6 @@ class traverse {
         if ($sign_Z = 1) execute positioned ~0 ~0 ~1 run check.main();
     }
 }   
-
 
 class check {
     function main() {
@@ -2547,5 +2560,87 @@ class entity_hitbox {
     function zombie_like() {
         $entity_half_width = 144;
         $entity_height = 936;
+    }
+}
+
+class storage {
+    //	var $total_distance
+    //		The distance travelled by the ray before it hits a block. 480 corresponds to one block. Unset if the maximum recursion depth is reached (i.e. if the ray travels at least 20 blocks).
+    //	storage retina:output
+    //		Target: string
+    //			"BLOCK" if the ray hits a block, "ENTITY" if the ray hits an entity, "NONE" if the ray hits nothing.
+    //		Distance: double
+    //			How long the ray travels before hitting an obstacle.
+    //      HitFace: string
+    //			Cardinal direction for which face of the block/entity was hit.
+    //		TargetedBlock: int[]
+    //			The integer coordinates of the block that the ray finds itself in when it hits something (i.e. the "targeted block"). Unset if the ray hits an entity or if no block is found.
+    //		TargetedEntity.Pos: float[]
+    //			The position of the targeted entity. Unset if the ray hits a block or if no entity is found.
+    //		TargetedEntity.UUID: int[]
+    //			The UUID of the targeted entity. Unset if the ray hits a block or if no entity is found.
+    //		ContactSurface: double[]
+    //			The surface of the block or entity the ray hits (six coordinates between 0 and 480, where 0 0 0 and 480 480 480 are opposite corners of the block). Unset if no block or entity is found.
+    //		ContactCoordinates: double[]
+    //			The exact position where the ray hits something within the targeted block (three coordinates between 0 and 480, where 0 0 0 and 480 480 480 are opposite corners of the block). Unset if no block or entity is found.
+    //		PlacingPosition: int[]
+    //			The integer coordinates of the block before the ray hits something (i.e. where a block would be placed, if a player were to place a block). Unset if the ray hits an entity or if no block is found.
+
+    function block() {
+        // Target type
+        data modify storage retina:output Target set value "BLOCK";
+
+        // Targeted block
+        data modify storage retina:output TargetedBlock set value [0, 0, 0];
+        execute store result storage retina:output TargetedBlock[0] int 1 run $int_X.get();
+        execute store result storage retina:output TargetedBlock[1] int 1 run $int_Y.get();
+        execute store result storage retina:output TargetedBlock[2] int 1 run $int_Z.get();
+
+        // Placing position
+        data modify storage retina:output PlacingPosition set value [0, 0, 0];
+        execute store result storage retina:output PlacingPosition[0] int 1 run $prev_X.get();
+        execute store result storage retina:output PlacingPosition[1] int 1 run $prev_Y.get();
+        execute store result storage retina:output PlacingPosition[2] int 1 run $prev_Z.get();
+
+        // Contact surface
+        data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
+
+        // Contact coordinates
+        data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
+        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $X_intersection.get();
+        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $Y_intersection.get();
+        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $Z_intersection.get();
+
+        // Total distance
+        $total_distance = $block_distance;
+        $total_distance += $shortest_distance;
+        Text.tellraw(@a, "&<bold,italic>block_distance = &<$block_distance>, shortest_distance = &<$shortest_distance>, total_distance = &<$total_distance>");
+        execute store result storage retina:output Distance double 0.00208333 run $total_distance.get();
+    }
+    function entity() {
+        // Target type
+        data modify storage retina:output Target set value "ENTITY";
+
+        // Targeted entity
+        data modify storage retina:output TargetedEntity set value {UUID: [I; 0, 0, 0, 0], Pos: [0.0f, 0.0f, 0.0f]};
+        execute as @e[type=!#retina:ignore, tag=retina.possible_target] if score @s retina.id = $closest_cuboid_id retina.__variable__ run tag @s add retina.target;
+        data modify storage retina:data Entity set from entity @e[type=!#retina:ignore, tag=retina.target, limit=1];
+        data modify storage retina:output TargetedEntity.UUID set from storage retina:data Entity.UUID;
+        data modify storage retina:output TargetedEntity.Pos set from storage retina:data Entity.Pos;
+        data remove storage retina:data Entity;
+
+        // Contact surface
+        data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
+
+        // Contact coordinates
+        data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
+        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $X_intersection.get();
+        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $Y_intersection.get();
+        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $Z_intersection.get();
+
+        // Total distance
+        $total_distance = $entity_distance;
+        $total_distance += $shortest_distance;
+        execute store result storage retina:output Distance double 0.00208333 run $total_distance.get();
     }
 }
