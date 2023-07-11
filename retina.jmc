@@ -1086,7 +1086,7 @@ class check {
                     $entity_[i]0 > 0;
                     $entity_[i]1 = $entity_frac_[i];
                     $entity_[i]1 += $entity_half_width;
-                    $entity_[i]1 < 480;
+                    $entity_[i]1 < SCALE;
                 },
                 ["X", "Z"]
             );
@@ -1094,7 +1094,7 @@ class check {
             $entity_Y0 > 0;
             $entity_Y1 = $entity_frac_Y;
             $entity_Y1 += $entity_height;
-            $entity_Y1 < 480;
+            $entity_Y1 < SCALE;
 
             // Store these coordinates to storage
             Hardcode.repeatList(
@@ -1174,10 +1174,10 @@ class find_closest_surface {
             ["[axis]", "[num]", "$index"],
             () => {
                 $[axis][num] = data get storage retina:data List[-1][$index];
-                $k = SCALE;
-                $k *= $step_[axis];
-                $k -= $frac_origin_[axis];
-                $[axis][num] += $k;
+                $t_[axis] = SCALE;
+                $t_[axis] *= $step_[axis];
+                $t_[axis] -= $frac_origin_[axis];
+                $[axis][num] += $t_[axis];
             },
             [
                 ["X", "Y", "Z", "X", "Y", "Z"],
@@ -1196,13 +1196,13 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
 
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<!bold>Relative X: &<!italic,light_purple,$relative_X>, &<white>X0: &<light_purple,$X0>");
-            if ($relative_X <= $X0) {
-                if ($output_vec3.X == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<white>X0: &<light_purple,$X0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.X == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
-            
+
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if (!$distance < $min_distance_to_surface) return 0;
                 
@@ -1241,13 +1241,13 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
             
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<!bold>Relative X: &<!italic,light_purple,$relative_X>, &<white>X0: &<light_purple,$X0>");
-            if ($relative_X >= $X0) {
-                if ($output_vec3.X == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<white>X0: &<light_purple,$X0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.X == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
-            
+
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if (!$distance < $min_distance_to_surface) return 0;
 
@@ -1286,12 +1286,13 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<!bold>Relative Y: &<!italic,light_purple,$relative_Y>, &<white>Y0: &<light_purple,$Y0>");
-            if ($relative_Y <= $Y0) {
-                if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<white>Y0: &<light_purple,$Y0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.Y == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
-            
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if (!$distance < $min_distance_to_surface) return 0;
 
@@ -1330,12 +1331,13 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
 
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<!bold>Relative Y: &<!italic,light_purple,$relative_Y>, &<white>Y0: &<light_purple,$Y0>");
-            if ($relative_Y >= $Y0) {
-                if ($output_vec3.Y == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<white>Y0: &<light_purple,$Y0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.Y == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
-            
+                if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
+
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if (!$distance < $min_distance_to_surface) return 0;
 
@@ -1374,13 +1376,13 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<!bold>Relative Z: &<!italic,light_purple,$relative_Z>, &<white>Z0: &<light_purple,$Z0>");
-            if ($relative_Z <= $Z0) {
-                if ($output_vec3.Z == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<white>Z0: &<light_purple,$Z0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.Z == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
-            
+
                 // If this distance is closer than the minimum distance to a surface hit by the ray found so far, see if the ray intersects with the surface
                 if (!$distance < $min_distance_to_surface) return 0;
 
@@ -1419,9 +1421,9 @@ class find_closest_surface {
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
-            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<!bold>Relative Z: &<!italic,light_purple,$relative_Z>, &<white>Z0: &<light_purple,$Z0>");
-            if ($relative_Z >= $Z0) {
-                if ($output_vec3.Z == 0) return 0; // The if block is actually its own function, so this gives control back to the while loop.
+            if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<white>Z0: &<light_purple,$Z0>");
+            if (score 0 retina.__int__ matches 0) {
+                if ($output_vec3.Z == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
                 if ($debug_messages) Text.tellraw(@a, "&<italic>Distance: &<light_purple,$distance>");
@@ -1470,6 +1472,9 @@ class find_closest_surface {
         $closest_cuboid_id = $cuboid_id;
         $min_distance_to_surface = $distance;
 
+        $targeted_X = $X_intersection;
+        $targeted_Y = $Y_intersection;
+        $targeted_Z = $Z_intersection;
         data modify storage retina:data ContactSurface set from storage retina:data List[-1];
     }
 }
@@ -2607,15 +2612,30 @@ class storage {
 
         // Contact coordinates
         data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
-        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $X_intersection.get();
-        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $Y_intersection.get();
-        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $Z_intersection.get();
+        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $targeted_X.get();
+        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $targeted_Y.get();
+        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $targeted_Z.get();
 
         // Total distance
-        $total_distance = $block_distance;
-        $total_distance += $shortest_distance;
-        Text.tellraw(@a, "&<bold,italic>block_distance = &<$block_distance>, shortest_distance = &<$shortest_distance>, total_distance = &<$total_distance>");
+        if ($nearest_axis == 0) {
+            $total_distance = $delta_X;
+            $total_distance *= $X0;
+        }
+        if ($nearest_axis == 1) {
+            $total_distance = $delta_Y;
+            $total_distance *= $Y0;
+        }
+        if ($nearest_axis == 2) {
+            $total_distance = $delta_Z;
+            $total_distance *= $Z0;
+        }
+        $total_distance /= SCALE;
+
+        if ($debug_messages == 2) Text.tellraw(@a, "&<bold,italic>targeted_X = &<$targeted_X>, targeted_Y = &<$targeted_Y>, targeted_Z = &<$targeted_Z>");
+        if ($debug_messages == 2) Text.tellraw(@a, "&<bold,italic>total_distance = &<$total_distance>");
+        
         execute store result storage retina:output Distance double 0.00208333 run $total_distance.get();
+        if ($debug_messages == 2) tellraw @a [{"text":"Distance (NBT): ","bold":true,"italic":true},{"nbt":"Distance","storage":"retina:output","bold":false,"italic":false,"color":"red"}];
     }
     function entity() {
         // Target type
@@ -2634,13 +2654,26 @@ class storage {
 
         // Contact coordinates
         data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
-        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $X_intersection.get();
-        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $Y_intersection.get();
-        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $Z_intersection.get();
+        execute store result storage retina:output ContactCoordinates[0] double 0.00208333 run $targeted_X.get();
+        execute store result storage retina:output ContactCoordinates[1] double 0.00208333 run $targeted_Y.get();
+        execute store result storage retina:output ContactCoordinates[2] double 0.00208333 run $targeted_Z.get();
 
         // Total distance
-        $total_distance = $entity_distance;
-        $total_distance += $shortest_distance;
+        if ($nearest_axis == 0) {
+            $total_distance = $delta_X;
+            $total_distance *= $X0;
+        }
+        if ($nearest_axis == 1) {
+            $total_distance = $delta_Y;
+            $total_distance *= $Y0;
+        }
+        if ($nearest_axis == 2) {
+            $total_distance = $delta_Z;
+            $total_distance *= $Z0;
+        }
+        $total_distance /= SCALE;
+        
         execute store result storage retina:output Distance double 0.00208333 run $total_distance.get();
     }
 }
+
