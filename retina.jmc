@@ -142,6 +142,12 @@ new tags.blocks(door) {
 new tags.blocks(end_portal_frame) {
     "values": ["minecraft:end_portal_frame"]
 }
+new tags.blocks(extended_piston) {
+    "values": [
+        "minecraft:piston",
+        "minecraft:sticky_piston"
+    ]
+}
 new tags.blocks(farmland_shaped) {
     "values": [
         "minecraft:farmland",
@@ -289,12 +295,6 @@ new tags.blocks(piglin_wall_head) {
 }
 new tags.blocks(pink_petals) {
     "values": ["minecraft:pink_petals"]
-}
-new tags.blocks(piston) {
-    "values": [
-        "minecraft:piston",
-        "minecraft:sticky_piston"
-    ]
 }
 new tags.blocks(piston_head) {
     "values": ["minecraft:piston_head"]
@@ -1556,18 +1556,18 @@ class hitbox {
     }
     function bell() {
         // floor bell = single AABB
-        if (block ~ ~ ~ #minecraft:bell[attachment=floor] && !block ~ ~ ~ #minecraft:bell[facing=north] && !block ~ ~ ~ #minecraft:bell[facing=south]) data modify storage retina:data Surfaces set value {Top: [[120, 480, 0, 360, 480, 480]], Bottom: [[120, 0, 0, 360, 0, 480]], West: [[120, 0, 0, 120, 480, 480]], East: [[360, 0, 0, 360, 480, 480]], North: [[120, 0, 0, 360, 480, 0]], South: [[120, 0, 480, 360, 480, 480]]}
-        if (block ~ ~ ~ #minecraft:bell[attachment=floor] && !block ~ ~ ~ #minecraft:bell[facing=east] && !block ~ ~ ~ #minecraft:bell[facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 480, 120, 480, 480, 360]], Bottom: [[0, 0, 120, 480, 0, 360]], West: [[0, 0, 120, 0, 480, 360]], East: [[480, 0, 120, 480, 480, 360]], North: [[0, 0, 120, 480, 480, 120]], South: [[0, 0, 360, 480, 480, 360]]}
-        if (block ~ ~ ~ #minecraft:bell[attachment=floor]) return 1;
+        if (block ~ ~ ~ minecraft:bell[attachment=floor] && !block ~ ~ ~ minecraft:bell[facing=north] && !block ~ ~ ~ minecraft:bell[facing=south]) data modify storage retina:data Surfaces set value {Top: [[120, 480, 0, 360, 480, 480]], Bottom: [[120, 0, 0, 360, 0, 480]], West: [[120, 0, 0, 120, 480, 480]], East: [[360, 0, 0, 360, 480, 480]], North: [[120, 0, 0, 360, 480, 0]], South: [[120, 0, 480, 360, 480, 480]]}
+        if (block ~ ~ ~ minecraft:bell[attachment=floor] && !block ~ ~ ~ minecraft:bell[facing=east] && !block ~ ~ ~ minecraft:bell[facing=west]) data modify storage retina:data Surfaces set value {Top: [[0, 480, 120, 480, 480, 360]], Bottom: [[0, 0, 120, 480, 0, 360]], West: [[0, 0, 120, 0, 480, 360]], East: [[480, 0, 120, 480, 480, 360]], North: [[0, 0, 120, 480, 480, 120]], South: [[0, 0, 360, 480, 480, 360]]}
+        if (block ~ ~ ~ minecraft:bell[attachment=floor]) return 1;
 
         // otherwise, bell shape is two seperate cuboids
         data modify storage retina:data Surfaces set value {Top: [[150, 390, 150, 330, 390, 330], [120, 180, 120, 360, 180, 360]], Bottom: [[150, 180, 150, 330, 180, 330], [120, 120, 120, 360, 120, 360]], West: [[150, 180, 150, 150, 390, 330], [120, 120, 120, 120, 180, 360]], East: [[330, 180, 150, 330, 390, 330], [420, 120, 120, 360, 180, 360]], North: [[150, 180, 150, 330, 390, 150], [120, 120, 120, 360, 180, 120]], South: [[150, 180, 330, 330, 390, 330], [120, 120, 360, 360, 180, 360]]};
     }
     function berries() {
-        if (block ~ ~ ~ #minecraft:sweet_berries[age=0]) data modify storage retina:data Surfaces set value {Top: [[90, 240, 90, 390, 240, 390]], Bottom: [[90, 0, 90, 390, 0, 390]], West: [[90, 0, 90, 90, 240, 390]], East: [[390, 0, 90, 390, 240, 390]], North: [[90, 0, 90, 390, 240, 90]], South: [[90, 0, 390, 390, 240, 390]]}
-        if (block ~ ~ ~ #minecraft:sweet_berries[age=1]) hitbox.cactus_shaped();
-        if (block ~ ~ ~ #minecraft:sweet_berries[age=2]) hitbox.cactus_shaped();
-        if (block ~ ~ ~ #minecraft:sweet_berries[age=3]) hitbox.cubic();
+        if (block ~ ~ ~ minecraft:sweet_berries[age=0]) data modify storage retina:data Surfaces set value {Top: [[90, 240, 90, 390, 240, 390]], Bottom: [[90, 0, 90, 390, 0, 390]], West: [[90, 0, 90, 90, 240, 390]], East: [[390, 0, 90, 390, 240, 390]], North: [[90, 0, 90, 390, 240, 90]], South: [[90, 0, 390, 390, 240, 390]]}
+        if (block ~ ~ ~ minecraft:sweet_berries[age=1]) hitbox.cactus_shaped();
+        if (block ~ ~ ~ minecraft:sweet_berries[age=2]) hitbox.cactus_shaped();
+        if (block ~ ~ ~ minecraft:sweet_berries[age=3]) hitbox.cubic();
     }
     function big_dripleaf() {
         if (block ~ ~ ~ minecraft:big_dripleaf[facing=north]) data modify storage retina:data Surfaces set value {Top:[[150, 390, 270, 330, 390, 450]], Bottom:[[150, 0, 270, 330, 0, 450]], West:[[150, 0, 270, 150, 390, 450]], East:[[330, 0, 270, 330, 390, 450]], North:[[150, 0, 270, 330, 390, 270]], South:[[150, 0, 450, 330, 390, 450]]}
@@ -1714,15 +1714,15 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[0, 390, 0, 480, 390, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 390, 480]], East: [[480, 0, 0, 480, 390, 480]], North: [[0, 0, 0, 480, 390, 0]], South: [[0, 0, 480, 480, 390, 480]]};
     }
     function extended_piston() {
-        if (!block ~ ~ ~ #retina:piston[extended=true]) hitbox.cubic();
-        if (!block ~ ~ ~ #retina:piston[extended=true]) return 1;
+        if (!block ~ ~ ~ #retina:extended_piston[extended=true]) hitbox.cubic();
+        if (!block ~ ~ ~ #retina:extended_piston[extended=true]) return 1;
 
-        if (block ~ ~ ~ #retina:piston[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 360, 480, 480]], Bottom:[[0, 0, 0, 360, 0, 480]], West:[[0, 0, 0, 0, 480, 480]], East:[[360, 0, 0, 360, 480, 480]], North:[[0, 0, 0, 360, 480, 0]], South:[[0, 0, 480, 360, 480, 480]]}
-        if (block ~ ~ ~ #retina:piston[facing=west]) data modify storage retina:data Surfaces set value {Top:[[120, 480, 0, 480, 480, 480]], Bottom:[[120, 0, 0, 480, 0, 480]], West:[[120, 0, 0, 120, 480, 480]], East:[[480, 0, 0, 480, 480, 480]], North:[[120, 0, 0, 480, 480, 0]], South:[[120, 0, 480, 480, 480, 480]]}
-        if (block ~ ~ ~ #retina:piston[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 480, 480, 360]], Bottom:[[0, 0, 0, 480, 0, 360]], West:[[0, 0, 0, 0, 480, 360]], East:[[480, 0, 0, 480, 480, 360]], North:[[0, 0, 0, 480, 480, 0]], South:[[0, 0, 360, 480, 480, 360]]}
-        if (block ~ ~ ~ #retina:piston[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 120, 480, 480, 480]], Bottom:[[0, 0, 120, 480, 0, 480]], West:[[0, 0, 120, 0, 480, 480]], East:[[480, 0, 120, 480, 480, 480]], North:[[0, 0, 120, 480, 480, 120]], South:[[0, 0, 480, 480, 480, 480]]}
-        if (block ~ ~ ~ #retina:piston[facing=up]) data modify storage retina:data Surfaces set value {Top:[[0, 360, 0, 480, 360, 480]], Bottom:[[0, 0, 0, 480, 0, 480]], West:[[0, 0, 0, 0, 360, 480]], East:[[480, 0, 0, 480, 360, 480]], North:[[0, 0, 0, 480, 360, 0]], South:[[0, 0, 480, 480, 360, 480]]}
-        if (block ~ ~ ~ #retina:piston[facing=down]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 480, 480, 480]], Bottom:[[0, 120, 0, 480, 120, 480]], West:[[0, 120, 0, 0, 480, 480]], East:[[480, 120, 0, 480, 480, 480]], North:[[0, 120, 0, 480, 480, 0]], South:[[0, 120, 480, 480, 480, 480]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=east]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 360, 480, 480]], Bottom:[[0, 0, 0, 360, 0, 480]], West:[[0, 0, 0, 0, 480, 480]], East:[[360, 0, 0, 360, 480, 480]], North:[[0, 0, 0, 360, 480, 0]], South:[[0, 0, 480, 360, 480, 480]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=west]) data modify storage retina:data Surfaces set value {Top:[[120, 480, 0, 480, 480, 480]], Bottom:[[120, 0, 0, 480, 0, 480]], West:[[120, 0, 0, 120, 480, 480]], East:[[480, 0, 0, 480, 480, 480]], North:[[120, 0, 0, 480, 480, 0]], South:[[120, 0, 480, 480, 480, 480]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 480, 480, 360]], Bottom:[[0, 0, 0, 480, 0, 360]], West:[[0, 0, 0, 0, 480, 360]], East:[[480, 0, 0, 480, 480, 360]], North:[[0, 0, 0, 480, 480, 0]], South:[[0, 0, 360, 480, 480, 360]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 120, 480, 480, 480]], Bottom:[[0, 0, 120, 480, 0, 480]], West:[[0, 0, 120, 0, 480, 480]], East:[[480, 0, 120, 480, 480, 480]], North:[[0, 0, 120, 480, 480, 120]], South:[[0, 0, 480, 480, 480, 480]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=up]) data modify storage retina:data Surfaces set value {Top:[[0, 360, 0, 480, 360, 480]], Bottom:[[0, 0, 0, 480, 0, 480]], West:[[0, 0, 0, 0, 360, 480]], East:[[480, 0, 0, 480, 360, 480]], North:[[0, 0, 0, 480, 360, 0]], South:[[0, 0, 480, 480, 360, 480]]}
+        if (block ~ ~ ~ #retina:extended_piston[facing=down]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 0, 480, 480, 480]], Bottom:[[0, 120, 0, 480, 120, 480]], West:[[0, 120, 0, 0, 480, 480]], East:[[480, 120, 0, 480, 480, 480]], North:[[0, 120, 0, 480, 480, 0]], South:[[0, 120, 480, 480, 480, 480]]}
     }
     function farmland_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[0, 450, 0, 480, 450, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 450, 480]], East: [[480, 0, 0, 480, 450, 480]], North: [[0, 0, 0, 480, 450, 0]], South: [[0, 0, 480, 480, 450, 480]]};
@@ -2157,7 +2157,7 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[180, 360, 180, 360, 360, 360]], Bottom: [[180, 0, 180, 360, 0, 360]], West: [[180, 0, 180, 180, 360, 360]], East: [[360, 0, 180, 360, 360, 360]], North: [[180, 0, 180, 360, 360, 180]], South: [[180, 0, 360, 360, 360, 360]]};
     }
     function vine_like() {
-        if (block ~ ~ ~ #retina:vine[up=true]) {
+        if (block ~ ~ ~ #retina:vine_like[up=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 480, 0, 480, 480, 480]; 
             data modify storage retina:data Surfaces.Bottom append value [0, 450, 0, 480, 450, 480]; 
             data modify storage retina:data Surfaces.West append value [0, 450, 0, 0, 480, 480]; 
@@ -2165,7 +2165,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 450, 0, 480, 480, 0];
             data modify storage retina:data Surfaces.South append value [0, 450, 480, 480, 480, 480];
         }
-        if (block ~ ~ ~ #retina:vine[down=true]) {
+        if (block ~ ~ ~ #retina:vine_like[down=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 30, 0, 480, 30, 480]; 
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 480, 0, 480]; 
             data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 30, 480]; 
@@ -2173,7 +2173,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 0, 480, 30, 0];
             data modify storage retina:data Surfaces.South append value [0, 0, 480, 480, 30, 480];
         }
-        if (block ~ ~ ~ #retina:vine[north=true]) {
+        if (block ~ ~ ~ #retina:vine_like[north=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 480, 0, 480, 480, 30];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 480, 0, 30];
             data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 480, 30];
@@ -2181,7 +2181,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 0, 480, 480, 0];
             data modify storage retina:data Surfaces.South append value [0, 0, 30, 480, 480, 30];
         }
-        if (block ~ ~ ~ #retina:vine[south=true]) {
+        if (block ~ ~ ~ #retina:vine_like[south=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 480, 450, 480, 480, 480];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 450, 480, 0, 480];
             data modify storage retina:data Surfaces.West append value [0, 0, 450, 0, 480, 480];
@@ -2189,7 +2189,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 450, 480, 480, 450];
             data modify storage retina:data Surfaces.South append value [0, 0, 480, 480, 480, 480];
         }
-        if (block ~ ~ ~ #retina:vine[west=true]) {
+        if (block ~ ~ ~ #retina:vine_like[west=true]) {
             data modify storage retina:data Surfaces.Top append value [0, 480, 0, 30, 480, 480];
             data modify storage retina:data Surfaces.Bottom append value [0, 0, 0, 30, 0, 480];
             data modify storage retina:data Surfaces.West append value [0, 0, 0, 0, 480, 480];
@@ -2197,7 +2197,7 @@ class hitbox {
             data modify storage retina:data Surfaces.North append value [0, 0, 0, 30, 480, 0];
             data modify storage retina:data Surfaces.South append value [0, 0, 480, 30, 480, 480];
         }
-        if (block ~ ~ ~ #retina:vine[east=true]) {
+        if (block ~ ~ ~ #retina:vine_like[east=true]) {
             data modify storage retina:data Surfaces.Top append value [450, 480, 0, 480, 480, 480];
             data modify storage retina:data Surfaces.Bottom append value [450, 0, 0, 480, 0, 480];
             data modify storage retina:data Surfaces.West append value [450, 0, 0, 450, 480, 480];
@@ -2207,10 +2207,10 @@ class hitbox {
         }
     }
     function wall_banner() {
-        if (block ~ ~ ~ #minecraft:wall_banner[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 420, 480, 375, 480]], Bottom:[[0, 0, 420, 480, 0, 480]], West:[[0, 0, 420, 0, 375, 480]], East:[[480, 0, 420, 480, 375, 480]], North:[[0, 0, 420, 480, 375, 420]], South:[[0, 0, 480, 480, 375, 480]]}
-        if (block ~ ~ ~ #minecraft:wall_banner[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 480, 375, 60]], Bottom:[[0, 0, 0, 480, 0, 60]], West:[[0, 0, 0, 0, 375, 60]], East:[[480, 0, 0, 480, 375, 60]], North:[[0, 0, 0, 480, 375, 0]], South:[[0, 0, 60, 480, 375, 60]]}
-        if (block ~ ~ ~ #minecraft:wall_banner[facing=east]) data modify storage retina:data Surfaces set value {Top:[[420, 375, 0, 480, 375, 480]], Bottom:[[420, 0, 0, 480, 0, 480]], West:[[420, 0, 0, 420, 375, 480]], East:[[480, 0, 0, 480, 375, 480]], North:[[420, 0, 0, 480, 375, 0]], South:[[420, 0, 480, 480, 375, 480]]}
-        if (block ~ ~ ~ #minecraft:wall_banner[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 60, 375, 480]], Bottom:[[0, 0, 0, 60, 0, 480]], West:[[0, 0, 0, 0, 375, 480]], East:[[60, 0, 0, 60, 375, 480]], North:[[0, 0, 0, 60, 375, 0]], South:[[0, 0, 480, 60, 375, 480]]}
+        if (block ~ ~ ~ #retina:wall_banner[facing=north]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 420, 480, 375, 480]], Bottom:[[0, 0, 420, 480, 0, 480]], West:[[0, 0, 420, 0, 375, 480]], East:[[480, 0, 420, 480, 375, 480]], North:[[0, 0, 420, 480, 375, 420]], South:[[0, 0, 480, 480, 375, 480]]}
+        if (block ~ ~ ~ #retina:wall_banner[facing=south]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 480, 375, 60]], Bottom:[[0, 0, 0, 480, 0, 60]], West:[[0, 0, 0, 0, 375, 60]], East:[[480, 0, 0, 480, 375, 60]], North:[[0, 0, 0, 480, 375, 0]], South:[[0, 0, 60, 480, 375, 60]]}
+        if (block ~ ~ ~ #retina:wall_banner[facing=east]) data modify storage retina:data Surfaces set value {Top:[[420, 375, 0, 480, 375, 480]], Bottom:[[420, 0, 0, 480, 0, 480]], West:[[420, 0, 0, 420, 375, 480]], East:[[480, 0, 0, 480, 375, 480]], North:[[420, 0, 0, 480, 375, 0]], South:[[420, 0, 480, 480, 375, 480]]}
+        if (block ~ ~ ~ #retina:wall_banner[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 375, 0, 60, 375, 480]], Bottom:[[0, 0, 0, 60, 0, 480]], West:[[0, 0, 0, 0, 375, 480]], East:[[60, 0, 0, 60, 375, 480]], North:[[0, 0, 0, 60, 375, 0]], South:[[0, 0, 480, 60, 375, 480]]}
     }
     function wall_hanging_sign() {
         if (!block ~ ~ ~ #minecraft:wall_hanging_signs[facing=east] && !block ~ ~ ~ #minecraft:wall_hanging_signs[facing=west]) data modify storage retina:data Surfaces set value {Top:[[0, 480, 180, 480, 480, 300], [30, 300, 210, 450, 300, 270]], Bottom:[[0, 420, 180, 480, 420, 300], [30, 0, 210, 450, 0, 270]], West:[[0, 420, 180, 0, 480, 300], [30, 0, 210, 30, 300, 270]], East:[[480, 420, 180, 480, 480, 300], [450, 0, 210, 450, 300, 270]], North:[[0, 420, 180, 480, 480, 180], [30, 0, 210, 450, 300, 210]], South:[[0, 420, 300, 480, 480, 300], [30, 0, 270, 450, 300, 270]]}
