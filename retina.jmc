@@ -1129,18 +1129,19 @@ class find_closest_surface {
     }
     function store_coords() {
         Hardcode.repeatLists(
-            ["[axis]", "[num]", "$index"],
+            ["[axis]", "index"],
             () => {
-                $[axis][num] = data get storage retina:data List[-1][$index];
-                $t_[axis] = SCALE;
+                $[axis]0 = data get storage retina:data List[-1][index];
+                $[axis]1 = data get storage retina:data List[-1][ Hardcode.calc(index + 3) ];
+                $t_[axis] = 480;
                 $t_[axis] *= $step_[axis];
                 $t_[axis] -= $frac_origin_[axis];
-                $[axis][num] += $t_[axis];
+                $[axis]0 += $t_[axis];
+                $[axis]1 += $t_[axis];
             },
             [
-                ["X", "Y", "Z", "X", "Y", "Z"],
-                ["0", "0", "0", "1", "1", "1"],
-                ["0", "1", "2", "3", "4", "5"]
+                ["X", "Y", "Z"],
+                ["0", "1", "2"]
             ]
         );
     }
