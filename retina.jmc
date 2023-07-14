@@ -888,21 +888,6 @@ class traverse {
         $step_X += $sign_X;
         $int_X += $sign_X;
 
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $relative_[i] = $output_vec3.[i];
-                $relative_[i] *= $shortest_distance;
-                $relative_[i] /= SCALE;
-                $[i] = $relative_[i];
-                $[i] += $origin_[i];
-
-                $frac_[i] = $[i];
-                $frac_[i] %= SCALE;
-            },
-            ["X", "Y", "Z"]
-        );
-
         if ($sign_X = -1) execute positioned ~-1 ~0 ~0 run check.main();
         if ($sign_X = 1) execute positioned ~1 ~0 ~0 run check.main();
     }
@@ -912,21 +897,6 @@ class traverse {
         $distance_Y += $delta_Y;
         $step_Y += $sign_Y;
         $int_Y += $sign_Y;
-
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $relative_[i] = $output_vec3.[i];
-                $relative_[i] *= $shortest_distance;
-                $relative_[i] /= SCALE;
-                $[i] = $relative_[i];
-                $[i] += $origin_[i];
-
-                $frac_[i] = $[i];
-                $frac_[i] %= SCALE;
-            },
-            ["X", "Y", "Z"]
-        );
 
         if ($sign_Y = -1) execute positioned ~0 ~-1 ~0 run check.main();
         if ($sign_Y = 1) execute positioned ~0 ~1 ~0 run check.main();
@@ -938,21 +908,6 @@ class traverse {
         $distance_Z += $delta_Z;
         $step_Z += $sign_Z;
         $int_Z += $sign_Z;
-        
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $relative_[i] = $output_vec3.[i];
-                $relative_[i] *= $shortest_distance;
-                $relative_[i] /= SCALE;
-                $[i] = $relative_[i];
-                $[i] += $origin_[i];
-
-                $frac_[i] = $[i];
-                $frac_[i] %= SCALE;
-            },
-            ["X", "Y", "Z"]
-        );
 
         if ($sign_Z = -1) execute positioned ~0 ~0 ~-1 run check.main();
         if ($sign_Z = 1) execute positioned ~0 ~0 ~1 run check.main();
