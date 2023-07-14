@@ -16,6 +16,7 @@ data remove storage retina:output ContactSurface
 data remove storage retina:output HitFace
 execute store result score $block_distance retina.__variable__ run scoreboard players set $entity_distance retina.__variable__ 2147483647
 execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
+execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
 tag @s add retina.executing
 execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
