@@ -1153,7 +1153,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
 
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[WEST] &<white>X0: &<light_purple,$X0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.X == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
@@ -1198,7 +1198,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[EAST] &<white>X0: &<light_purple,$X0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.X == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $X0;
                 $distance /= $output_vec3.X;
@@ -1243,7 +1243,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[BOTTOM] &<white>Y0: &<light_purple,$Y0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.Y == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
@@ -1288,7 +1288,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
 
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[TOP] &<white>Y0: &<light_purple,$Y0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.Y == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Y0;
                 $distance /= $output_vec3.Y;
@@ -1333,7 +1333,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[NORTH] &<white>Z0: &<light_purple,$Z0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.Z == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;
@@ -1378,7 +1378,7 @@ class find_closest_surface {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
             
             if ($debug_messages) Text.tellraw(@a, "&<italic,bold>[SOUTH] &<white>Z0: &<light_purple,$Z0>");
-            if (score 0 retina.__int__ matches 0) {
+            execute run {
                 if ($output_vec3.Z == 0) return 0; // The code block is actually its own function, so this gives control back to the while loop.
                 $distance = $Z0;
                 $distance /= $output_vec3.Z;

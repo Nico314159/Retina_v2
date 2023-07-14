@@ -1,2 +1,5 @@
-scoreboard players operation $total_distance retina.__variable__ = $delta_X retina.__variable__
-scoreboard players operation $total_distance retina.__variable__ *= $X0 retina.__variable__
+scoreboard objectives remove retina
+scoreboard objectives remove retina.show_particle
+scoreboard objectives remove retina.show_line
+scoreboard objectives remove retina.raycast_count
+scoreboard objectives remove retinacasttemp
