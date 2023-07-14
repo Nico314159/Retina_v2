@@ -1,0 +1,3 @@
+scoreboard objectives remove retina
+scoreboard objectives remove retina.show_particle
+scoreboard objectives remove retina.show_line

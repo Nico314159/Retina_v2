@@ -779,6 +779,7 @@ $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 $max_depth ??= 50;
 data merge storage retina:input {TargetEntities: true};
+data merge storage retina:output {ContactCoordinates: [0.0d, 0.0d, 0.0d], ContactSurface: [0, 0, 0, 0, 0, 0], Distance: 0.0d, HitFace: "", PlacingPosition: [0, 0, 0], Target: "", TargetedBlock: [0, 0, 0]};
 
 class traverse {
     function setup() {
@@ -2677,3 +2678,12 @@ class storage {
     }
 }
 
+$old_version_installed ?= scoreboard players add * retina 1;
+if ($old_version_installed) {
+    scoreboard objectives remove retina;
+    scoreboard objectives remove retina.show_particle;
+    scoreboard objectives remove retina.show_line;
+    scoreboard objectives remove retina.raycast_count;
+    scoreboard objectives remove retinacasttemp;
+}
+function uninstall() {}

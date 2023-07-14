@@ -1,0 +1,1 @@
+scoreboard objectives remove retina.__variable__
