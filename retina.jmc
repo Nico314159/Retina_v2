@@ -2631,9 +2631,6 @@ class storage {
             $total_distance *= $Z0;
         }
         $total_distance /= SCALE;
-
-        if ($debug_messages == 2) Text.tellraw(@a, "&<bold,italic>targeted_X = &<$targeted_X>, targeted_Y = &<$targeted_Y>, targeted_Z = &<$targeted_Z>");
-        if ($debug_messages == 2) Text.tellraw(@a, "&<bold,italic>total_distance = &<$total_distance>");
         
         execute store result storage retina:output Distance double 0.00208333 run $total_distance.get();
         if ($debug_messages == 2) tellraw @a [{"text":"Distance (NBT): ","bold":true,"italic":true},{"nbt":"Distance","storage":"retina:output","bold":false,"italic":false,"color":"red"}];

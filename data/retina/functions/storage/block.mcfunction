@@ -16,7 +16,5 @@ execute if score $nearest_axis retina.__variable__ matches 0 run function retina
 execute if score $nearest_axis retina.__variable__ matches 1 run function retina:__private__/if_else/21
 execute if score $nearest_axis retina.__variable__ matches 2 run function retina:__private__/if_else/22
 scoreboard players operation $total_distance retina.__variable__ /= 480 retina.__int__
-execute if score $debug_messages retina.__variable__ matches 2 run tellraw @a ["",{"text":"targeted_X = ","bold":true,"italic":true},{"score":{"name":"$targeted_X","objective":"retina.__variable__"}},{"text":", targeted_Y = "},{"score":{"name":"$targeted_Y","objective":"retina.__variable__"}},{"text":", targeted_Z = "},{"score":{"name":"$targeted_Z","objective":"retina.__variable__"}}]
-execute if score $debug_messages retina.__variable__ matches 2 run tellraw @a ["",{"text":"total_distance = ","bold":true,"italic":true},{"score":{"name":"$total_distance","objective":"retina.__variable__"}}]
 execute store result storage retina:output Distance double 0.00208333 run scoreboard players get $total_distance retina.__variable__
 execute if score $debug_messages retina.__variable__ matches 2 run tellraw @a [{"text":"Distance (NBT): ","bold":true,"italic":true},{"nbt":"Distance","storage":"retina:output","bold":false,"italic":false,"color":"red"}]
