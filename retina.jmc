@@ -948,12 +948,12 @@ class check {
             if ($contact) $block_distance = $min_distance_to_surface;
             $hit_block = $contact;
         }
-        function get_hitbox() {
+        function get_hitbox() { 
             Hardcode.repeatList(
                 "[shape]",
-                () => { 
-                    if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
-                    if (block ~ ~ ~ #retina:[shape]) return 1;
+                () => {
+                    $found_match ?= execute if block ~ ~ ~ #retina:[shape] run hitbox.[shape]();
+                    if ($found_match) return 1;
                 },
                 ["amethyst", "anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
@@ -1003,8 +1003,8 @@ class check {
                 Hardcode.repeatList( 
                     "[type]",
                     () => {
-                        if (entity @s[type=#retina:[type]]) entity_hitbox.[type]();
-                        if (entity @s[type=#retina:[type]]) return 1;
+                        $found_match ?= execute if entity @s[type=#retina:[type]] run entity_hitbox.[type]();
+                        if ($found_match) return 1;
                     },
                     ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
                     "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
