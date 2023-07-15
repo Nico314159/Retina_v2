@@ -797,6 +797,7 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
+        tag @e remove retina.target;
         data modify storage retina:output Target set value "NONE";
         data remove storage retina:output Distance;
         data remove storage retina:output TargetedBlock;
@@ -1528,10 +1529,10 @@ class hitbox {
         data modify storage retina:data Surfaces set value {Top: [[150, 390, 150, 330, 390, 330], [120, 180, 120, 360, 180, 360]], Bottom: [[150, 180, 150, 330, 180, 330], [120, 120, 120, 360, 120, 360]], West: [[150, 180, 150, 150, 390, 330], [120, 120, 120, 120, 180, 360]], East: [[330, 180, 150, 330, 390, 330], [420, 120, 120, 360, 180, 360]], North: [[150, 180, 150, 330, 390, 150], [120, 120, 120, 360, 180, 120]], South: [[150, 180, 330, 330, 390, 330], [120, 120, 360, 360, 180, 360]]};
     }
     function berries() {
-        if (block ~ ~ ~ minecraft:sweet_berries[age=0]) data modify storage retina:data Surfaces set value {Top: [[90, 240, 90, 390, 240, 390]], Bottom: [[90, 0, 90, 390, 0, 390]], West: [[90, 0, 90, 90, 240, 390]], East: [[390, 0, 90, 390, 240, 390]], North: [[90, 0, 90, 390, 240, 90]], South: [[90, 0, 390, 390, 240, 390]]}
-        if (block ~ ~ ~ minecraft:sweet_berries[age=1]) hitbox.cactus_shaped();
-        if (block ~ ~ ~ minecraft:sweet_berries[age=2]) hitbox.cactus_shaped();
-        if (block ~ ~ ~ minecraft:sweet_berries[age=3]) hitbox.cubic();
+        if (block ~ ~ ~ minecraft:sweet_berry_bush[age=0]) data modify storage retina:data Surfaces set value {Top: [[90, 240, 90, 390, 240, 390]], Bottom: [[90, 0, 90, 390, 0, 390]], West: [[90, 0, 90, 90, 240, 390]], East: [[390, 0, 90, 390, 240, 390]], North: [[90, 0, 90, 390, 240, 90]], South: [[90, 0, 390, 390, 240, 390]]}
+        if (block ~ ~ ~ minecraft:sweet_berry_bush[age=1]) hitbox.cactus_shaped();
+        if (block ~ ~ ~ minecraft:sweet_berry_bush[age=2]) hitbox.cactus_shaped();
+        if (block ~ ~ ~ minecraft:sweet_berry_bush[age=3]) hitbox.cubic();
     }
     function big_dripleaf() {
         if (block ~ ~ ~ minecraft:big_dripleaf[facing=north]) data modify storage retina:data Surfaces set value {Top:[[150, 390, 270, 330, 390, 450]], Bottom:[[150, 0, 270, 330, 0, 450]], West:[[150, 0, 270, 150, 390, 450]], East:[[330, 0, 270, 330, 390, 450]], North:[[150, 0, 270, 330, 390, 270]], South:[[150, 0, 450, 330, 390, 450]]}
@@ -2628,5 +2629,7 @@ if ($old_version_installed) {
     scoreboard objectives remove retina.show_line;
     scoreboard objectives remove retina.raycast_count;
     scoreboard objectives remove retinacasttemp;
+    kill @e[type=marker, tag=retina.ray];
+    kill @e[type=marker, tag=retina.get_coordinates];
 }
 function uninstall() {}
