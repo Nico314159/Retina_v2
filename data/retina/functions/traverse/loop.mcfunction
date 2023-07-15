@@ -7,6 +7,7 @@ execute if score $shortest_distance retina.__variable__ = $distance_X retina.__v
 scoreboard players operation $prev_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $prev_Y retina.__variable__ = $int_Y retina.__variable__
 scoreboard players operation $prev_Z retina.__variable__ = $int_Z retina.__variable__
+execute if score $debug_messages retina.__variable__ matches 3 run particle crit
 execute if score $nearest_axis retina.__variable__ matches 0 if score $step retina.__variable__ < $max_depth retina.__variable__ if score $hit_block retina.__variable__ matches 0 if score $hit_entity retina.__variable__ matches 0 run function retina:traverse/x
 execute if score $nearest_axis retina.__variable__ matches 1 if score $step retina.__variable__ < $max_depth retina.__variable__ if score $hit_block retina.__variable__ matches 0 if score $hit_entity retina.__variable__ matches 0 run function retina:traverse/y
 execute if score $nearest_axis retina.__variable__ matches 2 if score $step retina.__variable__ < $max_depth retina.__variable__ if score $hit_block retina.__variable__ matches 0 if score $hit_entity retina.__variable__ matches 0 run function retina:traverse/z

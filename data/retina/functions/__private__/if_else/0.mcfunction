@@ -1,6 +1,5 @@
-data modify storage retina:data Surfaces.Top append value [[0,390,0,480,390,480]]
-data modify storage retina:data Surfaces.Bottom append value [[0,330,0,480,330,480]]
-data modify storage retina:data Surfaces.West append value [[0,330,0,0,390,480]]
-data modify storage retina:data Surfaces.East append value [[480,330,0,480,390,480]]
-data modify storage retina:data Surfaces.North append value [[0,330,0,480,390,0]]
-data modify storage retina:data Surfaces.South append value [[0,330,480,480,390,480]]
+execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
+execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red"}]
+function retina:math/gimbal_to_vec
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold"},{"text":"]","color":"gold"}]

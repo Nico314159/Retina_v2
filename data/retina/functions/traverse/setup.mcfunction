@@ -19,11 +19,7 @@ execute store result score $block_distance retina.__variable__ run scoreboard pl
 execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
 execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
 tag @s add retina.executing
-execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
-execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
-execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red"}]
-function retina:math/gimbal_to_vec
-execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold"},{"text":"]","color":"gold"}]
+execute unless score $bypass_gimbals retina.__variable__ matches 1.. run function retina:__private__/if_else/0
 execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run function retina:__private__/anonymous/0
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__

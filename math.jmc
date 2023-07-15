@@ -57,4 +57,77 @@ class Math {
         $output_vec3.Y = $output;
         $output_vec3.Y *= -1;
     }
+    function gimbal_to_matrix() {
+        // Get sine and cosine values of yaw and pitch
+        $input = $input_pitch;
+        Math.sine();
+        $sin_X = $output;
+        Math.cosine();
+        $cos_X = $output;
+
+        $input = $input_yaw;
+        Math.sine();
+        $sin_Y = $output;
+        Math.cosine();
+        $cos_Y = $output;
+
+        // Compute vectors of matrix
+        $output_mat3.XX = $cos_Y;
+        $output_mat3.XY = 0;
+        $output_mat3.XZ = $sin_Y;
+
+        $output_mat3.YX = $sin_Y;
+        $output_mat3.YX *= $sin_X;
+        $output_mat3.YX *= -1;
+        $output_mat3.YX /= SCALE;
+        $output_mat3.YY = $cos_X;
+        $output_mat3.YZ = $cos_Y;
+        $output_mat3.YZ *= $sin_X;
+        $output_mat3.YZ /= SCALE;
+
+        $output_mat3.ZX = $sin_Y;
+        $output_mat3.ZX *= $cos_X;
+        $output_mat3.ZX *= -1;
+        $output_mat3.ZX /= SCALE;
+        $output_mat3.ZY = $sin_X;
+        $output_mat3.ZY *= -1;
+        $output_mat3.ZZ = $cos_Y;
+        $output_mat3.ZZ *= $cos_X;
+        $output_mat3.ZZ /= SCALE;
+    }
+    function matrix_transform() {
+        // Perform linear transformation
+        $mat3_column_0 = $input_mat3.XX;
+        $mat3_column_1 = $input_mat3.YX;
+        $mat3_column_2 = $input_mat3.ZX;
+        $mat3_column_0 *= $input_vec3.X;
+        $mat3_column_1 *= $input_vec3.Y;
+        $mat3_column_2 *= $input_vec3.Z;
+        $output_vec3.X = $mat3_column_0;
+        $output_vec3.X += $mat3_column_1;
+        $output_vec3.X += $mat3_column_2;
+        $output_vec3.X /= SCALE;
+
+        $mat3_column_0 = $input_mat3.XY;
+        $mat3_column_1 = $input_mat3.YY;
+        $mat3_column_2 = $input_mat3.ZY;
+        $mat3_column_0 *= $input_vec3.X;
+        $mat3_column_1 *= $input_vec3.Y;
+        $mat3_column_2 *= $input_vec3.Z;
+        $output_vec3.Y = $mat3_column_0;
+        $output_vec3.Y += $mat3_column_1;
+        $output_vec3.Y += $mat3_column_2;
+        $output_vec3.Y /= SCALE;
+
+        $mat3_column_0 = $input_mat3.XZ;
+        $mat3_column_1 = $input_mat3.YZ;
+        $mat3_column_2 = $input_mat3.ZZ;
+        $mat3_column_0 *= $input_vec3.X;
+        $mat3_column_1 *= $input_vec3.Y;
+        $mat3_column_2 *= $input_vec3.Z;
+        $output_vec3.Z = $mat3_column_0;
+        $output_vec3.Z += $mat3_column_1;
+        $output_vec3.Z += $mat3_column_2;
+        $output_vec3.Z /= SCALE;
+    }
 }
