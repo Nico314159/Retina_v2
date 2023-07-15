@@ -5,7 +5,6 @@ scoreboard players set 0 retina.__int__ 0
 scoreboard players set 2 retina.__int__ 2
 scoreboard players set 1800 retina.__int__ 1800
 scoreboard players set 3600 retina.__int__ 3600
-scoreboard players set -2 retina.__int__ -2
 scoreboard players set -4 retina.__int__ -4
 scoreboard players set -1 retina.__int__ -1
 scoreboard players set $overflow_risk retina.__variable__ 2147483647

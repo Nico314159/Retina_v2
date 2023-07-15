@@ -920,9 +920,9 @@ class traverse {
         if ($sign_Z = 1) execute positioned ~0 ~0 ~1 run check.main();
     }
     function multicast() {
-        $horizontal_count = data get storage retina:input HorizontalCount;
-        $vertical_count = data get storage retina:input VerticalCount;
-        $centered_count = data get storage retina:input CenteredCount;
+        $horizontal_count = data get storage retina:input HorizontalCount 10;
+        $vertical_count = data get storage retina:input VerticalCount 10;
+        $centered_count = data get storage retina:input CenteredCount 1;
 
         // input validation
         if ($horizontal_count <= 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>HorizontalCount storage has invalid value of &<$horizontal_count>");
@@ -933,32 +933,36 @@ class traverse {
         if ($centered_count < 0) return 0;
 
         $bypass_gimbals = true;
-        for ($i = 0; $i < $horizontal_count; $i++;) { 
-            for ($j = 0; $j < $vertical_count; $j++;) {
-                $input_vec3.X = $horizontal_count;
-                $input_vec3.X /= -2;
-                $input_vec3.X += $i;
-                $input_vec3.Y = $vertical_count;
-                $input_vec3.Y /= -2;
-                $input_vec3.Y += $j;
-                $input_vec3.Z = 20;
+        for ($i = 0; $i < $horizontal_count; $i += 10;) { 
+            for ($j = 0; $j < $vertical_count; $j += 10;) {
+                $input_vec3.X = $i;
+                $input_vec3.X *= 2;
+                $input_vec3.X -= $horizontal_count;
+                $input_vec3.X += 10;
+                $input_vec3.Y = $i;
+                $input_vec3.Y *= 2;
+                $input_vec3.Y -= $vertical_count;
+                $input_vec3.Y += 10;
+                $input_vec3.Z = 100;
+                Text.tellraw(@a, "Input Vector: &<red, italic>[&<$input_vec3.X, italic>, &<$input_vec3.Y, italic>, &<$input_vec3.Z, italic>]"); 
 
+                $length = 0;
                 Hardcode.repeatList("[axis]", () => {
-                    $input_vec3.[axis] *= SCALE; $temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;
+                    $temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;
                 }, ["X", "Y", "Z"]);
                 $length = Math.sqrt($length);
                 Math.gimbal_to_matrix();
                 Math.matrix_transform();
                 Hardcode.repeatList("[axis]", () => {
-                    $output_vec3.[axis] /= $length; $output_vec3.[axis] /= SCALE;
-                    if ($debug_messages) Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
+                    $output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;
+                    Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
                 }, ["X", "Y", "Z"]);
                 traverse.setup();
             } 
         }
         $bypass_gimbals = false;
 
-        for ($i = 0; $i < $centered_count; $i++) {traverse.setup();}
+        for ($k = 0; $k < $centered_count; $k ++) {traverse.setup();}
     }
 }   
 
