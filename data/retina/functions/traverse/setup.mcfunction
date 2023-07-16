@@ -8,7 +8,6 @@ scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__varia
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute unless score $test_Z retina.__variable__ matches -1..0 run return 0
-tag @e remove retina.target
 data modify storage retina:output Target set value "NONE"
 data remove storage retina:output Distance
 data remove storage retina:output TargetedBlock
@@ -19,7 +18,7 @@ execute store result score $block_distance retina.__variable__ run scoreboard pl
 execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
 execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
 tag @s add retina.executing
-execute unless score $bypass_gimbals retina.__variable__ matches 1.. run function retina:__private__/if_else/0
+execute if score $single_call retina.__variable__ matches 1.. run function retina:__private__/if_else/0
 execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run function retina:__private__/anonymous/0
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__

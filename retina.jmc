@@ -797,7 +797,6 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
-        tag @e remove retina.target;
         data modify storage retina:output Target set value "NONE";
         data remove storage retina:output Distance;
         data remove storage retina:output TargetedBlock;
@@ -809,7 +808,8 @@ class traverse {
         $max_depth = data get storage retina:input MaxRecursionDepth;
         
         tag @s add retina.executing;
-        if (!$bypass_gimbals) {
+        if ($single_call) {
+            tag @e remove retina.target;
             $input_pitch = data get entity @s Rotation[1] 10;
             $input_yaw = data get entity @s Rotation[0] 10;
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -881,7 +881,7 @@ class traverse {
         $prev_Y = $int_Y;
         $prev_Z = $int_Z;
 
-        if ($debug_messages == 3) particle crit;
+        if ($debug_messages == 2) particle crit;
 
         // Process data based on nearest axis
         if ($nearest_axis = 0 && no_break) traverse.x();
@@ -932,37 +932,40 @@ class traverse {
         if ($centered_count < 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
         if ($centered_count < 0) return 0;
 
-        $bypass_gimbals = true;
-        for ($i = 0; $i < $horizontal_count; $i += 10;) { 
-            for ($j = 0; $j < $vertical_count; $j += 10;) {
+        $single_call = true;
+        for ($i = 0; $i < $horizontal_count; $i += 10) { 
+            for ($j = 0; $j < $vertical_count; $j += 10) {
                 $input_vec3.X = $i;
                 $input_vec3.X *= 2;
-                $input_vec3.X -= $horizontal_count;
                 $input_vec3.X += 10;
-                $input_vec3.Y = $i;
+                $input_vec3.X -= $horizontal_count;
+                $input_vec3.Y = $j;
                 $input_vec3.Y *= 2;
-                $input_vec3.Y -= $vertical_count;
                 $input_vec3.Y += 10;
-                $input_vec3.Z = 100;
+                $input_vec3.Y -= $vertical_count;
+                $input_vec3.Z = 500;
                 Text.tellraw(@a, "Input Vector: &<red, italic>[&<$input_vec3.X, italic>, &<$input_vec3.Y, italic>, &<$input_vec3.Z, italic>]"); 
 
                 $length = 0;
-                Hardcode.repeatList("[axis]", () => {
-                    $temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;
-                }, ["X", "Y", "Z"]);
+                Hardcode.repeatList("[axis]", () => {$temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;}, ["X", "Y", "Z"]);
                 $length = Math.sqrt($length);
+
+                $input_pitch = data get entity @s Rotation[1] 10;
+                $input_yaw = data get entity @s Rotation[0] 10;
                 Math.gimbal_to_matrix();
+                Hardcode.repeatList("[pair]", () => {$input_mat3.[pair] = $output_mat3.[pair];}, ["XX", "XY", "XZ", "YX", "YY", "YZ", "ZX", "ZY", "ZZ"]);
                 Math.matrix_transform();
-                Hardcode.repeatList("[axis]", () => {
-                    $output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;
-                    Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
-                }, ["X", "Y", "Z"]);
+
+                Hardcode.repeatList("[axis]", () => {$output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;}, ["X", "Y", "Z"]);
+                Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
                 traverse.setup();
             } 
         }
-        $bypass_gimbals = false;
 
-        for ($k = 0; $k < $centered_count; $k ++) {traverse.setup();}
+        $input_pitch = data get entity @s Rotation[1] 10;
+        $input_yaw = data get entity @s Rotation[0] 10;
+        for ($k = 0; $k < $centered_count; $k++) {traverse.setup();}
+        $single_call = false;
     }
 }   
 
