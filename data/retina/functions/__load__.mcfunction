@@ -9,6 +9,8 @@ scoreboard players set -4 retina.__int__ -4
 scoreboard players set -1 retina.__int__ -1
 scoreboard players set $overflow_risk retina.__variable__ 2147483647
 scoreboard players operation $overflow_risk retina.__variable__ /= 480 retina.__int__
+scoreboard objectives add retina.id dummy
+scoreboard objectives add retina.hit dummy
 data merge storage retina:input {HorizontalCount:1b,VerticalCount:1b,CenteredCount:0b}
 execute unless data storage retina:input MaxRecursionDepth run data merge storage retina:input {MaxRecursionDepth:50}
 execute unless data storage retina:input TargetEntities run data merge storage retina:input {TargetEntities:true}

@@ -777,6 +777,8 @@ new tags.entity_types(zombie_like) {
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
 $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
+Scoreboard.add(retina.id, dummy);
+Scoreboard.add(retina.hit, dummy);
 data merge storage retina:input {HorizontalCount: 1b, VerticalCount: 1b, CenteredCount: 0b};
 if (!data storage retina:input MaxRecursionDepth) data merge storage retina:input {MaxRecursionDepth: 50}
 if (!data storage retina:input TargetEntities) data merge storage retina:input {TargetEntities: true}
@@ -810,6 +812,7 @@ class traverse {
         tag @s add retina.executing;
         if ($single_call) {
             tag @e remove retina.target;
+            retina.hit:@e = 0;
             $input_pitch = data get entity @s Rotation[1] 10;
             $input_yaw = data get entity @s Rotation[0] 10;
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -933,6 +936,8 @@ class traverse {
         if ($centered_count < 0) return 0;
 
         $single_call = true;
+        tag @e remove retina.target;
+        retina.hit:@e = 0;
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
                 $input_vec3.X = $i;
@@ -944,7 +949,7 @@ class traverse {
                 $input_vec3.Y += 10;
                 $input_vec3.Y -= $vertical_count;
                 $input_vec3.Z = 500;
-                Text.tellraw(@a, "Input Vector: &<red, italic>[&<$input_vec3.X, italic>, &<$input_vec3.Y, italic>, &<$input_vec3.Z, italic>]"); 
+                if ($debug_messages) Text.tellraw(@a, "Input Vector: &<red, italic>[&<$input_vec3.X, italic>, &<$input_vec3.Y, italic>, &<$input_vec3.Z, italic>]"); 
 
                 $length = 0;
                 Hardcode.repeatList("[axis]", () => {$temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;}, ["X", "Y", "Z"]);
@@ -957,7 +962,7 @@ class traverse {
                 Math.matrix_transform();
 
                 Hardcode.repeatList("[axis]", () => {$output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;}, ["X", "Y", "Z"]);
-                Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
+                if ($debug_messages) Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
                 traverse.setup();
             } 
         }
@@ -2645,6 +2650,7 @@ class storage {
         // Targeted entity
         data modify storage retina:output TargetedEntity set value {UUID: [I; 0, 0, 0, 0], Pos: [0.0f, 0.0f, 0.0f]};
         execute as @e[type=!#retina:ignore, tag=retina.possible_target] if score @s retina.id = $closest_cuboid_id retina.__variable__ run tag @s add retina.target;
+        execute as @e[type=!#retina:ignore, tag=retina.possible_target] if score @s retina.id = $closest_cuboid_id retina.__variable__ run retina.hit:@s++;
         data modify storage retina:data Entity set from entity @e[type=!#retina:ignore, tag=retina.target, limit=1];
         data modify storage retina:output TargetedEntity.UUID set from storage retina:data Entity.UUID;
         data modify storage retina:output TargetedEntity.Pos set from storage retina:data Entity.Pos;

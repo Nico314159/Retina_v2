@@ -7,7 +7,7 @@ scoreboard players operation $input_vec3.Y retina.__variable__ *= 2 retina.__int
 scoreboard players add $input_vec3.Y retina.__variable__ 10
 scoreboard players operation $input_vec3.Y retina.__variable__ -= $vertical_count retina.__variable__
 scoreboard players set $input_vec3.Z retina.__variable__ 500
-tellraw @a ["",{"text":"Input Vector: "},{"text":"[","color":"red","italic":true},{"score":{"name":"$input_vec3.X","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":", ","italic":true,"color":"red"},{"score":{"name":"$input_vec3.Y","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":", ","italic":true,"color":"red"},{"score":{"name":"$input_vec3.Z","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":"]","italic":true,"color":"red"}]
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Input Vector: "},{"text":"[","color":"red","italic":true},{"score":{"name":"$input_vec3.X","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":", ","italic":true,"color":"red"},{"score":{"name":"$input_vec3.Y","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":", ","italic":true,"color":"red"},{"score":{"name":"$input_vec3.Z","objective":"retina.__variable__"},"italic":true,"color":"red"},{"text":"]","italic":true,"color":"red"}]
 scoreboard players set $length retina.__variable__ 0
 scoreboard players operation $temp retina.__variable__ = $input_vec3.X retina.__variable__
 scoreboard players operation $temp retina.__variable__ *= $input_vec3.X retina.__variable__
@@ -40,7 +40,7 @@ scoreboard players operation $output_vec3.Y retina.__variable__ *= 480 retina.__
 scoreboard players operation $output_vec3.Y retina.__variable__ /= $length retina.__variable__
 scoreboard players operation $output_vec3.Z retina.__variable__ *= 480 retina.__int__
 scoreboard players operation $output_vec3.Z retina.__variable__ /= $length retina.__variable__
-tellraw @a ["",{"text":"Angled Vector: "},{"text":"[","color":"gold","italic":true},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":", ","italic":true,"color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":", ","italic":true,"color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":"]","italic":true,"color":"gold"}]
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Angled Vector: "},{"text":"[","color":"gold","italic":true},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":", ","italic":true,"color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":", ","italic":true,"color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"italic":true,"color":"gold"},{"text":"]","italic":true,"color":"gold"}]
 function retina:traverse/setup
 scoreboard players add $j retina.__variable__ 10
 execute if score $j retina.__variable__ < $vertical_count retina.__variable__ run function retina:__private__/for_loop/1
