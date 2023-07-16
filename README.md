@@ -1,4 +1,4 @@
-# Retina_v2
+# Retina v2
  
 **Retina 2.0** is a raycasting library data pack for Minecraft: Java Edition 1.20+, using voxel traversal. At the moment, the features are pretty minimal, but I have a lot more planned, so check back in the future!
 
@@ -19,7 +19,9 @@ effect give @e[type=minecraft:goat, tag=retina.target] minecraft:levitation 1 0
 ```
 For more specific data about the intersected block/entity, see the 'Output' section.
 
-## Settings
+To do multiple angled raycasts at once (eg. shotguns), you can use the `retina:traverse/multicast` function. Make sure that `HorizontalCount` and `VerticalCount` are set properly or it will not work. (see below for more information)
+
+## Settings / Input
 
 ### Target entities
 
@@ -40,6 +42,16 @@ data modify storage retina:input MaxRecursionDepth set value 100
 ```
 
 Values under 10 may fail to detect blocks that are within arm reach of the player.
+
+### Raycast count
+
+The `HorizontalCount` and `VerticalCount` storage values define an NxM grid of raycasts offset from the cursor, whereas `CenteredCount` adds additional raycasts that are centered directly on the crosshair (like regular raycasts).
+To set all of these different values at once, you can use the `data merge` command.
+
+```mcfunction
+# Does 10 raycasts in a 3x3 grid with the middle one doubled up.
+data merge storage retina:input {HorizontalCount: 3, VerticalCount: 3, CenteredCount: 1}
+```
 
 ## Output
 
