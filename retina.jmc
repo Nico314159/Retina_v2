@@ -935,7 +935,7 @@ class traverse {
         if ($centered_count < 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
         if ($centered_count < 0) return 0;
 
-        $single_call = true;
+        $single_call = false;
         tag @e remove retina.target;
         retina.hit:@e = 0;
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
@@ -970,7 +970,7 @@ class traverse {
         $input_pitch = data get entity @s Rotation[1] 10;
         $input_yaw = data get entity @s Rotation[0] 10;
         for ($k = 0; $k < $centered_count; $k++) {traverse.setup();}
-        $single_call = false;
+        $single_call = true;
     }
 }   
 

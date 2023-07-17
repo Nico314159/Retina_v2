@@ -7,7 +7,7 @@ execute if score $vertical_count retina.__variable__ matches ..0 run tellraw @a 
 execute if score $vertical_count retina.__variable__ matches ..0 run return 0
 execute if score $centered_count retina.__variable__ matches ..-1 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"CenteredCount storage has invalid value of ","color":"red"},{"score":{"name":"$centered_count","objective":"retina.__variable__"},"color":"red"}]
 execute if score $centered_count retina.__variable__ matches ..-1 run return 0
-scoreboard players set $single_call retina.__variable__ 1
+scoreboard players set $single_call retina.__variable__ 0
 tag @e remove retina.target
 scoreboard players set @e retina.hit 0
 scoreboard players set $i retina.__variable__ 0
@@ -16,4 +16,4 @@ execute store result score $input_pitch retina.__variable__ run data get entity 
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
 scoreboard players set $k retina.__variable__ 0
 execute if score $k retina.__variable__ < $centered_count retina.__variable__ run function retina:__private__/for_loop/2
-scoreboard players set $single_call retina.__variable__ 0
+scoreboard players set $single_call retina.__variable__ 1
