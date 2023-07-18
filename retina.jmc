@@ -779,7 +779,7 @@ $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 Scoreboard.add(retina.id, dummy);
 Scoreboard.add(retina.hit, dummy);
-data merge storage retina:input {HorizontalCount: 1b, VerticalCount: 1b, CenteredCount: 0b, SpreadFactor: [100, 100]};
+data merge storage retina:input {HorizontalCount: 1b, VerticalCount: 1b, CenteredCount: 0b, SpreadFactor: [100, 100], EndpointEntity: 0b};
 if (!data storage retina:input MaxRecursionDepth) data merge storage retina:input {MaxRecursionDepth: 50}
 if (!data storage retina:input TargetEntities) data merge storage retina:input {TargetEntities: true}
 data merge storage retina:output {ContactCoordinates: [], ContactSurface: [], Distance: 0.0d, HitFace: "", PlacingPosition: [], Target: "", TargetedBlock: []};
@@ -813,6 +813,7 @@ class traverse {
         if ($single_call) {
             tag @e remove retina.target;
             retina.hit:@e = 0;
+            kill @e[type=marker,tag=retina.endpoint];
             $input_pitch = data get entity @s Rotation[1] 10;
             $input_yaw = data get entity @s Rotation[0] 10;
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -2654,6 +2655,11 @@ class storage {
         );
         $total_distance /= SCALE;
         execute store result storage retina:output Distance double 0.0020833333333333333 run $total_distance.get();
+
+        if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
+            tag @s add retina.endpoint;
+            data modify entity @s Pos set from storage retina:output ContactCoordinates;
+        }
     }
     function entity() {
         // Target type

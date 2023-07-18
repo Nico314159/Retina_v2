@@ -20,3 +20,4 @@ execute store result storage retina:output ContactCoordinates[2] double 0.002083
 execute if score $nearest_axis retina.__variable__ matches 2 run function retina:__private__/if_else/17
 scoreboard players operation $total_distance retina.__variable__ /= 480 retina.__int__
 execute store result storage retina:output Distance double 0.0020833333333333333 run scoreboard players get $total_distance retina.__variable__
+execute if data storage retina:input {EndpointEntity: true} summon minecraft:marker run function retina:__private__/anonymous/9
