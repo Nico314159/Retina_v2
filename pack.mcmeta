@@ -1,6 +1,6 @@
 {
-	"pack": {
-		"pack_format": 10,
-		"description": "(WIP) Raycasting implementation using voxel traversal"
-	}
+    "pack": {
+        "pack_format": 10,
+        "description": "Precise & customizable raycast setup for use in integrated systems."
+    }
 }
