@@ -935,8 +935,8 @@ class traverse {
         if ($centered_count < 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
         if ($centered_count < 0) return 0;
 
-        $spread_least = data get retina:input SpreadFactor[0];
-        $spread_range = data get retina:input SpreadFactor[1];
+        $spread_least = data get storage retina:input SpreadFactor[0];
+        $spread_range = data get storage retina:input SpreadFactor[1];
         $spread_range -= $spread_least;
 
         $single_call = false;
@@ -972,12 +972,9 @@ class traverse {
                 $length = 0;
                 Hardcode.repeatList("[axis]", () => {$temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;}, ["X", "Y", "Z"]);
                 $length = Math.sqrt($length);
-
-
                 Math.gimbal_to_matrix();
                 Hardcode.repeatList("[pair]", () => {$input_mat3.[pair] = $output_mat3.[pair];}, ["XX", "XY", "XZ", "YX", "YY", "YZ", "ZX", "ZY", "ZZ"]);
                 Math.matrix_transform();
-
                 Hardcode.repeatList("[axis]", () => {$output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;}, ["X", "Y", "Z"]);
                 if ($debug_messages) Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
                 traverse.setup();
