@@ -2680,13 +2680,13 @@ class storage {
         // Contact coordinates
         data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
         Hardcode.repeatLists(
-            ["[axis]", "index"],
+            ["[axis]", "_index"],
             () => {
                 $targeted_[axis] += $origin_[axis];
-                execute store result storage retina:output ContactCoordinates[index] double 0.0020833333333333333 run $targeted_[axis].get();
+                execute store result storage retina:output ContactCoordinates[_index] double 0.0020833333333333333 run $targeted_[axis].get();
 
                 // Total distance
-                if ($nearest_axis == index) {
+                if ($nearest_axis == _index) {
                     $total_distance = $delta_[axis];
                     $total_distance *= $[axis]0;
                 }
