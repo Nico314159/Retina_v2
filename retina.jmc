@@ -954,6 +954,7 @@ class traverse {
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
+                if ($spread_range == 0) $spread = 100;
                 $input_vec3.X *= $spread;
                 $input_vec3.X /= 100;
 
@@ -964,6 +965,7 @@ class traverse {
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
+                if ($spread_range == 0) $spread = 100;
                 $input_vec3.Y *= $spread;
                 $input_vec3.Y /= 100;
 
@@ -2659,7 +2661,7 @@ class storage {
         if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
             tag @s add retina.endpoint;
             data modify entity @s Pos set from storage retina:output ContactCoordinates;
-            if ($end_particle) particle minecraft:soul_fire_flame ~ ~ ~ 0 0 0 0 1 force @a;
+            if ($end_particle) execute at @s run particle minecraft:soul_fire_flame ~ ~ ~ 0 0 0 0 1 force @a;
         }
     }
     function entity() {
