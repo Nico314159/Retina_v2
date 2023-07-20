@@ -4,4 +4,3 @@ execute unless score $hit_block retina.__variable__ matches 1.. if score $debug_
 execute unless score $hit_block retina.__variable__ matches 1.. run return 0
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Block has been hit! Coordinates: ","bold":true,"underlined":true,"color":"gray"},{"text":"[","color":"blue"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Y","objective":"retina.__variable__"},"color":"blue"},{"text":", ","color":"blue"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"blue"},{"text":"]","color":"blue"}]
 execute if score $debug_gold retina.__variable__ matches 1.. run setblock ~ ~ ~ gold_block
-execute if score $end_particle retina.__variable__ matches 1.. run particle minecraft:end_rod ~ ~ ~ 0 0 0 0 1 force @a
