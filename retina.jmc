@@ -2661,7 +2661,7 @@ class storage {
         if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
             tag @s add retina.endpoint;
             data modify entity @s Pos set from storage retina:output ContactCoordinates;
-            if ($end_particle) execute at @s run particle minecraft:soul_fire_flame ~ ~ ~ 0 0 0 0 1 force @a;
+            if ($end_particle) execute at @s run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force @a;
         }
     }
     function entity() {
