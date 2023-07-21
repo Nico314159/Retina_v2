@@ -13,6 +13,7 @@ scoreboard players operation $spread_range retina.__variable__ -= $spread_least 
 scoreboard players set $single_call retina.__variable__ 0
 tag @e remove retina.target
 scoreboard players set @e retina.hit 0
+kill @e[type=marker,tag=retina.endpoint]
 execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
 scoreboard players set $i retina.__variable__ 0
