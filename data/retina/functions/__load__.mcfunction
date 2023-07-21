@@ -19,3 +19,4 @@ execute unless data storage retina:input TargetEntities run data merge storage r
 data merge storage retina:output {ContactCoordinates:[],ContactSurface:[],Distance:0.0d,HitFace:"",PlacingPosition:[],Target:"",TargetedBlock:[]}
 execute store success score $old_version_installed retina.__variable__ run scoreboard players add * retina 1
 execute if score $old_version_installed retina.__variable__ matches 1.. run function retina:__private__/if_else/21
+return 1
