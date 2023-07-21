@@ -2691,3 +2691,4 @@ if ($old_version_installed) {
     kill @e[type=marker, tag=retina.get_coordinates];
 }
 function uninstall() {}
+return 1;
