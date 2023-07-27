@@ -2013,8 +2013,12 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:pressure_plates[powered=true]) data modify storage retina:data Surfaces set value {Top: [[30, 15, 30, 450, 15, 450]], Bottom: [[30, 0, 30, 450, 0, 450]], West: [[30, 0, 30, 30, 15, 450]], East: [[450, 0, 30, 450, 15, 450]], North: [[30, 0, 30, 450, 15, 30]], South: [[30, 0, 450, 450, 15, 450]]}
     }
     function rail() {
-        if (!block ~ ~ ~ #retina:rail[shape=ascending_east] && !block ~ ~ ~ #retina:rail[shape=ascending_west] && !block ~ ~ ~ #retina:rail[shape=ascending_north] && !block ~ ~ ~ #retina:rail[shape=ascending_south]) data modify storage retina:data Surfaces set value {Top: [[0, 60, 0, 480, 60, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 60, 480]], East: [[480, 0, 0, 480, 60, 480]], North: [[0, 0, 0, 480, 60, 0]], South: [[0, 0, 480, 480, 60, 480]]}
-        if (!block ~ ~ ~ #retina:rail[shape=east_west] && !block ~ ~ ~ #retina:rail[shape=north_south]) data modify storage retina:data Surfaces set value {Top: [[0, 240, 0, 480, 240, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 240, 480]], East: [[480, 0, 0, 480, 240, 480]], North: [[0, 0, 0, 480, 240, 0]], South: [[0, 0, 480, 480, 240, 480]]}
+        if (!block ~ ~ ~ #retina:rail[shape=ascending_east] && !block ~ ~ ~ #retina:rail[shape=ascending_west] && !block ~ ~ ~ #retina:rail[shape=ascending_north] && !block ~ ~ ~ #retina:rail[shape=ascending_south]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 60, 0, 480, 60, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 60, 480]], East: [[480, 0, 0, 480, 60, 480]], North: [[0, 0, 0, 480, 60, 0]], South: [[0, 0, 480, 480, 60, 480]]};
+        }
+        if (!block ~ ~ ~ #retina:rail[shape=east_west] && !block ~ ~ ~ #retina:rail[shape=north_south] && !block ~ ~ ~ #retina:rail[shape=north_west] && !block ~ ~ ~ #retina:rail[shape=north_east] && !block ~ ~ ~ #retina:rail[shape=south_west] && !block ~ ~ ~ #retina:rail[shape=south_east]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 240, 0, 480, 240, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 240, 480]], East: [[480, 0, 0, 480, 240, 480]], North: [[0, 0, 0, 480, 240, 0]], South: [[0, 0, 480, 480, 240, 480]]};
+        }
     }
     function repeater_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[0, 60, 0, 480, 60, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 60, 480]], East: [[480, 0, 0, 480, 60, 480]], North: [[0, 0, 0, 480, 60, 0]], South: [[0, 0, 480, 480, 60, 480]]};
