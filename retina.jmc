@@ -2661,6 +2661,7 @@ class storage {
             [["X", "Y", "Z"], ["0", "1", "2"]]
         );
         $total_distance /= SCALE;
+        if ($total_distance < 0) $total_distance *= -1;
         execute store result storage retina:output Distance double 0.0020833333333333333 run $total_distance.get();
 
         if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
@@ -2702,6 +2703,7 @@ class storage {
             [["X", "Y", "Z"], ["0", "1", "2"]]
         );
         $total_distance /= SCALE;
+        if ($total_distance < 0) $total_distance *= -1;
         execute store result storage retina:output Distance double 0.0020833333333333333 run $total_distance.get();
     }
 }
