@@ -812,7 +812,8 @@ class traverse {
         tag @s add retina.executing;
         if ($single_call) {
             tag @e remove retina.target;
-            retina.hit:@e = 0;
+            scoreboard players reset * retina.hit;
+            kill @e[type=marker,tag=retina.endpoint];
             $input_pitch = data get entity @s Rotation[1] 10;
             $input_yaw = data get entity @s Rotation[0] 10;
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
@@ -937,7 +938,10 @@ class traverse {
 
         $single_call = false;
         tag @e remove retina.target;
-        retina.hit:@e = 0;
+        scoreboard players reset * retina.hit;
+        kill @e[type=marker,tag=retina.endpoint];
+        $input_pitch = data get entity @s Rotation[1] 10;
+        $input_yaw = data get entity @s Rotation[0] 10;
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
                 $input_vec3.X = $i;
