@@ -1,5 +1,5 @@
 tag @e remove retina.target
-scoreboard players set @e retina.hit 0
+scoreboard players reset * retina.hit
 kill @e[type=marker,tag=retina.endpoint]
 execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
