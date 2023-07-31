@@ -1749,7 +1749,12 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:doors[facing=south, open=true, hinge=right]) data modify storage retina:data Surfaces set value {Top: [[0, 480, 0, 90, 480, 480]], Bottom: [[0, 0, 0, 90, 0, 480]], West: [[0, 0, 0, 0, 480, 480]], East: [[90, 0, 0, 90, 480, 480]], North: [[0, 0, 0, 90, 480, 0]], South: [[0, 0, 480, 90, 480, 480]]}
     }
     function end_portal_frame() {
-        data modify storage retina:data Surfaces set value {Top: [[0, 390, 0, 480, 390, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 390, 480]], East: [[480, 0, 0, 480, 390, 480]], North: [[0, 0, 0, 480, 390, 0]], South: [[0, 0, 480, 480, 390, 480]]};
+        if (block ~ ~ ~ minecraft:end_portal_frame[eye=false]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 390, 0, 480, 390, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 390, 480]], East: [[480, 0, 0, 480, 390, 480]], North: [[0, 0, 0, 480, 390, 0]], South: [[0, 0, 480, 480, 390, 480]]};
+        }
+        if (block ~ ~ ~ minecraft:end_portal_frame[eye=true]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 390, 0, 480, 390, 480], [120, 480, 120, 360, 480, 360]], Bottom: [[0, 0, 0, 480, 0, 480], [120, 390, 120, 360, 390, 360]], West: [[0, 0, 0, 0, 390, 480], [120, 390, 120, 120, 480, 360]], East: [[480, 0, 0, 480, 390, 480], [360, 390, 120, 360, 480, 360]], North: [[0, 0, 0, 480, 390, 0], [120, 390, 120, 360, 480, 120]], South: [[0, 0, 480, 480, 390, 480], [120, 390, 360, 360, 480, 360]]};
+        }
     }
     function extended_piston() {
         if (!block ~ ~ ~ #retina:extended_piston[extended=true]) hitbox.cubic();
