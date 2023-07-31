@@ -260,6 +260,9 @@ new tags.blocks(nether_fungus) {
 new tags.blocks(nether_sprouts) {
     "values": ["minecraft:nether_sprouts"]
 }
+new tags.blocks(nether_wart) {
+    "values": ["minecraft:nether_wart"]
+}
 new tags.blocks(pane_shaped) {
 	"values": [
 		"minecraft:iron_bars",
@@ -1944,6 +1947,20 @@ class hitbox {
     }
     function nether_sprouts() {
         data modify storage retina:data Surfaces set value {Top: [[60, 90, 60, 420, 90, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[60, 0, 60, 60, 90, 420]], East: [[420, 0, 60, 420, 90, 420]], North: [[60, 0, 60, 420, 90, 60]], South: [[60, 0, 420, 420, 90, 420]]};
+    }
+    function nether_wart() {
+        if (block ~ ~ ~ nether_wart[age=0]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 150, 0, 480, 150, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 150, 480]], East: [[480, 0, 0, 480, 150, 480]], North: [[0, 0, 0, 480, 150, 0]], South: [[0, 0, 480, 480, 150, 480]]};
+        }
+        if (block ~ ~ ~ nether_wart[age=1]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 240, 0, 480, 240, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 240, 480]], East: [[480, 0, 0, 480, 240, 480]], North: [[0, 0, 0, 480, 240, 0]], South: [[0, 0, 480, 480, 240, 480]]};
+        }
+        if (block ~ ~ ~ nether_wart[age=2]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 330, 0, 480, 330, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 330, 480]], East: [[480, 0, 0, 480, 330, 480]], North: [[0, 0, 0, 480, 330, 0]], South: [[0, 0, 480, 480, 330, 480]]};
+        }
+        if (block ~ ~ ~ nether_wart[age=3]) {
+            data modify storage retina:data Surfaces set value {Top: [[0, 420, 0, 480, 420, 480]], Bottom: [[0, 0, 0, 480, 0, 480]], West: [[0, 0, 0, 0, 420, 480]], East: [[480, 0, 0, 480, 420, 480]], North: [[0, 0, 0, 480, 420, 0]], South: [[0, 0, 480, 480, 420, 480]]};
+        }
     }
     function pane_shaped() {
         data modify storage retina:data Surfaces set value {Top: [[210, 480, 210, 270, 480, 270]], Bottom: [[210, 0, 210, 270, 0, 270]], West: [[210, 0, 210, 210, 480, 270]], East: [[270, 0, 210, 270, 480, 270]], North: [[210, 0, 210, 270, 480, 210]], South: [[210, 0, 270, 270, 480, 270]]};
