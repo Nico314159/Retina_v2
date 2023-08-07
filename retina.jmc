@@ -958,7 +958,7 @@ class traverse {
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
-                if ($spread_range == 0) $spread = 100;
+                if ($spread_range == 0) $spread = $spread_least;
                 $input_vec3.X *= $spread;
                 $input_vec3.X /= 100;
 
@@ -969,7 +969,7 @@ class traverse {
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
-                if ($spread_range == 0) $spread = 100;
+                if ($spread_range == 0) $spread = $spread_least;
                 $input_vec3.Y *= $spread;
                 $input_vec3.Y /= 100;
 

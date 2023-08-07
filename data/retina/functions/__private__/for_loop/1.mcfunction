@@ -8,7 +8,7 @@ scoreboard players operation $spread retina.__variable__ = __math__.rng.result r
 scoreboard players add $spread retina.__variable__ 1
 scoreboard players operation $spread retina.__variable__ %= $spread_range retina.__variable__
 scoreboard players operation $spread retina.__variable__ += $spread_least retina.__variable__
-execute if score $spread_range retina.__variable__ matches 0 run scoreboard players set $spread retina.__variable__ 100
+execute if score $spread_range retina.__variable__ matches 0 run scoreboard players operation $spread retina.__variable__ = $spread_least retina.__variable__
 scoreboard players operation $input_vec3.X retina.__variable__ *= $spread retina.__variable__
 scoreboard players operation $input_vec3.X retina.__variable__ /= 100 retina.__int__
 scoreboard players operation $input_vec3.Y retina.__variable__ = $j retina.__variable__
@@ -21,7 +21,7 @@ scoreboard players operation $spread retina.__variable__ = __math__.rng.result r
 scoreboard players add $spread retina.__variable__ 1
 scoreboard players operation $spread retina.__variable__ %= $spread_range retina.__variable__
 scoreboard players operation $spread retina.__variable__ += $spread_least retina.__variable__
-execute if score $spread_range retina.__variable__ matches 0 run scoreboard players set $spread retina.__variable__ 100
+execute if score $spread_range retina.__variable__ matches 0 run scoreboard players operation $spread retina.__variable__ = $spread_least retina.__variable__
 scoreboard players operation $input_vec3.Y retina.__variable__ *= $spread retina.__variable__
 scoreboard players operation $input_vec3.Y retina.__variable__ /= 100 retina.__int__
 scoreboard players set $input_vec3.Z retina.__variable__ 500
