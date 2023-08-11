@@ -1,6 +1,6 @@
-data modify storage retina:data Surfaces.Top append value [[0,390,0,480,390,480]]
-data modify storage retina:data Surfaces.Bottom append value [[0,330,0,480,330,480]]
-data modify storage retina:data Surfaces.West append value [[0,330,0,0,390,480]]
-data modify storage retina:data Surfaces.East append value [[480,330,0,480,390,480]]
-data modify storage retina:data Surfaces.North append value [[0,330,0,480,390,0]]
-data modify storage retina:data Surfaces.South append value [[0,330,480,480,390,480]]
+scoreboard players set __math__.rng.bound retina.__variable__ 5
+function retina:__private__/math_random/main
+scoreboard players operation $input_vec3.X retina.__variable__ = __math__.rng.result retina.__variable__
+scoreboard players add $input_vec3.X retina.__variable__ 2
+scoreboard players operation $input_vec3.X retina.__variable__ %= 3 retina.__int__
+scoreboard players remove $input_vec3.X retina.__variable__ 1

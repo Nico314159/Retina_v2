@@ -138,7 +138,6 @@ class traverse {
 
         if ($sign_Y = -1) execute positioned ~0 ~-1 ~0 run check.main();
         if ($sign_Y = 1) execute positioned ~0 ~1 ~0 run check.main();
-
     }
     function z() {
         if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
@@ -176,6 +175,11 @@ class traverse {
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
                 $input_vec3.X = $i;
+                if ($horizontal_count == 1) {
+                    $input_vec3.X = Math.random(2, 6);
+                    $input_vec3.X %= 3;
+                    $input_vec3.X--;
+                }
                 $input_vec3.X *= 2;
                 $input_vec3.X += 10;
                 $input_vec3.X -= $horizontal_count;
@@ -187,6 +191,11 @@ class traverse {
                 $input_vec3.X /= 100;
 
                 $input_vec3.Y = $j;
+                if ($vertical_count == 1) {
+                    $input_vec3.Y = Math.random(2, 6);
+                    $input_vec3.Y %= 3;
+                    $input_vec3.Y--;
+                }
                 $input_vec3.Y *= 2;
                 $input_vec3.Y += 10;
                 $input_vec3.Y -= $vertical_count;
@@ -1517,7 +1526,6 @@ class hitbox {
         if (block ~ ~ ~ #minecraft:wall_signs[facing=north]) data modify storage retina:data Surfaces set value {Top: [[0, 375, 420, 480, 375, 480]], Bottom: [[0, 105, 420, 480, 105, 480]], West: [[0, 105, 420, 0, 375, 480]], East: [[480, 105, 420, 480, 375, 480]], North: [[0, 105, 420, 480, 375, 420]], South: [[0, 105, 480, 480, 375, 480]]}
     }
     function wall_torch() {
-                
         if (block ~ ~ ~ #retina:wall_torch[facing=east]) data modify storage retina:data Surfaces set value {Top: [[0, 390, 165, 150, 390, 315]], Bottom: [[0, 90, 165, 150, 90, 315]], West: [[0, 90, 165, 0, 390, 315]], East: [[150, 90, 165, 150, 390, 315]], North: [[0, 90, 165, 150, 390, 165]], South: [[0, 90, 315, 150, 390, 315]]}
         if (block ~ ~ ~ #retina:wall_torch[facing=west]) data modify storage retina:data Surfaces set value {Top: [[330, 390, 165, 480, 390, 315]], Bottom: [[330, 90, 165, 480, 90, 315]], West: [[330, 90, 165, 330, 390, 315]], East: [[480, 90, 165, 480, 390, 315]], North: [[330, 90, 165, 480, 390, 165]], South: [[330, 90, 315, 480, 390, 315]]}
         if (block ~ ~ ~ #retina:wall_torch[facing=north]) data modify storage retina:data Surfaces set value {Top: [[165, 390, 330, 315, 390, 480]], Bottom: [[165, 90, 330, 315, 90, 480]], West: [[165, 90, 330, 165, 390, 480]], East: [[315, 90, 330, 315, 390, 480]], North: [[165, 90, 330, 315, 390, 330]], South: [[165, 90, 480, 315, 390, 480]]}

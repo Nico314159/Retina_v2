@@ -3,6 +3,7 @@ scoreboard objectives add retina.__int__ dummy
 scoreboard players set 480 retina.__int__ 480
 scoreboard players set 0 retina.__int__ 0
 scoreboard players set 2 retina.__int__ 2
+scoreboard players set 3 retina.__int__ 3
 scoreboard players set 100 retina.__int__ 100
 scoreboard players set 1800 retina.__int__ 1800
 scoreboard players set 3600 retina.__int__ 3600
@@ -18,5 +19,5 @@ execute unless data storage retina:input MaxRecursionDepth run data merge storag
 execute unless data storage retina:input TargetEntities run data merge storage retina:input {TargetEntities:true}
 data merge storage retina:output {ContactCoordinates:[],ContactSurface:[],Distance:0.0d,HitFace:"",PlacingPosition:[],Target:"",TargetedBlock:[]}
 execute store success score $old_version_installed retina.__variable__ run scoreboard players add * retina 1
-execute if score $old_version_installed retina.__variable__ matches 1.. run function retina:__private__/if_else/21
+execute if score $old_version_installed retina.__variable__ matches 1.. run function retina:__private__/if_else/23
 return 1
