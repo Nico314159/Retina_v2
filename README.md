@@ -1,6 +1,6 @@
 # Retina v2
  
-**Retina 2.0** is a raycasting library data pack for Minecraft: Java Edition 1.20+, using voxel traversal. At the moment, the features are pretty minimal, but I have a lot more planned, so check back in the future!
+**Retina 2.0** is a raycasting library data pack for Minecraft: Java Edition 1.20+, using voxel traversal. 
 
 Unlike other similar packs, it supports (almost) **all** of the different hitboxes, including both blocks & entities. It also doesn't rely on entity teleportation, meaning it runs slightly faster on average too.
 
@@ -49,9 +49,14 @@ The `HorizontalCount` and `VerticalCount` storage values define an NxM grid of r
 To set all of these different values at once, you can use the `data merge` command.
 
 ```mcfunction
-# Does 10 raycasts in a 3x3 grid with the middle one doubled up.
+# Will do 10 raycasts in a 3x3 grid with the middle one doubled up.
 data merge storage retina:input {HorizontalCount: 3, VerticalCount: 3, CenteredCount: 1}
 ```
+
+### Random spread
+
+The `SpreadFactor` storage path lets you set the random spread for multi-raycasts. `SpreadFactor[0]` is the minimum amount, and `SpreadFactor[1]` is the maximum.
+If you don't want any randomization, simply set both values to the same number.
 
 ## Output
 

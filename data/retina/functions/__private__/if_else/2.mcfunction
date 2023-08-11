@@ -4,3 +4,4 @@ scoreboard players operation $input_vec3.Y retina.__variable__ = __math__.rng.re
 scoreboard players add $input_vec3.Y retina.__variable__ 2
 scoreboard players operation $input_vec3.Y retina.__variable__ %= 3 retina.__int__
 scoreboard players remove $input_vec3.Y retina.__variable__ 1
+scoreboard players operation $input_vec3.Y retina.__variable__ *= 10 retina.__int__

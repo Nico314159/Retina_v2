@@ -1,5 +1,5 @@
 scoreboard players operation $input_vec3.X retina.__variable__ = $i retina.__variable__
-execute if score $horizontal_count retina.__variable__ matches 1 run function retina:__private__/if_else/1
+execute if score $horizontal_count retina.__variable__ matches 10 run function retina:__private__/if_else/1
 scoreboard players operation $input_vec3.X retina.__variable__ *= 2 retina.__int__
 scoreboard players add $input_vec3.X retina.__variable__ 10
 scoreboard players operation $input_vec3.X retina.__variable__ -= $horizontal_count retina.__variable__
@@ -13,7 +13,7 @@ execute if score $spread_range retina.__variable__ matches 0 run scoreboard play
 scoreboard players operation $input_vec3.X retina.__variable__ *= $spread retina.__variable__
 scoreboard players operation $input_vec3.X retina.__variable__ /= 100 retina.__int__
 scoreboard players operation $input_vec3.Y retina.__variable__ = $j retina.__variable__
-execute if score $vertical_count retina.__variable__ matches 1 run function retina:__private__/if_else/2
+execute if score $vertical_count retina.__variable__ matches 10 run function retina:__private__/if_else/2
 scoreboard players operation $input_vec3.Y retina.__variable__ *= 2 retina.__int__
 scoreboard players add $input_vec3.Y retina.__variable__ 10
 scoreboard players operation $input_vec3.Y retina.__variable__ -= $vertical_count retina.__variable__

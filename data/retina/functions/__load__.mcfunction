@@ -6,6 +6,7 @@ scoreboard players set 2 retina.__int__ 2
 scoreboard players set 3 retina.__int__ 3
 scoreboard players set 100 retina.__int__ 100
 scoreboard players set 1800 retina.__int__ 1800
+scoreboard players set 10 retina.__int__ 10
 scoreboard players set 3600 retina.__int__ 3600
 scoreboard players set -4 retina.__int__ -4
 scoreboard players set -1 retina.__int__ -1
