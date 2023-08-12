@@ -175,15 +175,15 @@ class traverse {
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
                 $input_vec3.X = $i;
+                $input_vec3.X *= 2;
+                $input_vec3.X += 10;
+                $input_vec3.X -= $horizontal_count;
                 if ($horizontal_count == 10) {
                     $input_vec3.X = Math.random(2, 6);
                     $input_vec3.X %= 3;
                     $input_vec3.X --;
                     $input_vec3.X *= 10;
                 }
-                $input_vec3.X *= 2;
-                $input_vec3.X += 10;
-                $input_vec3.X -= $horizontal_count;
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
@@ -192,15 +192,15 @@ class traverse {
                 $input_vec3.X /= 100;
 
                 $input_vec3.Y = $j;
+                $input_vec3.Y *= 2;
+                $input_vec3.Y += 10;
+                $input_vec3.Y -= $vertical_count;
                 if ($vertical_count == 10) {
                     $input_vec3.Y = Math.random(2, 6);
                     $input_vec3.Y %= 3;
                     $input_vec3.Y --;
                     $input_vec3.Y *= 10;
                 }
-                $input_vec3.Y *= 2;
-                $input_vec3.Y += 10;
-                $input_vec3.Y -= $vertical_count;
                 $spread = Math.random();
                 $spread %= $spread_range;
                 $spread += $spread_least;
