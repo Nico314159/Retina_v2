@@ -6,8 +6,8 @@ scoreboard players set 2 retina.__int__ 2
 scoreboard players set 3 retina.__int__ 3
 scoreboard players set 100 retina.__int__ 100
 scoreboard players set 1800 retina.__int__ 1800
-scoreboard players set 10 retina.__int__ 10
 scoreboard players set 3600 retina.__int__ 3600
+scoreboard players set 20 retina.__int__ 20
 scoreboard players set -4 retina.__int__ -4
 scoreboard players set -1 retina.__int__ -1
 execute unless score __math__.seed retina.__variable__ matches -2147483648..2147483647 run function retina:__private__/math_random/setup
