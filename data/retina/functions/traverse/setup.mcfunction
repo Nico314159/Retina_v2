@@ -92,4 +92,5 @@ execute if score $offset_Y retina.__variable__ matches 608..610 positioned ~ ~1.
 execute if score $offset_Y retina.__variable__ matches 192 positioned ~ ~0.4 ~ run function retina:traverse/loop
 execute if score $hit_block retina.__variable__ matches 1.. run function retina:storage/block
 execute if score $hit_entity retina.__variable__ matches 1.. run function retina:storage/entity
+function #retina:on_hit
 tag @s remove retina.executing

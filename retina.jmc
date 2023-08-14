@@ -97,6 +97,7 @@ class traverse {
 
         if ($hit_block) storage.block();
         if ($hit_entity) storage.entity();
+        execute run function #retina:on_hit;
         tag @s remove retina.executing;
     }
     function loop() {
