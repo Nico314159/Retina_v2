@@ -30,6 +30,7 @@ class traverse {
         data remove storage retina:output Distance;
         data remove storage retina:output TargetedBlock;
         data remove storage retina:output TargetedEntity;
+        data remove storage retina:output PlacingPosition;
         data remove storage retina:output ContactSurface;
         data remove storage retina:output HitFace;
         $block_distance = execute run $entity_distance = 2147483647;

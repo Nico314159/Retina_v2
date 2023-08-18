@@ -12,6 +12,7 @@ data modify storage retina:output Target set value "NONE"
 data remove storage retina:output Distance
 data remove storage retina:output TargetedBlock
 data remove storage retina:output TargetedEntity
+data remove storage retina:output PlacingPosition
 data remove storage retina:output ContactSurface
 data remove storage retina:output HitFace
 execute store result score $block_distance retina.__variable__ run scoreboard players set $entity_distance retina.__variable__ 2147483647
