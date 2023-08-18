@@ -3,6 +3,8 @@ data modify storage retina:output TargetedBlock set value [0,0,0]
 data modify storage retina:output PlacingPosition set value [0,0,0]
 data modify storage retina:output ContactCoordinates set value [0.0d,0.0d,0.0d]
 data modify storage retina:output ContactSurface set from storage retina:data ContactSurface
+execute if score $X0 retina.__variable__ matches ..-1 run scoreboard players add $X0 retina.__variable__ 480
+execute if score $Y0 retina.__variable__ matches ..-1 run scoreboard players add $Y0 retina.__variable__ 480
 execute store result storage retina:output TargetedBlock[0] int 1 run scoreboard players get $int_X retina.__variable__
 execute store result storage retina:output PlacingPosition[0] int 1 run scoreboard players get $prev_X retina.__variable__
 scoreboard players operation $targeted_X retina.__variable__ += $origin_X retina.__variable__

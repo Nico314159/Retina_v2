@@ -7,6 +7,8 @@ data modify storage retina:output TargetedEntity.Pos set from storage retina:dat
 data remove storage retina:data Entity
 data modify storage retina:output ContactSurface set from storage retina:data ContactSurface
 data modify storage retina:output ContactCoordinates set value [0.0d,0.0d,0.0d]
+execute if score $X0 retina.__variable__ matches ..-1 run scoreboard players add $X0 retina.__variable__ 480
+execute if score $Y0 retina.__variable__ matches ..-1 run scoreboard players add $Y0 retina.__variable__ 480
 scoreboard players operation $targeted_X retina.__variable__ += $origin_X retina.__variable__
 execute store result storage retina:output ContactCoordinates[0] double 0.0020833333333333333 run scoreboard players get $targeted_X retina.__variable__
 execute if score $nearest_axis retina.__variable__ matches 0 run function retina:__private__/if_else/20

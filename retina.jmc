@@ -1897,6 +1897,10 @@ class storage {
         // Contact surface
         data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
 
+        // I have no clue why X and Y need this but Z doesn't.
+        if ($X0 < 0) $X0 += 480;
+        if ($Y0 < 0) $Y0 += 480;
+
         Hardcode.repeatLists(
             ["[axis]", "index"],
             () => {
@@ -1948,6 +1952,11 @@ class storage {
 
         // Contact coordinates
         data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
+
+        // I have no clue why X and Y need this but Z doesn't.
+        if ($X0 < 0) $X0 += 480;
+        if ($Y0 < 0) $Y0 += 480;
+        
         Hardcode.repeatLists(
             ["[axis]", "_index"],
             () => {
