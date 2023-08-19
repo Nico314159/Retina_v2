@@ -27,7 +27,7 @@ class traverse {
         );
         
         data modify storage retina:output Target set value "NONE";
-        data remove storage retina:output Distance;
+        data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth;
         data remove storage retina:output TargetedBlock;
         data remove storage retina:output TargetedEntity;
         data remove storage retina:output PlacingPosition;

@@ -9,7 +9,7 @@ scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retin
 execute unless score $test_Z retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute unless score $test_Z retina.__variable__ matches -1..0 run return 0
 data modify storage retina:output Target set value "NONE"
-data remove storage retina:output Distance
+data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth
 data remove storage retina:output TargetedBlock
 data remove storage retina:output TargetedEntity
 data remove storage retina:output PlacingPosition
