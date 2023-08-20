@@ -17,7 +17,7 @@ class traverse {
         Hardcode.repeatList(
             "[i]",
             () => {
-                $int_[i] = data get entity @e[type=marker,tag=retina.height,limit=1] Pos[0] 1;
+                $int_[i] = data get entity @s Pos[0] 1;
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
                 if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
