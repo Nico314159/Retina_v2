@@ -21,6 +21,19 @@ For more specific data about the intersected block/entity, see the 'Output' sect
 
 To do multiple angled raycasts at once (eg. shotguns), you can use the `retina:traverse/multicast` function. Make sure that `HorizontalCount` and `VerticalCount` are set properly or it will not work. (see below for more information)
 
+## Function tag
+
+If you want to run your own function every time a raycast hits something/someone (including in multicasts), you can add it to the `#retina:on_hit` function tag in your datapack. For example, my TF2 pack uses the following:
+```json
+{
+    "values": [
+        "tf2:weapons/damage"
+    ],
+    "replace": false
+}
+```
+(`"replace": false` is advised for compatibility with other potential datapacks modifying the tag)
+
 ## Settings / Input
 
 ### Target entities
