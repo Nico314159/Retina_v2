@@ -40,8 +40,6 @@ execute if score $output_vec3.X retina.__variable__ matches 0 run scoreboard pla
 execute if score $output_vec3.X retina.__variable__ matches 0 run scoreboard players set $distance_X retina.__variable__ 2147483647
 scoreboard players operation $int_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $int_X retina.__variable__ /= 480 retina.__int__
-scoreboard players operation $frac_X retina.__variable__ = $X retina.__variable__
-scoreboard players operation $frac_X retina.__variable__ %= 480 retina.__int__
 scoreboard players operation $origin_Y retina.__variable__ = $Y retina.__variable__
 scoreboard players operation $frac_origin_Y retina.__variable__ = $Y retina.__variable__
 scoreboard players operation $frac_origin_Y retina.__variable__ %= 480 retina.__int__
@@ -61,8 +59,6 @@ execute if score $output_vec3.Y retina.__variable__ matches 0 run scoreboard pla
 execute if score $output_vec3.Y retina.__variable__ matches 0 run scoreboard players set $distance_Y retina.__variable__ 2147483647
 scoreboard players operation $int_Y retina.__variable__ = $Y retina.__variable__
 scoreboard players operation $int_Y retina.__variable__ /= 480 retina.__int__
-scoreboard players operation $frac_Y retina.__variable__ = $Y retina.__variable__
-scoreboard players operation $frac_Y retina.__variable__ %= 480 retina.__int__
 scoreboard players operation $origin_Z retina.__variable__ = $Z retina.__variable__
 scoreboard players operation $frac_origin_Z retina.__variable__ = $Z retina.__variable__
 scoreboard players operation $frac_origin_Z retina.__variable__ %= 480 retina.__int__
@@ -82,8 +78,6 @@ execute if score $output_vec3.Z retina.__variable__ matches 0 run scoreboard pla
 execute if score $output_vec3.Z retina.__variable__ matches 0 run scoreboard players set $distance_Z retina.__variable__ 2147483647
 scoreboard players operation $int_Z retina.__variable__ = $Z retina.__variable__
 scoreboard players operation $int_Z retina.__variable__ /= 480 retina.__int__
-scoreboard players operation $frac_Z retina.__variable__ = $Z retina.__variable__
-scoreboard players operation $frac_Z retina.__variable__ %= 480 retina.__int__
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Origin: "},{"text":"[","color":"yellow"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Y","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"yellow"},{"text":"]","color":"yellow"}]
 scoreboard players set $step retina.__variable__ 0
 execute store result score $offset_Y retina.__variable__ run data get entity @s Pos[1] -480

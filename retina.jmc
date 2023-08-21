@@ -82,8 +82,6 @@ class traverse {
 
                 $int_[i] = $[i];
                 $int_[i] /= SCALE;
-                $frac_[i] = $[i];
-                $frac_[i] %= SCALE;
             },
             ["X", "Y", "Z"]
         );
