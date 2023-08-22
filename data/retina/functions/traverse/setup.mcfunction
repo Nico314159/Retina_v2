@@ -15,8 +15,9 @@ data remove storage retina:output TargetedEntity
 data remove storage retina:output PlacingPosition
 data remove storage retina:output ContactSurface
 data remove storage retina:output HitFace
+data modify storage retina:output HitEntityHead set value false
 execute store result score $block_distance retina.__variable__ run scoreboard players set $entity_distance retina.__variable__ 2147483647
-execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
+execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ store result score $contact retina.__variable__ run scoreboard players set $check_for_head retina.__variable__ 0
 execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
 tag @s add retina.executing
 execute if score $single_call retina.__variable__ matches 1.. run function retina:__private__/if_else/0

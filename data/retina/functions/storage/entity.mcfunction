@@ -11,13 +11,13 @@ execute if score $X0 retina.__variable__ matches ..-1 run scoreboard players add
 execute if score $Y0 retina.__variable__ matches ..-1 run scoreboard players add $Y0 retina.__variable__ 480
 scoreboard players operation $targeted_X retina.__variable__ += $origin_X retina.__variable__
 execute store result storage retina:output ContactCoordinates[0] double 0.0020833333333333333 run scoreboard players get $targeted_X retina.__variable__
-execute if score $nearest_axis retina.__variable__ matches 0 run function retina:__private__/if_else/20
+execute if score $nearest_axis retina.__variable__ matches 0 run function retina:__private__/if_else/26
 scoreboard players operation $targeted_Y retina.__variable__ += $origin_Y retina.__variable__
 execute store result storage retina:output ContactCoordinates[1] double 0.0020833333333333333 run scoreboard players get $targeted_Y retina.__variable__
-execute if score $nearest_axis retina.__variable__ matches 1 run function retina:__private__/if_else/21
+execute if score $nearest_axis retina.__variable__ matches 1 run function retina:__private__/if_else/27
 scoreboard players operation $targeted_Z retina.__variable__ += $origin_Z retina.__variable__
 execute store result storage retina:output ContactCoordinates[2] double 0.0020833333333333333 run scoreboard players get $targeted_Z retina.__variable__
-execute if score $nearest_axis retina.__variable__ matches 2 run function retina:__private__/if_else/22
+execute if score $nearest_axis retina.__variable__ matches 2 run function retina:__private__/if_else/28
 scoreboard players operation $total_distance retina.__variable__ /= 480 retina.__int__
 execute if score $total_distance retina.__variable__ matches ..-1 run scoreboard players operation $total_distance retina.__variable__ *= -1 retina.__int__
 execute store result storage retina:output Distance double 0.0020833333333333333 run scoreboard players get $total_distance retina.__variable__
