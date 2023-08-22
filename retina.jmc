@@ -458,6 +458,12 @@ class find_closest_surface {
                 ["0", "1", "2"]
             ]
         );
+        $test = $Y1;
+        $test -= $Y0;
+        if ($test < 480) expand {
+            $head_Y += $t_Y;
+            $head_Y -= 480;
+        }
     }
     function west() {
         // @within find_closest_surface.main()
@@ -497,6 +503,7 @@ class find_closest_surface {
                 if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "West";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }
@@ -545,6 +552,7 @@ class find_closest_surface {
                 if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "East";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }
@@ -593,6 +601,7 @@ class find_closest_surface {
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "Bottom";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }
@@ -641,6 +650,7 @@ class find_closest_surface {
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "Top";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }
@@ -689,6 +699,7 @@ class find_closest_surface {
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "North";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }
@@ -737,6 +748,7 @@ class find_closest_surface {
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) {
                     find_closest_surface.ray_intersects_with_surface();
                     data modify storage retina:output HitFace set value "South";
+                    Text.tellraw(@a, "check_for_head: &<$check_for_head>, intersect: &<$Y_intersection>, head: &<$head_Y>, Y0: &<$Y0>, Y1: &<$Y1>");
                     if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
                 }
             }

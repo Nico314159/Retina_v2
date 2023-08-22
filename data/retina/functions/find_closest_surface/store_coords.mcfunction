@@ -19,3 +19,7 @@ scoreboard players operation $t_Z retina.__variable__ *= $step_Z retina.__variab
 scoreboard players operation $t_Z retina.__variable__ -= $frac_origin_Z retina.__variable__
 scoreboard players operation $Z0 retina.__variable__ += $t_Z retina.__variable__
 scoreboard players operation $Z1 retina.__variable__ += $t_Z retina.__variable__
+scoreboard players operation $test retina.__variable__ = $Y1 retina.__variable__
+scoreboard players operation $test retina.__variable__ -= $Y0 retina.__variable__
+execute if score $test retina.__variable__ matches ..479 run scoreboard players operation $head_Y retina.__variable__ += $t_Y retina.__variable__
+execute if score $test retina.__variable__ matches ..479 run scoreboard players remove $head_Y retina.__variable__ 480
