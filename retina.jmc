@@ -1789,7 +1789,7 @@ class entity_hitbox {
         $entity_half_width = 144;
         $entity_height = 864;
         $check_for_head = true;
-        $head_Y = 720;
+        $head_Y = 624;
     }
     function polar_bear() {
         $entity_half_width = 336;
@@ -1893,7 +1893,7 @@ class entity_hitbox {
         $entity_half_width = 144;
         $entity_height = 936;
         $check_for_head = true;
-        $head_Y = 720;
+        $head_Y = 696;
     }
 }
 
