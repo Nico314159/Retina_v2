@@ -1,0 +1,255 @@
+class entity_hitbox {
+    function allay() {
+        $entity_half_width = 84;
+        $entity_height = 288;
+    }
+    function armor_stand() {
+        data modify storage retina:data EntityTag set from entity @s;
+        if (data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 60;
+        if (data storage retina:data EntityTag{Small: 1b}) $entity_height = 474;
+        if (!data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 120;
+        if (!data storage retina:data EntityTag{Small: 1b}) $entity_height = 948;
+        if (data storage retina:data EntityTag{Marker: 1b}) $entity_half_width = execute run $entity_height = 0;
+    }
+    function axolotl() {
+        $entity_half_width = 180;
+        $entity_height = 202; // rounded from 201.6;
+    }
+    function bat_like() {
+        $entity_half_width = 216;
+        $entity_height = 672;
+    }
+    function bee() {
+        $entity_half_width = 144;
+        $entity_height = 336;
+    }
+    function boat() {
+        $entity_half_width = 330;
+        $entity_height = 270;
+    }
+    function camel() {
+        $entity_half_width = 408;
+        $entity_height = 1140;
+    }
+    function cat_like() {
+        $entity_half_width = 144;
+        $entity_height = 336;
+    }
+    function cave_spider() {
+        $entity_half_width = 168;
+        $entity_height = 240;
+    }
+    function chicken() {
+        $entity_half_width = 96;
+        $entity_height = 336;
+    }
+    function cod() {
+        $entity_half_width = 120;
+        $entity_height = 144;
+    }
+    function cow() {
+        $entity_half_width = 216;
+        $entity_height = 672;
+    }
+    function creeper() {
+        $entity_half_width = 144;
+        $entity_height = 816;
+    }
+    function dolphin() {
+        $entity_half_width = 216;
+        $entity_height = 288;
+    }
+    function donkey() {
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 720;
+    }
+    function elder_guardian() {
+        $entity_half_width = 479; // rounded from 479.4;
+        $entity_height = 959; // rounded from 958.8;
+    }
+    function end_crystal() {
+        $entity_half_width = 480;
+        $entity_height = 960;
+    }
+    function enderman() {
+        $entity_half_width = 144;
+        $entity_height = 1392;
+    }
+    function falling_block_like() {
+        $entity_half_width = 235; // rounded from 235.2;
+        $entity_height = 470; // rounded from 470.4;
+    }
+    function frog() {
+        $entity_half_width = 120;
+        $entity_height = 240;
+    }
+    function ghast() {
+        $entity_half_width = 960;
+        $entity_height = 1920;
+    }
+    function giant() {
+        $entity_half_width = 864;
+        $entity_height = 5760;
+    }
+    function guardian() {
+        $entity_half_width = 204;
+        $entity_height = 408;
+    }
+    function hoglin() {
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 672;
+    }
+    function horse_like() {
+        $entity_half_width = 335; // rounded from 335.156256;
+        $entity_height = 768;
+    }
+    function iron_golem() {
+        $entity_half_width = 336;
+        $entity_height = 1296;
+    }
+    function item_frame() {
+        $item_frame_facing = data get entity @s Facing;
+        switch ($item_frame_facing) {
+            case 0: data modify storage retina:data Surfaces set value {Top: [[60, 480, 60, 420, 480, 420]], Bottom: [[60, 450, 60, 420, 450, 420]], West: [[60, 450, 60, 60, 480, 420]], East: [[420, 450, 60, 420, 480, 420]], North: [[60, 450, 60, 420, 480, 60]], South: [[60, 450, 420, 420, 480, 420]]};
+            case 1: data modify storage retina:data Surfaces set value {Top: [[60, 30, 60, 420, 30, 420]], Bottom: [[60, 0, 60, 420, 0, 420]], West: [[60, 0, 60, 60, 30, 420]], East: [[420, 0, 60, 420, 30, 420]], North: [[60, 0, 60, 420, 30, 60]], South: [[60, 0, 420, 420, 30, 420]]};
+            case 2: data modify storage retina:data Surfaces set value {Top: [[60, 420, 450, 420, 420, 480]], Bottom: [[60, 60, 450, 420, 60, 480]], West: [[60, 60, 450, 60, 420, 480]], East: [[420, 60, 450, 420, 420, 480]], North: [[60, 60, 450, 420, 420, 450]], South: [[60, 60, 480, 420, 420, 480]]};
+            case 3: data modify storage retina:data Surfaces set value {Top: [[60, 420, 0, 420, 420, 30]], Bottom: [[60, 60, 0, 420, 60, 30]], West: [[60, 60, 0, 60, 420, 30]], East: [[420, 60, 0, 420, 420, 30]], North: [[60, 60, 0, 420, 420, 0]], South: [[60, 60, 30, 420, 420, 30]]};
+            case 4: data modify storage retina:data Surfaces set value {Top: [[450, 420, 60, 480, 420, 420]], Bottom: [[450, 60, 60, 480, 60, 420]], West: [[450, 60, 60, 450, 420, 420]], East: [[480, 60, 60, 480, 420, 420]], North: [[450, 60, 60, 480, 420, 60]], South: [[450, 60, 420, 480, 420, 420]]};
+            case 5: data modify storage retina:data Surfaces set value {Top: [[0, 420, 60, 30, 420, 420]], Bottom: [[0, 60, 60, 30, 60, 420]], West: [[0, 60, 60, 0, 420, 420]], East: [[30, 60, 60, 30, 420, 420]], North: [[0, 60, 60, 30, 420, 60]], South: [[0, 60, 420, 30, 420, 420]]};
+        }
+    }
+    function leash_knot() {
+        $entity_half_width = 90;
+        $entity_height = 240;
+    }
+    function llama() {
+        $entity_half_width = 216;
+        $entity_height = 898; // rounded from 897.6;
+    }
+    function minecart() {
+        $entity_half_width = 235; // rounded from 235.2;
+        $entity_height = 336;
+    }
+    function panda() {
+        $entity_half_width = 312;
+        $entity_height = 600;
+    }
+    function phantom() {
+        $entity_half_width = 216;
+        $entity_height = 240;
+    }
+    function pig() {
+        $entity_half_width = 216;
+        $entity_height = 432;
+    }
+    function player_like() {
+        $entity_half_width = 144;
+        $entity_height = 864;
+        $check_for_head = true;
+        $head_Y = 624;
+    }
+    function polar_bear() {
+        $entity_half_width = 336;
+        $entity_height = 672;
+    }
+    function pufferfish() {
+        $pufferfish_puffstate = data get entity @s PuffState;
+        if ($pufferfish_puffstate = 0) $entity_half_width = 84;
+        if ($pufferfish_puffstate = 0) $entity_height = 168;
+        if ($pufferfish_puffstate = 1) $entity_half_width = 120;
+        if ($pufferfish_puffstate = 1) $entity_height = 240;
+        if ($pufferfish_puffstate = 2) $entity_half_width = 168;
+        if ($pufferfish_puffstate = 2) $entity_height = 336;
+    }
+    function rabbit() {
+        $entity_half_width = 96;
+        $entity_height = 240;
+    }
+    function ravager() {
+        $entity_half_width = 468;
+        $entity_height = 960;
+    }
+    function salmon() {
+        $entity_half_width = 168;
+        $entity_height = 192;
+    }
+    function sheep_like() {
+        $entity_half_width = 216;
+        $entity_height = 624;
+    }
+    function shulker() {
+        // TODO: take peek/rotation into account and move this to the end of get_hitbox.entity(), along with item frames and paintings maybe
+        $entity_half_width = 240;
+        $entity_height = 480;
+    }
+    function skeleton() {
+        $entity_half_width = 144;
+        $entity_height = 955; // rounded from 955.2;
+    }
+    function slime_like() {
+        $entity_half_width = 122; // rounded from 122.4;
+        $entity_height = 245; // rounded from 244.8;
+        $slime_size = data get entity @s Size;
+        $slime_size ++;
+        $entity_half_width *= $slime_size;
+        $entity_height *= $slime_size;
+    }
+    function small_arthropod() {
+        $entity_half_width = 96;
+        $entity_height = 144;
+    }
+    function sniffer() {
+        $entity_half_width = 456;
+        $entity_height = 840;
+    }
+    function snow_golem() {
+        $entity_half_width = 168;
+        $entity_height = 912;
+    }
+    function spider() {
+        $entity_half_width = 336;
+        $entity_height = 432;
+    }
+    function squid() {
+        $entity_half_width = 192;
+        $entity_height = 384;
+    }
+    function strider() {
+        $entity_half_width = 216;
+        $entity_height = 816;
+    }
+    function tropical_fish() {
+        $entity_half_width = 120;
+        $entity_height = 192;
+    }
+    function turtle() {
+        $entity_half_width = 288;
+        $entity_height = 192;
+    }
+    function vex() {
+        $entity_half_width = 96;
+        $entity_height = 384;
+    }
+    function warden() {
+        $entity_half_width = 216;
+        $entity_height = 1392;
+    }
+    function wither() {
+        $entity_half_width = 216;
+        $entity_height = 1680;
+    }
+    function wither_skeleton() {
+        $entity_half_width = 168;
+        $entity_height = 1152;
+    }
+    function wolf() {
+        $entity_half_width = 144;
+        $entity_height = 408;
+    }
+    function zombie_like() {
+        $entity_half_width = 144;
+        $entity_height = 936;
+        $check_for_head = true;
+        $head_Y = 696;
+    }
+}
