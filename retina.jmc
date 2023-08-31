@@ -13,6 +13,14 @@ data merge storage retina:output {ContactCoordinates: [], ContactSurface: [], Di
 
 class traverse {
     function setup() {
+        data modify storage retina:output Target set value "NONE";
+        data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth;
+        data remove storage retina:output TargetedBlock;
+        data remove storage retina:output TargetedEntity;
+        data remove storage retina:output PlacingPosition;
+        data remove storage retina:output ContactSurface;
+        data remove storage retina:output HitFace;
+        
         // guard condition
         Hardcode.repeatList(
             "[i]",
@@ -26,18 +34,10 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
-        data modify storage retina:output Target set value "NONE";
-        data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth;
-        data remove storage retina:output TargetedBlock;
-        data remove storage retina:output TargetedEntity;
-        data remove storage retina:output PlacingPosition;
-        data remove storage retina:output ContactSurface;
-        data remove storage retina:output HitFace;
-        data modify storage retina:output HitEntityHead set value false;
         $block_distance = execute run $entity_distance = 2147483647;
 		$hit_block = execute run $hit_entity = execute run $contact = false;
         $max_depth = data get storage retina:input MaxRecursionDepth;
-        
+
         tag @s add retina.executing;
         if ($single_call) {
             tag @e remove retina.target;

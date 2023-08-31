@@ -1,3 +1,10 @@
+data modify storage retina:output Target set value "NONE"
+data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth
+data remove storage retina:output TargetedBlock
+data remove storage retina:output TargetedEntity
+data remove storage retina:output PlacingPosition
+data remove storage retina:output ContactSurface
+data remove storage retina:output HitFace
 execute store result score $int_X retina.__variable__ run data get entity @s Pos[0] 1
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
@@ -8,14 +15,6 @@ scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__varia
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"Raycast Z coordinate of ","color":"red"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red"},{"text":")","color":"red"}]
 execute unless score $test_Z retina.__variable__ matches -1..0 run return 0
-data modify storage retina:output Target set value "NONE"
-data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth
-data remove storage retina:output TargetedBlock
-data remove storage retina:output TargetedEntity
-data remove storage retina:output PlacingPosition
-data remove storage retina:output ContactSurface
-data remove storage retina:output HitFace
-data modify storage retina:output HitEntityHead set value false
 execute store result score $block_distance retina.__variable__ run scoreboard players set $entity_distance retina.__variable__ 2147483647
 execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
 execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
