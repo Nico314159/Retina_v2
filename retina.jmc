@@ -34,8 +34,8 @@ class traverse {
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
         
-        $block_distance = execute run $entity_distance = 2147483647;
-		$hit_block = execute run $hit_entity = execute run $contact = false;
+        $block_distance = $entity_distance = 2147483647;
+		$hit_block = $hit_entity = $contact = false;
         $max_depth = data get storage retina:input MaxRecursionDepth;
 
         tag @s add retina.executing;
