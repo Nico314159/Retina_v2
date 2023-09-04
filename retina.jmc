@@ -265,8 +265,8 @@ class check {
             Hardcode.repeatList(
                 "[shape]",
                 () => { 
-                    if (block ~ ~ ~ #retina:[shape]) hitbox.[shape]();
-                    if (block ~ ~ ~ #retina:[shape]) return 1;
+                    if (block ~ ~ ~ #retina:[shape] && !$ignore_[shape]) hitbox.[shape]();
+                    if (block ~ ~ ~ #retina:[shape] && !$ignore_[shape]) return 1;
                 },
                 ["amethyst", "anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
@@ -317,8 +317,8 @@ class check {
                 Hardcode.repeatList( 
                     "[type]",
                     () => {
-                        if (entity @s[type=#retina:[type]]) entity_hitbox.[type]();
-                        if (entity @s[type=#retina:[type]]) return 1;
+                        if (entity @s[type=#retina:[type]] && !$ignore_[type]) entity_hitbox.[type]();
+                        if (entity @s[type=#retina:[type]] && !$ignore_[type]) return 1;
                     },
                     ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
                     "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
