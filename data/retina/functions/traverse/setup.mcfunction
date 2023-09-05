@@ -36,8 +36,7 @@ scoreboard players operation $distance_X retina.__variable__ *= -1 retina.__int_
 scoreboard players operation $distance_X retina.__variable__ %= 480 retina.__int__
 scoreboard players operation $distance_X retina.__variable__ *= $delta_X retina.__variable__
 scoreboard players operation $distance_X retina.__variable__ /= 480 retina.__int__
-execute if score $output_vec3.X retina.__variable__ matches 0 run scoreboard players set $delta_X retina.__variable__ 2147483647
-execute if score $output_vec3.X retina.__variable__ matches 0 run scoreboard players set $distance_X retina.__variable__ 2147483647
+execute if score $output_vec3.X retina.__variable__ matches 0 store result score $delta_X retina.__variable__ run scoreboard players set $distance_X retina.__variable__ 2147483647
 scoreboard players operation $int_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $int_X retina.__variable__ /= 480 retina.__int__
 scoreboard players operation $origin_Y retina.__variable__ = $Y retina.__variable__
@@ -55,8 +54,7 @@ scoreboard players operation $distance_Y retina.__variable__ *= -1 retina.__int_
 scoreboard players operation $distance_Y retina.__variable__ %= 480 retina.__int__
 scoreboard players operation $distance_Y retina.__variable__ *= $delta_Y retina.__variable__
 scoreboard players operation $distance_Y retina.__variable__ /= 480 retina.__int__
-execute if score $output_vec3.Y retina.__variable__ matches 0 run scoreboard players set $delta_Y retina.__variable__ 2147483647
-execute if score $output_vec3.Y retina.__variable__ matches 0 run scoreboard players set $distance_Y retina.__variable__ 2147483647
+execute if score $output_vec3.Y retina.__variable__ matches 0 store result score $delta_Y retina.__variable__ run scoreboard players set $distance_Y retina.__variable__ 2147483647
 scoreboard players operation $int_Y retina.__variable__ = $Y retina.__variable__
 scoreboard players operation $int_Y retina.__variable__ /= 480 retina.__int__
 scoreboard players operation $origin_Z retina.__variable__ = $Z retina.__variable__
@@ -74,8 +72,7 @@ scoreboard players operation $distance_Z retina.__variable__ *= -1 retina.__int_
 scoreboard players operation $distance_Z retina.__variable__ %= 480 retina.__int__
 scoreboard players operation $distance_Z retina.__variable__ *= $delta_Z retina.__variable__
 scoreboard players operation $distance_Z retina.__variable__ /= 480 retina.__int__
-execute if score $output_vec3.Z retina.__variable__ matches 0 run scoreboard players set $delta_Z retina.__variable__ 2147483647
-execute if score $output_vec3.Z retina.__variable__ matches 0 run scoreboard players set $distance_Z retina.__variable__ 2147483647
+execute if score $output_vec3.Z retina.__variable__ matches 0 store result score $delta_Z retina.__variable__ run scoreboard players set $distance_Z retina.__variable__ 2147483647
 scoreboard players operation $int_Z retina.__variable__ = $Z retina.__variable__
 scoreboard players operation $int_Z retina.__variable__ /= 480 retina.__int__
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Origin: "},{"text":"[","color":"yellow"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Y","objective":"retina.__variable__"},"color":"yellow"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"yellow"},{"text":"]","color":"yellow"}]

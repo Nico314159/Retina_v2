@@ -78,8 +78,7 @@ class traverse {
                 $distance_[i] *= $delta_[i];
                 $distance_[i] /= SCALE;
 
-                if ($output_vec3.[i] == 0) $delta_[i] = 2147483647;
-                if ($output_vec3.[i] == 0) $distance_[i] = 2147483647;
+                if ($output_vec3.[i] == 0) $delta_[i] = $distance_[i] = 2147483647;
 
                 $int_[i] = $[i];
                 $int_[i] /= SCALE;
