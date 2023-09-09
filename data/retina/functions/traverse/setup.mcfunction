@@ -1,5 +1,6 @@
 data modify storage retina:output Target set value "NONE"
 data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth
+data modify storage retina:output HitEntityHead set value false
 data remove storage retina:output TargetedBlock
 data remove storage retina:output TargetedEntity
 data remove storage retina:output PlacingPosition

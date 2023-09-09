@@ -15,6 +15,7 @@ class traverse {
     function setup() {
         data modify storage retina:output Target set value "NONE";
         data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth;
+        data modify storage retina:output HitEntityHead set value false;
         data remove storage retina:output TargetedBlock;
         data remove storage retina:output TargetedEntity;
         data remove storage retina:output PlacingPosition;
@@ -232,6 +233,7 @@ class check {
     function main() {
         $step ++;
 
+        $check_for_head = false;
         check.block.main();
         if (data storage retina:input {TargetEntities: true}) check.entity.main();
 
@@ -296,7 +298,6 @@ class check {
 
             // Identify the entity and get a list of surfaces
             retina.id:$max = 0;
-            $check_for_head = false;
             tag @e[type=!#retina:intangible] remove retina.possible_target;
             execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
 

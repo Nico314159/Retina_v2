@@ -1,7 +1,6 @@
 data remove storage retina:data Surfaces
 data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]}
 scoreboard players set $max retina.id 0
-scoreboard players set $check_for_head retina.__variable__ 0
 tag @e[type=!#retina:intangible] remove retina.possible_target
 execute align xyz as @e[type=!#retina:intangible,tag=!retina.executing,dx=0,dy=0,dz=0] at @s run function retina:check/entity/get_hitbox
 scoreboard players set $contact retina.__variable__ 0
