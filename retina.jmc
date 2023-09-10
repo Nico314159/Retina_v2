@@ -460,10 +460,13 @@ class find_closest_surface {
         );
         $test = $Y1;
         $test -= $Y0;
-        if ($test < 480) expand {
-            $head_Y += $t_Y;
-            $head_Y -= 480;
+        if ($test >= 480) expand {
+            // no head on lower block
+            $head_Y = 2147483647;
+            return 0;
         }
+        $head_Y += $t_Y;
+        $head_Y -= 480;
     }
     function west() {
         // @within find_closest_surface.main()
