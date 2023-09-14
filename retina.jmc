@@ -472,8 +472,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.West;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
@@ -520,8 +519,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.East;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
@@ -568,8 +566,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.Bottom;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
@@ -616,8 +613,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.Top;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
@@ -664,8 +660,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.North;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
@@ -712,8 +707,7 @@ class find_closest_surface {
         // @within find_closest_surface.main()
 
         data modify storage retina:data List set from storage retina:data Surfaces.South;
-        $surfaces = data get storage retina:data List;
-        $cuboid_id = $surfaces;
+        $cuboid_id = $surfaces = data get storage retina:data List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
