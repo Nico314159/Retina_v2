@@ -447,7 +447,7 @@ class find_closest_surface {
             () => {
                 $[axis]0 = data get storage retina:data List[-1][index];
                 $[axis]1 = data get storage retina:data List[-1][ Hardcode.calc(index + 3) ];
-                $t_[axis] = 480;
+                $t_[axis] = SCALE;
                 $t_[axis] *= $step_[axis];
                 $t_[axis] -= $frac_origin_[axis];
                 $[axis]0 += $t_[axis];
@@ -460,13 +460,13 @@ class find_closest_surface {
         );
         $test = $Y1;
         $test -= $Y0;
-        if ($test >= 480) expand {
+        if ($test >= SCALE) expand {
             // no head on lower block
             $head_Y = 2147483647;
             return 0;
         }
         $head_Y += $t_Y;
-        $head_Y -= 480;
+        $head_Y -= SCALE;
     }
     function west() {
         // @within find_closest_surface.main()
@@ -817,8 +817,8 @@ class storage {
         data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
 
         // I have no clue why X and Y need this but Z doesn't.
-        if ($X0 < 0) $X0 += 480;
-        if ($Y0 < 0) $Y0 += 480;
+        if ($X0 < 0) $X0 += SCALE;
+        if ($Y0 < 0) $Y0 += SCALE;
 
         Hardcode.repeatLists(
             ["[axis]", "index"],
@@ -873,8 +873,8 @@ class storage {
         data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
 
         // I have no clue why X and Y need this but Z doesn't.
-        if ($X0 < 0) $X0 += 480;
-        if ($Y0 < 0) $Y0 += 480;
+        if ($X0 < 0) $X0 += SCALE;
+        if ($Y0 < 0) $Y0 += SCALE;
         
         Hardcode.repeatLists(
             ["[axis]", "_index"],
