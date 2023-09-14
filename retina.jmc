@@ -166,6 +166,7 @@ class traverse {
         $spread_least = data get storage retina:input SpreadFactor[0];
         $spread_range = data get storage retina:input SpreadFactor[1];
         $spread_range -= $spread_least;
+        $spread_range ++;
 
         $single_call = false;
         tag @e remove retina.target;
