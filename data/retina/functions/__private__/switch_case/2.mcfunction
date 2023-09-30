@@ -1,2 +1,0 @@
-execute if score $item_frame_facing retina.__variable__ matches 3 run function retina:__private__/switch_case/7
-execute if score $item_frame_facing retina.__variable__ matches 4..5 run function retina:__private__/switch_case/8
