@@ -41,7 +41,6 @@ scoreboard players operation $length retina.__variable__ += $temp retina.__varia
 scoreboard players operation __math__.N retina.__variable__ = $length retina.__variable__
 function retina:__private__/math_sqrt/main
 scoreboard players operation $length retina.__variable__ = __math__.x_n retina.__variable__
-function retina:math/gimbal_to_matrix
 scoreboard players operation $input_mat3.XX retina.__variable__ = $output_mat3.XX retina.__variable__
 scoreboard players operation $input_mat3.XY retina.__variable__ = $output_mat3.XY retina.__variable__
 scoreboard players operation $input_mat3.XZ retina.__variable__ = $output_mat3.XZ retina.__variable__

@@ -17,6 +17,7 @@ scoreboard players reset * retina.hit
 kill @e[type=marker,tag=retina.endpoint]
 execute store result score $input_pitch retina.__variable__ run data get entity @s Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get entity @s Rotation[0] 10
+function retina:math/gimbal_to_matrix
 scoreboard players set $i retina.__variable__ 0
 execute if score $i retina.__variable__ < $horizontal_count retina.__variable__ run function retina:__private__/for_loop/0
 scoreboard players set $k retina.__variable__ 0
