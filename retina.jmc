@@ -164,9 +164,7 @@ class traverse {
         if ($centered_count < 0) return 0;
 
         $spread_least = data get storage retina:input SpreadFactor[0];
-        $spread_range = data get storage retina:input SpreadFactor[1];
-        $spread_range -= $spread_least;
-        $spread_range ++;
+        $spread_most = data get storage retina:input SpreadFactor[1];
 
         $single_call = false;
         tag @e remove retina.target;
@@ -182,15 +180,12 @@ class traverse {
                 $input_vec3.X += 10;
                 $input_vec3.X -= $horizontal_count;
                 if ($horizontal_count == 10) {
-                    $input_vec3.X = Math.random(2, 6);
+                    $input_vec3.X = execute run random value 2..6;
                     $input_vec3.X %= 3;
                     $input_vec3.X --;
                     $input_vec3.X *= 20;
                 }
-                $spread = Math.random();
-                $spread %= $spread_range;
-                $spread += $spread_least;
-                if ($spread_range == 0) $spread = $spread_least;
+                $spread = Math.random($spread_least, $spread_most);
                 $input_vec3.X *= $spread;
                 $input_vec3.X /= 100;
 
@@ -199,15 +194,12 @@ class traverse {
                 $input_vec3.Y += 10;
                 $input_vec3.Y -= $vertical_count;
                 if ($vertical_count == 10) {
-                    $input_vec3.Y = Math.random(2, 6);
+                    $input_vec3.Y = execute run random value 2..6;
                     $input_vec3.Y %= 3;
                     $input_vec3.Y --;
                     $input_vec3.Y *= 20;
                 }
-                $spread = Math.random();
-                $spread %= $spread_range;
-                $spread += $spread_least;
-                if ($spread_range == 0) $spread = $spread_least;
+                $spread = Math.random($spread_least, $spread_most);
                 $input_vec3.Y *= $spread;
                 $input_vec3.Y /= 100;
 

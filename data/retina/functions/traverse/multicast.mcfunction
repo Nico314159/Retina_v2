@@ -8,9 +8,7 @@ execute if score $vertical_count retina.__variable__ matches ..0 run return 0
 execute if score $centered_count retina.__variable__ matches ..-1 run tellraw @a ["",{"text":"[Error] ","color":"dark_red"},{"text":"CenteredCount storage has invalid value of ","color":"red"},{"score":{"name":"$centered_count","objective":"retina.__variable__"},"color":"red"}]
 execute if score $centered_count retina.__variable__ matches ..-1 run return 0
 execute store result score $spread_least retina.__variable__ run data get storage retina:input SpreadFactor[0]
-execute store result score $spread_range retina.__variable__ run data get storage retina:input SpreadFactor[1]
-scoreboard players operation $spread_range retina.__variable__ -= $spread_least retina.__variable__
-scoreboard players add $spread_range retina.__variable__ 1
+execute store result score $spread_most retina.__variable__ run data get storage retina:input SpreadFactor[1]
 scoreboard players set $single_call retina.__variable__ 0
 tag @e remove retina.target
 scoreboard players reset * retina.hit
