@@ -29,6 +29,7 @@ class traverse {
                 $int_[i] = data get entity @s Pos[0] 1;
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
+                // TODO: use `return run` when 1.20.3 releases
                 if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
                 if (!$test_[i] matches -1..0) return 0;
             },
@@ -162,6 +163,7 @@ class traverse {
         if ($vertical_count <= 0) return 0;
         if ($centered_count < 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
         if ($centered_count < 0) return 0;
+        // TODO: use `return run` when 1.20.3 releases ^^
 
         $spread_least = data get storage retina:input SpreadFactor[0];
         $spread_most = data get storage retina:input SpreadFactor[1];
@@ -310,6 +312,7 @@ class check {
                 Hardcode.repeatList( 
                     "[type]",
                     () => {
+                        // TODO: use `return run` when 1.20.3 releases
                         if (entity @s[type=#retina:[type]] && !$ignore_[type]) entity_hitbox.[type]();
                         if (entity @s[type=#retina:[type]] && !$ignore_[type]) return 1;
                     },
@@ -454,8 +457,9 @@ class find_closest_surface {
         $test = $Y1;
         $test -= $Y0;
         if ($test >= SCALE) expand {
-            // no head on lower block
+            // TODO: use `return run` when 1.20.3 releases
             $head_Y = 2147483647;
+            // no head on lower block
             return 0;
         }
         $head_Y += $t_Y;
