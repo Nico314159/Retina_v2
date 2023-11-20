@@ -11,6 +11,7 @@ scoreboard players set 20 retina.__int__ 20
 scoreboard players set -4 retina.__int__ -4
 scoreboard players set -1 retina.__int__ -1
 execute unless score __math__.seed retina.__variable__ matches -2147483648..2147483647 run function retina:__private__/math_random/setup
+scoreboard players set $single_call retina.__variable__ 1
 scoreboard players set $overflow_risk retina.__variable__ 2147483647
 scoreboard players operation $overflow_risk retina.__variable__ /= 480 retina.__int__
 scoreboard objectives add retina.id dummy

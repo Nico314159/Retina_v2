@@ -2,6 +2,7 @@ import "math";
 import "tags";
 
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
+$single_call = true;
 $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 Scoreboard.add(retina.id, dummy);
