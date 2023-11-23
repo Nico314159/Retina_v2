@@ -1,3 +1,2 @@
-function retina:find_closest_surface/ray_intersects_with_surface
-data modify storage retina:output HitFace set value "North"
-execute if score $check_for_head retina.__variable__ matches 1.. if score $Y_intersection retina.__variable__ >= $head_Y retina.__variable__ run data modify storage retina:output HitEntityHead set value true
+scoreboard players operation $entity_half_width retina.__variable__ += $expand_entity_hitboxes retina.__variable__
+scoreboard players operation $entity_height retina.__variable__ += $expand_entity_hitboxes retina.__variable__
