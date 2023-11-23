@@ -24,17 +24,20 @@ class traverse {
         data remove storage retina:output HitFace;
         
         // guard condition
-        Hardcode.repeatList(
-            "[i]",
+        Hardcode.repeatLists(
+            ["[i]", "_n_"],
             () => {
-                $int_[i] = data get entity @s Pos[0] 1;
+                $int_[i] = data get entity @s Pos[_n_] 1;
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
                 // TODO: use `return run` when 1.20.3 releases
                 if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
                 if (!$test_[i] matches -1..0) return 0;
             },
-            ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
+            [
+                ["X", "Z"], // not worried about Y since that's never gonna be high enough to overflow
+                ["0", "2"]
+            ]
         );
         
         $block_distance = $entity_distance = 2147483647;
