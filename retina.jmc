@@ -148,11 +148,11 @@ class traverse {
             tp @s ~ ~ ~ ~ ~;
             data modify storage retina:operations setup_context set from entity @s {}; //use storage cause it is more efficent then getting data from entity
             
-            if (!($override_pitch == 1)) $input_pitch = data get storage retina:operations setup_context.Rotation[1] 10;
-            if ($override_pitch == 1) $input_pitch = $override_pitch;
+            if (!($override_pitch == $override_pitch)) $input_pitch = data get storage retina:operations setup_context.Rotation[1] 10;
+            if ($override_pitch == $override_pitch) $input_pitch = $override_pitch;
             scoreboard players reset $override_pitch retina.__variable__;  //idk if there is a different way to reset sb in this compiler
-            if (!($override_yawn == 1)) $input_yaw = data get storage retina:operations setup_context.Rotation[0] 10;
-            if ($override_yawn == 1) $input_yaw = $override_yawn;
+            if (!($override_yawn == $override_yawn)) $input_yaw = data get storage retina:operations setup_context.Rotation[0] 10;
+            if ($override_yawn == $override_yawn) $input_yaw = $override_yawn;
             scoreboard players reset $override_yawn retina.__variable__; //idk if there is a different way to reset sb in this compiler
             
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
