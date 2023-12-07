@@ -1,5 +1,4 @@
-execute unless block ~ ~ ~ #retina:extended_piston[extended=true] run function retina:hitbox/cubic
-execute unless block ~ ~ ~ #retina:extended_piston[extended=true] run return 1
+return run execute unless block ~ ~ ~ #retina:extended_piston[extended=true] run function retina:hitbox/cubic
 execute if block ~ ~ ~ #retina:extended_piston[facing=east] run data modify storage retina:data Surfaces set value {Top:[[0,480,0,360,480,480]],Bottom:[[0,0,0,360,0,480]],West:[[0,0,0,0,480,480]],East:[[360,0,0,360,480,480]],North:[[0,0,0,360,480,0]],South:[[0,0,480,360,480,480]]}
 execute if block ~ ~ ~ #retina:extended_piston[facing=west] run data modify storage retina:data Surfaces set value {Top:[[120,480,0,480,480,480]],Bottom:[[120,0,0,480,0,480]],West:[[120,0,0,120,480,480]],East:[[480,0,0,480,480,480]],North:[[120,0,0,480,480,0]],South:[[120,0,480,480,480,480]]}
 execute if block ~ ~ ~ #retina:extended_piston[facing=south] run data modify storage retina:data Surfaces set value {Top:[[0,480,0,480,480,360]],Bottom:[[0,0,0,480,0,360]],West:[[0,0,0,0,480,360]],East:[[480,0,0,480,480,360]],North:[[0,0,0,480,480,0]],South:[[0,0,360,480,480,360]]}
