@@ -1,4 +1,4 @@
-execute if score $output_vec3.Z retina.__variable__ matches 0 run return 0
+execute if score $output_vec3.Z retina.__variable__ matches 0 run return fail
 scoreboard players operation $distance retina.__variable__ = $Z0 retina.__variable__
 scoreboard players operation $distance retina.__variable__ /= $output_vec3.Z retina.__variable__
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Distance: ","italic":true},{"color":"light_purple","score":{"name":"$distance","objective":"retina.__variable__"}}]
