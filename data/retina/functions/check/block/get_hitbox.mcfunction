@@ -102,6 +102,8 @@ execute if block ~ ~ ~ #retina:pressure_plate unless score $ignore_pressure_plat
 execute if block ~ ~ ~ #retina:pressure_plate unless score $ignore_pressure_plate retina.__variable__ matches 1.. run return 1
 execute if block ~ ~ ~ #retina:rail unless score $ignore_rail retina.__variable__ matches 1.. run function retina:hitbox/rail
 execute if block ~ ~ ~ #retina:rail unless score $ignore_rail retina.__variable__ matches 1.. run return 1
+execute if block ~ ~ ~ #retina:redstone_wire unless score $ignore_redstone_wire retina.__variable__ matches 1.. run function retina:hitbox/redstone_wire
+execute if block ~ ~ ~ #retina:redstone_wire unless score $ignore_redstone_wire retina.__variable__ matches 1.. run return 1
 execute if block ~ ~ ~ #retina:repeater_shaped unless score $ignore_repeater_shaped retina.__variable__ matches 1.. run function retina:hitbox/repeater_shaped
 execute if block ~ ~ ~ #retina:repeater_shaped unless score $ignore_repeater_shaped retina.__variable__ matches 1.. run return 1
 execute if block ~ ~ ~ #retina:rod unless score $ignore_rod retina.__variable__ matches 1.. run function retina:hitbox/rod

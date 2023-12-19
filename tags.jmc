@@ -321,6 +321,11 @@ new tags.blocks(repeater_shaped) {
 		"minecraft:comparator"
 	]
 }
+new tags.blocks(redstone_wire) {
+    "values": [
+        "minecraft:redstone_wire"
+	]
+}
 new tags.blocks(rod) {
     "values": [
         "minecraft:end_rod",

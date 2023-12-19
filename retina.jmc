@@ -272,9 +272,10 @@ class check {
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "extended_piston", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", "grindstone",
                 "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lectern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
-                "pane_shaped", "pickle", "piglin_head", "piglin_wall_head", "pink_petals", "piston_head", "pitcher_crop", "pressure_plate", "rail", "repeater_shaped", "rod",
-                "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", 
-                "stem", "stonecutter", "structure_void", "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
+                "pane_shaped", "pickle", "piglin_head", "piglin_wall_head", "pink_petals", "piston_head", "pitcher_crop", "pressure_plate", 
+                "rail", "redstone_wire", "repeater_shaped", "rod", "sapling", "seagrass", "short_crop", "slab", "small_dripleaf", "sniffer_egg", "snow", 
+                "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem", "stonecutter", "structure_void", 
+                "tall_crop", "torchflower_crop", "trapdoor", "tripwire", "tripwire_hook", "turtle_egg", "twisting_vines", 
                 "vertical_torch", "vine_like", "wall_banner", "wall_hanging_sign", "wall_head", "wall_sign", "wall_torch", "wall", "weeping_vines"]
             );
             hitbox.cubic(); // if it doesn't match any special hitbox, assume it's a 1x1x1 cube.
