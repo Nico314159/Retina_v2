@@ -2,5 +2,13 @@
     "pack": {
         "pack_format": 18,
         "description": "Precise & customizable raycast library for use in integrated systems."
+    },
+    "overlays": {
+        "entries": [
+            {
+                "formats": 26,
+                "directory": "overlay_26"
+            }
+        ]
     }
 }
