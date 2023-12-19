@@ -844,7 +844,7 @@ class storage {
             tag @s add retina.endpoint;
             data modify entity @s Pos set from storage retina:output ContactCoordinates;
             if ($end_particle) execute at @s run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force @a;
-        };
+        }
     }
     function entity() {
         // Target type
@@ -892,7 +892,7 @@ class storage {
             tag @s add retina.endpoint;
             data modify entity @s Pos set from storage retina:output ContactCoordinates;
             if ($end_particle) execute at @s run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force @a;
-        };
+        }
     }
 }
 
