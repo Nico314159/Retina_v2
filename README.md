@@ -126,6 +126,5 @@ You are free to redistribute Retina or modified versions of Retina as a part of 
 ## Limitations
 
 - Randomized block hitboxes: flowers, bamboo plants, mangrove propagules, and pointed dripstone can't be properly implemented due to having hitboxes that differ depending on what block they are placed on. Thus, they are currently treated as air blocks.
-- Ignores for certain types of blocks: these will be implemented in a future update, but for now, just add whichever blocks you want to ignore to the `#retina:airs` tag on your end.
 
 
