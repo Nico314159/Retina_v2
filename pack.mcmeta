@@ -6,7 +6,7 @@
     "overlays": {
         "entries": [
             {
-                "formats": 26,
+                "formats": [26, 99],
                 "directory": "overlay_26"
             }
         ]
