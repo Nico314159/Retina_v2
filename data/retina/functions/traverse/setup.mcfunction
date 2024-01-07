@@ -81,9 +81,8 @@ execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a 
 scoreboard players set $step retina.__variable__ 0
 execute store result score $offset_Y retina.__variable__ run data get entity @s Pos[1] -480
 scoreboard players operation $offset_Y retina.__variable__ += $Y retina.__variable__
-execute if score $offset_Y retina.__variable__ matches 776..778 positioned ~ ~1.62 ~ run function retina:traverse/loop
-execute if score $offset_Y retina.__variable__ matches 608..610 positioned ~ ~1.27 ~ run function retina:traverse/loop
-execute if score $offset_Y retina.__variable__ matches 192 positioned ~ ~0.4 ~ run function retina:traverse/loop
+execute store result storage retina:data offset_Y double 0.0020833333333333333 run scoreboard players get $offset_Y retina.__variable__
+function retina:__private__/anonymous/1 with storage retina:data
 execute if score $hit_block retina.__variable__ matches 1.. run function retina:storage/block
 execute if score $hit_entity retina.__variable__ matches 1.. run function retina:storage/entity
 function #retina:on_hit

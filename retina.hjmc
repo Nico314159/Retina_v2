@@ -3,3 +3,4 @@
 #define double_hit $hit_block && $hit_entity
 #command random
 #uninstall
+#nometa

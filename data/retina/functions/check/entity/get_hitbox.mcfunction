@@ -1,5 +1,5 @@
-function retina:__private__/anonymous/1
-execute summon marker run function retina:__private__/anonymous/2
+function retina:__private__/anonymous/2
+execute summon marker run function retina:__private__/anonymous/3
 scoreboard players operation $entity_X0 retina.__variable__ = $entity_frac_X retina.__variable__
 scoreboard players operation $entity_X0 retina.__variable__ -= $entity_half_width retina.__variable__
 scoreboard players operation $entity_X0 retina.__variable__ > 0 retina.__int__
