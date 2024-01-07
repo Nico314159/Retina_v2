@@ -5,6 +5,7 @@ data remove storage retina:output TargetedBlock
 data remove storage retina:output TargetedEntity
 data remove storage retina:output PlacingPosition
 data remove storage retina:output ContactSurface
+data remove storage retina:output ContactCoordinates
 data remove storage retina:output HitFace
 execute store result score $int_X retina.__variable__ run data get entity @s Pos[0] 1
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__

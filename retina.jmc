@@ -21,6 +21,7 @@ class traverse {
         data remove storage retina:output TargetedEntity;
         data remove storage retina:output PlacingPosition;
         data remove storage retina:output ContactSurface;
+        data remove storage retina:output ContactCoordinates;
         data remove storage retina:output HitFace;
         
         // guard condition
