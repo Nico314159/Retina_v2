@@ -433,7 +433,7 @@ class check {
             if (!($expand_entity_hitboxes == $expand_entity_hitboxes)) {
                 execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
             } else {
-                execute align xyz positioned ~-1 ~-1 ~-1 as @e[type=!#retina:intangible, tag=!retina.executing, dx=2, dy=2, dz=2] at @s run check.entity.get_hitbox();
+                execute align xyz positioned ~-1 ~-1 ~-1 as @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=2, dy=2, dz=2] at @s run check.entity.get_hitbox();
             }
 
             // See if the ray hits any surface
