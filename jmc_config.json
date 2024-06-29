@@ -1,7 +1,7 @@
 {
     "namespace": "retina",
     "description": "Precise & customizable raycast library for use in integrated systems.",
-    "pack_format": "18",
+    "pack_format": "48",
     "target": "retina.jmc",
     "output": "."
 }

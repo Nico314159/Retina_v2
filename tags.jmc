@@ -1,5 +1,5 @@
 // also includes blocks w/ randomized hitboxes
-new tags.blocks(airs) {
+new tags.block(airs) {
     "values": [
         "minecraft:air",
         "minecraft:cave_air",
@@ -13,7 +13,7 @@ new tags.blocks(airs) {
 	]
 }
 
-new tags.blocks(amethyst) {
+new tags.block(amethyst) {
     "values": [
         "minecraft:small_amethyst_bud",
         "minecraft:medium_amethyst_bud",
@@ -21,43 +21,43 @@ new tags.blocks(amethyst) {
         "minecraft:amethyst_cluster"
     ]
 }
-new tags.blocks(anvil) {
+new tags.block(anvil) {
     "values": ["#minecraft:anvil"]
 }
-new tags.blocks(attached_stem) {
+new tags.block(attached_stem) {
 	"values": [
 		"minecraft:attached_melon_stem",
 		"minecraft:attached_pumpkin_stem"
 	]
 }
-new tags.blocks(azalea) {
+new tags.block(azalea) {
     "values": [
         "minecraft:azalea",
         "minecraft:flowering_azalea"
     ]
 }
-new tags.blocks(bed) {
+new tags.block(bed) {
 	"values": ["#minecraft:beds"]
 }
-new tags.blocks(bell) {
+new tags.block(bell) {
     "values": ["minecraft:bell"]
 }
-new tags.blocks(berries) {
+new tags.block(berries) {
     "values": ["minecraft:sweet_berry_bush"]
 }
-new tags.blocks(big_dripleaf) {
+new tags.block(big_dripleaf) {
 	"values": ["minecraft:big_dripleaf"]
 }
-new tags.blocks(big_dripleaf_stem) {
+new tags.block(big_dripleaf_stem) {
 	"values": ["minecraft:big_dripleaf_stem"]
 }
-new tags.blocks(brewing_stand) {
+new tags.block(brewing_stand) {
 	"values": ["minecraft:brewing_stand"]
 }
-new tags.blocks(button) {
+new tags.block(button) {
 	"values": ["#minecraft:buttons"]
 }
-new tags.blocks(cactus_shaped) {
+new tags.block(cactus_shaped) {
     "values": [
 		"minecraft:cactus",
         "minecraft:decorated_pot",
@@ -67,44 +67,44 @@ new tags.blocks(cactus_shaped) {
         "minecraft:cave_vines"
 	]
 }
-new tags.blocks(cake) {
+new tags.block(cake) {
     "values": [
         "minecraft:cake",
         "#minecraft:candle_cakes"
     ]
 }
-new tags.blocks(campfire) {
+new tags.block(campfire) {
     "values": ["#minecraft:campfires"]
 }
-new tags.blocks(candle) {
+new tags.block(candle) {
     "values": ["#minecraft:candles"]
 }
-new tags.blocks(carpet) {
+new tags.block(carpet) {
     "values": [
         "#minecraft:wool_carpets",
         "minecraft:moss_carpet"
     ]
 }
-new tags.blocks(cauldron) {
+new tags.block(cauldron) {
     "values": ["#minecraft:cauldrons"]
 }
-new tags.blocks(chain) {
+new tags.block(chain) {
     "values": ["minecraft:chain"]
 }
-new tags.blocks(chest) {
+new tags.block(chest) {
     "values": [
 		"minecraft:chest",
 		"minecraft:ender_chest",
 		"minecraft:trapped_chest"
 	]
 }
-new tags.blocks(composter) {
+new tags.block(composter) {
     "values": ["minecraft:composter"]
 }
-new tags.blocks(conduit) {
+new tags.block(conduit) {
     "values": ["minecraft:conduit"]
 }
-new tags.blocks(coral_fan) {
+new tags.block(coral_fan) {
     "values": [
         "minecraft:tube_coral_fan",
         "minecraft:brain_coral_fan",
@@ -118,7 +118,7 @@ new tags.blocks(coral_fan) {
         "minecraft:dead_horn_coral_fan"
     ]
 }
-new tags.blocks(coral_plant) {
+new tags.block(coral_plant) {
     "values": [
         "minecraft:tube_coral",
         "minecraft:brain_coral",
@@ -132,39 +132,39 @@ new tags.blocks(coral_plant) {
         "minecraft:dead_horn_coral"
     ]
 }
-new tags.blocks(daylight_detector) {
+new tags.block(daylight_detector) {
     "values": ["minecraft:daylight_detector"]
 }
-new tags.blocks(door) {
+new tags.block(door) {
     "values": ["#minecraft:doors"]
 }
-new tags.blocks(end_portal_frame) {
+new tags.block(end_portal_frame) {
     "values": ["minecraft:end_portal_frame"]
 }
-new tags.blocks(extended_piston) {
+new tags.block(extended_piston) {
     "values": [
         "minecraft:piston",
         "minecraft:sticky_piston"
     ]
 }
-new tags.blocks(farmland_shaped) {
+new tags.block(farmland_shaped) {
     "values": [
         "minecraft:farmland",
         "minecraft:dirt_path"
     ]
 }
-new tags.blocks(fence) {
+new tags.block(fence) {
     "values": ["#minecraft:fences"]
 }
-new tags.blocks(fence_gate) {
+new tags.block(fence_gate) {
     "values": ["#minecraft:fence_gates"]
 }
-new tags.blocks(fire) {
+new tags.block(fire) {
     "values": ["#minecraft:fire"]
 }
-new tags.blocks(grass_shaped) {
+new tags.block(grass_shaped) {
     "values": [
-		"minecraft:grass",
+		"minecraft:short_grass",
 		"minecraft:fern",
 		"minecraft:dead_bush",
 		"minecraft:warped_roots",
@@ -172,16 +172,16 @@ new tags.blocks(grass_shaped) {
 		"minecraft:small_dripleaf"
 	]
 }
-new tags.blocks(grindstone) {
+new tags.block(grindstone) {
     "values": ["minecraft:grindstone"]
 }
-new tags.blocks(hanging_roots) {
+new tags.block(hanging_roots) {
     "values": ["minecraft:hanging_roots"]
 }
-new tags.blocks(hanging_sign) {
+new tags.block(hanging_sign) {
     "values": ["#minecraft:ceiling_hanging_signs"]
 }
-new tags.blocks(head) {
+new tags.block(head) {
     "values": [
         "minecraft:player_head",
         "minecraft:zombie_head",
@@ -191,25 +191,25 @@ new tags.blocks(head) {
         "minecraft:dragon_head"
     ]
 }
-new tags.blocks(hopper) {
+new tags.block(hopper) {
     "values": ["minecraft:hopper"]
 }
-new tags.blocks(ladder) {
+new tags.block(ladder) {
     "values": ["minecraft:ladder"]
 }
-new tags.blocks(lantern) {
+new tags.block(lantern) {
     "values": [
         "minecraft:lantern",
         "minecraft:soul_lantern"
     ]
 }
-new tags.blocks(lectern) {
+new tags.block(lectern) {
     "values": ["minecraft:lectern"]
 }
-new tags.blocks(lever) {
+new tags.block(lever) {
     "values": ["minecraft:lever"]
 }
-new tags.blocks(mushroom_shaped) {
+new tags.block(mushroom_shaped) {
 	"values": [
 		"minecraft:brown_mushroom",
 		"minecraft:red_mushroom",
@@ -250,19 +250,19 @@ new tags.blocks(mushroom_shaped) {
         "minecraft:potted_torchflower"
 	]
 }
-new tags.blocks(nether_fungus) {
+new tags.block(nether_fungus) {
     "values": [
         "minecraft:crimson_fungus",
         "minecraft:warped_fungus"
     ]
 }
-new tags.blocks(nether_sprouts) {
+new tags.block(nether_sprouts) {
     "values": ["minecraft:nether_sprouts"]
 }
-new tags.blocks(nether_wart) {
+new tags.block(nether_wart) {
     "values": ["minecraft:nether_wart"]
 }
-new tags.blocks(pane_shaped) {
+new tags.block(pane_shaped) {
 	"values": [
 		"minecraft:iron_bars",
 		"minecraft:glass_pane",
@@ -284,30 +284,30 @@ new tags.blocks(pane_shaped) {
 		"minecraft:black_stained_glass_pane"
 	]
 }
-new tags.blocks(pickle) {
+new tags.block(pickle) {
     "values": ["minecraft:sea_pickle"]
 }
-new tags.blocks(piglin_head) {
+new tags.block(piglin_head) {
     "values": ["minecraft:piglin_head"]
 }
-new tags.blocks(piglin_wall_head) {
+new tags.block(piglin_wall_head) {
     "values": [
         "minecraft:piglin_wall_head"
     ]
 }
-new tags.blocks(pink_petals) {
+new tags.block(pink_petals) {
     "values": ["minecraft:pink_petals"]
 }
-new tags.blocks(piston_head) {
+new tags.block(piston_head) {
     "values": ["minecraft:piston_head"]
 }
-new tags.blocks(pitcher_crop) {
+new tags.block(pitcher_crop) {
     "values": ["minecraft:pitcher_crop"]
 }
-new tags.blocks(pressure_plate) {
+new tags.block(pressure_plate) {
     "values": ["#minecraft:pressure_plates"]
 }
-new tags.blocks(rail) {
+new tags.block(rail) {
 	"values": [
         "minecraft:rail",
 		"minecraft:activator_rail",
@@ -315,25 +315,25 @@ new tags.blocks(rail) {
 		"minecraft:powered_rail"
 	]
 }
-new tags.blocks(repeater_shaped) {
+new tags.block(repeater_shaped) {
     "values": [
         "minecraft:repeater",
 		"minecraft:comparator"
 	]
 }
-new tags.blocks(redstone_wire) {
+new tags.block(redstone_wire) {
     "values": [
         "minecraft:redstone_wire"
 	]
 }
-new tags.blocks(rod) {
+new tags.block(rod) {
     "values": [
         "minecraft:end_rod",
         "minecraft:lightning_rod"
     ]
 }
 // exclude mangrove & azalea
-new tags.blocks(sapling) {
+new tags.block(sapling) {
     "values": [
         "minecraft:oak_sapling",
         "minecraft:spruce_sapling",
@@ -344,50 +344,50 @@ new tags.blocks(sapling) {
         "minecraft:cherry_sapling"
     ]
 }
-new tags.blocks(sculk_sensor) {
+new tags.block(sculk_sensor) {
     "values": [
         "minecraft:sculk_sensor",
         "minecraft:calibrated_sculk_sensor"
     ]
 }
-new tags.blocks(seagrass) {
+new tags.block(seagrass) {
     "values": ["minecraft:seagrass"]
 }
-new tags.blocks(short_crop) {
+new tags.block(short_crop) {
     "values": [
         "minecraft:carrots",
         "minecraft:potatoes"
     ]
 }
-new tags.blocks(slab) {
+new tags.block(slab) {
     "values": [
         "#minecraft:slabs",
         "minecraft:sculk_sensor",
         "minecraft:calibrated_sculk_sensor"
     ]
 }
-new tags.blocks(small_dripleaf) {
+new tags.block(small_dripleaf) {
     "values": ["minecraft:small_dripleaf"]
 }
-new tags.blocks(sniffer_egg) {
+new tags.block(sniffer_egg) {
     "values": ["minecraft:sniffer_egg"]
 }
-new tags.blocks(snow) {
+new tags.block(snow) {
     "values": ["minecraft:snow"]
 }
-new tags.blocks(spore_blossom) {
+new tags.block(spore_blossom) {
     "values": ["minecraft:spore_blossom"]
 }
-new tags.blocks(sugar_cane_like) {
+new tags.block(sugar_cane_like) {
 	"values": [
 		"minecraft:sugar_cane",
 		"minecraft:tall_seagrass"
 	]
 }
-new tags.blocks(stair) {
+new tags.block(stair) {
     "values": ["#minecraft:stairs"]
 }
-new tags.blocks(standing_sign_or_banner) {
+new tags.block(standing_sign_or_banner) {
     "values": [
 		"#minecraft:standing_signs",
 		"minecraft:white_banner",
@@ -410,60 +410,60 @@ new tags.blocks(standing_sign_or_banner) {
 		"minecraft:twisting_vines_plant"
 	]
 }
-new tags.blocks(stem) {
+new tags.block(stem) {
     "values": [
         "minecraft:melon_stem",
         "minecraft:pumpkin_stem"
     ]
 }
-new tags.blocks(stonecutter) {
+new tags.block(stonecutter) {
     "values": ["minecraft:stonecutter"]
 }
-new tags.blocks(structure_void) {
+new tags.block(structure_void) {
     "values": ["minecraft:structure_void"]
 }
-new tags.blocks(tall_crop) {
+new tags.block(tall_crop) {
 	"values": [
         "minecraft:beetroots",
         "minecraft:wheat"
     ]
 }
-new tags.blocks(torchflower_crop) {
+new tags.block(torchflower_crop) {
     "values": ["minecraft:torchflower_crop"]
 }
-new tags.blocks(trapdoor) {
+new tags.block(trapdoor) {
     "values": ["#minecraft:trapdoors"]
 }
-new tags.blocks(tripwire) {
+new tags.block(tripwire) {
     "values": ["minecraft:tripwire"]
 }
-new tags.blocks(tripwire_hook) {
+new tags.block(tripwire_hook) {
     "values": ["minecraft:tripwire_hook"]
 }
-new tags.blocks(turtle_egg) {
+new tags.block(turtle_egg) {
     "values": ["minecraft:turtle_egg"]
 }
-new tags.blocks(twisting_vines) {
+new tags.block(twisting_vines) {
     "values": ["minecraft:twisting_vines"]
 }
-new tags.blocks(vertical_torch) {
+new tags.block(vertical_torch) {
 	"values": [
 		"minecraft:torch",
 		"minecraft:redstone_torch",
 		"minecraft:soul_torch"
 	]
 }
-new tags.blocks(vine_like) {
+new tags.block(vine_like) {
     "values": [
         "minecraft:vine",
         "minecraft:sculk_vein",
         "minecraft:glow_lichen"
     ]
 }
-new tags.blocks(wall) {
+new tags.block(wall) {
     "values": ["#minecraft:walls"]
 }
-new tags.blocks(wall_banner) {
+new tags.block(wall_banner) {
     "values": [
 		"minecraft:white_wall_banner",
 		"minecraft:orange_wall_banner",
@@ -483,10 +483,10 @@ new tags.blocks(wall_banner) {
 		"minecraft:black_wall_banner"
     ]
 }
-new tags.blocks(wall_hanging_sign) {
+new tags.block(wall_hanging_sign) {
     "values": ["#minecraft:wall_hanging_signs"]
 }
-new tags.blocks(wall_head) {
+new tags.block(wall_head) {
     "values": [
         "minecraft:player_wall_head",
         "minecraft:zombie_wall_head",
@@ -496,22 +496,22 @@ new tags.blocks(wall_head) {
         "minecraft:dragon_wall_head"
     ]
 }
-new tags.blocks(wall_sign) {
+new tags.block(wall_sign) {
     "values": ["#minecraft:wall_signs"]
 }
-new tags.blocks(wall_torch) {
+new tags.block(wall_torch) {
 	"values": [
 		"minecraft:wall_torch",
 		"minecraft:redstone_wall_torch",
 		"minecraft:soul_wall_torch"
 	]
 }
-new tags.blocks(weeping_vines) {
+new tags.block(weeping_vines) {
     "values": ["minecraft:weeping_vines"]
 }
 
 
-new tags.entity_types(intangible) {
+new tags.entity_type(intangible) {
 	"description": "Entities to ignore when looking for targeted entities",
 	"values": [
 		"minecraft:area_effect_cloud",
@@ -544,98 +544,98 @@ new tags.entity_types(intangible) {
 	]
 }
 
-new tags.entity_types(allay) {
+new tags.entity_type(allay) {
     "values": ["minecraft:allay"]
 }
-new tags.entity_types(armor_stand) {
+new tags.entity_type(armor_stand) {
     "values": ["minecraft:armor_stand"]
 }
-new tags.entity_types(axolotl) {
+new tags.entity_type(axolotl) {
     "values": ["minecraft:axolotl"]
 }
-new tags.entity_types(bat_like) {
+new tags.entity_type(bat_like) {
     "values": [
 		"minecraft:bat",
 		"minecraft:parrot"
 	]
 }
-new tags.entity_types(bee) {
+new tags.entity_type(bee) {
     "values": ["minecraft:bee"]
 }
-new tags.entity_types(boat) {
+new tags.entity_type(boat) {
     "values": [
 		"minecraft:boat",
 		"minecraft:chest_boat"
 	]
 }
-new tags.entity_types(camel) {
+new tags.entity_type(camel) {
     "values": ["minecraft:camel"]
 }
-new tags.entity_types(cat_like) {
+new tags.entity_type(cat_like) {
     "values": [
 		"minecraft:cat",
 		"minecraft:fox",
 		"minecraft:ocelot"
 	]
 }
-new tags.entity_types(cave_spider) {
+new tags.entity_type(cave_spider) {
     "values": ["minecraft:cave_spider"]
 }
-new tags.entity_types(chicken) {
+new tags.entity_type(chicken) {
     "values": ["minecraft:chicken"]
 }
-new tags.entity_types(cod) {
+new tags.entity_type(cod) {
     "values": ["minecraft:cod"]
 }
-new tags.entity_types(cow) {
+new tags.entity_type(cow) {
     "values": [
 		"minecraft:cow",
 		"minecraft:mooshroom"
 	]
 }
-new tags.entity_types(creeper) {
+new tags.entity_type(creeper) {
     "values": ["minecraft:creeper"]
 }
-new tags.entity_types(dolphin) {
+new tags.entity_type(dolphin) {
     "values": ["minecraft:dolphin"]
 }
-new tags.entity_types(donkey) {
+new tags.entity_type(donkey) {
     "values": ["minecraft:donkey"]
 }
-new tags.entity_types(elder_guardian) {
+new tags.entity_type(elder_guardian) {
     "values": ["minecraft:elder_guardian"]
 }
-new tags.entity_types(end_crystal) {
+new tags.entity_type(end_crystal) {
     "values": ["minecraft:end_crystal"]
 }
-new tags.entity_types(enderman) {
+new tags.entity_type(enderman) {
     "values": ["minecraft:enderman"]
 }
-new tags.entity_types(falling_block_like) {
+new tags.entity_type(falling_block_like) {
     "values": [
 		"minecraft:falling_block",
 		"minecraft:tnt"
 	]
 }
-new tags.entity_types(frog) {
+new tags.entity_type(frog) {
     "values": ["minecraft:frog"]
 }
-new tags.entity_types(ghast) {
+new tags.entity_type(ghast) {
     "values": ["minecraft:ghast"]
 }
-new tags.entity_types(giant) {
+new tags.entity_type(giant) {
     "values": ["minecraft:giant"]
 }
-new tags.entity_types(guardian) {
+new tags.entity_type(guardian) {
     "values": ["minecraft:guardian"]
 }
-new tags.entity_types(hoglin) {
+new tags.entity_type(hoglin) {
     "values": [
 		"minecraft:hoglin",
 		"minecraft:zoglin"
 	]
 }
-new tags.entity_types(horse_like) {
+new tags.entity_type(horse_like) {
     "values": [
 		"minecraft:horse",
 		"minecraft:mule",
@@ -643,25 +643,25 @@ new tags.entity_types(horse_like) {
 		"minecraft:zombie_horse"
 	]
 }
-new tags.entity_types(iron_golem) {
+new tags.entity_type(iron_golem) {
     "values": ["minecraft:iron_golem"]
 }
-new tags.entity_types(item_frame) {
+new tags.entity_type(item_frame) {
     "values": [
 		"minecraft:item_frame",
 		"minecraft:glow_item_frame"
 	]
 }
-new tags.entity_types(leash_knot) {
+new tags.entity_type(leash_knot) {
     "values": ["minecraft:leash_knot"]
 }
-new tags.entity_types(llama) {
+new tags.entity_type(llama) {
     "values": [
 		"minecraft:llama",
 		"minecraft:trader_llama"
 	]
 }
-new tags.entity_types(minecart) {
+new tags.entity_type(minecart) {
     "values": [
 		"minecraft:minecart",
 		"minecraft:tnt_minecart",
@@ -672,100 +672,100 @@ new tags.entity_types(minecart) {
 		"minecraft:command_block_minecart"
 	]
 }
-new tags.entity_types(panda) {
+new tags.entity_type(panda) {
     "values": ["minecraft:panda"]
 }
-new tags.entity_types(phantom) {
+new tags.entity_type(phantom) {
     "values": ["minecraft:phantom"]
 }
-new tags.entity_types(pig) {
+new tags.entity_type(pig) {
     "values": ["minecraft:pig"]
 }
-new tags.entity_types(player_like) {
+new tags.entity_type(player_like) {
     "values": [
         "minecraft:player",
         "minecraft:blaze"
     ]
 }
-new tags.entity_types(polar_bear) {
+new tags.entity_type(polar_bear) {
     "values": ["minecraft:polar_bear"]
 }
-new tags.entity_types(pufferfish) {
+new tags.entity_type(pufferfish) {
     "values": ["minecraft:pufferfish"]
 }
-new tags.entity_types(rabbit) {
+new tags.entity_type(rabbit) {
     "values": ["minecraft:rabbit"]
 }
-new tags.entity_types(ravager) {
+new tags.entity_type(ravager) {
     "values": ["minecraft:ravager"]
 }
-new tags.entity_types(salmon) {
+new tags.entity_type(salmon) {
     "values": ["minecraft:salmon"]
 }
-new tags.entity_types(sheep_like) {
+new tags.entity_type(sheep_like) {
     "values": [
         "minecraft:sheep",
         "minecraft:goat"
     ]
 }
-new tags.entity_types(shulker) {
+new tags.entity_type(shulker) {
     "values": ["minecraft:shulker"]
 }
-new tags.entity_types(skeleton) {
+new tags.entity_type(skeleton) {
     "values": ["#minecraft:skeletons"]
 }
-new tags.entity_types(slime_like) {
+new tags.entity_type(slime_like) {
     "values": [
 		"minecraft:slime",
 		"minecraft:magma_cube"
 	]
 }
-new tags.entity_types(small_arthropod) {
+new tags.entity_type(small_arthropod) {
     "values": [
         "minecraft:endermite",
         "minecraft:silverfish"
     ]
 }
-new tags.entity_types(sniffer) {
+new tags.entity_type(sniffer) {
     "values": ["minecraft:sniffer"]
 }
-new tags.entity_types(snow_golem) {
+new tags.entity_type(snow_golem) {
     "values": ["minecraft:snow_golem"]
 }
-new tags.entity_types(spider) {
+new tags.entity_type(spider) {
     "values": ["minecraft:spider"]
 }
-new tags.entity_types(squid) {
+new tags.entity_type(squid) {
     "values": [
 		"minecraft:squid",
 		"minecraft:glow_squid"
 	]
 }
-new tags.entity_types(strider) {
+new tags.entity_type(strider) {
     "values": ["minecraft:strider"]
 }
-new tags.entity_types(tropical_fish) {
+new tags.entity_type(tropical_fish) {
     "values": ["minecraft:tropical_fish"]
 }
-new tags.entity_types(turtle) {
+new tags.entity_type(turtle) {
     "values": ["minecraft:turtle"]
 }
-new tags.entity_types(vex) {
+new tags.entity_type(vex) {
     "values": ["minecraft:vex"]
 }
-new tags.entity_types(warden) {
+new tags.entity_type(warden) {
     "values": ["minecraft:warden"]
 }
-new tags.entity_types(wither) {
+new tags.entity_type(wither) {
     "values": ["minecraft:wither"]
 }
-new tags.entity_types(wither_skeleton) {
+new tags.entity_type(wither_skeleton) {
     "values": ["minecraft:wither_skeleton"]
 }
-new tags.entity_types(wolf) {
+new tags.entity_type(wolf) {
     "values": ["minecraft:wolf"]
 }
-new tags.entity_types(zombie_like) {
+new tags.entity_type(zombie_like) {
     "values": [
 		"minecraft:drowned",
 		"minecraft:evoker",
