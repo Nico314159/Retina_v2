@@ -21,7 +21,7 @@ execute store result score $block_distance retina.__variable__ run scoreboard pl
 execute store result score $hit_block retina.__variable__ store result score $hit_entity retina.__variable__ run scoreboard players set $contact retina.__variable__ 0
 execute store result score $max_depth retina.__variable__ run data get storage retina:input MaxRecursionDepth
 tag @s add retina.executing
-execute if score $single_call retina.__variable__ matches 1.. run function retina:__private__/if_else/0
+execute if score $single_call retina.__variable__ matches 1.. run function retina:__private__/if_else/2
 execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run function retina:__private__/anonymous/0
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__

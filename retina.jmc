@@ -184,44 +184,8 @@ class traverse {
         Math.gimbal_to_matrix();
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
-                $input_vec3.X = $i;
-                $input_vec3.X *= 2;
-                $input_vec3.X += 10;
-                $input_vec3.X -= $horizontal_count;
-                if ($horizontal_count == 10) {
-                    $input_vec3.X = execute run random value 2..6;
-                    $input_vec3.X %= 3;
-                    $input_vec3.X --;
-                    $input_vec3.X *= 20;
-                }
-                $spread = Math.random($spread_least, $spread_most);
-                $input_vec3.X *= $spread;
-                $input_vec3.X /= 100;
-
-                $input_vec3.Y = $j;
-                $input_vec3.Y *= 2;
-                $input_vec3.Y += 10;
-                $input_vec3.Y -= $vertical_count;
-                if ($vertical_count == 10) {
-                    $input_vec3.Y = execute run random value 2..6;
-                    $input_vec3.Y %= 3;
-                    $input_vec3.Y --;
-                    $input_vec3.Y *= 20;
-                }
-                $spread = Math.random($spread_least, $spread_most);
-                $input_vec3.Y *= $spread;
-                $input_vec3.Y /= 100;
-
-                $input_vec3.Z = 500;
-                if ($debug_messages) Text.tellraw(@a, "Input Vector: &<red, italic>[&<$input_vec3.X, italic>, &<$input_vec3.Y, italic>, &<$input_vec3.Z, italic>]"); 
-
-                $length = 0;
-                Hardcode.repeatList("[axis]", () => {$temp = $input_vec3.[axis]; $temp *= $input_vec3.[axis]; $length += $temp;}, ["X", "Y", "Z"]);
-                $length = Math.sqrt($length);
-                Hardcode.repeatList("[pair]", () => {$input_mat3.[pair] = $output_mat3.[pair];}, ["XX", "XY", "XZ", "YX", "YY", "YZ", "ZX", "ZY", "ZZ"]);
-                Math.matrix_transform();
-                Hardcode.repeatList("[axis]", () => {$output_vec3.[axis] *= SCALE; $output_vec3.[axis] /= $length;}, ["X", "Y", "Z"]);
-                if ($debug_messages) Text.tellraw(@a, "Angled Vector: &<gold, italic>[&<$output_vec3.X, italic>, &<$output_vec3.Y, italic>, &<$output_vec3.Z, italic>]");
+                Math.Sway_Heave_Surge.find();
+                Math.Sway_Heave_Surge.apply();
                 traverse.setup();
             } 
         }
@@ -230,6 +194,7 @@ class traverse {
         $single_call = true;
     }
 }   
+
 
 class check {
     function main() {
