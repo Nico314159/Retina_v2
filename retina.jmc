@@ -31,9 +31,9 @@ class traverse {
                 $int_[i] = data get entity @s Pos[_n_] 1;
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
-                // TODO: use `return run` when 1.20.3 releases
-                if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
-                if (!$test_[i] matches -1..0) return 0;
+                if (!$test_[i] matches -1..0) {
+                    return run Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
+                }
             },
             [
                 ["X", "Z"], // not worried about Y since that's never gonna be high enough to overflow
@@ -129,8 +129,10 @@ class traverse {
         if ($nearest_axis = 2 && no_break) traverse.z();
     }
     function x() {
-        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
+        if ($debug_messages) expand {
+            Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+            Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>X");
+        }
         $distance_X += $delta_X;
         $step_X += $sign_X;
         $int_X += $sign_X;
@@ -139,8 +141,10 @@ class traverse {
         if ($sign_X = 1) execute positioned ~1 ~0 ~0 run check.main();
     }
     function y() {
-        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
+        if ($debug_messages) expand {
+            Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+            Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Y");
+        }
         $distance_Y += $delta_Y;
         $step_Y += $sign_Y;
         $int_Y += $sign_Y;
@@ -149,8 +153,10 @@ class traverse {
         if ($sign_Y = 1) execute positioned ~0 ~1 ~0 run check.main();
     }
     function z() {
-        if ($debug_messages) Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
-        if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
+        if ($debug_messages) expand {
+            Text.tellraw(@a, "Distances to each block: &<green>[&<$distance_X>, &<$distance_Y>, &<$distance_Z>]");
+            Text.tellraw(@a, "&<!bold, white>Closest direction: &<bold,aqua>Z");
+        }
         $distance_Z += $delta_Z;
         $step_Z += $sign_Z;
         $int_Z += $sign_Z;
@@ -164,13 +170,15 @@ class traverse {
         $centered_count = data get storage retina:input CenteredCount 1;
 
         // input validation
-        if ($horizontal_count <= 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>HorizontalCount storage has invalid value of &<$horizontal_count>");
-        if ($horizontal_count <= 0) return 0;
-        if ($vertical_count <= 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>VerticalCount storage has invalid value of &<$vertical_count>");
-        if ($vertical_count <= 0) return 0;
-        if ($centered_count < 0) Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
-        if ($centered_count < 0) return 0;
-        // TODO: use `return run` when 1.20.3 releases ^^
+        if ($horizontal_count <= 0) return run {
+            Text.tellraw(@a, "&<dark_red>[Error] &<red>HorizontalCount storage has invalid value of &<$horizontal_count>");
+        }
+        if ($vertical_count <= 0) return run {
+            Text.tellraw(@a, "&<dark_red>[Error] &<red>VerticalCount storage has invalid value of &<$vertical_count>");
+        } 
+        if ($centered_count < 0) return run {
+            Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
+        }
 
         $spread_least = data get storage retina:input SpreadFactor[0];
         $spread_most = data get storage retina:input SpreadFactor[1];
@@ -202,19 +210,28 @@ class check {
 
         $check_for_head = false;
         check.block.main();
-        if (data storage retina:input {TargetEntities: true}) check.entity.main();
+        if (data storage retina:input {TargetEntities: true}) {
+            check.entity.main();
+        }
 
-        if ($step >= $max_depth && $debug_messages) Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-        if (no_break) traverse.loop();
+        if ($step >= $max_depth && $debug_messages) {
+            Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+        }
+        if (no_break) {traverse.loop();}
     }
     class block {
         function main() {
             if (block ~ ~ ~ #retina:airs) return 0;
             check.block.found();
-            if (!$hit_block && $debug_messages) Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-            if (!$hit_block) return 0;
+            if (!$hit_block) return run {
+                if ($debug_messages) {
+                    Text.tellraw(@a, "&<italic, white>No block... Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+                }
+            } 
             
-            if ($debug_messages) Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+            if ($debug_messages) {
+                Text.tellraw(@a, "&<bold, underlined, gray>Block has been hit! Coordinates: &<blue>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+            }
             if ($debug_gold) setblock ~ ~ ~ gold_block;
             // if ($end_particle) particle minecraft:end_rod ~ ~ ~ 0 0 0 0 1 force @a;
         }
@@ -233,8 +250,9 @@ class check {
             Hardcode.repeatList(
                 "[shape]",
                 () => { 
-                    if (block ~ ~ ~ #retina:[shape] && !$ignore_[shape]) hitbox.[shape]();
-                    if (block ~ ~ ~ #retina:[shape] && !$ignore_[shape]) return 1;
+                    if (block ~ ~ ~ #retina:[shape] && !$ignore_[shape]) {
+                        return run hitbox.[shape]();
+                    }
                 },
                 ["amethyst", "anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "button", 
                 "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
@@ -253,10 +271,15 @@ class check {
         function main() {
             // This doesn't need to be its own function, but now I can add debug stuff later	
             execute align xyz if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=0, dy=0, dz=0] run check.entity.found();
-            if (!$hit_entity && $debug_messages) Text.tellraw(@a, "&<italic, white>No entity... Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
-            if (!$hit_entity) return 0;
+            if (!$hit_block) return run {
+                if ($debug_messages) {
+                    Text.tellraw(@a, "&<italic, white>No entity... Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+                }
+            } 
             
-            if ($debug_messages) Text.tellraw(@a, "&<bold, underlined, dark_gray>Entity has been hit! Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]. hit_entity = &<$hit_entity>");
+            if ($debug_messages) {
+                Text.tellraw(@a, "&<bold, underlined, dark_gray>Entity has been hit! Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]. hit_entity = &<$hit_entity>");
+            }
             // if ($end_particle) particle minecraft:soul_fire_flame ~ ~ ~ 0 0 0 0 1 force @a;
         }
         function found() {
@@ -276,7 +299,9 @@ class check {
             $hit_entity = $contact;
 
             // If the ray could hit both an entity and a block, remember only the one that comes first
-            if ($hit_block && $hit_entity && $debug_messages) Text.tellraw(@a, "&<gold>Distance comparison: entity_distance = &<$entity_distance>, block_distance = &<$block_distance>");
+            if ($hit_block && $hit_entity && $debug_messages) {
+                Text.tellraw(@a, "&<gold>Distance comparison: entity_distance = &<$entity_distance>, block_distance = &<$block_distance>");
+            }
             if ($hit_block && $hit_entity && $entity_distance < $block_distance) $hit_block = false;
             if ($hit_block && $hit_entity && $entity_distance >= $block_distance) $hit_entity = false;
         }
@@ -285,9 +310,9 @@ class check {
                 Hardcode.repeatList( 
                     "[type]",
                     () => {
-                        // TODO: use `return run` when 1.20.3 releases
-                        if (entity @s[type=#retina:[type]] && !$ignore_[type]) entity_hitbox.[type]();
-                        if (entity @s[type=#retina:[type]] && !$ignore_[type]) return 1;
+                        if (entity @s[type=#retina:[type]] && !$ignore_[type]) {
+                            return run entity_hitbox.[type]();
+                        }
                     },
                     ["allay", "armor_stand", "axolotl", "bat_like", "bee", "boat", "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
                     "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
@@ -429,11 +454,9 @@ class find_closest_surface {
         );
         $test = $Y1;
         $test -= $Y0;
-        if ($test >= SCALE) expand {
-            // TODO: use `return run` when 1.20.3 releases
+        if ($test >= SCALE) return run {
             $head_Y = 2147483647;
             // no head on lower block
-            return 0;
         }
         $head_Y += $t_Y;
         $head_Y -= SCALE;

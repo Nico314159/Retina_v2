@@ -21,7 +21,6 @@ scoreboard players operation $Z0 retina.__variable__ += $t_Z retina.__variable__
 scoreboard players operation $Z1 retina.__variable__ += $t_Z retina.__variable__
 scoreboard players operation $test retina.__variable__ = $Y1 retina.__variable__
 scoreboard players operation $test retina.__variable__ -= $Y0 retina.__variable__
-execute if score $test retina.__variable__ matches 480.. run scoreboard players set $head_Y retina.__variable__ 2147483647
-execute if score $test retina.__variable__ matches 480.. run return 0
+execute if score $test retina.__variable__ matches 480.. run return run scoreboard players set $head_Y retina.__variable__ 2147483647
 scoreboard players operation $head_Y retina.__variable__ += $t_Y retina.__variable__
 scoreboard players remove $head_Y retina.__variable__ 480
