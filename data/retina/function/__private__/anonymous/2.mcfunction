@@ -1,4 +1,5 @@
 execute if entity @s[type=#retina:allay] unless score $ignore_allay retina.__variable__ matches 1.. run return run function retina:entity_hitbox/allay
+execute if entity @s[type=#retina:armadillo] unless score $ignore_armadillo retina.__variable__ matches 1.. run return run function retina:entity_hitbox/armadillo
 execute if entity @s[type=#retina:armor_stand] unless score $ignore_armor_stand retina.__variable__ matches 1.. run return run function retina:entity_hitbox/armor_stand
 execute if entity @s[type=#retina:axolotl] unless score $ignore_axolotl retina.__variable__ matches 1.. run return run function retina:entity_hitbox/axolotl
 execute if entity @s[type=#retina:bat_like] unless score $ignore_bat_like retina.__variable__ matches 1.. run return run function retina:entity_hitbox/bat_like

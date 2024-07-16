@@ -3,6 +3,10 @@ class entity_hitbox {
         $entity_half_width = 84;
         $entity_height = 288;
     }
+    function armadillo() {
+        $entity_half_width = 168;
+        $entity_height = 312;
+    }
     function armor_stand() {
         data modify storage retina:data EntityTag set from entity @s;
         if (data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 60;

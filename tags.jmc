@@ -548,6 +548,9 @@ new tags.entity_type(intangible) {
 new tags.entity_type(allay) {
     "values": ["minecraft:allay"]
 }
+new tags.entity_type(armadillo) {
+    "values": ["minecraft:armadillo"]
+}
 new tags.entity_type(armor_stand) {
     "values": ["minecraft:armor_stand"]
 }
@@ -595,7 +598,10 @@ new tags.entity_type(cow) {
 	]
 }
 new tags.entity_type(creeper) {
-    "values": ["minecraft:creeper"]
+    "values": [
+        "minecraft:breeze",
+        "minecraft:creeper"
+    ]
 }
 new tags.entity_type(dolphin) {
     "values": ["minecraft:dolphin"]
