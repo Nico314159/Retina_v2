@@ -1,14 +1,6 @@
 {
     "pack": {
-        "pack_format": 18,
+        "pack_format": 48,
         "description": "Precise & customizable raycast library for use in integrated systems."
-    },
-    "overlays": {
-        "entries": [
-            {
-                "formats": [26, 99],
-                "directory": "overlay_26"
-            }
-        ]
     }
 }
