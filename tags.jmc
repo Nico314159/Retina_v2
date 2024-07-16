@@ -188,7 +188,8 @@ new tags.block(head) {
         "minecraft:creeper_head",
         "minecraft:skeleton_skull",
         "minecraft:wither_skeleton_skull",
-        "minecraft:dragon_head"
+        "minecraft:dragon_head",
+        "minecraft:heavy_core"
     ]
 }
 new tags.block(hopper) {
