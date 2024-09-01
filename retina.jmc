@@ -7,29 +7,35 @@ $overflow_risk = 2147483647;
 $overflow_risk /= SCALE;
 Scoreboard.add(retina.id, dummy);
 Scoreboard.add(retina.hit, dummy);
-data merge storage retina:input {HorizontalCount: 1b, VerticalCount: 1b, CenteredCount: 0b, SpreadFactor: [100, 100], EndpointEntity: 0b};
-if (!data storage retina:input MaxRecursionDepth) data merge storage retina:input {MaxRecursionDepth: 50};
-if (!data storage retina:input TargetBlocks) data merge storage retina:input {TargetBlocks: true};
-if (!data storage retina:input TargetEntities) data merge storage retina:input {TargetEntities: true};
-data merge storage retina:output {ContactCoordinates: [], ContactSurface: [], Distance: 0.0d, HitFace: "", PlacingPosition: [], Target: "", TargetedBlock: []};
+input:: += {HorizontalCount: 1b, VerticalCount: 1b, CenteredCount: 0b, SpreadFactor: [100, 100], EndpointEntity: 0b};
+if (!data storage retina:input MaxRecursionDepth) {
+    input:: += {MaxRecursionDepth: 50};
+}
+if (!data storage retina:input TargetBlocks) {
+    input:: += {TargetBlocks: true};
+}
+if (!data storage retina:input TargetEntities) {
+    input:: += {TargetEntities: true};
+}
+output:: += {ContactCoordinates: [], ContactSurface: [], Distance: 0.0d, HitFace: "", PlacingPosition: [], Target: "", TargetedBlock: []};
 
 class traverse {
     function setup() {
-        data modify storage retina:output Target set value "NONE";
-        data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth;
-        data modify storage retina:output HitEntityHead set value false;
-        data remove storage retina:output TargetedBlock;
-        data remove storage retina:output TargetedEntity;
-        data remove storage retina:output PlacingPosition;
-        data remove storage retina:output ContactSurface;
-        data remove storage retina:output ContactCoordinates;
-        data remove storage retina:output HitFace;
+        output::Target = "NONE";
+        output::Distance = input::MaxRecursionDepth;
+        output::HitEntityHead = false;
+        output::TargetedBlock.del();
+        output::TargetedEntity.del();
+        output::PlacingPosition.del();
+        output::ContactSurface.del();
+        output::ContactCoordinates.del();
+        output::HitFace.del();
         
         // guard condition
         Hardcode.repeatLists(
             ["[i]", "_n_"],
             () => {
-                $int_[i] = data get entity @s Pos[_n_] 1;
+                $int_[i] = @s::Pos[_n_];
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
                 if (!$test_[i] matches -1..0) {
@@ -44,24 +50,24 @@ class traverse {
         
         $block_distance = $entity_distance = 2147483647;
 		$hit_block = $hit_entity = $contact = false;
-        $max_depth = data get storage retina:input MaxRecursionDepth;
+        $max_depth = input::MaxRecursionDepth;
 
         tag @s add retina.executing;
         if ($single_call) {
             tag @e remove retina.target;
             scoreboard players reset * retina.hit;
             kill @e[type=marker,tag=retina.endpoint];
-            $input_pitch = data get entity @s Rotation[1] 10;
-            $input_yaw = data get entity @s Rotation[0] 10;
+            $input_pitch = @s::Rotation[1] * 10;
+            $input_yaw = @s::Rotation[0] * 10;
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
             Math.gimbal_to_vec();
             if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
         }
 
         execute anchored eyes positioned ^ ^ ^ summon minecraft:marker run {
-            $X = data get entity @s Pos[0] SCALE;
-            $Y = data get entity @s Pos[1] SCALE;
-            $Z = data get entity @s Pos[2] SCALE;
+            $X = @s::Pos[0] * SCALE;
+            $Y = @s::Pos[1] * SCALE;
+            $Z = @s::Pos[2] * SCALE;
             kill @s;
         }
         Hardcode.repeatList(
@@ -86,7 +92,9 @@ class traverse {
                 $distance_[i] *= $delta_[i];
                 $distance_[i] /= SCALE;
 
-                if ($output_vec3.[i] == 0) $delta_[i] = $distance_[i] = 2147483647;
+                if ($output_vec3.[i] == 0) {
+                    $delta_[i] = $distance_[i] = 2147483647;
+                }
 
                 $int_[i] = $[i];
                 $int_[i] /= SCALE;
@@ -96,9 +104,9 @@ class traverse {
         if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
 
         $step = 0;
-        $offset_Y = data get entity @s Pos[1] -SCALE;
+        $offset_Y = @s::Pos[1] * EVAL(-SCALE);
         $offset_Y += $Y;
-        execute store result storage retina:data offset_Y double 0.0020833333333333333 run $offset_Y.get();
+        data::offset_Y = EVAL(1 / SCALE) * (double) $offset_Y;
         
         execute run {
             $ execute positioned ~ ~$(offset_Y) ~ run traverse.loop();
@@ -166,9 +174,9 @@ class traverse {
         if ($sign_Z = 1) execute positioned ~0 ~0 ~1 run check.main();
     }
     function multicast() {
-        $horizontal_count = data get storage retina:input HorizontalCount 10;
-        $vertical_count = data get storage retina:input VerticalCount 10;
-        $centered_count = data get storage retina:input CenteredCount 1;
+        $horizontal_count = input::HorizontalCount * 10;
+        $vertical_count = input::VerticalCount * 10;
+        $centered_count = input::CenteredCount * 1;
 
         // input validation
         if ($horizontal_count <= 0) return run {
@@ -181,15 +189,15 @@ class traverse {
             Text.tellraw(@a, "&<dark_red>[Error] &<red>CenteredCount storage has invalid value of &<$centered_count>");
         }
 
-        $spread_least = data get storage retina:input SpreadFactor[0];
-        $spread_most = data get storage retina:input SpreadFactor[1];
+        $spread_least = input::SpreadFactor[0];
+        $spread_most = input::SpreadFactor[1];
 
         $single_call = false;
         tag @e remove retina.target;
         scoreboard players reset * retina.hit;
         kill @e[type=marker,tag=retina.endpoint];
-        $input_pitch = data get entity @s Rotation[1] 10;
-        $input_yaw = data get entity @s Rotation[0] 10;
+        $input_pitch = @s::Rotation[1] * 10;
+        $input_yaw = @s::Rotation[0] * 10;
         Math.gimbal_to_matrix();
         for ($i = 0; $i < $horizontal_count; $i += 10) { 
             for ($j = 0; $j < $vertical_count; $j += 10) {
@@ -240,8 +248,8 @@ class check {
         }
         function found() {
             // Clear residual data from `Surfaces`
-            data remove storage retina:data Surfaces;
-            data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
+            data::Surfaces.del();
+            data::Surfaces = {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
             check.block.get_hitbox();
 
             // See if the ray hits any surface
@@ -287,8 +295,8 @@ class check {
         }
         function found() {
             // Clear residual data from `Surfaces`
-            data remove storage retina:data Surfaces;
-            data modify storage retina:data Surfaces set value {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
+            data::Surfaces.del();
+            data::Surfaces = {Top:[],Bottom:[],West:[],East:[],North:[],South:[]};
 
             // Identify the entity and get a list of surfaces
             retina.id:$max = 0;
@@ -327,13 +335,13 @@ class check {
 
             // Get the entity's coordinates
             execute summon marker run {
-                data modify storage retina:data Pos set from entity @s Pos;
+                data::Pos = @s::Pos;
 		        
                 // Get position (fractional coordinates)
                 Hardcode.repeatLists(
                     ["[axis]", "$index"],
                     () => { 
-                        $entity_frac_[axis] = data get storage retina:data Pos[$index] SCALE;
+                        $entity_frac_[axis] = data::Pos[$index] * SCALE;
 						//$debug_[axis] = $entity_frac_[axis];
                         $temp = SCALE;
                         $temp *= $int_[axis];
@@ -343,7 +351,7 @@ class check {
                 );
 
                 // Clean up
-                data remove storage retina:data Pos;
+                data::Pos.del();
                 kill @s;
             }
         
@@ -367,51 +375,51 @@ class check {
 
             // Store these coordinates to storage
             Hardcode.repeatList(
-                "[face]", () => {data modify storage retina:data Surfaces.[face] append value [0, 0, 0, 0, 0, 0];}, 
+                "[face]", () => {data::Surfaces.[face] << [0, 0, 0, 0, 0, 0];}, 
                 ["Top", "Bottom", "West", "East", "North", "South"]
             );
 
-            execute store result storage retina:data Surfaces.Top[-1][0] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.Top[-1][1] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.Top[-1][2] int 1 run $entity_Z0.get();
-            execute store result storage retina:data Surfaces.Top[-1][3] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.Top[-1][4] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.Top[-1][5] int 1 run $entity_Z1.get();
+            data::Surfaces.Top[-1][0] = $entity_X0;
+            data::Surfaces.Top[-1][1] = $entity_Y1;
+            data::Surfaces.Top[-1][2] = $entity_Z0;
+            data::Surfaces.Top[-1][3] = $entity_X1;
+            data::Surfaces.Top[-1][4] = $entity_Y1;
+            data::Surfaces.Top[-1][5] = $entity_Z1;
 
-            execute store result storage retina:data Surfaces.Bottom[-1][0] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.Bottom[-1][1] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.Bottom[-1][2] int 1 run $entity_Z0.get();
-            execute store result storage retina:data Surfaces.Bottom[-1][3] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.Bottom[-1][4] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.Bottom[-1][5] int 1 run $entity_Z1.get();
+            data::Surfaces.Bottom[-1][0] = $entity_X0;
+            data::Surfaces.Bottom[-1][1] = $entity_Y0;
+            data::Surfaces.Bottom[-1][2] = $entity_Z0;
+            data::Surfaces.Bottom[-1][3] = $entity_X1;
+            data::Surfaces.Bottom[-1][4] = $entity_Y0;
+            data::Surfaces.Bottom[-1][5] = $entity_Z1;
 
-            execute store result storage retina:data Surfaces.West[-1][0] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.West[-1][1] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.West[-1][2] int 1 run $entity_Z0.get();
-            execute store result storage retina:data Surfaces.West[-1][3] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.West[-1][4] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.West[-1][5] int 1 run $entity_Z1.get();
+            data::Surfaces.West[-1][0] = $entity_X0;
+            data::Surfaces.West[-1][1] = $entity_Y0;
+            data::Surfaces.West[-1][2] = $entity_Z0;
+            data::Surfaces.West[-1][3] = $entity_X0;
+            data::Surfaces.West[-1][4] = $entity_Y1;
+            data::Surfaces.West[-1][5] = $entity_Z1;
 
-            execute store result storage retina:data Surfaces.East[-1][0] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.East[-1][1] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.East[-1][2] int 1 run $entity_Z0.get();
-            execute store result storage retina:data Surfaces.East[-1][3] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.East[-1][4] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.East[-1][5] int 1 run $entity_Z1.get();
+            data::Surfaces.East[-1][0] = $entity_X1;
+            data::Surfaces.East[-1][1] = $entity_Y0;
+            data::Surfaces.East[-1][2] = $entity_Z0;
+            data::Surfaces.East[-1][3] = $entity_X1;
+            data::Surfaces.East[-1][4] = $entity_Y1;
+            data::Surfaces.East[-1][5] = $entity_Z1;
 
-            execute store result storage retina:data Surfaces.North[-1][0] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.North[-1][1] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.North[-1][2] int 1 run $entity_Z0.get();
-            execute store result storage retina:data Surfaces.North[-1][3] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.North[-1][4] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.North[-1][5] int 1 run $entity_Z0.get();
+            data::Surfaces.North[-1][0] = $entity_X0;
+            data::Surfaces.North[-1][1] = $entity_Y0;
+            data::Surfaces.North[-1][2] = $entity_Z0;
+            data::Surfaces.North[-1][3] = $entity_X1;
+            data::Surfaces.North[-1][4] = $entity_Y1;
+            data::Surfaces.North[-1][5] = $entity_Z0;
 
-            execute store result storage retina:data Surfaces.South[-1][0] int 1 run $entity_X0.get();
-            execute store result storage retina:data Surfaces.South[-1][1] int 1 run $entity_Y0.get();
-            execute store result storage retina:data Surfaces.South[-1][2] int 1 run $entity_Z1.get();
-            execute store result storage retina:data Surfaces.South[-1][3] int 1 run $entity_X1.get();
-            execute store result storage retina:data Surfaces.South[-1][4] int 1 run $entity_Y1.get();
-            execute store result storage retina:data Surfaces.South[-1][5] int 1 run $entity_Z1.get();
+            data::Surfaces.South[-1][0] = $entity_X0;
+            data::Surfaces.South[-1][1] = $entity_Y0;
+            data::Surfaces.South[-1][2] = $entity_Z1;
+            data::Surfaces.South[-1][3] = $entity_X1;
+            data::Surfaces.South[-1][4] = $entity_Y1;
+            data::Surfaces.South[-1][5] = $entity_Z1;
 
             if (entity @s[type=#retina:item_frame]) entity_hitbox.item_frame(); // Special case for item frames and paintings which are annoying
 
@@ -442,8 +450,8 @@ class find_closest_surface {
         Hardcode.repeatLists(
             ["[axis]", "index"],
             () => {
-                $[axis]0 = data get storage retina:data List[-1][index];
-                $[axis]1 = data get storage retina:data List[-1][ Hardcode.calc(index + 3) ];
+                $[axis]0 = data::List[-1][index];
+                $[axis]1 = data::List[-1][ Hardcode.calc(index + 3) ];
                 $t_[axis] = SCALE;
                 $t_[axis] *= $step_[axis];
                 $t_[axis] -= $frac_origin_[axis];
@@ -467,8 +475,8 @@ class find_closest_surface {
     function west() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.West;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.West;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
@@ -500,13 +508,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "West";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "West";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -514,8 +522,8 @@ class find_closest_surface {
     function east() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.East;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.East;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[0] and List[3] should have the same values)
@@ -547,13 +555,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($Y_intersection >= $Y0 && $Y_intersection <= $Y1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "East";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "East";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -561,8 +569,8 @@ class find_closest_surface {
     function bottom() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.Bottom;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.Bottom;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
@@ -594,13 +602,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "Bottom";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "Bottom";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -608,8 +616,8 @@ class find_closest_surface {
     function top() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.Top;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.Top;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[1] and List[4] should have the same values)
@@ -641,13 +649,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Z_intersection >= $Z0 && $Z_intersection <= $Z1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "Top";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "Top";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -655,8 +663,8 @@ class find_closest_surface {
     function north() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.North;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.North;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
@@ -688,13 +696,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "North";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "North";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -702,8 +710,8 @@ class find_closest_surface {
     function south() {
         // @within find_closest_surface.main()
 
-        data modify storage retina:data List set from storage retina:data Surfaces.South;
-        $cuboid_id = $surfaces = data get storage retina:data List;
+        data::List = data::Surfaces.South;
+        $cuboid_id = $surfaces = data::List;
         $cuboid_id --;
         while ($surfaces >= 1) {
             find_closest_surface.store_coords(); // Store all coordinates to scores (List[2] and List[5] should have the same values)
@@ -735,13 +743,13 @@ class find_closest_surface {
                 // If the ray hits the surface, return this as the minimum distance and the contact surface
                 if ($X_intersection >= $X0 && $X_intersection <= $X1 && $Y_intersection >= $Y0 && $Y_intersection <= $Y1) {
                     find_closest_surface.ray_intersects_with_surface();
-                    data modify storage retina:output HitFace set value "South";
-                    if ($check_for_head && $Y_intersection >= $head_Y) data modify storage retina:output HitEntityHead set value true;
+                    output::HitFace = "South";
+                    if ($check_for_head && $Y_intersection >= $head_Y) output::HitEntityHead = true;
                 }
             }
 
             // Loop this function
-            data remove storage retina:data List[-1];
+            data::List[-1].del();
             $surfaces --;
             $cuboid_id --;
         }
@@ -765,7 +773,7 @@ class find_closest_surface {
         $targeted_X = $X_intersection;
         $targeted_Y = $Y_intersection;
         $targeted_Z = $Z_intersection;
-        data modify storage retina:data ContactSurface set from storage retina:data List[-1];
+        data::ContactSurface = data::List[-1];
     }
 }
 
@@ -796,15 +804,15 @@ class storage {
     //			The integer coordinates of the block before the ray hits something (i.e. where a block would be placed, if a player were to place a block). Unset if the ray hits an entity or if no block is found.
 
     function block() {
-        data modify storage retina:output Target set value "BLOCK"; 
+        output::Target = "BLOCK"; 
 
         // Reset previous values
-        data modify storage retina:output TargetedBlock set value [0, 0, 0];
-        data modify storage retina:output PlacingPosition set value [0, 0, 0];
-        data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
+        output::TargetedBlock = [0, 0, 0];
+        output::PlacingPosition = [0, 0, 0];
+        output::ContactCoordinates = [0.0d, 0.0d, 0.0d];
 
         // Contact surface
-        data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
+        output::ContactSurface = data::ContactSurface;
 
         // I have no clue why X and Y need this but Z doesn't.
         if ($X0 < 0) $X0 += SCALE;
@@ -814,14 +822,14 @@ class storage {
             ["[axis]", "index"],
             () => {
                 // Targeted block
-                execute store result storage retina:output TargetedBlock[index] int 1 run $int_[axis].get();
+                output::TargetedBlock[index] = $int_[axis].get();
 
                 // Placing position
-                execute store result storage retina:output PlacingPosition[index] int 1 run $prev_[axis].get();
+                output::PlacingPosition[index] = $prev_[axis].get();
 
                 // Contact coordinates
                 $targeted_[axis] += $origin_[axis];
-                execute store result storage retina:output ContactCoordinates[index] double 0.0020833333333333333 run $targeted_[axis].get();
+                output::ContactCoordinates[index] = EVAL(1 / SCALE) * (double) $targeted_[axis];
 
                 // Total distance
                 if ($nearest_axis == index) {
@@ -833,34 +841,34 @@ class storage {
         );
         $total_distance /= SCALE;
         if ($total_distance < 0) $total_distance *= -1;
-        execute store result storage retina:output Distance double 0.0020833333333333333 run $total_distance.get();
+        output::Distance = EVAL(1 / SCALE) * (double) $total_distance;
 
         if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
             tag @s add retina.endpoint;
-            data modify entity @s Pos set from storage retina:output ContactCoordinates;
+            @s::Pos = output::ContactCoordinates;
             if ($end_particle) execute at @s run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force @a;
         }
     }
     function entity() {
         // Target type
-        data modify storage retina:output Target set value "ENTITY";
+        output::Target = "ENTITY";
 
         // Targeted entity
-        data modify storage retina:output TargetedEntity set value {UUID: [I; 0, 0, 0, 0], Pos: [0.0f, 0.0f, 0.0f]};
+        output::TargetedEntity = {UUID: [I; 0, 0, 0, 0], Pos: [0.0f, 0.0f, 0.0f]};
         execute as @e[type=!#retina:ignore, tag=retina.possible_target] if score @s retina.id = $closest_cuboid_id retina.__variable__ run {
             tag @s add retina.target;
             retina.hit:@s++;
         }
-        data modify storage retina:data Entity set from entity @e[type=!#retina:ignore, tag=retina.target, limit=1];
-        data modify storage retina:output TargetedEntity.UUID set from storage retina:data Entity.UUID;
-        data modify storage retina:output TargetedEntity.Pos set from storage retina:data Entity.Pos;
-        data remove storage retina:data Entity;
+        data::Entity = @e[type=!#retina:ignore, tag=retina.target, limit=1]::;
+        output::TargetedEntity.UUID = data::Entity.UUID;
+        output::TargetedEntity.Pos = data::Entity.Pos;
+        data::Entity.del();
 
         // Contact surface
-        data modify storage retina:output ContactSurface set from storage retina:data ContactSurface;
+        output::ContactSurface = data::ContactSurface;
 
         // Contact coordinates
-        data modify storage retina:output ContactCoordinates set value [0.0d, 0.0d, 0.0d];
+        output::ContactCoordinates = [0.0d, 0.0d, 0.0d];
 
         // I have no clue why X and Y need this but Z doesn't.
         if ($X0 < 0) $X0 += SCALE;
@@ -870,7 +878,7 @@ class storage {
             ["[axis]", "_index"],
             () => {
                 $targeted_[axis] += $origin_[axis];
-                execute store result storage retina:output ContactCoordinates[_index] double 0.0020833333333333333 run $targeted_[axis].get();
+                output::ContactCoordinates[_index] = EVAL(1 / SCALE) * (double) $targeted_[axis];
 
                 // Total distance
                 if ($nearest_axis == _index) {
@@ -882,10 +890,10 @@ class storage {
         );
         $total_distance /= SCALE;
         if ($total_distance < 0) $total_distance *= -1;
-        execute store result storage retina:output Distance double 0.0020833333333333333 run $total_distance.get();
+        output::Distance = EVAL(1 / SCALE) * (double) $total_distance;
         if (data storage retina:input {EndpointEntity: true}) execute summon minecraft:marker run {
             tag @s add retina.endpoint;
-            data modify entity @s Pos set from storage retina:output ContactCoordinates;
+            @s::Pos = output::ContactCoordinates;
             if ($end_particle) execute at @s run particle minecraft:electric_spark ~ ~ ~ 0 0 0 0 1 force @a;
         }
     }

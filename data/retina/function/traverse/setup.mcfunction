@@ -1,4 +1,4 @@
-data modify storage retina:output Target set value "NONE"
+data modify storage retina:output Target set value 'NONE'
 data modify storage retina:output Distance set from storage retina:input MaxRecursionDepth
 data modify storage retina:output HitEntityHead set value false
 data remove storage retina:output TargetedBlock
@@ -7,11 +7,11 @@ data remove storage retina:output PlacingPosition
 data remove storage retina:output ContactSurface
 data remove storage retina:output ContactCoordinates
 data remove storage retina:output HitFace
-execute store result score $int_X retina.__variable__ run data get entity @s Pos[0] 1
+execute store result score $int_X retina.__variable__ run data get entity @s Pos[0]
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_X retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast X coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
-execute store result score $int_Z retina.__variable__ run data get entity @s Pos[2] 1
+execute store result score $int_Z retina.__variable__ run data get entity @s Pos[2]
 scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast Z coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
@@ -79,7 +79,7 @@ execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a 
 scoreboard players set $step retina.__variable__ 0
 execute store result score $offset_Y retina.__variable__ run data get entity @s Pos[1] -480
 scoreboard players operation $offset_Y retina.__variable__ += $Y retina.__variable__
-execute store result storage retina:data offset_Y double 0.0020833333333333333 run scoreboard players get $offset_Y retina.__variable__
+execute store result storage retina:data offset_Y double 0.0020833 run scoreboard players get $offset_Y retina.__variable__
 function retina:__private__/anonymous/1 with storage retina:data
 execute if score $hit_block retina.__variable__ matches 1.. run function retina:storage/block
 execute if score $hit_entity retina.__variable__ matches 1.. run function retina:storage/entity
