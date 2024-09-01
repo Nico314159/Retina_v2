@@ -16,18 +16,16 @@ data remove storage retina:input OverrideExecutingEntity
 execute if data storage retina:input ExpandEntityHitboxes store result score $expand_entity_hitboxes retina.__variable__ run data get storage retina:input ExpandEntityHitboxes 480
 execute if score $expand_entity_hitboxes retina.__variable__ matches 0 run scoreboard players reset $expand_entity_hitboxes retina.__variable__
 data remove storage retina:input ExpandEntityHitboxes
-execute unless score $override_executing retina.__variable__ matches 1 positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing
+execute unless score $override_executing retina.__variable__ matches 1.. positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing
 execute summon minecraft:marker run function retina:__private__/anonymous/2
 scoreboard players operation $int_X retina.__variable__ = $overflow_check_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
-execute unless score $test_X retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast X coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
-execute unless score $test_X retina.__variable__ matches -1..0 run return 0
+execute unless score $test_X retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast X coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
 scoreboard players operation $int_Z retina.__variable__ = $overflow_check_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
-execute unless score $test_Z retina.__variable__ matches -1..0 run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast Z coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
-execute unless score $test_Z retina.__variable__ matches -1..0 run return 0
+execute unless score $test_Z retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast Z coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ %= 480 retina.__int__
@@ -90,5 +88,5 @@ execute if score $hit_block retina.__variable__ matches 1.. run function retina:
 execute if score $hit_entity retina.__variable__ matches 1.. run function retina:storage/entity
 scoreboard players reset $expand_entity_hitboxes retina.__variable__
 function #retina:on_hit
-execute unless score $override_executing retina.__variable__ matches 1 positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing
+execute unless score $override_executing retina.__variable__ matches 1.. positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing
 scoreboard players reset $override_executing retina.__variable__

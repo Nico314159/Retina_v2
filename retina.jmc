@@ -145,11 +145,17 @@ class traverse {
         $override_executing = input::OverrideExecutingEntity;
         input::OverrideExecutingEntity.del();
         //expand hit boxes
-        if (data storage retina:input ExpandEntityHitboxes) $expand_entity_hitboxes = input::ExpandEntityHitboxes * SCALE;
-        if ($expand_entity_hitboxes == 0) scoreboard players reset $expand_entity_hitboxes retina.__variable__;
+        if (data storage retina:input ExpandEntityHitboxes) {
+            $expand_entity_hitboxes = input::ExpandEntityHitboxes * SCALE;
+        }
+        if ($expand_entity_hitboxes == 0) {
+            scoreboard players reset $expand_entity_hitboxes retina.__variable__;
+        }
         input::ExpandEntityHitboxes.del();
 
-        if (!($override_executing == 1)) {execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing;}
+        if (!$override_executing) {
+            execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing;
+        }
 
         execute summon minecraft:marker run {
             tag @e remove retina.target;
@@ -159,12 +165,20 @@ class traverse {
             tp @s ~ ~ ~ ~ ~;
             data::setup_context = @s::{}; //use storage cause it is more efficent then getting data from entity
             
-            if (!($override_pitch == $override_pitch)) $input_pitch = data::setup_context.Rotation[1] * 10;
-            if ($override_pitch == $override_pitch) $input_pitch = $override_pitch;
+            if ($override_pitch != $override_pitch) {
+                $input_pitch = data::setup_context.Rotation[1] * 10;
+            }
+            if ($override_pitch == $override_pitch) {
+                $input_pitch = $override_pitch;
+            }
             scoreboard players reset $override_pitch retina.__variable__; 
-            if (!($override_yaw == $override_yaw)) $input_yaw = data::setup_context.Rotation[0]  * 10;
-            if ($override_yaw == $override_yaw) $input_yaw = $override_yaw;
-            scoreboard players reset $override_yaw retina.__variable__;
+            if ($override_yaw != $override_yaw) {
+                $input_yaw = data::setup_context.Rotation[0] * 10;
+            }
+            if ($override_yaw == $override_yaw) {
+                $input_yaw = $override_yaw;
+            }
+            scoreboard players reset $override_yaw retina.__variable__; 
             
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
             Math.gimbal_to_vec();
@@ -186,9 +200,9 @@ class traverse {
                 $int_[i] = $overflow_check_[i]; //use scoreboard got just above to avoid getting player data since it is very expensive
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
-                // TODO: use `return run` when 1.20.3 releases
-                if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
-                if (!$test_[i] matches -1..0) return 0;
+                if (!$test_[i] matches -1..0) return run {
+                    Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
+                }
             },
             ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
@@ -232,7 +246,9 @@ class traverse {
         if ($hit_entity) storage.entity();
         scoreboard players reset $expand_entity_hitboxes retina.__variable__;
         execute run function #retina:on_hit;
-        if (!($override_executing == 1)) {execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing;}
+        if (!$override_executing) {
+            execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing;
+        }
         scoreboard players reset $override_executing retina.__variable__;
     }
 
@@ -408,11 +424,12 @@ class check {
     class entity {
         function main() {
             // This doesn't need to be its own function, but now I can add debug stuff later	
-            if (!($expand_entity_hitboxes == $expand_entity_hitboxes)) {
+            if ($expand_entity_hitboxes != $expand_entity_hitboxes) {
                 execute align xyz if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=0, dy=0, dz=0] run check.entity.found();
             } else {
                 execute align xyz positioned ~-1 ~-1 ~-1 if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=2, dy=2, dz=2] positioned ~1 ~1 ~1 run check.entity.found();  //selecting entities from blocks nearby cause of expanded hitboxes
             }
+
             if (!$hit_entity) return run {
                 if ($debug_messages) {
                     Text.tellraw(@a, "&<italic, white>No entity... Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
@@ -432,7 +449,7 @@ class check {
             // Identify the entity and get a list of surfaces
             retina.id:$max = 0;
             tag @e[type=!#retina:intangible] remove retina.possible_target;
-            if (!($expand_entity_hitboxes == $expand_entity_hitboxes)) {
+            if ($expand_entity_hitboxes != $expand_entity_hitboxes) {
                 execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
             } else {
                 execute align xyz positioned ~-1 ~-1 ~-1 as @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=2, dy=2, dz=2] at @s run check.entity.get_hitbox();
