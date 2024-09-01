@@ -17,7 +17,17 @@ execute if data storage retina:input ExpandEntityHitboxes store result score $ex
 execute if score $expand_entity_hitboxes retina.__variable__ matches 0 run scoreboard players reset $expand_entity_hitboxes retina.__variable__
 data remove storage retina:input ExpandEntityHitboxes
 execute unless score $override_executing retina.__variable__ matches 1.. positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing
-execute summon minecraft:marker run function retina:__private__/anonymous/2
+execute unless data retina:input SetupContext summon minecraft:marker run function retina:__private__/anonymous/2
+execute store result score $input_pitch retina.__variable__ run data get storage retina:input SetupContext.Rotation[1] 10
+execute store result score $input_yaw retina.__variable__ run data get storage retina:input SetupContext.Rotation[0] 10
+execute store result score $X retina.__variable__ run data get storage retina:input SetupContext.Pos[0] 480
+execute store result score $Y retina.__variable__ run data get storage retina:input SetupContext.Pos[1] 480
+execute store result score $Z retina.__variable__ run data get storage retina:input SetupContext.Pos[2] 480
+execute store result score $overflow_check_X retina.__variable__ run data get storage retina:input SetupContext.Pos[0] 1
+execute store result score $overflow_check_Z retina.__variable__ run data get storage retina:input SetupContext.Pos[2] 1
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red","type":"score"}]
+function retina:math/gimbal_to_vec
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold","type":"text"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":"]","color":"gold"}]
 scoreboard players operation $int_X retina.__variable__ = $overflow_check_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
