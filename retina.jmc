@@ -3,7 +3,7 @@ import "tags";
 
 //summon minecraft:marker 0 0 0 {Tags:["retina.height","retina.ignore"]};
 $single_call = true;
-$overflow_risk = 2147483647;
+$overflow_risk = MAX_INT;
 $overflow_risk /= SCALE;
 Scoreboard.add(retina.id, dummy);
 Scoreboard.add(retina.hit, dummy);
@@ -19,8 +19,9 @@ if (!data storage retina:input TargetEntities) {
 }
 output:: += {ContactCoordinates: [], ContactSurface: [], Distance: 0.0d, HitFace: "", PlacingPosition: [], Target: "", TargetedBlock: []};
 
-class traverse {
-    function setup() {
+class shared {
+    @lazy
+    function reset_output() {
         output::Target = "NONE";
         output::Distance = input::MaxRecursionDepth;
         output::HitEntityHead = false;
@@ -30,28 +31,84 @@ class traverse {
         output::ContactSurface.del();
         output::ContactCoordinates.del();
         output::HitFace.del();
-        
+    }
+    @lazy 
+    function guard() {
         // guard condition
-        Hardcode.repeatLists(
-            ["[i]", "_n_"],
+        Hardcode.repeatList(
+            "[i]",
             () => {
-                $int_[i] = @s::Pos[_n_];
+                $int_[i] = $overflow_check_[i]; //use scoreboard got just above to avoid getting player data since it is very expensive
                 $test_[i] = $int_[i];
                 $test_[i] /= $overflow_risk;
-                if (!$test_[i] matches -1..0) {
-                    return run Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
+                if (!$test_[i] matches -1..0) return run {
+                    Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
                 }
             },
-            [
-                ["X", "Z"], // not worried about Y since that's never gonna be high enough to overflow
-                ["0", "2"]
-            ]
+            ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
         );
-        
-        $block_distance = $entity_distance = 2147483647;
+    }
+    @lazy
+    function reset_flags() {
+        $block_distance = $entity_distance = MAX_INT;
 		$hit_block = $hit_entity = $contact = false;
         $max_depth = input::MaxRecursionDepth;
         $max_depth *= $max_depth;
+    }
+    @lazy
+    function calculate() {
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $origin_[i] = $[i];
+                $frac_origin_[i] = $[i];
+                $frac_origin_[i] %= SCALE;
+                $step_[i] = 0;
+
+                if ($output_vec3.[i] < 0) $sign_[i] = -1;
+                if ($output_vec3.[i] >= 0) $sign_[i] = 1;
+
+                $delta_[i] = EVAL(SCALE ** 2);
+                $delta_[i] /= $output_vec3.[i];
+                $delta_[i] /= $sign_[i];
+
+                $distance_[i] = $[i];
+                $distance_[i] *= $sign_[i];
+                $distance_[i] *= -1;
+                $distance_[i] %= SCALE;
+                $distance_[i] *= $delta_[i];
+                $distance_[i] /= SCALE;
+
+                if ($output_vec3.[i] == 0) {
+                    $delta_[i] = $distance_[i] = MAX_INT;
+                }
+
+                $int_[i] = $[i];
+                $int_[i] /= SCALE;
+            },
+            ["X", "Y", "Z"]
+        );
+        if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+    }
+    @lazy
+    function handle_hit() {
+        if ($hit_block) storage.block();
+        if ($hit_entity) storage.entity();
+        execute run function #retina:on_hit;
+    }
+}
+
+
+class traverse {
+    function setup() {
+        shared.reset_output();
+        
+        $overflow_check_X = @s::Pos[0];
+        $overflow_check_Z = @s::Pos[2];
+
+        shared.guard();
+        
+        shared.reset_flags();
 
         tag @s add retina.executing;
         if ($single_call) {
@@ -71,38 +128,8 @@ class traverse {
             $Z = @s::Pos[2] * SCALE;
             kill @s;
         }
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $origin_[i] = $[i];
-                $frac_origin_[i] = $[i];
-                $frac_origin_[i] %= SCALE;
-                $step_[i] = 0;
 
-                if ($output_vec3.[i] < 0) $sign_[i] = -1;
-                if ($output_vec3.[i] >= 0) $sign_[i] = 1;
-
-                $delta_[i] = 230400;
-                $delta_[i] /= $output_vec3.[i];
-                $delta_[i] /= $sign_[i];
-
-                $distance_[i] = $[i];
-                $distance_[i] *= $sign_[i];
-                $distance_[i] *= -1;
-                $distance_[i] %= SCALE;
-                $distance_[i] *= $delta_[i];
-                $distance_[i] /= SCALE;
-
-                if ($output_vec3.[i] == 0) {
-                    $delta_[i] = $distance_[i] = 2147483647;
-                }
-
-                $int_[i] = $[i];
-                $int_[i] /= SCALE;
-            },
-            ["X", "Y", "Z"]
-        );
-        if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+        shared.calculate();
 
         $step = 0;
         $offset_Y = @s::Pos[1] * EVAL(-SCALE);
@@ -113,9 +140,7 @@ class traverse {
             $ execute positioned ~ ~$(offset_Y) ~ run traverse.loop();
         } with data::;
 
-        if ($hit_block) storage.block();
-        if ($hit_entity) storage.entity();
-        execute run function #retina:on_hit;
+        shared.handle_hit();
         tag @s remove retina.executing;
     }
 
@@ -124,20 +149,9 @@ class traverse {
         // set OverrideExecutingEntity to true to prevent the function to exclude the entity in the start block from being selected
         // set ExpandEntityHitboxes to the amount of blocks (double) to expand the hibox (0 to 1)
 
-        output::Target = "NONE";
-        output::Distance = input::MaxRecursionDepth;
-        output::HitEntityHead = false;
-        output::TargetedBlock.del();
-        output::TargetedEntity.del();
-        output::PlacingPosition.del();
-        output::ContactSurface.del();
-        output::ContactCoordinates.del();
-        output::HitFace.del();
+        shared.reset_output();
         
-        $block_distance = $entity_distance = 2147483647;
-		$hit_block = $hit_entity = $contact = false;
-        $max_depth = input::MaxRecursionDepth;
-        $max_depth *= $max_depth;
+        shared.reset_flags();
 
         //override executing entity
         $override_executing = input::OverrideExecutingEntity;
@@ -174,67 +188,25 @@ class traverse {
 
         $overflow_check_X = input::SetupContext.Pos[0] * 1;
         $overflow_check_Z = input::SetupContext.Pos[2] * 1;
+        shared.guard();
 
         if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
         Math.gimbal_to_vec();
         if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
 
-        // guard condition
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $int_[i] = $overflow_check_[i]; //use scoreboard got just above to avoid getting player data since it is very expensive
-                $test_[i] = $int_[i];
-                $test_[i] /= $overflow_risk;
-                if (!$test_[i] matches -1..0) return run {
-                    Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
-                }
-            },
-            ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
-        );
-
-        Hardcode.repeatList(
-            "[i]",
-            () => {
-                $origin_[i] = $[i];
-                $frac_origin_[i] = $[i];
-                $frac_origin_[i] %= SCALE;
-                $step_[i] = 0;
-
-                if ($output_vec3.[i] < 0) $sign_[i] = -1;
-                if ($output_vec3.[i] >= 0) $sign_[i] = 1;
-
-                $delta_[i] = 230400;
-                $delta_[i] /= $output_vec3.[i];
-                $delta_[i] /= $sign_[i];
-
-                $distance_[i] = $[i];
-                $distance_[i] *= $sign_[i];
-                $distance_[i] *= -1;
-                $distance_[i] %= SCALE;
-                $distance_[i] *= $delta_[i];
-                $distance_[i] /= SCALE;
-
-                if ($output_vec3.[i] == 0) $delta_[i] = $distance_[i] = 2147483647;
-
-                $int_[i] = $[i];
-                $int_[i] /= SCALE;
-            },
-            ["X", "Y", "Z"]
-        );
-        if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+        shared.calculate();
 
         $step = 0;
         traverse.loop(); //deleted offset stuff cause we are running the function in the correct context already
-        scoreboard players reset $ignore_blocks retina.__variable__;
 
-        if ($hit_block) storage.block();
-        if ($hit_entity) storage.entity();
-        scoreboard players reset $expand_entity_hitboxes retina.__variable__;
-        execute run function #retina:on_hit;
+        shared.handle_hit();
+
         if (!$override_executing) {
             execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing;
         }
+        
+        // reset special scores
+        scoreboard players reset $expand_entity_hitboxes retina.__variable__;
         scoreboard players reset $override_executing retina.__variable__;
     }
 
@@ -609,7 +581,7 @@ class find_closest_surface {
         $test = $Y1;
         $test -= $Y0;
         if ($test >= SCALE) return run {
-            $head_Y = 2147483647;
+            $head_Y = MAX_INT;
             // no head on lower block
         }
         $head_Y += $t_Y;

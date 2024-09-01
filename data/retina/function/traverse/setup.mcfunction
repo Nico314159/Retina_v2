@@ -7,11 +7,13 @@ data remove storage retina:output PlacingPosition
 data remove storage retina:output ContactSurface
 data remove storage retina:output ContactCoordinates
 data remove storage retina:output HitFace
-execute store result score $int_X retina.__variable__ run data get entity @s Pos[0]
+execute store result score $overflow_check_X retina.__variable__ run data get entity @s Pos[0]
+execute store result score $overflow_check_Z retina.__variable__ run data get entity @s Pos[2]
+scoreboard players operation $int_X retina.__variable__ = $overflow_check_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_X retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast X coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
-execute store result score $int_Z retina.__variable__ run data get entity @s Pos[2]
+scoreboard players operation $int_Z retina.__variable__ = $overflow_check_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast Z coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]

@@ -2,5 +2,6 @@
 #define no_break $step < $max_depth && $hit_block = 0 && $hit_entity = 0
 #define double_hit $hit_block && $hit_entity
 #bind EVAL
+#define MAX_INT EVAL(2 ** 31 - 1)
 #uninstall
 #nometa

@@ -25,9 +25,6 @@ execute store result score $Y retina.__variable__ run data get storage retina:in
 execute store result score $Z retina.__variable__ run data get storage retina:input SetupContext.Pos[2] 480
 execute store result score $overflow_check_X retina.__variable__ run data get storage retina:input SetupContext.Pos[0] 1
 execute store result score $overflow_check_Z retina.__variable__ run data get storage retina:input SetupContext.Pos[2] 1
-execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red","type":"score"}]
-function retina:math/gimbal_to_vec
-execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold","type":"text"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":"]","color":"gold"}]
 scoreboard players operation $int_X retina.__variable__ = $overflow_check_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ = $int_X retina.__variable__
 scoreboard players operation $test_X retina.__variable__ /= $overflow_risk retina.__variable__
@@ -36,6 +33,9 @@ scoreboard players operation $int_Z retina.__variable__ = $overflow_check_Z reti
 scoreboard players operation $test_Z retina.__variable__ = $int_Z retina.__variable__
 scoreboard players operation $test_Z retina.__variable__ /= $overflow_risk retina.__variable__
 execute unless score $test_Z retina.__variable__ matches -1..0 run return run tellraw @a ["",{"text":"[Error] ","color":"dark_red","type":"text"},{"text":"Raycast Z coordinate of ","color":"red","type":"text"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":" is out of range (-","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"score":{"name":"$overflow_risk","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":")","color":"red"}]
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Pitch: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_pitch","objective":"retina.__variable__"},"color":"red","type":"score"},{"text":", ","color":"red"},{"text":"Yaw: ","bold":false,"color":"white","type":"text"},{"score":{"name":"$input_yaw","objective":"retina.__variable__"},"color":"red","type":"score"}]
+function retina:math/gimbal_to_vec
+execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Facing Vector: "},{"text":"[","color":"gold","type":"text"},{"score":{"name":"$output_vec3.X","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Y","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":", ","color":"gold"},{"score":{"name":"$output_vec3.Z","objective":"retina.__variable__"},"color":"gold","type":"score"},{"text":"]","color":"gold"}]
 scoreboard players operation $origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ = $X retina.__variable__
 scoreboard players operation $frac_origin_X retina.__variable__ %= 480 retina.__int__
@@ -93,10 +93,9 @@ scoreboard players operation $int_Z retina.__variable__ /= 480 retina.__int__
 execute if score $debug_messages retina.__variable__ matches 1.. run tellraw @a ["",{"text":"Origin: "},{"text":"[","color":"yellow","type":"text"},{"score":{"name":"$int_X","objective":"retina.__variable__"},"color":"yellow","type":"score"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Y","objective":"retina.__variable__"},"color":"yellow","type":"score"},{"text":", ","color":"yellow"},{"score":{"name":"$int_Z","objective":"retina.__variable__"},"color":"yellow","type":"score"},{"text":"]","color":"yellow"}]
 scoreboard players set $step retina.__variable__ 0
 function retina:traverse/loop
-scoreboard players reset $ignore_blocks retina.__variable__
 execute if score $hit_block retina.__variable__ matches 1.. run function retina:storage/block
 execute if score $hit_entity retina.__variable__ matches 1.. run function retina:storage/entity
-scoreboard players reset $expand_entity_hitboxes retina.__variable__
 function #retina:on_hit
 execute unless score $override_executing retina.__variable__ matches 1.. positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing
+scoreboard players reset $expand_entity_hitboxes retina.__variable__
 scoreboard players reset $override_executing retina.__variable__
