@@ -123,7 +123,7 @@ class traverse {
         // this function can be run without an entity as context. just run it with already the correct position and direction context
         // set OverrideExecutingEntity to true to prevent the function to exclude the entity in the start block from being selected
         // set ExpandEntityHitboxes to the amount of blocks (double) to expand the hibox (0 to 1)
-        // $override_pitch and $override_yawn are scores used to override the angle of the cast using scoreboards (usefull in some situations)
+        // $override_pitch and $override_yaw are scores used to override the angle of the cast using scoreboards (usefull in some situations)
         // set IgnoreBlocks to true to ignore blocks
 
         output::Target = "NONE";
@@ -162,9 +162,9 @@ class traverse {
             if (!($override_pitch == $override_pitch)) $input_pitch = operations::setup_context.Rotation[1] * 10;
             if ($override_pitch == $override_pitch) $input_pitch = $override_pitch;
             scoreboard players reset $override_pitch retina.__variable__; 
-            if (!($override_yawn == $override_yawn)) $input_yaw = operations::setup_context.Rotation[0]  * 10;
-            if ($override_yawn == $override_yawn) $input_yaw = $override_yawn;
-            scoreboard players reset $override_yawn retina.__variable__;
+            if (!($override_yaw == $override_yaw)) $input_yaw = operations::setup_context.Rotation[0]  * 10;
+            if ($override_yaw == $override_yaw) $input_yaw = $override_yaw;
+            scoreboard players reset $override_yaw retina.__variable__;
             
             if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
             Math.gimbal_to_vec();
