@@ -18,6 +18,7 @@ scoreboard objectives add retina.id dummy
 scoreboard objectives add retina.hit dummy
 data merge storage retina:input {HorizontalCount:1b,VerticalCount:1b,CenteredCount:0b,SpreadFactor:[100,100],EndpointEntity:0b}
 execute unless data storage retina:input MaxRecursionDepth run data merge storage retina:input {MaxRecursionDepth:50}
+execute unless data storage retina:input TargetBlocks run data merge storage retina:input {TargetBlocks:true}
 execute unless data storage retina:input TargetEntities run data merge storage retina:input {TargetEntities:true}
 data merge storage retina:output {ContactCoordinates:[],ContactSurface:[],Distance:0.0d,HitFace:"",PlacingPosition:[],Target:"",TargetedBlock:[]}
 execute store success score $old_version_installed retina.__variable__ run scoreboard players add * retina 1
