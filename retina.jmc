@@ -157,12 +157,12 @@ class traverse {
             kill @e[type=marker,tag=retina.endpoint];
 
             tp @s ~ ~ ~ ~ ~;
-            operations::setup_context = @s::{}; //use storage cause it is more efficent then getting data from entity
+            data::setup_context = @s::{}; //use storage cause it is more efficent then getting data from entity
             
-            if (!($override_pitch == $override_pitch)) $input_pitch = operations::setup_context.Rotation[1] * 10;
+            if (!($override_pitch == $override_pitch)) $input_pitch = data::setup_context.Rotation[1] * 10;
             if ($override_pitch == $override_pitch) $input_pitch = $override_pitch;
             scoreboard players reset $override_pitch retina.__variable__; 
-            if (!($override_yaw == $override_yaw)) $input_yaw = operations::setup_context.Rotation[0]  * 10;
+            if (!($override_yaw == $override_yaw)) $input_yaw = data::setup_context.Rotation[0]  * 10;
             if ($override_yaw == $override_yaw) $input_yaw = $override_yaw;
             scoreboard players reset $override_yaw retina.__variable__;
             
@@ -170,12 +170,12 @@ class traverse {
             Math.gimbal_to_vec();
             if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
             
-            $X = operations::setup_context.Pos[0] * SCALE;
-            $Y = operations::setup_context.Pos[1] * SCALE;
-            $Z = operations::setup_context.Pos[2] * SCALE;
+            $X = data::setup_context.Pos[0] * SCALE;
+            $Y = data::setup_context.Pos[1] * SCALE;
+            $Z = data::setup_context.Pos[2] * SCALE;
 
-            $overflow_check_X = operations::setup_context.Pos[0] * 1;
-            $overflow_check_Z = operations::setup_context.Pos[2] * 1;
+            $overflow_check_X = data::setup_context.Pos[0] * 1;
+            $overflow_check_Z = data::setup_context.Pos[2] * 1;
             kill @s;
         }
 
