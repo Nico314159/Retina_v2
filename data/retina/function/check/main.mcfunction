@@ -1,4 +1,12 @@
-scoreboard players add $step retina.__variable__ 1
+scoreboard players operation $distance_traveled_squared_X retina.__variable__ = $step_X retina.__variable__
+scoreboard players operation $distance_traveled_squared_X retina.__variable__ *= $step_X retina.__variable__
+scoreboard players operation $distance_traveled_squared_Y retina.__variable__ = $step_Y retina.__variable__
+scoreboard players operation $distance_traveled_squared_Y retina.__variable__ *= $step_Y retina.__variable__
+scoreboard players operation $distance_traveled_squared_Z retina.__variable__ = $step_Z retina.__variable__
+scoreboard players operation $distance_traveled_squared_Z retina.__variable__ *= $step_Z retina.__variable__
+scoreboard players operation $step retina.__variable__ = $distance_traveled_squared_X retina.__variable__
+scoreboard players operation $step retina.__variable__ += $distance_traveled_squared_Y retina.__variable__
+scoreboard players operation $step retina.__variable__ += $distance_traveled_squared_Z retina.__variable__
 scoreboard players set $check_for_head retina.__variable__ 0
 execute if data storage retina:input {TargetBlocks:true} run function retina:check/block/main
 execute if data storage retina:input {TargetEntities:true} run function retina:check/entity/main

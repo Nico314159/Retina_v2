@@ -51,6 +51,7 @@ class traverse {
         $block_distance = $entity_distance = 2147483647;
 		$hit_block = $hit_entity = $contact = false;
         $max_depth = input::MaxRecursionDepth;
+        $max_depth *= $max_depth;
 
         tag @s add retina.executing;
         if ($single_call) {
@@ -117,6 +118,124 @@ class traverse {
         execute run function #retina:on_hit;
         tag @s remove retina.executing;
     }
+
+    function setup_no_entity() {
+        // this function can be run without an entity as context. just run it with already the correct position and direction context
+        // set OverrideExecutingEntity to true to prevent the function to exclude the entity in the start block from being selected
+        // set ExpandEntityHitboxes to the amount of blocks (double) to expand the hibox (0 to 1)
+        // $override_pitch and $override_yawn are scores used to override the angle of the cast using scoreboards (usefull in some situations)
+        // set IgnoreBlocks to true to ignore blocks
+
+        output::Target = "NONE";
+        output::Distance = input::MaxRecursionDepth;
+        output::HitEntityHead = false;
+        output::TargetedBlock.del();
+        output::TargetedEntity.del();
+        output::PlacingPosition.del();
+        output::ContactSurface.del();
+        output::ContactCoordinates.del();
+        output::HitFace.del();
+        
+        $block_distance = $entity_distance = 2147483647;
+		$hit_block = $hit_entity = $contact = false;
+        $max_depth = input::MaxRecursionDepth;
+        $max_depth *= $max_depth;
+
+        //override executing entity
+        $override_executing = input::OverrideExecutingEntity;
+        input::OverrideExecutingEntity.del();
+        //expand hit boxes
+        if (data storage retina:input ExpandEntityHitboxes) $expand_entity_hitboxes = input::ExpandEntityHitboxes * SCALE;
+        if ($expand_entity_hitboxes == 0) scoreboard players reset $expand_entity_hitboxes retina.__variable__;
+        input::ExpandEntityHitboxes.del();
+
+        if (!($override_executing == 1)) {execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing;}
+
+        execute summon minecraft:marker run {
+            tag @e remove retina.target;
+            scoreboard players reset * retina.hit;
+            kill @e[type=marker,tag=retina.endpoint];
+
+            tp @s ~ ~ ~ ~ ~;
+            operations::setup_context = @s::{}; //use storage cause it is more efficent then getting data from entity
+            
+            if (!($override_pitch == $override_pitch)) $input_pitch = operations::setup_context.Rotation[1] * 10;
+            if ($override_pitch == $override_pitch) $input_pitch = $override_pitch;
+            scoreboard players reset $override_pitch retina.__variable__; 
+            if (!($override_yawn == $override_yawn)) $input_yaw = operations::setup_context.Rotation[0]  * 10;
+            if ($override_yawn == $override_yawn) $input_yaw = $override_yawn;
+            scoreboard players reset $override_yawn retina.__variable__;
+            
+            if ($debug_messages) Text.tellraw(@a, "&<!bold, white>Pitch: &<$input_pitch, red>, &<!bold, white>Yaw: &<$input_yaw, red>");
+            Math.gimbal_to_vec();
+            if ($debug_messages) Text.tellraw(@a, "Facing Vector: &<gold>[&<$output_vec3.X>, &<$output_vec3.Y>, &<$output_vec3.Z>]");
+            
+            $X = operations::setup_context.Pos[0] * SCALE;
+            $Y = operations::setup_context.Pos[1] * SCALE;
+            $Z = operations::setup_context.Pos[2] * SCALE;
+
+            $overflow_check_X = operations::setup_context.Pos[0] * 1;
+            $overflow_check_Z = operations::setup_context.Pos[2] * 1;
+            kill @s;
+        }
+
+        // guard condition
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $int_[i] = $overflow_check_[i]; //use scoreboard got just above to avoid getting player data since it is very expensive
+                $test_[i] = $int_[i];
+                $test_[i] /= $overflow_risk;
+                // TODO: use `return run` when 1.20.3 releases
+                if (!$test_[i] matches -1..0) Text.tellraw(@a, "&<dark_red>[Error] &<red>Raycast [i] coordinate of &<$int_[i]> is out of range (-&<$overflow_risk>, &<$overflow_risk>)");
+                if (!$test_[i] matches -1..0) return 0;
+            },
+            ["X", "Z"] // not worried about Y since that's never gonna be high enough to overflow
+        );
+
+        Hardcode.repeatList(
+            "[i]",
+            () => {
+                $origin_[i] = $[i];
+                $frac_origin_[i] = $[i];
+                $frac_origin_[i] %= SCALE;
+                $step_[i] = 0;
+
+                if ($output_vec3.[i] < 0) $sign_[i] = -1;
+                if ($output_vec3.[i] >= 0) $sign_[i] = 1;
+
+                $delta_[i] = 230400;
+                $delta_[i] /= $output_vec3.[i];
+                $delta_[i] /= $sign_[i];
+
+                $distance_[i] = $[i];
+                $distance_[i] *= $sign_[i];
+                $distance_[i] *= -1;
+                $distance_[i] %= SCALE;
+                $distance_[i] *= $delta_[i];
+                $distance_[i] /= SCALE;
+
+                if ($output_vec3.[i] == 0) $delta_[i] = $distance_[i] = 2147483647;
+
+                $int_[i] = $[i];
+                $int_[i] /= SCALE;
+            },
+            ["X", "Y", "Z"]
+        );
+        if ($debug_messages) Text.tellraw(@a, "Origin: &<yellow>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+
+        $step = 0;
+        traverse.loop(); //deleted offset stuff cause we are running the function in the correct context already
+        scoreboard players reset $ignore_blocks retina.__variable__;
+
+        if ($hit_block) storage.block();
+        if ($hit_entity) storage.entity();
+        scoreboard players reset $expand_entity_hitboxes retina.__variable__;
+        execute run function #retina:on_hit;
+        if (!($override_executing == 1)) {execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] remove retina.executing;}
+        scoreboard players reset $override_executing retina.__variable__;
+    }
+
     function loop() {
         // Find nearest axis
         $shortest_distance = $distance_X;
@@ -215,7 +334,15 @@ class traverse {
 
 class check {
     function main() {
-        $step ++;
+        $distance_traveled_squared_X = $step_X;
+        $distance_traveled_squared_X *= $step_X;
+        $distance_traveled_squared_Y = $step_Y;
+        $distance_traveled_squared_Y *= $step_Y;
+        $distance_traveled_squared_Z = $step_Z;
+        $distance_traveled_squared_Z *= $step_Z;
+        $step = $distance_traveled_squared_X;
+        $step += $distance_traveled_squared_Y; 
+        $step += $distance_traveled_squared_Z;
 
         $check_for_head = false;
         if (data storage retina:input {TargetBlocks: true}) {
@@ -281,8 +408,12 @@ class check {
     class entity {
         function main() {
             // This doesn't need to be its own function, but now I can add debug stuff later	
-            execute align xyz if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=0, dy=0, dz=0] run check.entity.found();
-            if (!$hit_block) return run {
+            if (!($expand_entity_hitboxes == $expand_entity_hitboxes)) {
+                execute align xyz if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=0, dy=0, dz=0] run check.entity.found();
+            } else {
+                execute align xyz positioned ~-1 ~-1 ~-1 if entity @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=2, dy=2, dz=2] positioned ~1 ~1 ~1 run check.entity.found();  //selecting entities from blocks nearby cause of expanded hitboxes
+            }
+            if (!$hit_entity) return run {
                 if ($debug_messages) {
                     Text.tellraw(@a, "&<italic, white>No entity... Coordinates: &<dark_aqua>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
                 }
@@ -301,7 +432,11 @@ class check {
             // Identify the entity and get a list of surfaces
             retina.id:$max = 0;
             tag @e[type=!#retina:intangible] remove retina.possible_target;
-            execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
+            if (!($expand_entity_hitboxes == $expand_entity_hitboxes)) {
+                execute align xyz as @e[type=!#retina:intangible, tag=!retina.executing, dx=0, dy=0, dz=0] at @s run check.entity.get_hitbox();
+            } else {
+                execute align xyz positioned ~-1 ~-1 ~-1 as @e[type=!#retina:intangible, tag=!retina.ignore, tag=!retina.executing, dx=2, dy=2, dz=2] at @s run check.entity.get_hitbox();
+            }
 
             // See if the ray hits any surface
             $contact = false;
@@ -353,6 +488,11 @@ class check {
                 // Clean up
                 data::Pos.del();
                 kill @s;
+            }
+
+            if ($expand_entity_hitboxes == $expand_entity_hitboxes) {
+                $entity_half_width += $expand_entity_hitboxes;
+                $entity_height += $expand_entity_hitboxes;
             }
         
             Hardcode.repeatList(
@@ -874,6 +1014,16 @@ class storage {
         if ($X0 < 0) $X0 += SCALE;
         if ($Y0 < 0) $Y0 += SCALE;
         
+        if ($expand_entity_hitboxes == $expand_entity_hitboxes) {
+            //adding correction for expanded hitboxes, so that the contact coordinates are on the actual entity hitbox
+            if (data storage retina:output {HitFace: "North"}) $targeted_Z += $expand_entity_hitboxes;
+            if (data storage retina:output {HitFace: "South"}) $targeted_Z -= $expand_entity_hitboxes;
+            if (data storage retina:output {HitFace: "East"}) $targeted_X -= $expand_entity_hitboxes;
+            if (data storage retina:output {HitFace: "West"}) $targeted_X += $expand_entity_hitboxes;
+            if (data storage retina:output {HitFace: "Top"}) $targeted_Y -= $expand_entity_hitboxes;
+            if (data storage retina:output {HitFace: "Bottom"}) $targeted_Y += $expand_entity_hitboxes;
+        }
+
         Hardcode.repeatLists(
             ["[axis]", "_index"],
             () => {

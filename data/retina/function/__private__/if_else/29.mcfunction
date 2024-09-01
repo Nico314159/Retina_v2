@@ -1,7 +1,6 @@
-scoreboard objectives remove retina
-scoreboard objectives remove retina.show_particle
-scoreboard objectives remove retina.show_line
-scoreboard objectives remove retina.raycast_count
-scoreboard objectives remove retinacasttemp
-kill @e[type=marker,tag=retina.ray]
-kill @e[type=marker,tag=retina.get_coordinates]
+execute if data storage retina:output {HitFace:"North"} run scoreboard players operation $targeted_Z retina.__variable__ += $expand_entity_hitboxes retina.__variable__
+execute if data storage retina:output {HitFace:"South"} run scoreboard players operation $targeted_Z retina.__variable__ -= $expand_entity_hitboxes retina.__variable__
+execute if data storage retina:output {HitFace:"East"} run scoreboard players operation $targeted_X retina.__variable__ -= $expand_entity_hitboxes retina.__variable__
+execute if data storage retina:output {HitFace:"West"} run scoreboard players operation $targeted_X retina.__variable__ += $expand_entity_hitboxes retina.__variable__
+execute if data storage retina:output {HitFace:"Top"} run scoreboard players operation $targeted_Y retina.__variable__ -= $expand_entity_hitboxes retina.__variable__
+execute if data storage retina:output {HitFace:"Bottom"} run scoreboard players operation $targeted_Y retina.__variable__ += $expand_entity_hitboxes retina.__variable__

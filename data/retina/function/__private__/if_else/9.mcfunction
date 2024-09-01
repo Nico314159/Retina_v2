@@ -1,6 +1,3 @@
-data modify storage retina:data Surfaces.Top append value [[0,390,0,480,390,480]]
-data modify storage retina:data Surfaces.Bottom append value [[0,330,0,480,330,480]]
-data modify storage retina:data Surfaces.West append value [[0,330,0,0,390,480]]
-data modify storage retina:data Surfaces.East append value [[480,330,0,480,390,480]]
-data modify storage retina:data Surfaces.North append value [[0,330,0,480,390,0]]
-data modify storage retina:data Surfaces.South append value [[0,330,480,480,390,480]]
+function retina:find_closest_surface/ray_intersects_with_surface
+data modify storage retina:output HitFace set value 'Top'
+execute if score $check_for_head retina.__variable__ matches 1.. if score $Y_intersection retina.__variable__ >= $head_Y retina.__variable__ run data modify storage retina:output HitEntityHead set value true
