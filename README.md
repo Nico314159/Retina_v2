@@ -36,9 +36,19 @@ If you want to run your own function every time a raycast hits something/someone
 
 ## Settings / Input
 
+### Target blocks
+
+By default, the ray will detect both blocks and entities. If you want to ignore blocks, and just focus on entities the player is looking at, set `TargetBlocks` to `false` (`0b`):
+
+```mcfunction
+data modify storage retina:input TargetBlocks set value false
+```
+
+Even if `TargetBlocks` is true, "intangible" blocks (air and light blocks) are still ignored, as well as [a few special cases of randomized blocks](#limitations) 
+
 ### Target entities
 
-By default, the ray will detect both entities and blocks. If you want to ignore entities, and just focus on blocks the player is be looking at, set `TargetEntities` to `false` (`0b`):
+On the other hand, if you want to ignore entities and only focus on blocks, then set `TargetEntities` to `false` (`0b`):
 
 ```mcfunction
 data modify storage retina:input TargetEntities set value false
@@ -70,6 +80,35 @@ data merge storage retina:input {HorizontalCount: 3, VerticalCount: 3, CenteredC
 
 The `SpreadFactor` storage path lets you set the random spread for multi-raycasts. `SpreadFactor[0]` is the minimum amount, and `SpreadFactor[1]` is the maximum.
 If you don't want any randomization, simply set both values to the same number.
+
+## Raycasting without an entity
+
+Using the `retina:traverse/setup_no_entity` function, you can do a raycast from the `execute positioned/rotated` context, without needing a specific entity to use. It also comes with a few additional settings.
+
+### Store same raycast
+
+`SetupContext` lets you save a particular position and rotation for future use without needing the same execute command, and also makes it easier to take variable inputs. For example: 
+```mcfunction
+data merge retina:input {SetupContext: {Pos: [10.5f, 0.0f, -56.5f], Rotation: [45.0f, -30.0f]}}
+data modify storage retina:input SetupContext.Pos[2] set from storage my_pack:foo bar
+function retina:traverse/setup_no_entity
+
+...
+function retina:traverse/setup_no_entity
+# ^^ will still use the same coordinates as before
+```
+
+### Override executing entity
+
+If `OverrideExecutingEntity` is false or unspecified, all entities in the same voxel as the origin will be given the `retina.executing` tag, as if the raycast function had been called by them. If this behavior is not wanted, set `OverrideExecutingEntity` to `true` (`1b`) and no entities will be tagged.
+
+### ExpandEntityHitboxes
+
+Setting `ExpandEntityHitboxes` to a double will (for the purpose of the raycast) expand all entity hitboxes by that number of blocks. 
+```mcfunction
+# Raycast will act as if entity hitboxes are half a block bigger in each direction
+data merge retina:input {ExpandEntityHitboxes: 0.5}
+```
 
 ## Output
 
