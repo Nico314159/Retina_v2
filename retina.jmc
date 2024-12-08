@@ -550,7 +550,7 @@ class find_closest_surface {
     function main() {
         // @within check.block.found()
 
-        $min_distance_to_surface = 832; // sqrt(3) * 480
+        $min_distance_to_surface = EVAL((3 ** 0.5 * SCALE) \ 1);
         Hardcode.repeatLists(
             ["[direction]", "[axis]", "[sign]"],
             () => {if (!$sign_[axis] = [sign] && no_break) find_closest_surface.[direction]();},
