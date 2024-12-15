@@ -1,2 +1,2 @@
-scoreboard players set $entity_half_width retina.__variable__ 144
-scoreboard players set $entity_height retina.__variable__ 955
+data modify storage retina:data entity_half_width set value 0.3
+data modify storage retina:data entity_height set value 1.98958333334

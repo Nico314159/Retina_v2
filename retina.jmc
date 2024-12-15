@@ -465,6 +465,9 @@ class check {
                 kill @s;
             }
 
+            $entity_half_width = data::entity_half_width * SCALE;
+            $entity_height = data::entity_height * SCALE;
+
             if ($expand_entity_hitboxes == $expand_entity_hitboxes) {
                 $entity_half_width += $expand_entity_hitboxes;
                 $entity_height += $expand_entity_hitboxes;

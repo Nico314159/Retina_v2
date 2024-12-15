@@ -1,115 +1,119 @@
 class entity_hitbox {
     function allay() {
-        $entity_half_width = 84;
-        $entity_height = 288;
+        data::entity_half_width = 0.175;
+        data::entity_height = 0.6;
     }
     function armadillo() {
-        $entity_half_width = 168;
-        $entity_height = 312;
+        data::entity_half_width = 0.35;
+        data::entity_height = 0.65;
     }
     function armor_stand() {
         data::EntityTag = @s::;
-        if (data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 60;
-        if (data storage retina:data EntityTag{Small: 1b}) $entity_height = 474;
-        if (!data storage retina:data EntityTag{Small: 1b}) $entity_half_width = 120;
-        if (!data storage retina:data EntityTag{Small: 1b}) $entity_height = 948;
-        if (data storage retina:data EntityTag{Marker: 1b}) $entity_half_width = $entity_height = 0;
+        if (data storage retina:data EntityTag{Small: 1b}) {
+            data:: += {entity_half_width: 0.125, entity_height: 0.9875};
+        }
+        if (!data storage retina:data EntityTag{Small: 1b}) {
+            data:: += {entity_half_width: 0.25, entity_height: 1.975};
+        }
+        if (data storage retina:data EntityTag{Marker: 1b}) {
+            data:: += {entity_half_width: 0.0, entity_height: 0.0};
+        }
     }
     function axolotl() {
-        $entity_half_width = 180;
-        $entity_height = 202; // rounded from 201.6;
+        data::entity_half_width = 0.375;
+        data::entity_height = 0.42;
     }
     function bat_like() {
-        $entity_half_width = 216;
-        $entity_height = 672;
+        data::entity_half_width = 0.45;
+        data::entity_height = 1.4;
     }
     function bee() {
-        $entity_half_width = 144;
-        $entity_height = 336;
+        data::entity_half_width = 0.3;
+        data::entity_height = 0.7;
     }
     function boat() {
-        $entity_half_width = 330;
-        $entity_height = 270;
+        data::entity_half_width = 0.6875;
+        data::entity_height = 0.5625;
     }
     function camel() {
-        $entity_half_width = 408;
-        $entity_height = 1140;
+        data::entity_half_width = 0.85;
+        data::entity_height = 2.375;
     }
     function cat_like() {
-        $entity_half_width = 144;
-        $entity_height = 336;
+        data::entity_half_width = 0.3;
+        data::entity_height = 0.7;
     }
     function cave_spider() {
-        $entity_half_width = 168;
-        $entity_height = 240;
+        data::entity_half_width = 0.35;
+        data::entity_height = 0.5;
     }
     function chicken() {
-        $entity_half_width = 96;
-        $entity_height = 336;
+        data::entity_half_width = 0.2;
+        data::entity_height = 0.7;
     }
     function cod() {
-        $entity_half_width = 120;
-        $entity_height = 144;
+        data::entity_half_width = 0.25;
+        data::entity_height = 0.3;
     }
     function cow() {
-        $entity_half_width = 216;
-        $entity_height = 672;
+        data::entity_half_width = 0.45;
+        data::entity_height = 1.4;
     }
     function creeper() {
-        $entity_half_width = 144;
-        $entity_height = 816;
+        data::entity_half_width = 0.3;
+        data::entity_height = 1.7;
     }
     function dolphin() {
-        $entity_half_width = 216;
-        $entity_height = 288;
+        data::entity_half_width = 0.45;
+        data::entity_height = 0.6;
     }
     function donkey() {
-        $entity_half_width = 335; // rounded from 335.156256;
-        $entity_height = 720;
+        data::entity_half_width = 0.6982422;
+        data::entity_height = 1.5;
     }
     function elder_guardian() {
-        $entity_half_width = 479; // rounded from 479.4;
-        $entity_height = 959; // rounded from 958.8;
+        data::entity_half_width = 0.99875;
+        data::entity_height = 1.9975;
     }
     function end_crystal() {
-        $entity_half_width = 480;
-        $entity_height = 960;
+        data::entity_half_width = 1;
+        data::entity_height = 2;
     }
     function enderman() {
-        $entity_half_width = 144;
-        $entity_height = 1392;
+        data::entity_half_width = 0.3;
+        data::entity_height = 2.9;
     }
     function falling_block_like() {
-        $entity_half_width = 235; // rounded from 235.2;
-        $entity_height = 470; // rounded from 470.4;
+        data::entity_half_width = 0.49;
+        data::entity_height = 0.98;
     }
     function frog() {
-        $entity_half_width = 120;
-        $entity_height = 240;
+        data::entity_half_width = 0.25;
+        data::entity_height = 0.5;
     }
     function ghast() {
-        $entity_half_width = 960;
-        $entity_height = 1920;
+        data::entity_half_width = 2;
+        data::entity_height = 4;
     }
     function giant() {
-        $entity_half_width = 864;
-        $entity_height = 5760;
+        data::entity_half_width = 1.8;
+        data::entity_height = 12;
     }
     function guardian() {
-        $entity_half_width = 204;
-        $entity_height = 408;
+        data::entity_half_width = 0.425;
+        data::entity_height = 0.85;
     }
     function hoglin() {
-        $entity_half_width = 335; // rounded from 335.156256;
-        $entity_height = 672;
+        data::entity_half_width = 0.6982422;
+        data::entity_height = 1.4;
     }
     function horse_like() {
-        $entity_half_width = 335; // rounded from 335.156256;
-        $entity_height = 768;
+        data::entity_half_width = 0.6982422;
+        data::entity_height = 1.6;
     }
     function iron_golem() {
-        $entity_half_width = 336;
-        $entity_height = 1296;
+        data::entity_half_width = 0.7;
+        data::entity_height = 2.7;
     }
     function item_frame() {
         $item_frame_facing = @s::Facing;
@@ -123,137 +127,138 @@ class entity_hitbox {
         }
     }
     function leash_knot() {
-        $entity_half_width = 90;
-        $entity_height = 240;
+        data::entity_half_width = 0.1875;
+        data::entity_height = 0.5;
     }
     function llama() {
-        $entity_half_width = 216;
-        $entity_height = 898; // rounded from 897.6;
+        data::entity_half_width = 0.45;
+        data::entity_height = 1.87;
     }
     function minecart() {
-        $entity_half_width = 235; // rounded from 235.2;
-        $entity_height = 336;
+        data::entity_half_width = 0.49;
+        data::entity_height = 0.7;
     }
     function panda() {
-        $entity_half_width = 312;
-        $entity_height = 600;
+        data::entity_half_width = 0.65;
+        data::entity_height = 1.25;
     }
     function phantom() {
-        $entity_half_width = 216;
-        $entity_height = 240;
+        data::entity_half_width = 0.45;
+        data::entity_height = 0.5;
     }
     function pig() {
-        $entity_half_width = 216;
-        $entity_height = 432;
+        data::entity_half_width = 0.45;
+        data::entity_height = 0.9;
     }
     function player_like() {
-        $entity_half_width = 144;
-        $entity_height = 864;
+        data::entity_half_width = 0.3;
+        data::entity_height = 1.8;
         $check_for_head = true;
-        $head_Y = 624;
+        $head_Y = EVAL(1.3 * SCALE);
     }
     function polar_bear() {
-        $entity_half_width = 336;
-        $entity_height = 672;
+        data::entity_half_width = 0.7;
+        data::entity_height = 1.4;
     }
     function pufferfish() {
         $pufferfish_puffstate = @s::PuffState;
-        if ($pufferfish_puffstate = 0) $entity_half_width = 84;
-        if ($pufferfish_puffstate = 0) $entity_height = 168;
-        if ($pufferfish_puffstate = 1) $entity_half_width = 120;
-        if ($pufferfish_puffstate = 1) $entity_height = 240;
-        if ($pufferfish_puffstate = 2) $entity_half_width = 168;
-        if ($pufferfish_puffstate = 2) $entity_height = 336;
+        if ($pufferfish_puffstate == 0) {
+            data:: += {entity_half_width: 0.175, entity_height: 0.35};
+        }
+        if ($pufferfish_puffstate == 1) {
+            data:: += {entity_half_width: 0.25, entity_height: 0.5};
+        }
+        if ($pufferfish_puffstate == 2) {
+            data:: += {entity_half_width: 0.35, entity_height: 0.7};
+        } 
     }
     function rabbit() {
-        $entity_half_width = 96;
-        $entity_height = 240;
+        data::entity_half_width = 0.2;
+        data::entity_height = 0.5;
     }
     function ravager() {
-        $entity_half_width = 468;
-        $entity_height = 960;
+        data::entity_half_width = 0.975;
+        data::entity_height = 2;
     }
     function salmon() {
-        $entity_half_width = 168;
-        $entity_height = 192;
+        data::entity_half_width = 0.35;
+        data::entity_height = 0.4;
     }
     function sheep_like() {
-        $entity_half_width = 216;
-        $entity_height = 624;
+        data::entity_half_width = 0.45;
+        data::entity_height = 1.3;
     }
     function shulker() {
         // TODO: take peek/rotation into account and move this to the end of get_hitbox.entity(), along with item frames and paintings maybe
-        $entity_half_width = 240;
-        $entity_height = 480;
+        data::entity_half_width = 0.5;
+        data::entity_height = 1;
     }
     function skeleton() {
-        $entity_half_width = 144;
-        $entity_height = 955; // rounded from 955.2;
+        data::entity_half_width = 0.3;
+        data::entity_height = 1.98958333334;
     }
     function slime_like() {
-        $entity_half_width = 122; // rounded from 122.4;
-        $entity_height = 245; // rounded from 244.8;
         $slime_size = @s::Size;
         $slime_size ++;
-        $entity_half_width *= $slime_size;
-        $entity_height *= $slime_size;
+        data::entity_half_width = 0.255 * (float) $slime_size;
+        data::entity_height = 0.510 * (float) $slime_size;
     }
     function small_arthropod() {
-        $entity_half_width = 96;
-        $entity_height = 144;
+        data::entity_half_width = 0.2;
+        data::entity_height = 0.3;
     }
     function sniffer() {
-        $entity_half_width = 456;
-        $entity_height = 840;
+        data::entity_half_width = 0.95;
+        data::entity_height = 1.75;
     }
     function snow_golem() {
-        $entity_half_width = 168;
-        $entity_height = 912;
+        data::entity_half_width = 0.35;
+        data::entity_height = 1.9;
     }
     function spider() {
-        $entity_half_width = 336;
-        $entity_height = 432;
+        data::entity_half_width = 0.7;
+        data::entity_height = 0.9;
     }
     function squid() {
-        $entity_half_width = 192;
-        $entity_height = 384;
+        data::entity_half_width = 0.4;
+        data::entity_height = 0.8;
     }
     function strider() {
-        $entity_half_width = 216;
-        $entity_height = 816;
+        data::entity_half_width = 0.45;
+        data::entity_height = 1.7;
     }
     function tropical_fish() {
-        $entity_half_width = 120;
-        $entity_height = 192;
+        data::entity_half_width = 0.25;
+        data::entity_height = 0.4;
     }
     function turtle() {
-        $entity_half_width = 288;
-        $entity_height = 192;
+        data::entity_half_width = 0.6;
+        data::entity_height = 0.4;
     }
     function vex() {
-        $entity_half_width = 96;
-        $entity_height = 384;
+        data::entity_half_width = 0.2;
+        data::entity_height = 0.8;
     }
     function warden() {
-        $entity_half_width = 216;
-        $entity_height = 1392;
+        data::entity_half_width = 0.45;
+        data::entity_height = 2.9;
     }
     function wither() {
-        $entity_half_width = 216;
-        $entity_height = 1680;
+        data::entity_half_width = 0.45;
+        data::entity_height = 3.5;
     }
     function wither_skeleton() {
-        $entity_half_width = 168;
-        $entity_height = 1152;
+        data::entity_half_width = 0.35;
+        data::entity_height = 2.4;
     }
     function wolf() {
-        $entity_half_width = 144;
-        $entity_height = 408;
+        data::entity_half_width = 0.3;
+        data::entity_height = 0.85;
     }
     function zombie_like() {
-        $entity_half_width = 144;
-        $entity_height = 936;
+        data::entity_half_width = 0.3;
+        data::entity_height = 1.95;
         $check_for_head = true;
-        $head_Y = 696;
+        $head_Y = EVAL(1.45 * SCALE);
     }
 }
