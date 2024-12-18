@@ -1,4 +1,4 @@
-execute if block ~ ~ ~ minecraft:sweet_berry_bush[age=0] run data modify storage retina:data Surfaces set value {Top:[[0.1875,0.5,0.1875,0.8125,0.5,0.8125]],Bottom:[[0.1875,0,0.1875,0.8125,0,0.8125]],West:[[0.1875,0,0.1875,0.1875,0.5,0.8125]],East:[[0.8125,0,0.1875,0.8125,0.5,0.8125]],North:[[0.1875,0,0.1875,0.8125,0.5,0.1875]],South:[[0.1875,0,0.8125,0.8125,0.5,0.8125]]}
+execute if block ~ ~ ~ minecraft:sweet_berry_bush[age=0] run data modify storage retina:data Surfaces set value {Top:[[0.1875,0.5,0.1875,0.8125,0.5,0.8125]],Bottom:[[0.1875,0.0,0.1875,0.8125,0.0,0.8125]],West:[[0.1875,0.0,0.1875,0.1875,0.5,0.8125]],East:[[0.8125,0.0,0.1875,0.8125,0.5,0.8125]],North:[[0.1875,0.0,0.1875,0.8125,0.5,0.1875]],South:[[0.1875,0.0,0.8125,0.8125,0.5,0.8125]]}
 execute if block ~ ~ ~ minecraft:sweet_berry_bush[age=1] run function retina:hitbox/cactus_shaped
 execute if block ~ ~ ~ minecraft:sweet_berry_bush[age=2] run function retina:hitbox/cactus_shaped
 execute if block ~ ~ ~ minecraft:sweet_berry_bush[age=3] run function retina:hitbox/cubic
