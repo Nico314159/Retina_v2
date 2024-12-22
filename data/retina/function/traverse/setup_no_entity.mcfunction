@@ -17,7 +17,7 @@ execute if data storage retina:input ExpandEntityHitboxes store result score $ex
 execute if score $expand_entity_hitboxes retina.__variable__ matches 0 run scoreboard players reset $expand_entity_hitboxes retina.__variable__
 data remove storage retina:input ExpandEntityHitboxes
 execute unless score $override_executing retina.__variable__ matches 1.. positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing
-execute unless data retina:input SetupContext summon minecraft:marker run function retina:__private__/anonymous/2
+execute unless data storage retina:input SetupContext summon minecraft:marker run function retina:__private__/anonymous/2
 execute store result score $input_pitch retina.__variable__ run data get storage retina:input SetupContext.Rotation[1] 10
 execute store result score $input_yaw retina.__variable__ run data get storage retina:input SetupContext.Rotation[0] 10
 execute store result score $X retina.__variable__ run data get storage retina:input SetupContext.Pos[0] 480

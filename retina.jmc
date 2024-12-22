@@ -169,7 +169,7 @@ class traverse {
             execute positioned ~-0.5 ~-0.5 ~-0.5 run tag @e[dx=0] add retina.executing;
         }
 
-        execute unless data retina:input SetupContext summon minecraft:marker run {
+        execute unless data storage retina:input SetupContext summon minecraft:marker run {
             tag @e remove retina.target;
             scoreboard players reset * retina.hit;
             kill @e[type=marker,tag=retina.endpoint];
