@@ -493,7 +493,7 @@ class check {
 
             // Store these coordinates to storage
             Hardcode.repeatList(
-                "[face]", () => {data::Surfaces.[face] << [0, 0, 0, 0, 0, 0];}, 
+                "[face]", () => {data::Surfaces.[face] << [0.0, 0.0, 0.0, 0.0, 0.0, 0.0];}, 
                 ["Top", "Bottom", "West", "East", "North", "South"]
             );
 

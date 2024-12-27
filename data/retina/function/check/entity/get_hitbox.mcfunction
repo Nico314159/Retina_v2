@@ -20,12 +20,12 @@ scoreboard players operation $entity_Y0 retina.__variable__ > 0 retina.__int__
 scoreboard players operation $entity_Y1 retina.__variable__ = $entity_frac_Y retina.__variable__
 scoreboard players operation $entity_Y1 retina.__variable__ += $entity_height retina.__variable__
 scoreboard players operation $entity_Y1 retina.__variable__ < 480 retina.__int__
-data modify storage retina:data Surfaces.Top append value [0,0,0,0,0,0]
-data modify storage retina:data Surfaces.Bottom append value [0,0,0,0,0,0]
-data modify storage retina:data Surfaces.West append value [0,0,0,0,0,0]
-data modify storage retina:data Surfaces.East append value [0,0,0,0,0,0]
-data modify storage retina:data Surfaces.North append value [0,0,0,0,0,0]
-data modify storage retina:data Surfaces.South append value [0,0,0,0,0,0]
+data modify storage retina:data Surfaces.Top append value [0.0,0.0,0.0,0.0,0.0,0.0]
+data modify storage retina:data Surfaces.Bottom append value [0.0,0.0,0.0,0.0,0.0,0.0]
+data modify storage retina:data Surfaces.West append value [0.0,0.0,0.0,0.0,0.0,0.0]
+data modify storage retina:data Surfaces.East append value [0.0,0.0,0.0,0.0,0.0,0.0]
+data modify storage retina:data Surfaces.North append value [0.0,0.0,0.0,0.0,0.0,0.0]
+data modify storage retina:data Surfaces.South append value [0.0,0.0,0.0,0.0,0.0,0.0]
 execute store result storage retina:data Surfaces.Top[-1][0] double 0.0020833 run scoreboard players get $entity_X0 retina.__variable__
 execute store result storage retina:data Surfaces.Top[-1][1] double 0.0020833 run scoreboard players get $entity_Y1 retina.__variable__
 execute store result storage retina:data Surfaces.Top[-1][2] double 0.0020833 run scoreboard players get $entity_Z0 retina.__variable__
