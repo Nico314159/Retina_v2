@@ -264,6 +264,9 @@ new tags.block(nether_sprouts) {
 new tags.block(nether_wart) {
     "values": ["minecraft:nether_wart"]
 }
+new tags.block(pale_hanging_moss) {
+    "values": ["minecraft:pale_hanging_moss"]
+}
 new tags.block(pane_shaped) {
 	"values": [
 		"minecraft:iron_bars",
