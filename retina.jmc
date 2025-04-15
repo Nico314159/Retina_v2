@@ -317,6 +317,7 @@ class check {
         $step = $distance_traveled_squared_X;
         $step += $distance_traveled_squared_Y; 
         $step += $distance_traveled_squared_Z;
+        $step_count = Math.sqrt($step);
 
         $check_for_head = false;
         if (data storage retina:input {TargetBlocks: true}) {
@@ -327,7 +328,7 @@ class check {
         }
 
         if ($step >= $max_depth && $debug_messages) {
-            Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
+            Text.tellraw(@a, "&<italic, light_purple>Failed to find anything within &<$step_count> blocks. End coordinates: &<bold>[&<$int_X>, &<$int_Y>, &<$int_Z>]");
         }
         if (no_break) {traverse.loop();}
     }
