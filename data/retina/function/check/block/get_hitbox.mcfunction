@@ -10,6 +10,7 @@ execute if block ~ ~ ~ #retina:big_dripleaf_stem unless score $ignore_big_driple
 execute if block ~ ~ ~ #retina:brewing_stand unless score $ignore_brewing_stand retina.__variable__ matches 1.. run return run function retina:hitbox/brewing_stand
 execute if block ~ ~ ~ #retina:bush unless score $ignore_bush retina.__variable__ matches 1.. run return run function retina:hitbox/bush
 execute if block ~ ~ ~ #retina:button unless score $ignore_button retina.__variable__ matches 1.. run return run function retina:hitbox/button
+execute if block ~ ~ ~ #retina:cactus_flower unless score $ignore_cactus_flower retina.__variable__ matches 1.. run return run function retina:hitbox/cactus_flower
 execute if block ~ ~ ~ #retina:cactus_shaped unless score $ignore_cactus_shaped retina.__variable__ matches 1.. run return run function retina:hitbox/cactus_shaped
 execute if block ~ ~ ~ #retina:candle unless score $ignore_candle retina.__variable__ matches 1.. run return run function retina:hitbox/candle
 execute if block ~ ~ ~ #retina:cake unless score $ignore_cake retina.__variable__ matches 1.. run return run function retina:hitbox/cake

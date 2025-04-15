@@ -60,6 +60,9 @@ new tags.block(bush) {
 new tags.block(button) {
 	"values": ["#minecraft:buttons"]
 }
+new tags.block(cactus_flower) {
+    "values": ["minecraft:cactus_flower"]
+}
 new tags.block(cactus_shaped) {
     "values": [
 		"minecraft:cactus",
