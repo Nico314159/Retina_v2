@@ -530,14 +530,15 @@ new tags.entity_type(intangible) {
 		"minecraft:item",
         "minecraft:item_display",
 		"minecraft:leash_knot",
+        "minecraft:lingering_potion",
 		"minecraft:llama_spit",
 		"minecraft:marker",
 		"minecraft:minecart",
 		"minecraft:painting",
-		"minecraft:potion",
 		"minecraft:small_fireball",
 		"minecraft:snowball",
 		"minecraft:spectral_arrow",
+        "minecraft:splash_potion",
         "minecraft:text_display",
 		"minecraft:tnt",
 		"minecraft:trident",
@@ -568,8 +569,17 @@ new tags.entity_type(bee) {
 }
 new tags.entity_type(boat) {
     "values": [
-		"minecraft:boat",
-		"minecraft:chest_boat"
+		"#minecraft:boat",
+        "minecraft:oak_chest_boat",
+        "minecraft:spruce_chest_boat",
+        "minecraft:birch_chest_boat",
+        "minecraft:jungle_chest_boat",
+        "minecraft:acacia_chest_boat",
+        "minecraft:cherry_chest_boat",
+        "minecraft:dark_oak_chest_boat",
+        "minecraft:pale_oak_chest_boat",
+        "minecraft:mangrove_chest_boat",
+        "minecraft:bamboo_chest_raft"
 	]
 }
 new tags.entity_type(camel) {
