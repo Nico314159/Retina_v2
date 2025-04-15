@@ -8,6 +8,7 @@ execute if block ~ ~ ~ #retina:berries unless score $ignore_berries retina.__var
 execute if block ~ ~ ~ #retina:big_dripleaf unless score $ignore_big_dripleaf retina.__variable__ matches 1.. run return run function retina:hitbox/big_dripleaf
 execute if block ~ ~ ~ #retina:big_dripleaf_stem unless score $ignore_big_dripleaf_stem retina.__variable__ matches 1.. run return run function retina:hitbox/big_dripleaf_stem
 execute if block ~ ~ ~ #retina:brewing_stand unless score $ignore_brewing_stand retina.__variable__ matches 1.. run return run function retina:hitbox/brewing_stand
+execute if block ~ ~ ~ #retina:bush unless score $ignore_bush retina.__variable__ matches 1.. run return run function retina:hitbox/bush
 execute if block ~ ~ ~ #retina:button unless score $ignore_button retina.__variable__ matches 1.. run return run function retina:hitbox/button
 execute if block ~ ~ ~ #retina:cactus_shaped unless score $ignore_cactus_shaped retina.__variable__ matches 1.. run return run function retina:hitbox/cactus_shaped
 execute if block ~ ~ ~ #retina:candle unless score $ignore_candle retina.__variable__ matches 1.. run return run function retina:hitbox/candle
@@ -41,6 +42,7 @@ execute if block ~ ~ ~ #retina:lever unless score $ignore_lever retina.__variabl
 execute if block ~ ~ ~ #retina:mushroom_shaped unless score $ignore_mushroom_shaped retina.__variable__ matches 1.. run return run function retina:hitbox/mushroom_shaped
 execute if block ~ ~ ~ #retina:nether_fungus unless score $ignore_nether_fungus retina.__variable__ matches 1.. run return run function retina:hitbox/nether_fungus
 execute if block ~ ~ ~ #retina:nether_sprouts unless score $ignore_nether_sprouts retina.__variable__ matches 1.. run return run function retina:hitbox/nether_sprouts
+execute if block ~ ~ ~ #retina:pale_hanging_moss unless score $ignore_pale_hanging_moss retina.__variable__ matches 1.. run return run function retina:hitbox/pale_hanging_moss
 execute if block ~ ~ ~ #retina:pane_shaped unless score $ignore_pane_shaped retina.__variable__ matches 1.. run return run function retina:hitbox/pane_shaped
 execute if block ~ ~ ~ #retina:pickle unless score $ignore_pickle retina.__variable__ matches 1.. run return run function retina:hitbox/pickle
 execute if block ~ ~ ~ #retina:piglin_head unless score $ignore_piglin_head retina.__variable__ matches 1.. run return run function retina:hitbox/piglin_head

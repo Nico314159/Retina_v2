@@ -54,6 +54,9 @@ new tags.block(big_dripleaf_stem) {
 new tags.block(brewing_stand) {
 	"values": ["minecraft:brewing_stand"]
 }
+new tags.block(bush) {
+	"values": ["minecraft:bush"]
+}
 new tags.block(button) {
 	"values": ["#minecraft:buttons"]
 }
