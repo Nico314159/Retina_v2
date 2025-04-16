@@ -746,7 +746,11 @@ new tags.entity_type(shulker) {
     "values": ["minecraft:shulker"]
 }
 new tags.entity_type(skeleton) {
-    "values": ["#minecraft:skeletons"]
+    "values": [
+        "minecraft:bogged",
+        "minecraft:skeleton",
+        "minecraft:stray"
+    ]
 }
 new tags.entity_type(slime_like) {
     "values": [
