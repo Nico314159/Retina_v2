@@ -59,6 +59,7 @@ execute if block ~ ~ ~ #retina:rod unless score $ignore_rod retina.__variable__ 
 execute if block ~ ~ ~ #retina:sapling unless score $ignore_sapling retina.__variable__ matches 1.. run return run function retina:hitbox/sapling
 execute if block ~ ~ ~ #retina:seagrass unless score $ignore_seagrass retina.__variable__ matches 1.. run return run function retina:hitbox/seagrass
 execute if block ~ ~ ~ #retina:short_crop unless score $ignore_short_crop retina.__variable__ matches 1.. run return run function retina:hitbox/short_crop
+execute if block ~ ~ ~ #retina:short_dry_grass unless score $ignore_short_dry_grass retina.__variable__ matches 1.. run return run function retina:hitbox/short_dry_grass
 execute if block ~ ~ ~ #retina:slab unless score $ignore_slab retina.__variable__ matches 1.. run return run function retina:hitbox/slab
 execute if block ~ ~ ~ #retina:small_dripleaf unless score $ignore_small_dripleaf retina.__variable__ matches 1.. run return run function retina:hitbox/small_dripleaf
 execute if block ~ ~ ~ #retina:sniffer_egg unless score $ignore_sniffer_egg retina.__variable__ matches 1.. run return run function retina:hitbox/sniffer_egg
