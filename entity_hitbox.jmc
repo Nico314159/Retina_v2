@@ -59,6 +59,10 @@ class entity_hitbox {
         data::entity_half_width = 0.45;
         data::entity_height = 1.4;
     }
+    function creaking() {
+        data::entity_half_width = 0.45;
+        data::entity_height = 2.7;
+    }
     function creeper() {
         data::entity_half_width = 0.3;
         data::entity_height = 1.7;

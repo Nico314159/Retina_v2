@@ -624,6 +624,9 @@ new tags.entity_type(cow) {
 		"minecraft:mooshroom"
 	]
 }
+new tags.entity_type(creaking) {
+    "values": ["minecraft:creaking"]
+}
 new tags.entity_type(creeper) {
     "values": [
         "minecraft:breeze",

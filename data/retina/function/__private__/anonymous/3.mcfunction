@@ -11,6 +11,7 @@ execute if entity @s[type=#retina:cave_spider] unless score $ignore_cave_spider 
 execute if entity @s[type=#retina:chicken] unless score $ignore_chicken retina.__variable__ matches 1.. run return run function retina:entity_hitbox/chicken
 execute if entity @s[type=#retina:cow] unless score $ignore_cow retina.__variable__ matches 1.. run return run function retina:entity_hitbox/cow
 execute if entity @s[type=#retina:cod] unless score $ignore_cod retina.__variable__ matches 1.. run return run function retina:entity_hitbox/cod
+execute if entity @s[type=#retina:creaking] unless score $ignore_creaking retina.__variable__ matches 1.. run return run function retina:entity_hitbox/creaking
 execute if entity @s[type=#retina:creeper] unless score $ignore_creeper retina.__variable__ matches 1.. run return run function retina:entity_hitbox/creeper
 execute if entity @s[type=#retina:dolphin] unless score $ignore_dolphin retina.__variable__ matches 1.. run return run function retina:entity_hitbox/dolphin
 execute if entity @s[type=#retina:donkey] unless score $ignore_donkey retina.__variable__ matches 1.. run return run function retina:entity_hitbox/donkey

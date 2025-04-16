@@ -436,11 +436,13 @@ class check {
                             return run entity_hitbox.[type]();
                         }
                     },
-                    ["allay", "armadillo", "armor_stand", "axolotl", "bat_like", "bee", "boat", "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creeper", 
+                    ["allay", "armadillo", "armor_stand", "axolotl", "bat_like", "bee", "boat", 
+                    "camel", "cat_like", "cave_spider", "chicken", "cow", "cod", "creaking", "creeper", 
                     "dolphin", "donkey", "elder_guardian", "end_crystal", "enderman", "falling_block_like", "frog", "ghast", "giant", "guardian",
-                    "hoglin", "horse_like",  "iron_golem", "item_frame", "leash_knot", "llama", "minecart", "panda", "phantom", "pig", "player_like", 
-                    "polar_bear", "pufferfish", "rabbit", "ravager", "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod", "sniffer",
-                    "snow_golem", "spider", "squid", "strider", "tropical_fish", "turtle", "vex", "warden", "wither", "wither_skeleton", "wolf", "zombie_like"]
+                    "hoglin", "horse_like",  "iron_golem", "item_frame", "leash_knot", "llama", "minecart", 
+                    "panda", "phantom", "pig", "player_like", "polar_bear", "pufferfish", "rabbit", "ravager", 
+                    "salmon", "sheep_like", "shulker", "skeleton", "slime_like", "small_arthropod", "sniffer", "snow_golem", "spider", "squid", "strider", 
+                    "tropical_fish", "turtle", "vex", "warden", "wither", "wither_skeleton", "wolf", "zombie_like"]
                 );
             }
 
