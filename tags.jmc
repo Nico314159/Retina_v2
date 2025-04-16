@@ -311,7 +311,7 @@ new tags.block(piglin_wall_head) {
     ]
 }
 new tags.block(pink_petals) {
-    "values": ["minecraft:pink_petals"]
+    "values": ["minecraft:pink_petals", "minecraft:wildflowers"]
 }
 new tags.block(piston_head) {
     "values": ["minecraft:piston_head"]
