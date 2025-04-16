@@ -370,7 +370,7 @@ class check {
                 ["amethyst", "anvil", "attached_stem", "azalea", "bed", "bell", "berries", "big_dripleaf", "big_dripleaf_stem", "brewing_stand", "bush", "button", 
                 "cactus_flower", "cactus_shaped", "candle", "cake", "campfire", "carpet", "cauldron", "chain", "chest", "composter", "conduit", "coral_fan", "coral_plant",
                 "daylight_detector", "door", "end_portal_frame", "extended_piston", "farmland_shaped", "fence_gate", "fence", "fire", "grass_shaped", "grindstone",
-                "head", "hanging_roots", "hanging_sign", "ladder", "lantern", "lectern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
+                "head", "hanging_roots", "hanging_sign", "leaf_litter", "ladder", "lantern", "lectern", "lever", "mushroom_shaped", "nether_fungus", "nether_sprouts",
                 "pale_hanging_moss", "pane_shaped", "pickle", "piglin_head", "piglin_wall_head", "pink_petals", "piston_head", "pitcher_crop", "pressure_plate", 
                 "rail", "redstone_wire", "repeater_shaped", "rod", "sapling", "seagrass", "short_crop", "short_dry_grass", "slab", "small_dripleaf", "sniffer_egg", "snow", 
                 "spore_blossom", "sugar_cane_like", "stair", "standing_sign_or_banner", "stem", "stonecutter", "structure_void", 

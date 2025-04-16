@@ -36,6 +36,7 @@ execute if block ~ ~ ~ #retina:grindstone unless score $ignore_grindstone retina
 execute if block ~ ~ ~ #retina:head unless score $ignore_head retina.__variable__ matches 1.. run return run function retina:hitbox/head
 execute if block ~ ~ ~ #retina:hanging_roots unless score $ignore_hanging_roots retina.__variable__ matches 1.. run return run function retina:hitbox/hanging_roots
 execute if block ~ ~ ~ #retina:hanging_sign unless score $ignore_hanging_sign retina.__variable__ matches 1.. run return run function retina:hitbox/hanging_sign
+execute if block ~ ~ ~ #retina:leaf_litter unless score $ignore_leaf_litter retina.__variable__ matches 1.. run return run function retina:hitbox/leaf_litter
 execute if block ~ ~ ~ #retina:ladder unless score $ignore_ladder retina.__variable__ matches 1.. run return run function retina:hitbox/ladder
 execute if block ~ ~ ~ #retina:lantern unless score $ignore_lantern retina.__variable__ matches 1.. run return run function retina:hitbox/lantern
 execute if block ~ ~ ~ #retina:lectern unless score $ignore_lectern retina.__variable__ matches 1.. run return run function retina:hitbox/lectern

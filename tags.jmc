@@ -212,6 +212,9 @@ new tags.block(lantern) {
         "minecraft:soul_lantern"
     ]
 }
+new tags.block(leaf_litter) {
+    "values": ["minecraft:leaf_litter"]
+}
 new tags.block(lectern) {
     "values": ["minecraft:lectern"]
 }
