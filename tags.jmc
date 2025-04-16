@@ -374,7 +374,7 @@ new tags.block(short_crop) {
         "minecraft:potatoes"
     ]
 }
-new tags.blocks(short_dry_grass) {
+new tags.block(short_dry_grass) {
     "values": ["minecraft:short_dry_grass"]
 }
 new tags.block(slab) {
