@@ -1,6 +1,6 @@
 {
     "pack": {
-        "pack_format": 48,
+        "pack_format": 71,
         "description": "Precise & customizable raycast library for use in integrated systems."
     }
 }
