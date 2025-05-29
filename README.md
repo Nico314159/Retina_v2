@@ -1,8 +1,11 @@
-# Retina v2
- 
-**Retina 2.0** is a raycasting library data pack for Minecraft: Java Edition 1.20+, using voxel traversal. 
+# ℹ️ If you think you need this, you probably don't. 
 
-Unlike other similar packs, it supports (almost) **all** of the different hitboxes, including both blocks & entities. It also doesn't rely on entity teleportation, meaning it runs slightly faster on average too.
+# Ael's latest version of [Iris](https://github.com/Aeldrion/Iris) has better performance, supports random block hitboxes, and automatically updates to new Minecraft versions. Thus, I recommend using it over this repo unless there is a very good reason otherwise.
+
+
+## Retina v2
+ 
+**Retina 2.0** is a raycasting library data pack for Minecraft: Java Edition 1.20+, using voxel traversal to support most block hitboxes (slabs, trapdoors, fences, etc). 
 
 ## Usage
 
